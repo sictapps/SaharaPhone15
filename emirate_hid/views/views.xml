@@ -88,7 +88,8 @@
                 </form>
        <xpath expr="//field[@name='partner_id']" position="before">
 
-             <span><button  string="Read From Device"  class="oe_highlight btn-readCard"/></span>
+
+             <span ><button attrs="{'invisible': [('move_type', '==', 'entry')]}" string="Read From Device"  class="oe_highlight btn-readCard"/></span>
 
 
 
