@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
                 orderLine.product_id_change()
         else:
             raise UserError(
-                'Scanned Serial %s is not defined, or cannot be sold please verify product configuration' %
+                'Scanned Serial %s is not defined; or cannot be sold please verify product configuration' %
                 barcode)
 
 
