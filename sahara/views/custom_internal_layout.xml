@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+    <data>
+            <template id="sahara.your_custom_layout_header">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="web.address_layout"/>
+                    <t t-raw="0"/>
+                </div>
+            <div class="header">
+
+            <div class="row">
+
+            <div class="col-xs-3">
+               <div style="width: 45%;">
+                    <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 25px;"/>
+                </div>
+            <!-- <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/> -->
+            <!-- All your custom code here -->
+
+                        <table style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <p class="m-0" t-field="o.company_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <span t-field="o.company_id.street"/>
+                                <span t-field="o.company_id.city"/>
+                                <span t-field="o.company_id.state_id"/>
+                                        <!-- <address t-field="o.company_id.street"+" "+"o.company_id.city"+" "+"o.company_id.stateid" /> -->
+                                </td>        
+                            </tr>
+                            <tr>
+                                <td>
+                                    TRN:<span class="m-0" t-field="o.company_id.company_registry"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td>
+                                   Tel: <span class="m-0" t-field="o.company_id.phone"/>  ,   Mob: <span class="m-0" t-field="o.company_id.mobile"/>
+                                </td>
+                            </tr>
+                             <tr>    
+                                <td>
+                                    PO Box: <span class="m-0" t-field="o.company_id.zip"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                 <td>
+                                    Mail: <span class="m-0" t-field="o.company_id.email"/>
+                                </td>
+                            </tr>
+                        </table>
+            </div>
+            </div>
+            </div>
+
+            <div class="footer">
+                    <table  style="width: 100%;">
+                        <tr>
+                                <td style="align: left; text-align: left;width: 50%;">
+                                       Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
+                                       Account Number : <span class="m-0" t-if="o.company_id.bank_ids[0].acc_number" t-field="o.company_id.bank_ids[0].acc_number"/><br/>
+                                       IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_bic" t-field="o.company_id.bank_ids[0].bank_bic"/> <br/>
+                                </td>
+                                <td style="align: right;width: 50%;">
+                                       Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name" t-field="o.company_id.bank_ids[1].bank_name"/><br/>
+                                       Account Number : <span class="m-0" t-if="o.company_id.bank_ids[1].acc_number" t-field="o.company_id.bank_ids[1].acc_number"/><br/>
+                                       IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic" t-field="o.company_id.bank_ids[1].bank_bic"/> <br/>
+                                </td>
+                        </tr>
+                    </table>
+                    <div class="text-center" style="border-top: 1px solid black;">
+                       <span t-esc="time.strftime('(Time: %H:%M:%S)')"/>
+                       <!-- <div class="col-xs-2"> -->
+                            <!-- <small> -->
+                                <span>Page</span>
+                                <span class="page" />
+                                of
+                                <span class="topage" />
+                            <!-- </small> -->
+                        <!-- </div> -->
+                         <span t-esc="time.strftime('(Date :%d/%m/%Y )')"/>
+
+                        <!-- <ul class="list-inline">
+                            <li>Developed By: Hassan Enterprises</li>
+
+                            <li>&amp;bull;</li>
+                            <li>Phone: +92 321 1234567</li>
+
+                            <li>&amp;bull;</li>
+                            <li>Email: abc@gmail.com</li>
+                        </ul>
+
+                        <ul class="list-inline">
+                            <li>Page:</li>
+                            <li><span class="page"/></li>
+                            <li>/</li>
+                            <li><span class="topage"/></li>
+                        </ul> -->
+                    </div>
+                </div>    
+
+            </template>
+ </data>
+</openerp> 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_barcode_sale" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="_barcode_scanned" widget="barcode_handler" />
+            </xpath>
+            <xpath expr="//page[@name='order_lines']//form//field[@name='invoice_status']" position="after">
+                <field name="sapps_barcode_chosen_lots" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_emirate_hid_emirate_hid,emirate_hid.emirate_hid,model_emirate_hid_emirate_hid,base.group_user,1,1,1,1

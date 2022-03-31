@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="pos_select_user_reminder assets" inherit_id="point_of_sale.assets_common">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/sahara/static/src/css/pos.css"/>
+                <!-- <script type="text/javascript" src="/sahara/static/src/js/pos_select_user_reminder.js"></script> -->
+            </xpath>
+        </template>
+    </data>
+</odoo>

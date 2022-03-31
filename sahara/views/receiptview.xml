@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <template id="report_payment_receipt_document" inherit_id="account.report_payment_receipt">
+            <xpath expr='//t[@t-call="account.report_payment_receipt_document"]' position="replace">
+                <t t-call="sahara.report_payment_receipt_document_sahara" />
+            </xpath>
+        </template> 
+    </data>
+</odoo> 
