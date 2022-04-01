@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="UAE" name="UAE" >
+
+
+
+           <script type="text/javascript" src="/emirate_hid/js/UAE.js"/>
+
+    </template>
+
+
+
+
+</odoo>

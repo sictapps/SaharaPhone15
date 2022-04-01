@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="pos_extend_assets" inherit_id="point_of_sale.assets_common">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/sahara/static/src/js/pos_payment_button.js"/>
+                 <script type="text/javascript" src="/sahara/static/src/js/pos_set_price_default.js"/>
+                 <script type="text/javascript" src="/sahara/static/src/js/pos_set_price_after_neworderline.js"/>   
+                 <script type="text/javascript" src="/sahara/static/src/js/pos_set_default_customer.js"/>              
+            </xpath>
+        </template>
+    </data>
+</odoo>
