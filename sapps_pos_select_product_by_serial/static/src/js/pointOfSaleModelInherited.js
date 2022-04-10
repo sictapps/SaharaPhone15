@@ -29,8 +29,8 @@ odoo.define('sapps_pos_select_product_by_serial.pointOfSaleModelInherited', func
                     var args = arguments;
                     rpc.query({
                         model: 'stock.production.lot',
-                        method: 'search',
-                        args: [[['name', 'in', lots]]]
+                        method: 'custom_search',
+                        args: [1, lots]
                     }).then(function (backend_result) {
                         debugger;
                         var foundProductIds = backend_result

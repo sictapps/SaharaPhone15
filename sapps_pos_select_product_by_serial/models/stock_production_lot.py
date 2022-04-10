@@ -20,6 +20,14 @@ class StockProductionLotInherited(models.Model):
         else:
             return []
 
+    def custom_search(self, lots):
+        res = []
+        for lt in lots:
+            i = self.env['stock.production.lot'].search([('name', 'ilike', lt)])
+            res.append(i)
+        return res
+
+
 
 class StockMoveSaharahInherited(models.Model):
     _inherit = 'stock.move'

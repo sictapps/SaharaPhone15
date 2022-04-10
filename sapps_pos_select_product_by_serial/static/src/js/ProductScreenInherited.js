@@ -84,8 +84,8 @@ odoo.define('sapps_pos_select_product_by_serial.ProductScreenInherited', functio
                 try {
                     foundProductIds = await this.rpc({
                         model: 'stock.production.lot',
-                        method: 'search',
-                        args: [[['name', '=', code.base_code]]],
+                        method: 'custom_search',
+                        args: [1, [code.base_code]],
                         context: this.env.session.user_context,
                     });
                 } catch (error) {
@@ -147,7 +147,7 @@ odoo.define('sapps_pos_select_product_by_serial.ProductScreenInherited', functio
             //let product = this.env.pos.db.get_product_by_barcode(code.base_code);
             const options = await this._byLotGetAddProductOptions(product, code, code.base_code);
             for (const [key, value] of Object.entries(options["draftPackLotLines"]["modifiedPackLotLines"])) {
-                if (value == code.base_code){
+                if (value.toLowerCase() == code.base_code.toLowerCase()){
                     return this.showPopup('OfflineErrorPopup', {
                                 title: this.env._t('Serial Error'),
                                 body: this.env._t("Already exist in your order"),
