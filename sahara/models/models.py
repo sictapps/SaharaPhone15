@@ -36,3 +36,22 @@ class TextAccountMove(models.Model):
                             })
 
         return lot_values
+
+
+
+class SaharaAccountPayment(models.Model):
+  _inherit = "account.payment"
+
+  def _check_fill_line(self, amount_str):
+        return amount_str or ''
+  
+  # def _check_get_pages(self):
+  #       """ Returns the data structure used by the template : a list of dicts containing what to print on pages.
+  #       """
+  #       stub_pages = self._check_make_stub_pages() or [False]
+  #       pages = []
+  #       new_Pages=[]
+  #       for i, p in enumerate(stub_pages):
+  #           pages.append(self._check_build_page_info(i, p))
+  #       new_Pages.append(pages[0])    
+  #       return new_Pages
