@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <!-- <template id="print_check_middle" inherit_id="l10n_us_check_printing.print_check_middle">
+            <xpath expr='//t[@t-call="l10n_us_check_printing.ckus_check"]' position="replace">
+                <t t-call="sahara.ckus_check" />
+            </xpath>
+        </template>  -->
+    </data>
+</odoo> 

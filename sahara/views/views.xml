@@ -114,7 +114,14 @@
                                     <strong>Notes :</strong>
                                 </td>
                                 <td>
-                                    <p class="m-0" t-field="o.partner_id.vat"/>
+                                    <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                                    <t t-foreach="lines" t-as="line">
+                                        <t t-if="line.display_type == 'line_note'">
+                                            <!-- <td colspan="99"> -->
+                                                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <!-- </td> -->
+                                        </t>
+                                    </t>
                                 </td>
                                 <td>
                                     <strong>  :  ملاحظات  </strong>
@@ -291,7 +298,7 @@
                     </p>-->
                    
                     <br />
-                    <p>
+                    <!-- <p>
                         Invoice Note : 
                          <t t-foreach="lines" t-as="line">
                                     <t t-if="line.display_type == 'line_note'">
@@ -302,7 +309,7 @@
                                 
                          </t>
                         
-                    </p>
+                    </p> -->
                     <p t-if="o.invoice_payment_term_id" name="payment_term">
                         <span t-field="o.invoice_payment_term_id.note"/>
                     </p> 
