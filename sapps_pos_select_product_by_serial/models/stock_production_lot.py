@@ -8,7 +8,10 @@ class StockProductionLotInherited(models.Model):
     sale_line_stock_product_lot_id = fields.Many2one('sale.order.line')
 
     def check_if_lot_exists(self, lots):
-        res = self.env['stock.production.lot'].search([('name', 'in', lots)])
+        res = []
+        for lt in  lots:
+            i = self.env['stock.production.lot'].search([('name', 'ilike', lt)])
+            res.append(i)
         if any(not item.product_id.available_in_pos for item in res):
             raise UserError("Serial Scanned is related to product not available in POS")
 
