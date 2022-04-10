@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
 
 
     def on_barcode_scanned(self, barcode):
-        serial = self.env['stock.production.lot'].search([('name', '=', barcode)])
+        serial = self.env['stock.production.lot'].search([('name', 'ilike', barcode)])
         if serial and serial.product_id and serial.product_id.sale_ok:
             order_lines = self.order_line.filtered(
                 lambda r: r.product_id.id == serial.product_id.id)
