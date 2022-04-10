@@ -11,6 +11,7 @@ class StockProductionLotInherited(models.Model):
         res = self.env['stock.production.lot'].search([('name', 'in', lots)])
         if any(not item.product_id.available_in_pos for item in res):
             raise UserError("Serial Scanned is related to product not available in POS")
+
         if res and all(item.product_id.available_in_pos for item in res):
             return [{"quantity": item.product_qty, "product_id": item.product_id.id, "name": item.product_id.name, "lot": item.name} for item in res]
         else:
