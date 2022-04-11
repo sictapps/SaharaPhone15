@@ -23,8 +23,9 @@ class StockMoveSaharahInherited(models.Model):
 
     def _update_reserved_quantity(self, need, available_quantity, location_id, lot_id=None, package_id=None, owner_id=None, strict=True):
         self.ensure_one()
-        if 'sapps_from_sale_confirm' in self._context and self._context['sapps_from_sale_confirm'] == True \
-                and self.sale_line_id and len(self.sale_line_id.sapps_barcode_chosen_lots) > 0:
+        if self.sale_line_id and len(self.sale_line_id.sapps_barcode_chosen_lots) > 0:
+        #if 'sapps_from_sale_confirm' in self._context and self._context['sapps_from_sale_confirm'] == True \
+         #       and self.sale_line_id and len(self.sale_line_id.sapps_barcode_chosen_lots) > 0:
             taken_qty = 0
             for lotid in  self.sale_line_id.sapps_barcode_chosen_lots:
                 taken_qty = taken_qty + super(StockMoveSaharahInherited, self)._update_reserved_quantity(1, available_quantity, location_id, lot_id=lotid, package_id=package_id, owner_id=owner_id, strict=strict)
