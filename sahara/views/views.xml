@@ -141,7 +141,12 @@
                                     <strong>Sales Man :</strong>
                                 </td>
                                 <td>
-                                    
+                                    <!-- <p class="m-0" t-field="o.salesperson_id.name"/>  -->
+                                      <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson" t-key="lot.id">
+                                                 <!-- <span style="width: 33%;"> -->
+                                                       <t t-esc="salesperson['name']"/>&#160;&#160;&#160;&#160;
+                                                 <!-- </span> -->
+                                      </t>
                                 </td>
                                 <td>
                                     <strong>  : اسم البائع  </strong>

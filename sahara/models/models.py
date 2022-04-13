@@ -4,10 +4,24 @@ class TextAccountMove(models.Model):
    _inherit = "account.move"
    sapps_text_amount = fields.Char(string="Total In Words", required=False, compute="amount_to_words" )
    order_payment_method = fields.Char(string="payment type", required=False, compute="get_payment_type" )
+  #  salesperson_id = fields.Many2one('hr.employee', string='Salesperson',compute="get_order_line_salesperson_id")
    @api.depends('amount_total')
    def amount_to_words(self):
        for rec in self:
             rec.sapps_text_amount = num2words(rec.amount_total).upper()
+  
+   def get_order_line_salespersos(self,line):
+       salespersons = []
+       for rec in self:
+            move_id = line.move_id.id
+            pos_order = self.env['pos.order'].search([('account_move','=',line.move_id.id)])
+            pos_order_line = self.env['pos.order.line'].search([('order_id','=',pos_order.id),('product_id','=',line.product_id.id)])
+            salespersons.append({
+                                'id': pos_order_line.salesperson_id,
+                                'name': pos_order_line.salesperson_id.name
+                            })
+       return salespersons
+
 
    @api.depends('pos_payment_ids')
    def get_payment_type(self):
