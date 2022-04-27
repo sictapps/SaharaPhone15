@@ -48,6 +48,19 @@ class TextAccountMove(models.Model):
                                 'uom_name': line.product_uom_id.name,
                                 'lot_name': lot.lot_name,
                             })
+        if lot_values ==[]:
+           move_id = line.move_id.id
+           account_move = self.env['account.move'].search([('id','=',line.move_id.id)]) 
+           order_lines = self.env['stock.move.line'].search([('picking_id','=',account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids.id),('product_id','=',line.product_id.id)])
+           if order_lines:
+              for lot in order_lines:
+                lot_values.append({
+                                    'product_name': lot.product_id.name,
+                                    'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
+                                    'uom_name': line.product_uom_id.name,
+                                    'lot_name': lot.lot_id.name,
+                                })
+                            
 
         return lot_values
 
