@@ -51,7 +51,7 @@ class TextAccountMove(models.Model):
         if lot_values ==[]:
            move_id = line.move_id.id
            account_move = self.env['account.move'].search([('id','=',line.move_id.id)]) 
-           order_lines = self.env['stock.move.line'].search([('picking_id','=',account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids.id),('product_id','=',line.product_id.id)])
+           order_lines = self.env['stock.move.line'].search([('picking_id','in',account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids.ids),('product_id','=',line.product_id.id)])
            if order_lines:
               for lot in order_lines:
                 lot_values.append({
