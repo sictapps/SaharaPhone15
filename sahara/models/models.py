@@ -4,10 +4,24 @@ class TextAccountMove(models.Model):
    _inherit = "account.move"
    sapps_text_amount = fields.Char(string="Total In Words", required=False, compute="amount_to_words" )
    order_payment_method = fields.Char(string="payment type", required=False, compute="get_payment_type" )
+  #  salesperson_id = fields.Many2one('hr.employee', string='Salesperson',compute="get_order_line_salesperson_id")
    @api.depends('amount_total')
    def amount_to_words(self):
        for rec in self:
             rec.sapps_text_amount = num2words(rec.amount_total).upper()
+  
+   def get_order_line_salespersos(self,line):
+       salespersons = []
+       for rec in self:
+            move_id = line.move_id.id
+            pos_order = self.env['pos.order'].search([('account_move','=',line.move_id.id)])
+            pos_order_line = self.env['pos.order.line'].search([('order_id','=',pos_order.id),('product_id','=',line.product_id.id)])
+            salespersons.append({
+                                'id': pos_order_line.salesperson_id,
+                                'name': pos_order_line.salesperson_id.name
+                            })
+       return salespersons
+
 
    @api.depends('pos_payment_ids')
    def get_payment_type(self):
@@ -34,6 +48,19 @@ class TextAccountMove(models.Model):
                                 'uom_name': line.product_uom_id.name,
                                 'lot_name': lot.lot_name,
                             })
+        if lot_values ==[]:
+           move_id = line.move_id.id
+           account_move = self.env['account.move'].search([('id','=',line.move_id.id)]) 
+           order_lines = self.env['stock.move.line'].search([('picking_id','in',account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids.ids),('product_id','=',line.product_id.id)])
+           if order_lines:
+              for lot in order_lines:
+                lot_values.append({
+                                    'product_name': lot.product_id.name,
+                                    'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
+                                    'uom_name': line.product_uom_id.name,
+                                    'lot_name': lot.lot_id.name,
+                                })
+                            
 
         return lot_values
 
