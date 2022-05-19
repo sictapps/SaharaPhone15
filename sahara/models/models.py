@@ -5,6 +5,7 @@ class TextAccountMove(models.Model):
    sapps_text_amount = fields.Char(string="Total In Words", required=False, compute="amount_to_words" )
    order_payment_method = fields.Char(string="payment type", required=False, compute="get_payment_type" )
   #  salesperson_id = fields.Many2one('hr.employee', string='Salesperson',compute="get_order_line_salesperson_id")
+
    @api.depends('amount_total')
    def amount_to_words(self):
        for rec in self:
@@ -33,6 +34,12 @@ class TextAccountMove(models.Model):
                   rec.order_payment_method =pos_payment_id.payment_method_id.name
                 else:
                   rec.order_payment_method = "-"  
+   
+   def check_tax_amount(self,line):
+      result = 0
+      for rec in self:
+         result = line.price_total / line.quantity
+      return result  
 
    def get_line_lots(self,line):
         lot_values = []
@@ -70,8 +77,8 @@ class SaharaAccountPayment(models.Model):
   _inherit = "account.payment"
 
   def _check_fill_line(self, amount_str):
-        return amount_str or ''
-  
+        return amount_str or ''      
+
   # def _check_get_pages(self):
   #       """ Returns the data structure used by the template : a list of dicts containing what to print on pages.
   #       """
