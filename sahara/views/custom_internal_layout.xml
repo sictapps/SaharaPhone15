@@ -7,8 +7,8 @@
                     <t t-raw="0"/>
                 </div>
             <div class="header">
-             <h3 style="align:center; text-align: center;font-family: 'cool_font';">فاتورة ضريبة</h3>
-             <h3 style="align:center; text-align: center;font-family: 'cool_font';">TAX Invoice</h3>
+             <h3 style="align:center; text-align: center;font-family: 'cool_font';font-size:20px;font-weight: bold;">فاتورة ضريبة</h3>
+             <h3 style="align:center; text-align: center;font-family: 'cool_font';font-size:20px;font-weight: bold;">TAX Invoice</h3>
             <div class="row">
 
             <div class="col-xs-3">
@@ -21,7 +21,7 @@
                         <table style="width: 100%;">
                             <tr>
                                 <td>
-                                    <p class="m-0" t-field="o.company_id.name"/>
+                                    <p style="font-family: 'cool_font';color:red;" class="m-0" t-field="o.company_id.name"/>
                                 </td>
                             </tr>
                             <tr>
@@ -39,7 +39,7 @@
                             </tr>
                             <tr>    
                                 <td>
-                                   Tel: <span class="m-0" t-field="o.company_id.phone"/>  ,   Mob: <span class="m-0" t-field="o.company_id.mobile"/>
+                                    Tel: <span class="m-0" t-field="o.company_id.phone"/> <!-- ,   Mob: <span class="m-0" t-field="o.company_id.mobile"/> -->
                                 </td>
                             </tr>
                              <tr>    
@@ -57,8 +57,10 @@
             </div>
             </div>
 
-            <div class="footer">
-                    <table  style="width: 100%;font-family: 'cool_font';">
+            <!-- <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:0px !important;"> -->
+            <div class="footer" style="position:absolute;margin-bottom:30px;width:100%;">
+
+                    <!-- <table  style="width: 100%;font-family: 'cool_font';">
                         <tr>
                                 <td style="align: left; text-align: left;width: 33%;">
                                        Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
@@ -73,9 +75,9 @@
                                        IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic" t-field="o.company_id.bank_ids[1].bank_bic"/> <br/>
                                 </td>
                         </tr>
-                    </table>
-                    <div class="text-center" style="border-top: 1px solid black;font-family: 'cool_font';">
-                       <span t-esc="time.strftime('(Time: %H:%M:%S)')"/>
+                    </table> -->
+                    <div class="text-center" style="font-family: 'cool_font';">
+                       <span t-esc="time.strftime('(Time: %H:%M)')"/>
                        <!-- <div class="col-xs-2"> -->
                             <!-- <small> -->
                                 <span>Page</span>

@@ -52,10 +52,18 @@
                      <br/>
                      <br/>
                      <br/>
-                     <br/>
-                     <br/>
+
                         <table style="width: 100%;">
                             <tr>
+                                <td>
+                                    <strong>Customer Mail :</strong>
+                                </td>
+                                <td>
+                                    <p class="m-0" t-field="o.partner_id.email"/>
+                                </td>
+                                <td>
+                                    <strong> :  ايميل الزبون </strong>
+                                </td>
                                 <td>
                                     <strong>Customer Name :</strong>
                                 </td>
@@ -65,6 +73,9 @@
                                 <td>
                                     <strong> :  اسم الزبون </strong>
                                 </td>
+                               
+                            </tr>
+                            <tr>
                                 <td>
                                     <strong>Date  :</strong>
                                 </td>
@@ -73,6 +84,15 @@
                                 </td>
                                 <td>
                                     <strong> :  التاريخ </strong>
+                                </td>
+                                 <td>
+                                    <strong>Payment Type  :</strong>
+                                </td>
+                                <td>
+                                      <p class="m-0" t-field="o.order_payment_method"/>
+                                </td>
+                                <td>
+                                    <strong> :  طريقة الدفع </strong>
                                 </td>
                             </tr>
                             <tr>
@@ -115,6 +135,24 @@
                                     <strong> :  رقم الفاتورة </strong>
                                 </td>
                             </tr>
+                            <!-- <tr>
+                               
+                                <td>
+                                    <strong>Payment Type  :</strong>
+                                </td>
+                                <td>
+                                      <p class="m-0" t-field="o.order_payment_method"/>
+                                </td>
+                                <td>
+                                    <strong> :  طريقة الدفع </strong>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr> -->
                             <tr>
                                 <td>
                                     <strong>Notes :</strong>
@@ -133,17 +171,6 @@
                                     <strong>  :  ملاحظات  </strong>
                                 </td>
                                 <td>
-                                    <strong>Payment Type  :</strong>
-                                </td>
-                                <td>
-                                      <p class="m-0" t-field="o.order_payment_method"/>
-                                </td>
-                                <td>
-                                    <strong> :  طريقة الدفع </strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <strong>Sales Man :</strong>
                                 </td>
                                 <td>
@@ -157,7 +184,7 @@
                                 <td>
                                     <strong>  : اسم البائع  </strong>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <strong>Currency  :</strong>
                                 </td>
                                 <td>
@@ -165,7 +192,7 @@
                                 </td>
                                 <td>
                                     <strong> :  العملة </strong>
-                                </td>
+                                </td> -->
                             </tr>
                         </table>
 
@@ -178,10 +205,10 @@
                                 <t t-set="colspan" t-value="6"/>
                                 <t t-set="i" t-value="1" />
                                 <th style="border: 1px solid gray" name="th_SN" class="text-left"><span>No الرقم </span></th>
-                                <th style="border: 1px solid gray" name="th_description" class="text-left"><span>Description التفاصيل </span></th>
+                                <th style="border: 1px solid gray;border-bottom: 1px solid gray;" name="th_description" class="text-left"><span>Description التفاصيل </span></th>
                                 <th style="border: 1px solid gray" name="th_source" class="d-none text-left"><span>Source Document</span></th>
                                 <th style="border: 1px solid gray" name="th_quantity" class="text-right"><span>Quantity الكمية</span></th>
-                                <th style="border: 1px solid gray" name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price السعر</span></th>
+                                <th style="border: 1px solid gray" name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span> Price السعر</span></th>
                                 <th style="border: 1px solid gray" name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                     <span>Disc.%</span>
                                     <!-- TODO: remove in master -->
@@ -190,7 +217,7 @@
                                 <th style="border: 1px solid gray" name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>السعر+5% ضريبة  price+5%Vat</span></th>
                                 <th style="border: 1px solid gray" name="th_subtotal" class="text-right">
                                     <span groups="account.group_show_line_subtotals_tax_excluded">Amount الإجمالي</span>
-                                    <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                                    <span groups="account.group_show_line_subtotals_tax_included">Amount الإجمالي</span>
                                 </th>
                             </tr>
                         </thead>
@@ -208,7 +235,7 @@
                                             <span t-esc="i"/> 
                                             <t t-set="i" t-value="i+1"/> 
                                         </td>    
-                                        <td style="border: 1px solid gray" name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                        <td style="border-top: 1px solid gray;border-bottom: 0px solid white;" name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                         <td style="border: 1px solid gray" class="text-right">
                                             <span t-field="line.quantity"/>
                                             <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
@@ -246,7 +273,7 @@
                                 <tr>
                                   <t>   
                                         <td style="border: 1px solid gray" > SN  :</td>
-                                        <td style="width: 50%;border: 1px solid gray;"> 
+                                        <td style="width: 50%;border-top: 0px solid gray;border-right: 1px solid gray;border-bottom: 1px solid gray;border-top: none !important;"> 
                                            <t t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
                                                  <!-- <span style="width: 33%;"> -->
                                                        <t t-esc="lot['lot_name']"/>&#160;&#160;&#160;&#160;
@@ -272,7 +299,7 @@
 
                     <div class="clearfix">
                         <div id="total" class="row" style="padding-left:14px;">
-                            <div style="width:526px;border:1px solid gray;">
+                            <div style="width:526px;border:1px solid gray;font-size:12px;">
                                 Additional Details:<br />
                                 -   Reatailer acknowledges That the goods Are Received In Good condition<br />
                                 -   Manufacturer Warranty As Per terms From Invoice Date<br />
@@ -296,6 +323,14 @@
                                                 t-att-class="oe_subtotal_footer_separator"
                                                 t-esc="subtotal['formatted_amount']"
                                             />
+                                        </td>
+                                    </tr>
+
+                                    <tr class="border-black o_subtotal">
+                                        <td><strong> Discount الخصم </strong></td>
+
+                                        <td class="text-right">
+                                            <span t-field="o.discount_total"/>
                                         </td>
                                     </tr>
 
@@ -422,11 +457,29 @@
                         </tr>
                     </table>
 
+                    
+
                     <br/>
                     <br/>
                     <br/>
                     <br/>
                     <br/>
+                    <table  style="width: 100%;font-family: 'cool_font';font-size:12px;">
+                        <tr>
+                                <td style="align: left; text-align: left;width: 33%;">
+                                       Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
+                                       Account Number : <span class="m-0" t-if="o.company_id.bank_ids[0].acc_number" t-field="o.company_id.bank_ids[0].acc_number"/><br/>
+                                       IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_bic" t-field="o.company_id.bank_ids[0].bank_bic"/> <br/>
+                                </td>
+                                 <td style="align: left; text-align: left;width: 33%;">
+                                 </td>
+                                <td style="align: right;width: 33%;">
+                                       Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name" t-field="o.company_id.bank_ids[1].bank_name"/><br/>
+                                       Account Number : <span class="m-0" t-if="o.company_id.bank_ids[1].acc_number" t-field="o.company_id.bank_ids[1].acc_number"/><br/>
+                                       IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic" t-field="o.company_id.bank_ids[1].bank_bic"/> <br/>
+                                </td>
+                        </tr>
+                    </table>
 
                     <!-- <table  style="width: 100%;">
                         <tr>
