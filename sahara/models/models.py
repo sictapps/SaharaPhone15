@@ -4,7 +4,9 @@ class TextAccountMove(models.Model):
    _inherit = "account.move"
    sapps_text_amount = fields.Char(string="Total In Words", required=False, compute="amount_to_words" )
    order_payment_method = fields.Char(string="payment type", required=False, compute="get_payment_type" )
-  #  salesperson_id = fields.Many2one('hr.employee', string='Salesperson',compute="get_order_line_salesperson_id")
+  #  order_discount = fields.Integer(string="discount", required=False,compute="get_order_discount")
+   discount_total = fields.Monetary("Discount Total",compute='total_discount')
+    #  salesperson_id = fields.Many2one('hr.employee', string='Salesperson',compute="get_order_line_salesperson_id")
 
    @api.depends('amount_total')
    def amount_to_words(self):
@@ -34,6 +36,28 @@ class TextAccountMove(models.Model):
                   rec.order_payment_method =pos_payment_id.payment_method_id.name
                 else:
                   rec.order_payment_method = "-"  
+  
+  #  def get_order_discount(self):
+  #     result = 0
+  #     for rec in self.invoice_line_ids:
+  #         result = result + rec.discount
+  #     return result  
+
+   @api.depends('invoice_line_ids.quantity','invoice_line_ids.price_unit','invoice_line_ids.discount')
+   def total_discount(self):
+        for invoice in self:
+            total_price = 0
+            discount_amount = 0
+            final_discount_amount = 0
+            if invoice:  
+                for line in invoice.invoice_line_ids:
+                    if line:
+                        total_price = line.quantity * line.price_unit
+                        if total_price:  
+                            discount_amount = total_price - line.price_subtotal
+                            if discount_amount: 
+                                final_discount_amount = final_discount_amount + discount_amount
+                invoice.update({'discount_total':final_discount_amount})
    
    def check_tax_amount(self,line):
       result = 0
