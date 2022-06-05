@@ -5,52 +5,83 @@
             <t t-call="web.external_layout">
              <!-- <t t-call="sahara.custom_receipt_layout"> -->
                 <div>
-                    <h1>Sahara Phone L.L.C</h1>
+                    <h1 style="border-bottom: 2px dotted black;">Sahara Phone L.L.C</h1>
                 </div>
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
-                <div class="page">
-                    <h3><strong>Receipt Voucher</strong></h3>
-                    <div class="mb-4 mt-3">
-                        <div class="row">
-                            <div class="col-6" t-if="o.date">
-                                Date: <span t-field="o.date"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                Receipt Number: <span t-field="o.name"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6" t-if="o.partner_type">
-                                <t t-if="o.partner_type == 'customer'">
+                <h3><strong>Receipt Voucher</strong></h3>
+                <table class="page">
+                    <tr>
+                        <td style="width:200px">
+                            Date:
+                        </td>
+                        <td style="width:200px">
+                            <span t-field="o.date"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">
+                            Receipt Number:
+                        </td>
+                        <td style="width:200px">
+                            <span t-field="o.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">
+                            <t t-if="o.partner_type == 'customer'">
                                     Receipt From Mr:
                                 </t>
                                 <t t-if="o.partner_type == 'supplier'">
                                     Vendor:
-                                </t><span t-field="o.partner_id"/>
-                            </div>
-                            <!-- <div class="col-6" t-if="o.payment_method_id">
-                                Payment Method: <span t-field="o.payment_method_id.name"/>
-                            </div> -->
-                        </div>
-                        <div class="row">
-                            <div class="col-6" t-if="o.amount">
-                                The Sum Of Dhs: <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6" t-if="o.ref">
-                                Note: <span t-field="o.ref"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6" style="text-align: right">
-                                Receiver's Sign
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                </t>
+                        </td>
+                        <td style="width:200px">
+                             <span t-field="o.partner_id"/>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td style="width:200px">
+                            The Sum Of Dhs:
+                        </td>
+                        <td style="width:200px">
+                            <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">
+                            Note:
+                        </td>
+                        <td style="width:200px">
+                            <span t-field="o.ref"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:15px"></td>
+                        <td style="height:15px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">
+                           
+                        </td>
+                        <td style="width:200px">
+                            Receiver's Sign
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:30px"></td>
+                        <td style="height:30px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px;font-size:10px;">
+                            Phone: <span t-field="o.company_id.phone"/>
+                            PO.Box:<span t-field="o.company_id.zip"/>
+                        </td>
+                         <td style="width:200px;font-size:10px;">
+                            <span t-field="o.company_id.state_id"/>
+                            <span t-field="o.company_id.email"/>
+                        </td>
+                    </tr>
+                </table>
             </t>
         </template>
 
