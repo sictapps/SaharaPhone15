@@ -19,20 +19,6 @@
                 </div>
                 <br/>
                 <br/>
-
-                    <!-- <table style="width:100% !important;">
-                        <tr>
-                            <td style="width:1000px !important;">
-                            mmm
-                            </td>
-                            <td style="width:1000px !important;">
-                            sss
-                            </td> 
-                            <td style="float:right;">
-                                <img style="float:right;padding-left:300px;width:50%;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;height=%s' % ('Code128', o.ref, 50)"/>                    <br/>
-                            </td>
-                        </tr>
-                    </table>  -->
                     <!-- <h3 style="align:center; text-align: center" > فاتورة ضريبة    Tax Invoice </h3>     -->
                     <!-- <h2>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
