@@ -142,7 +142,10 @@
                                     <strong>Payment Type  :</strong>
                                 </td>
                                 <td>
-                                      <p class="m-0" t-field="o.order_payment_method"/>
+                                      <!-- <p class="m-0" t-field="o.order_payment_method"/> -->
+                                      <p t-if="o.invoice_payment_term_id">
+                                            <span t-field="o.invoice_payment_term_id.name"/>
+                                      </p> 
                                 </td>
                                 <td>
                                     <strong> :  نوع الدفع </strong>

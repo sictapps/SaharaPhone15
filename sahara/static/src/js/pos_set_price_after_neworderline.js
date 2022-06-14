@@ -12,6 +12,7 @@ odoo.define('sahara.possetpriceafterneworderline', function(require) {
                 // console.log('bbbbbbb');
                 self = this;
                 setTimeout(() => {
+                    self.NumberBuffer.reset();
                     self.state.numpadMode = 'price';
                 }, 200); 
             }
