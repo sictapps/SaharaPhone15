@@ -16,9 +16,10 @@ class TextAccountMove(models.Model):
    def get_order_line_salespersos(self,line):
        salespersons = []
        for rec in self:
-            move_id = line.move_id.id
-            pos_order = self.env['pos.order'].search([('account_move','=',line.move_id.id)])
-            pos_order_line = self.env['pos.order.line'].search([('order_id','=',pos_order.id),('product_id','=',line.product_id.id)])
+            move_id = self.id
+            pos_order = self.env['pos.order'].search([('account_move','=',self.id)])
+            pos_order_lines = self.env['pos.order.line'].search([('order_id','=',pos_order.id)])
+            pos_order_line = pos_order_lines[0]
             salespersons.append({
                                 'id': pos_order_line.salesperson_id,
                                 'name': pos_order_line.salesperson_id.name
