@@ -128,3 +128,9 @@ class SaharaQrCode(models.Model):
     _inherit = 'res.company'
 
     qrcode = fields.Binary('qrcode', readonly=False)
+
+
+class SaharaScannedEmirateId(models.Model):
+    _inherit = 'res.partner'
+
+    scannedEmirateId = fields.Binary('scannedEmirateId', readonly=False)
