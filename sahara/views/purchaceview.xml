@@ -247,8 +247,8 @@
 
                     <div style="margin-top:5px;">
                         <t t-if="o.partner_id.scannedEmirateId and o.partner_id.scannedEmirateIdsecond">
-                            <img style="max-height:300px;width:49% !important;margin:1px;" t-att-src="image_data_uri(o.partner_id.scannedEmirateId)"/>
-                            <img style="max-height:300px;width:49% !important;margin:1px;" t-att-src="image_data_uri(o.partner_id.scannedEmirateIdsecond)"/>
+                            <img style="max-height:250px;width:49% !important;margin:1px;" t-att-src="image_data_uri(o.partner_id.scannedEmirateId)"/>
+                            <img style="max-height:250px;width:49% !important;margin:1px;" t-att-src="image_data_uri(o.partner_id.scannedEmirateIdsecond)"/>
                         </t>     
                     </div>
 
