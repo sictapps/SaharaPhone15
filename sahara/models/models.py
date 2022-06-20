@@ -134,3 +134,4 @@ class SaharaScannedEmirateId(models.Model):
     _inherit = 'res.partner'
 
     scannedEmirateId = fields.Binary('scannedEmirateId', readonly=False)
+    scannedEmirateIdsecond = fields.Binary('scannedEmirateIdSecond', readonly=False)

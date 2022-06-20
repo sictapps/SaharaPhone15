@@ -44,7 +44,7 @@
                                 </span>
                             </td>
                             <td style="border:1px solid black;">
-                                 <p class="m-0" t-field="o.partner_id.name"/>
+                                 <p class="m-0" t-field="o.partner_id.Name"/>
                             </td>
                             <td style="border:1px solid black;">
                                 <span>
@@ -160,6 +160,23 @@
                                     </t>
                                 </tr>
                             </t>
+                            <t t-esc="k" />
+                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10]" t-as="k">
+                                    <t t-if="k > i-1">
+                                        <tr>
+                                            <td style="border: 1px solid black;" >
+                                                <span t-esc="k"/> 
+                                                <t t-set="k" t-value="k+1"/> 
+                                            </td>    
+                                            <td style="border: 1px solid black;" name="account_invoice_line_name"></td>
+                                            <td style="border: 1px solid black;" class="text-right">
+                                        
+                                            </td>
+                                            <td style="border: 1px solid black;" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            </td>
+                                        </tr> 
+                                    </t>    
+                            </t>
                         </tbody>
                         <tr>
                             <td style="width:10%;">
@@ -229,8 +246,9 @@
                     </div>
 
                     <div style="margin-top:5px;">
-                        <t t-if="o.partner_id.scannedEmirateId">
-                            <img style="max-height:250px;width:100%;" t-att-src="image_data_uri(o.partner_id.scannedEmirateId)"/>
+                        <t t-if="o.partner_id.scannedEmirateId and o.partner_id.scannedEmirateIdsecond">
+                            <img style="max-height:250px;width:49% !important;margin:1px;" t-att-src="image_data_uri(o.partner_id.scannedEmirateId)"/>
+                            <img style="max-height:250px;width:49% !important;margin:1px;" t-att-src="image_data_uri(o.partner_id.scannedEmirateIdsecond)"/>
                         </t>     
                     </div>
 
