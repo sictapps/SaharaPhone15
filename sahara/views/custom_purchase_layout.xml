@@ -13,9 +13,10 @@
             </div>
 
             <!-- <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:0px !important;"> -->
-            <div class="footer" style="position:absolute;margin-top:100px;width:100%;">
+            <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:10px !important;">
+                 <div class="row">
+                </div>
                 
-                    
             </div>    
 
         </template>
