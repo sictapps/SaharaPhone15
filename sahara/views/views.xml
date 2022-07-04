@@ -156,7 +156,7 @@
                                 <td>
                                     <!-- <p class="m-0" t-field="o.salesperson_id.name"/>  -->
                                     <!-- <t t-foreach="lines" t-as="line"> -->
-                                      <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson" t-key="lot.id">
+                                      <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson">
                                                  <!-- <span style="width: 33%;"> -->
                                                        <t t-esc="salesperson['name']"/>&#160;&#160;&#160;&#160;
                                                  <!-- </span> -->
@@ -233,23 +233,23 @@
                                 <t t-set="colspan" t-value="6"/>
                                 <t t-set="i" t-value="1" />
                                 <th style="width:5%;border: 1px solid gray" name="th_SN" class="text-left"><span>No الرقم </span></th>
-                                <th style="width:51%;border: 1px solid gray;border-bottom: 1px solid gray;" name="th_description" class="text-left"><span>Description التفاصيل </span></th>
+                                <th style="width:51%;border: 1px solid gray;border-bottom: 1px solid gray;text-align:center;margin-bottom:15px;" name="th_description"><span>Description </span><br/><span> التفاصيل </span></th>
                                 <th style="width:5%;border: 1px solid gray" name="th_source" class="d-none text-left"><span>Source Document</span></th>
-                                <th style="width:8%;border: 1px solid gray" name="th_quantity" class="text-right"><span>Quantity الكمية</span></th>
-                                <th style="width:11%;border: 1px solid gray" name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span> Price  السعر</span></th>
-                                <th style="width:11%;border: 1px solid gray" name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <th style="width:8%;border: 1px solid gray;text-align:center;" name="th_quantity"><span>Quantity </span><br/><span>الكمية</span></th>
+                                <th style="width:11%;border: 1px solid gray;text-align:center;" name="th_priceunit" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span> Price</span><br/><span>السعر</span></th>
+                                <th style="width:11%;border: 1px solid gray;text-align:center;" name="th_price_unit" t-if="display_discount" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                     <span>Disc.%</span>
                                     <!-- TODO: remove in master -->
                                     <t t-set="colspan" t-value="colspan+1"/>
                                 </th>
-                                <th style="width:11%;border: 1px solid gray;font-size:12px;" name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>السعر+5% ضريبة  price+5%Vat</span></th>
-                                <th style="width:18%;border: 1px solid gray" name="th_subtotal" class="text-right">
-                                    <span groups="account.group_show_line_subtotals_tax_excluded">Amount الإجمالي</span>
-                                    <span groups="account.group_show_line_subtotals_tax_included">Amount الإجمالي</span>
+                                <th style="width:11%;border: 1px solid gray;font-size:14px;;text-align:center;" name="th_taxes" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span> price+5%Vat</span><br/><span>السعر+5% ضريبة</span></th>
+                                <th style="width:18%;border: 1px solid gray;text-align:center;" name="th_subtotal">
+                                    <span groups="account.group_show_line_subtotals_tax_excluded">Amount AED الإجمالي</span>
+                                    <span groups="account.group_show_line_subtotals_tax_included">Amount AED الإجمالي</span>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="invoice_tbody">
+                        <tbody  stryle="margin-top:10px;" class="invoice_tbody">
                             <t t-set="current_subtotal" t-value="0"/>
                             <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
 
@@ -264,26 +264,26 @@
                                             <t t-set="i" t-value="i+1"/> 
                                         </td>    
                                         <td style="border-top: 1px solid gray;border-bottom: 0px solid white;" name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
-                                        <td style="border: 1px solid gray" class="text-right">
+                                        <td style="border: 1px solid gray;text-align:center;">
                                             <span t-field="line.quantity"/>
-                                            <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
+                                            <!-- <span t-field="line.product_uom_id"  groups="uom.group_uom"/> -->
                                         </td>
-                                        <td style="border: 1px solid gray" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <td style="border: 1px solid gray;text-align:center;" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span class="text-nowrap" t-field="line.price_unit"/>
                                         </td>
-                                        <td style="border: 1px solid gray" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <td style="border: 1px solid gray;text-align:center;" t-if="display_discount" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span class="text-nowrap" t-field="line.discount"/>
                                         </td>
-                                        <td style="border: 1px solid gray" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <td style="border: 1px solid gray;text-align:center;" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <!-- <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/> -->
                                             <!-- <span t-esc="lineprice"/>  -->
                                             <!-- <span t-set="lineprice" t-value="o.check_tax_amount(line)" /> -->
                                             <span t-set="lineprice" t-esc="'%.2f'% o.check_tax_amount(line)" />
-                                            <span t-esc="lineprice" />
+                                            <span  t-esc="lineprice" />
                                         </td>
-                                        <td style="border: 1px solid gray" class="text-right o_price_total">
-                                            <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                                            <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                        <td style="border: 1px solid gray;text-align:center;" class="o_price_total">
+                                            <span class="text-nowrap" widget='monetary' t-field-options="{&quot;widget&quot;: &quot;False&quot;}" t-esc="'{:,.2f}'.format(line.price_subtotal)"  groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <span class="text-nowrap" widget='monetary' t-field-options="{&quot;widget&quot;: &quot;False&quot;}" t-esc="'{:,.2f}'.format(line.price_total)"  groups="account.group_show_line_subtotals_tax_included"/>
                                         </td>
                                     </t>
                                     <t t-if="line.display_type == 'line_section'">
@@ -451,8 +451,8 @@
 
 
 
-                    <div style="align:center; text-align: center;border: 1px solid gray;">
-                        <p>
+                    <div style="margin-top:5px;align:center; text-align: center;border: 1px solid gray;">
+                        <p style="margin-bottom:3px;">
                             <span class="m-0" t-field="o.sapps_text_amount"/> UAE Dirham Only     
                          </p>
                     </div>

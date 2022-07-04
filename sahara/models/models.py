@@ -19,11 +19,12 @@ class TextAccountMove(models.Model):
             move_id = self.id
             pos_order = self.env['pos.order'].search([('account_move','=',self.id)])
             pos_order_lines = self.env['pos.order.line'].search([('order_id','=',pos_order.id)])
-            pos_order_line = pos_order_lines[0]
-            salespersons.append({
-                                'id': pos_order_line.salesperson_id,
-                                'name': pos_order_line.salesperson_id.name
-                            })
+            if pos_order_lines :
+                pos_order_line = pos_order_lines[0]
+                salespersons.append({
+                                    'id': pos_order_line.salesperson_id,
+                                    'name': pos_order_line.salesperson_id.name
+                                })
        return salespersons
 
 
