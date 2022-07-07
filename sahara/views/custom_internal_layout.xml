@@ -11,9 +11,6 @@
              <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:-2px;font-size:20px;font-weight: bold;">TAX Invoice</h3>
             <div class="row">
                <div class="col-xs-3">
-               <div style="width: 45%;">
-                    <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 25px;"/>
-                </div>
                
             <!-- <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/> -->
             <!-- All your custom code here -->
