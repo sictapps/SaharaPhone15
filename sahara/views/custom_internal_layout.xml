@@ -7,8 +7,8 @@
                     <t t-raw="0"/>
                 </div>
             <div class="header">
-             <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:-20px;font-size:20px;font-weight: bold;">فاتورة ضريبة</h3>
-             <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:-2px;font-size:20px;font-weight: bold;">TAX Invoice</h3>
+             <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:0px;font-size:20px;font-weight: bold;">فاتورة ضريبة</h3>
+             <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:0px;font-size:20px;font-weight: bold;">TAX Invoice</h3>
             <div class="row">
                <div class="col-xs-3">
                
@@ -62,7 +62,7 @@
                     </div>
             </div>
             <div class="col-xs-3">
-                <div style="width: 100%;float:right;margin-top:-100px;margin-right:-150px;"> 
+                <div style="width: 100%;float:right;margin-top:0px;margin-right:-150px;"> 
                     <div style="width: 45%;float:right;">
                         <img t-att-src="image_data_uri(o.company_id.qrcode)" style="max-height: 100px;"/>
                     </div> 
