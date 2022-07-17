@@ -10,11 +10,11 @@ odoo.define('sahara.setdefaultcustomer', function(require) {
                mounted() {          
                 self = this;
                 setTimeout(() => {
-                    var res = this.env.pos.db.search_partner('General Customer');
-                    if(res[0]){
-                        this.currentOrder.set_client(res[0]);
-                        this.currentOrder.updatePricelist(res[0]);
-                    }
+                    // var res = this.env.pos.db.search_partner('General Customer');
+                    // if(res[0]){
+                    //     this.currentOrder.set_client(res[0]);
+                    //     this.currentOrder.updatePricelist(res[0]);
+                    // }
                 },400); 
                 // console.log('aaaaaaaaaaa');
                }
