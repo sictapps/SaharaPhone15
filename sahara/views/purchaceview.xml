@@ -82,7 +82,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                            <td style="border:1px solid black;text-align:center;">
                                 <span>
                                         Identity Type
@@ -111,7 +111,7 @@
                                     تاريخ انتهاء اثبات الشخصية
                                 </span>
                             </td>
-                        </tr>
+                        </tr> -->
 
                     </table> 
 
@@ -144,7 +144,7 @@
                                             <span t-esc="i"/> 
                                             <t t-set="i" t-value="i+1"/> 
                                         </td>    
-                                        <td style="border: 1px solid black;font-size:12px;" name="account_invoice_line_name"><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></td>
+                                        <td style="border: 1px solid black;font-size:12px;" name="account_invoice_line_name"><span t-field="line.product_id.display_name" t-options="{'widget': 'text'}"/></td>
                                         <td style="border: 1px solid black;font-size:12px;"></td>
                                         <td style="border: 1px solid black;">
                                             <t>   
@@ -163,7 +163,7 @@
                                 </tr>
                             </t>
                             <t t-esc="k" />
-                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10]" t-as="k">
+                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" t-as="k">
                                     <t t-if="k > i-1">
                                         <tr style="border: 1px solid black !important;">
                                             <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" >
@@ -187,7 +187,7 @@
                             <td>
                             </td>
                             <td style="width:7%;border: 1px solid black;text-align:center;">
-                                <span t-esc="i"/> 
+                                <span t-esc="i-1"/> 
                             </td>
                             <td style="border: 1px solid black;width:30%;text-align:center;"><strong>Total:</strong></td>
                             <td style="border: 1px solid black;width:20%;font-size:20px;" class="text-right">
@@ -240,6 +240,21 @@
                             <td style="border:1px solid black;">
                                 <span>
                                     منظم السند
+                                </span>
+                            </td>
+                        </tr>
+                         <tr>
+                           <td style="border:1px solid black;text-align:center;">
+                                <span>
+                                        Buyer Name
+                                </span>
+                            </td>
+                            <td style="border:1px solid black;">
+
+                            </td>
+                            <td style="border:1px solid black;">
+                                <span>
+                                    اسم المشتري
                                 </span>
                             </td>
                         </tr>
