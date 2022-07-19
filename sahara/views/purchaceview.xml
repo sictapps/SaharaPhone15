@@ -272,7 +272,7 @@
                         </t>     
                     </div>
 
-                    <div class="text-center" style="margin-top:230px ;font-family: 'cool_font';font-size:12px;">
+                    <div class="text-center" style="margin-top:200px ;font-family: 'cool_font';font-size:12px;">
                        <span t-esc="time.strftime('Date %d/%m/%Y  ')"/>
                        <span t-esc="time.strftime(' Time: %H:%M:%S')"/>
                     </div>
