@@ -7,20 +7,18 @@
                     <t t-raw="0"/>
                 </div>
             <div class="header">
-
+             <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:0px;font-size:20px;font-weight: bold;">فاتورة ضريبة</h3>
+             <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:0px;font-size:20px;font-weight: bold;">TAX Invoice</h3>
             <div class="row">
-
-            <div class="col-xs-3">
-               <div style="width: 45%;">
-                    <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 25px;"/>
-                </div>
+               <div class="col-xs-3">
+               
             <!-- <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/> -->
             <!-- All your custom code here -->
-
+                       
                         <table style="width: 100%;">
                             <tr>
                                 <td>
-                                    <p class="m-0" t-field="o.company_id.name"/>
+                                    <p style="font-family: 'cool_font';color:red;font-size:25px;" class="m-0" t-field="o.company_id.name"/>
                                 </td>
                             </tr>
                             <tr>
@@ -38,7 +36,7 @@
                             </tr>
                             <tr>    
                                 <td>
-                                   Tel: <span class="m-0" t-field="o.company_id.phone"/>  ,   Mob: <span class="m-0" t-field="o.company_id.mobile"/>
+                                    Tel: <span class="m-0" t-field="o.company_id.phone"/> <!-- ,   Mob: <span class="m-0" t-field="o.company_id.mobile"/> -->
                                 </td>
                             </tr>
                              <tr>    
@@ -51,27 +49,49 @@
                                     Mail: <span class="m-0" t-field="o.company_id.email"/>
                                 </td>
                             </tr>
+                            <tr>    
+                                 <td>
+                                    Web: 
+                                </td>
+                            </tr>
                         </table>
             </div>
+            <div class="col-xs-6">
+                    <div style="width: 400px;float:right;">
+                        <span style="color:white;">mmmmm</span>
+                    </div>
             </div>
+            <div class="col-xs-3">
+                <div style="width: 100%;float:right;margin-top:0px;margin-right:-150px;"> 
+                    <div style="width: 45%;float:right;">
+                        <img t-att-src="image_data_uri(o.company_id.qrcode)" style="max-height: 100px;"/>
+                    </div> 
+                </div> 
+            </div>
+            </div>
+            
             </div>
 
-            <div class="footer">
-                    <table  style="width: 100%;">
+            <!-- <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:0px !important;"> -->
+            <div class="footer" style="position:absolute;margin-bottom:30px;width:100%;">
+
+                    <!-- <table  style="width: 100%;font-family: 'cool_font';">
                         <tr>
-                                <td style="align: left; text-align: left;width: 50%;">
+                                <td style="align: left; text-align: left;width: 33%;">
                                        Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
                                        Account Number : <span class="m-0" t-if="o.company_id.bank_ids[0].acc_number" t-field="o.company_id.bank_ids[0].acc_number"/><br/>
                                        IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_bic" t-field="o.company_id.bank_ids[0].bank_bic"/> <br/>
                                 </td>
-                                <td style="align: right;width: 50%;">
+                                 <td style="align: left; text-align: left;width: 33%;">
+                                 </td>
+                                <td style="align: right;width: 33%;">
                                        Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name" t-field="o.company_id.bank_ids[1].bank_name"/><br/>
                                        Account Number : <span class="m-0" t-if="o.company_id.bank_ids[1].acc_number" t-field="o.company_id.bank_ids[1].acc_number"/><br/>
                                        IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic" t-field="o.company_id.bank_ids[1].bank_bic"/> <br/>
                                 </td>
                         </tr>
-                    </table>
-                    <div class="text-center" style="border-top: 1px solid black;">
+                    </table> -->
+                    <div class="text-center" style="font-family: 'cool_font';">
                        <span t-esc="time.strftime('(Time: %H:%M:%S)')"/>
                        <!-- <div class="col-xs-2"> -->
                             <!-- <small> -->

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="sahara_qrcode">
+            <field name="name">sahara qrcode</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='favicon']" position="before">
+                        <field name="qrcode" widget="image"/>
+                 </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="sahara_scannedEmirateId">
+            <field name="name">sahara scannedEmirateId</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='category_id']" position="after">
+                        <field name="scannedEmirateId" widget="image"/>
+                        <field name="scannedEmirateIdsecond" widget="image"/>
+                 </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo> 

@@ -37,7 +37,10 @@
         'report/print_check_middle.xml',
         'report/print_check_bottom.xml',
         # 'views/sahara_custom_check.xml',
-        'views/payment_view.xml'
+        'views/payment_view.xml',
+        'views/sahara_qrcode.xml',
+        'views/purchaceview.xml',
+        'views/custom_purchase_layout.xml',
         #  'views/personviews.xml',
     ],
     # only loaded in demonstration mode
