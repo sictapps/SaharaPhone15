@@ -79,7 +79,7 @@ class TextAccountMove(models.Model):
                                 'product_name': lot.product_id.name,
                                 'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
                                 'uom_name': line.product_uom_id.name,
-                                'lot_name': lot.lot_name,
+                                'lot_name': '-',
                             })
         if lot_values ==[]:
            move_id = line.move_id.id
@@ -91,7 +91,7 @@ class TextAccountMove(models.Model):
                                     'product_name': lot.product_id.name,
                                     'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
                                     'uom_name': line.product_uom_id.name,
-                                    'lot_name': lot.lot_id.name,
+                                    'lot_name': '-',
                                 }
                   if not obj in lot_values:              
                     lot_values.append(obj)
@@ -106,7 +106,7 @@ class TextAccountMove(models.Model):
                                     'product_name': lot.product_id.name,
                                     'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
                                     'uom_name': line.product_uom_id.name,
-                                    'lot_name': lot.lot_id.name,
+                                    'lot_name': '-',
                                 }
                   if not obj in lot_values:              
                     lot_values.append(obj)
