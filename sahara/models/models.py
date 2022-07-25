@@ -79,7 +79,7 @@ class TextAccountMove(models.Model):
                                 'product_name': lot.product_id.name,
                                 'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
                                 'uom_name': line.product_uom_id.name,
-                                'lot_name': '-',
+                                'lot_name': lot.lot_name,
                             })
         if lot_values ==[]:
            move_id = line.move_id.id
@@ -91,22 +91,21 @@ class TextAccountMove(models.Model):
                                     'product_name': lot.product_id.name,
                                     'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
                                     'uom_name': line.product_uom_id.name,
-                                    'lot_name': '-',
+                                    'lot_name': lot.lot_id.name,
                                 }
                   if not obj in lot_values:              
                     lot_values.append(obj)
         if lot_values ==[]:
             move_id = line.move_id.id
-            account_move = self.env['account.move'].search([('id','=',line.move_id.id)])
-            stock_move = self.env['stock.move'].search([('purchase_line_id','=',line.purchase_line_id.id)])  
-            order_lines = self.env['stock.move.line'].search([('move_id','in',stock_move.ids),('product_id','=',line.product_id.id)])
+            account_move = self.env['account.move'].search([('id','=',line.move_id.id)]) 
+            order_lines = self.env['stock.move.line'].search([('picking_id','in',account_move.invoice_line_ids.purchase_line_id.order_id.picking_ids.ids),('product_id','=',line.product_id.id)])
             if order_lines:
                 for lot in order_lines:
                   obj = {
                                     'product_name': lot.product_id.name,
                                     'quantity': line.qty if lot.product_id.tracking == 'lot' else 1.0,
                                     'uom_name': line.product_uom_id.name,
-                                    'lot_name': '-',
+                                    'lot_name': lot.lot_id.name,
                                 }
                   if not obj in lot_values:              
                     lot_values.append(obj)
