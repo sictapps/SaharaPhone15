@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sapps_pos_select_product_id,sapps_pos_select_product_by_serial.stock_return_picking_multiple,model_stock_return_picking_multiple,base.group_user,1,1,1,1
+access_sapps_pos_select_product_line_id,sapps_pos_select_product_by_serial.multiple_transfer_return_picking_line,model_multiple_transfer_return_picking_line,base.group_user,1,1,1,1
