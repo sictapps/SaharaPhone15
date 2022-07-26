@@ -33,8 +33,8 @@ class StockMoveSaharahInherited(models.Model):
                 taken_qty = taken_qty + super(StockMoveSaharahInherited, self)._update_reserved_quantity(1, available_quantity, location_id, lot_id=lotid, package_id=package_id, owner_id=owner_id, strict=strict)
             self.sale_line_id.sapps_barcode_chosen_lots = False
             return taken_qty
-        elif 'returned_moves_with_lots' in self._context and self._context['returned_moves_with_lots'] == True \
-                 and len(self.sapps_chosen_lot_ids) > 0:
+        elif 'returned_moves_with_lots' in self._context and self._context['returned_moves_with_lots'] == True\
+                and len(self.sapps_chosen_lot_ids) >0 :
             taken_qty = 0
             for lotid in self.sapps_chosen_lot_ids:
                 taken_qty = taken_qty + super(StockMoveSaharahInherited, self)._update_reserved_quantity(1,
