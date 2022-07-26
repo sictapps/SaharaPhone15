@@ -32,12 +32,15 @@ class TextAccountMove(models.Model):
    def get_payment_type(self):
        for rec in self:
            accountMoveInv = self.env['account.move'].search([('id','=',(rec.id)+1)])
-           rec.order_payment_method = "-" 
+           rec.order_payment_method = "-"
            for pos_payment_id in accountMoveInv.pos_payment_ids:
                 if pos_payment_id.payment_method_id:
                   rec.order_payment_method =pos_payment_id.payment_method_id.name
                 else:
-                  rec.order_payment_method = "-"  
+                  rec.order_payment_method = "-"
+           if rec.order_payment_method == "-":
+                for item in rec._get_reconciled_info_JSON_values():
+                     rec.order_payment_method = item['journal_name']
   
   #  def get_order_discount(self):
   #     result = 0
