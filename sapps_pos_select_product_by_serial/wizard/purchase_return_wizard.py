@@ -46,6 +46,8 @@ class ReturnPicking(models.TransientModel):
             if move.picking_id.state != 'done':
                 raise UserError(_("You may only return Done pickings"))
 
+            if len(self.product_return_moves.filtered(lambda v: v.lot_id.id == serial.id)) > 0:
+                raise UserError(_("Serial already exists in return order"))
             move_dest_exists = False
             product_return_moves = []
             line_fields = [f for f in self.env['multiple.transfer.return.picking.line']._fields.keys()]
@@ -79,13 +81,7 @@ class ReturnPicking(models.TransientModel):
     @api.model
     def _prepare_stock_return_picking_line_vals_from_move(self, stock_move, serial):
         quantity = 1
-        for move in stock_move.move_dest_ids:
-            if move.origin_returned_move_id and move.origin_returned_move_id != stock_move:
-                continue
-            if move.state in ('partially_available', 'assigned'):
-                quantity -= sum(move.move_line_ids.mapped('product_qty'))
-            elif move.state in ('done'):
-                quantity -= move.product_qty
+
         quantity = float_round(quantity, precision_rounding=stock_move.product_id.uom_id.rounding)
         return {
             'product_id': stock_move.product_id.id,
