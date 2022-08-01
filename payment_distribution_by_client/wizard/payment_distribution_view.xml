@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_distribution_form_view" model="ir.ui.view">
+        <field name="name">payment.distribution.form.view</field>
+        <field name="model">payment.distribution.by.client</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Payment Distribution" delete="false" duplicate="false" print="false">
+                <header>
+                        <!-- Post -->
+                        <button name="make_payment_distribution" string="Post" class="oe_highlight"
+                                type="object"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                     <button class="oe_highlight" name="print" string="Print" type="object"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="journal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="min_amount"></field>
+
+                        <field name="payment_amount" />
+<field name="state" invisible="1"></field>
+                        <field name="is_posted" invisible="1"></field>
+                    </group>
+                    <group>
+
+                        <field name="payment_date" required="True"/>
+                         <field name="partner_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+
+                    </group>
+                </group>
+                <field name="distribution_line_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                    <tree string="Total AmountPayment Distribution Line" editable="bottom" >
+                        <field name="partner_id" />
+                        <field name="residual" force_save="1"/>
+                        <field name="partner_amount_residual" force_save="1"/>
+                        <field name="currency_id" force_save="1"/>
+                        <field name="amount_to_pay"/>
+                    </tree>
+                </field>
+                <footer>
+
+
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="payment_distribution_action" model="ir.actions.act_window">
+         <field name="name">Payment Distribution</field>
+         <field name="res_model">payment.distribution.by.client</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="view_mode">tree,form</field>
+         <field name="view_id" ref="payment_distribution_by_client.payment_distribution_form_view"/>
+         <field name="target">inline</field>
+    </record>
+    <record model="ir.ui.view" id="payment_distribution_list_action">
+      <field name="name">Payment Distribution list</field>
+      <field name="model">payment.distribution.by.client</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="partner_id"/>
+          <field name="payment_date"/>
+            <field name="state"></field>
+        </tree>
+      </field>
+    </record>
+        <record model="ir.actions.act_window" id="payment_distribution_full_action">
+         <field name="name">Payment Distribution list</field>
+         <field name="res_model">payment.distribution.by.client</field>
+         <field name="view_mode">tree,form</field>
+</record>
+    <menuitem id="payment_distrubution_menu" name="Payment Distribution By Client" parent="account.menu_finance_receivables" sequence="3"/>
+    <menuitem name="Payment Distribution By Client"  action="payment_distribution_full_action" id="menu_payment_distrubution_id" parent="account.menu_finance_receivables" sequence="3"/>
+</odoo>
