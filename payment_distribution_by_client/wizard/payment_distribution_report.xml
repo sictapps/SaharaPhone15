@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <report
+            id="action_report_payment_distribution"
+            model="payment.distribution.by.client"
+            string="payment distribution"
+            report_type="qweb-pdf"
+            name="payment_distribution_by_client.report"
+            file="payment_distribution_by_client.report"
+            menu="False"
+            print_report_name="'invoices for  - %s' % (object.partner_id.name)"
+        />
+
+    </data>
+</odoo>
