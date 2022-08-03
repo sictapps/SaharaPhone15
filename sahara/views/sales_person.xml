@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_report_pos_order_pivot_extend" model="ir.ui.view">
+            <field name="name">report.pos.order.pivot</field>
+            <field name="model">report.pos.order.salesperson</field>
+            <field name="arch" type="xml">
+                <pivot string="Point of Sale Analysis" sample="1">
+                    <field name="product_categ_id" type="row"/>
+                    <field name="date" interval="month" type="col"/>
+                    <field name="order_id" type="measure"/>
+                    <field name="product_qty" type="measure"/>
+                    <field name="price_total" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_report_pos_order_graph_extend" model="ir.ui.view">
+            <field name="name">report.pos.order.graph</field>
+            <field name="model">report.pos.order.salesperson</field>
+            <field name="arch" type="xml">
+                <graph string="Point of Sale Analysis" sample="1">
+                    <field name="product_categ_id"/>
+                    <field name="price_total" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="report_pos_order_view_tree_extend" model="ir.ui.view">
+            <field name="name">report.pos.order.view.tree</field>
+            <field name="model">report.pos.order.salesperson</field>
+            <field name="arch" type="xml">
+                <tree string="Point of Sale Analysis">
+                    <field name="date" widget="date"/>
+                    <field name="order_id" optional="hide"/>
+                    <field name="partner_id" optional="hide"/>
+                    <field name="product_id" optional="show"/>
+                    <field name="product_categ_id" optional="show"/>
+                    <field name="config_id" optional="hide"/>
+                    <field name="company_id" optional="show" groups="base.group_multi_company"/>
+                    <field name="state" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_report_pos_order_search_extend" model="ir.ui.view">
+            <field name="name">report.pos.order.search</field>
+            <field name="model">report.pos.order.salesperson</field>
+            <field name="arch" type="xml">
+                <search string="Point of Sale Analysis">
+                    <field name="date"/>
+                    <separator/>
+                    <filter string="Invoiced" name="invoiced" domain="[('state','=',('invoiced'))]"/>
+                    <filter string="Not Invoiced" name="not_invoiced" domain="[('state','=',('paid'))]"/>
+                    <separator/>
+                    <filter name="filter_date" date="date"/>
+                    <field name="config_id"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="product_categ_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="User" name="User" context="{'group_by':'user_id'}"/>
+                        <filter string="Salesperson" name="sales_person_id" context="{'group_by':'sales_person_id'}"/>
+                        <filter string="Point of Sale" name="pos" context="{'group_by':'config_id'}"/>
+                        <filter string="Product" name="product" context="{'group_by':'product_id'}"/>
+                        <filter string="Product Category" name="product_category" context="{'group_by':'product_categ_id'}"/>
+                        <separator/>
+                        <filter string="Order Date" name="order_month" context="{'group_by':'date:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_report_pos_order_all_extend" model="ir.actions.act_window">
+            <field name="name">Orders Analysis</field>
+            <field name="res_model">report.pos.order.salesperson</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="search_view_id" ref="view_report_pos_order_search_extend"/>
+            <field name="context">{'group_by_no_leaf':1,'group_by':[]}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No data yet!
+                </p><p>
+                    Create a new POS order
+                </p>
+            </field>
+        </record>  
+        
+        <menuitem id="menu_report_order_sales_person_details" name="Sales persons Details" action="sahara.action_report_pos_order_all_extend" parent="point_of_sale.menu_point_rep" sequence="5"/>
+
+        <!-- <record id="report_pos_order_search_extend" model="ir.ui.view">
+            <field name="name">report.pos.order.search.extend</field>
+            <field name="model">report.pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='product']" position="after">
+                    <separator/>
+                        <filter string="Sales Person" name="s.cashier" domain="[]" context="{'group_by':'s.cashier'}"/> 
+                    <separator/>
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</odoo> 
