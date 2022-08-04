@@ -3,6 +3,7 @@
 
     <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
         <xpath expr="//ul[hasclass('info-list')]/t[1]/li" position="inside">
+            <br/>Unit Tax:<t t-esc="((props.line.get_price_with_tax()-props.line.get_price_without_tax())/props.line.quantity)" />
             <span class="orderline-salesperson" t-if="env.pos.config.allow_orderline_user">
                 <i t-on-click="usericonclick" class="oe_link_icon fa fa-user oe_icon line-salesperson-icon oe_green" t-if="props.line.get_salesperson()" role="img"/>
 
@@ -10,7 +11,6 @@
                 <t t-esc="props.line.get_salesperson()" />
 
                 <i t-on-click="removesalesperson" class="oe_link_icon fa fa-remove oe_icon oe_red" t-if="props.line.get_salesperson()" role="img"/>
-            
             </span>
         </xpath>
     </t>

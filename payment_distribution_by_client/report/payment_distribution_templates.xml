@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report">
+    <t t-call="web.basic_layout">
+                <div class="col-12">
+
+                    <h1> <span t-esc="data['company_name']"/></h1>
+                    <br/>
+                </div>
+                <div class="col-12">
+
+                    <h2>Payment Date - <span t-esc="data['date']"/></h2>
+                    <br/>
+                </div>
+        <div class="col-12">
+
+                    <h2>Salesman - <span t-esc="data['sealman']"/></h2>
+                    <br/>
+                </div>
+        <div>
+            <table class="table table-bordered table-sm">
+                    <thead><tr>
+
+                        <th >Partner</th>
+                        <th>Partner Due</th>
+                        <th >Payment</th>
+                        <th >Real Payment</th>
+                    </tr></thead>
+                    <tr t-foreach="data['invoices']" t-as="invoice">
+
+                           <td ><t t-esc="invoice['partner_id']"/></td>
+                        <td ><t t-esc="invoice['partner_amount_residual']"/></td>
+                        <td ><t t-esc="invoice['residual']"/></td>
+                        <td ><t t-esc="invoice['amount_to_pay']"/></td>
+                    </tr>
+                <tr>
+                    <td colspan="2"><strong>total residual</strong></td>
+                    <td colspan="2"><strong>total amount</strong> </td>
+                    <td><strong>count</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span t-esc="data['total_residual']"/>
+                    </td>
+                    <td colspan="2">
+                    <span t-esc="data['total_amount']"/>
+                    </td>
+                    <td>
+                        <span t-esc="data['count']"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+</t>
+        </template>
+    </data>
+</odoo>

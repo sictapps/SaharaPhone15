@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_distribution_by_client,payment.distribution.by.client,model_payment_distribution_by_client,account.group_account_invoice,1,1,1,1
+access_payment_distribution_line_by_client,payment.distribution.line.by.client,model_payment_distribution_line_by_client,account.group_account_invoice,1,1,1,1

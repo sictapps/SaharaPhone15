@@ -41,6 +41,7 @@
         'views/sahara_qrcode.xml',
         'views/purchaceview.xml',
         'views/custom_purchase_layout.xml',
+        'views/sales_person.xml'
         #  'views/personviews.xml',
     ],
     # only loaded in demonstration mode

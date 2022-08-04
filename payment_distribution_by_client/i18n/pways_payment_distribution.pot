@@ -1,0 +1,260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pways_payment_distribution
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0e+e-20191230\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-06 12:43+0000\n"
+"PO-Revision-Date: 2020-10-06 12:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "<strong>count</strong>"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "<strong>total amount</strong>"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "<strong>total residual</strong>"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__amount_to_pay
+msgid "Amount"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__residual
+msgid "Amount Due"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields.selection,name:pways_payment_distribution.selection__payment_distribution__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__create_uid
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__create_date
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__currency_id
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Date"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__display_name
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__display_name
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_report_pways_payment_distribution_report_payment_distribution__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__distribution_id
+msgid "Distribution Wizard"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields.selection,name:pways_payment_distribution.selection__payment_distribution__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: code:addons/pways_payment_distribution/wizard/payment_distribution.py:0
+#, python-format
+msgid "Either payment not created or confirmed !"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__id
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__id
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_report_pways_payment_distribution_report_payment_distribution__id
+msgid "ID"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__invoice_id
+msgid "Invoice"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__date_invoice
+msgid "Invoice Date"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Invoice Number"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__invoice_total
+msgid "Invoice Total"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: code:addons/pways_payment_distribution/wizard/payment_distribution.py:0
+#, python-format
+msgid "Journal and invoices must have same currency !"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution____last_update
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line____last_update
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_report_pways_payment_distribution_report_payment_distribution____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__write_uid
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__write_date
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__reference
+msgid "Memo"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__distribution_line_ids
+msgid "Partial Inovice Line"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__partner_id
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Partner"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution_line__payment_id
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Payment"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__payment_date
+msgid "Payment Date"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Payment Date -"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.actions.act_window,name:pways_payment_distribution.payment_distribution_action
+#: model:ir.model,name:pways_payment_distribution.model_payment_distribution
+#: model:ir.ui.menu,name:pways_payment_distribution.menu_payment_distrubution_id
+#: model:ir.ui.menu,name:pways_payment_distribution.payment_distrubution_menu
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.payment_distribution_form_view
+msgid "Payment Distribution"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model,name:pways_payment_distribution.model_payment_distribution_line
+msgid "Payment Distribution Line"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.actions.act_window,name:pways_payment_distribution.payment_distribution_full_action
+msgid "Payment Distribution list"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.payment_distribution_form_view
+msgid "Post"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields.selection,name:pways_payment_distribution.selection__payment_distribution__state__posted
+msgid "Posted"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.payment_distribution_form_view
+msgid "Print"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Real Payment"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__partner_id
+msgid "Salesperson"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.report_payment_distribution
+msgid "Sealman -"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__state
+msgid "Status"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__payment_amount
+msgid "Total Amount"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model_terms:ir.ui.view,arch_db:pways_payment_distribution.payment_distribution_form_view
+msgid "Total AmountPayment Distribution Line"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.actions.report,name:pways_payment_distribution.action_report_payment_distribution
+msgid "payment distribution"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model.fields,field_description:pways_payment_distribution.field_payment_distribution__is_posted
+msgid "posted"
+msgstr ""
+
+#. module: pways_payment_distribution
+#: model:ir.model,name:pways_payment_distribution.model_report_pways_payment_distribution_report_payment_distribution
+msgid "report.pways_payment_distribution.report_payment_distribution"
+msgstr ""
