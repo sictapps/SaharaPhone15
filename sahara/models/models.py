@@ -210,14 +210,13 @@ class PosOrderSalesPersonReport(models.Model):
                 s.session_id,
                 s.account_move IS NOT NULL AS invoiced,
                 SUM(l.price_subtotal - l.total_cost / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) AS margin,
-                n.salesperson_id As sales_person_id
+                l.salesperson_id As sales_person_id
         """
 
     def _from(self):
         return """
             FROM pos_order_line AS l
                 INNER JOIN pos_order s ON (s.id=l.order_id)
-                INNER JOIN pos_order_line n ON (n.order_id = s.id)
                 LEFT JOIN product_product p ON (l.product_id=p.id)
                 LEFT JOIN product_template pt ON (p.product_tmpl_id=pt.id)
                 LEFT JOIN uom_uom u ON (u.id=pt.uom_id)
@@ -236,7 +235,7 @@ class PosOrderSalesPersonReport(models.Model):
                 pt.categ_id, pt.pos_categ_id,
                 p.product_tmpl_id,
                 ps.config_id,
-                n.salesperson_id
+                l.salesperson_id
         """
 
     def init(self):
