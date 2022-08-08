@@ -105,6 +105,7 @@ class ReturnPicking(models.TransientModel):
             'warehouse_id': self.picking_type_id.warehouse_id.id,
             'origin_returned_move_id': return_line.move_id.id,
             'procure_method': 'make_to_stock',
+            'to_refund': True
         }
         return vals
 
