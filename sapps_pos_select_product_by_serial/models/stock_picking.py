@@ -50,3 +50,13 @@ class PurchaseMultipleReturn(models.Model):
             'res_id': res.id,
             'context': self.env.context,
         }
+
+    def _check_old_purchase_orders(self):
+        all_po = self.env['purchase.order'].search([('create_date', '<', '10-08-2022')])
+        adjusted_mo = []
+        for po in all_po:
+            purchase_return = po.picking_ids.filtered(lambda v: v.origin == 'Return of ' + po.name)
+            for move in purchase_return.move_lines:
+                move.to_refund = True
+            if len(purchase_return.move_lines) > 0:
+                po.order_line._compute_qty_received()

@@ -10,7 +10,6 @@ class SaleOrder(models.Model):
         self = self.with_context(sapps_from_sale_confirm = True)
         return super(SaleOrder, self).action_confirm()
 
-
     def on_barcode_scanned(self, barcode):
         serial = self.env['stock.production.lot'].search([('name', '=', barcode)])
         if serial and serial.product_id and serial.product_id.sale_ok:
