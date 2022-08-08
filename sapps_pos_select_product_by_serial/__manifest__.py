@@ -16,7 +16,7 @@
         'security/ir.model.access.csv',
         'views/view.xml',
         'wizard/purchase_return_wizard_view.xml',
-        'data/check_old_purchase.xml'
+        # 'data/check_old_purchase.xml'
     ],
     'assets': {
         'point_of_sale.assets': [
