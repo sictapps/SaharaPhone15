@@ -10,12 +10,13 @@
      'description': """test""",
     # "sequence": 0,
     'depends': [
-        "point_of_sale", 'sale_management', 'barcodes', 'sale', 'stock_barcode','purchase_stock', 'stock'
+        "point_of_sale", 'sale_management', 'barcodes', 'sale','stock_barcode','purchase_stock', 'stock'
     ],
     'data': [
         'security/ir.model.access.csv',
         'views/view.xml',
-        'wizard/purchase_return_wizard_view.xml'
+        'wizard/purchase_return_wizard_view.xml',
+        'data/check_old_purchase.xml'
     ],
     'assets': {
         'point_of_sale.assets': [
