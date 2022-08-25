@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+            id="sapps_account_invoices"
+            model="account.move"
+            string="Repair Invoice"
+            report_type="qweb-pdf"
+            name="sapps_sahara_repair.report_sapps_invoice_with_payments"
+            file="sapps_sahara_repair.report_sapps_invoice_with_payments"
+            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+        />
+    </data>
+</odoo>

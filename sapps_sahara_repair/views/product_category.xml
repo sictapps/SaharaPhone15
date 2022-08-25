@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_category_property_repair_form" model="ir.ui.view">
+            <field name="name">product.category.property.repair.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='account_property']/group" position="inside">
+                    <field name="property_account_repair_income_categ_id"
+                                   domain="[('internal_type','=','other'),('deprecated', '=', False)]"/>
+                    <field name="property_account_repair_expense_categ_id"
+                                   domain="[('internal_type','=','other'),('deprecated', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
