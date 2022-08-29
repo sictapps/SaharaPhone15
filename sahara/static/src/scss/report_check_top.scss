@@ -25,6 +25,7 @@
         left: 6.50in;
         width: 0.98in;
         text-align: center;
+        font-size: 16px;
     }
     .ckus_date_format {
         top: 0.75in;
@@ -39,6 +40,7 @@
         width: 1.07in;
         text-align: center;
         z-index: 1 !important;
+        font-size: 16px;
     }
     .ckus_amount_in_word {
         top: 1.4in;
@@ -46,8 +48,8 @@
         width: 4in;// was 7
         // word-wrap: break-word;
         text-align: left;
-        font-weight: bold;
-        // font-size: 8px;
+        // font-weight: bold;
+        font-size: 16px;
         height: fit-content !important;
         overflow: wrap !important;
         word-break: break-word !important; // IE & < Edge 18
@@ -56,13 +58,14 @@
         white-space: pre-wrap !important;
         // border: 1px solid black !important;
         z-index: 99999999 !important;
-        line-height: 60px !important;
+        line-height: 50px !important;
     }
     .ckus_payee_name {
         top: 1.0in;
-        left: 1.7in;
+        left: 1.8in;
         width: 4.5in;
         text-align: left;
+        font-size: 16px;
     }
     .ckus_payee_address {
         top: 1.87in;
