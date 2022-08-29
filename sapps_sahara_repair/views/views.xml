@@ -1,0 +1,109 @@
+<odoo>
+    <data>
+        <record id="sapps_netc_repair_view_picking_form" model="ir.ui.view">
+      <field name="name">sapps.netc.repair.view.picking.form</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.view_picking_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='owner_id']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+      </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_repair_order_form_inherit">
+            <field name="name">view.repair.order.form.inherit</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="create_if_not_exists" attrs="{'invisible':[('is_internal', '=', True)]}"></field>
+                    <field name="new_lot_if_not_exists" attrs="{'invisible':[('is_internal', '=', True)]}"></field>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_internal', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_method']" position="after">
+                    <field name="is_internal" attrs="{'invisible':[('invoice_method', '!=', 'none')],
+                                                      'readonly':[('invoice_method', '!=', 'none')]
+                                                    }"></field>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button
+                            type="object"
+                            groups="sales_team.group_sale_manager"
+                            string="Confirm Quotation"
+                            name="action_confirm_quot"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('state', '!=', 'order')]}"
+                       />
+                </xpath>
+                <xpath expr="//button[@name='action_created_invoice']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('invoice_method','=','none'),
+                                                           '|',('state','in',('order',
+                                                                          'confirmed',
+                                                                          '2binvoiced',
+                                                                          'draft',
+                                                                          'under_repair'
+                                                                          )),
+                                                           ('is_internal', '=', True)
+                                                           ]
+                                             }</attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet/div[@name='button_box']" position="inside">
+
+                        <button
+                            type="object"
+                            name="action_view_transfer_materials"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('transfer_material_count', '=', 0)]}"
+                            groups="stock.group_stock_manager"
+                            icon="fa-truck"
+                        >
+                            <field
+                                name="transfer_material_count"
+                                widget="statinfo"
+                                string="Materials"
+                            />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_view_transfer_products"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('transfer_product_count', '=', 0)]}"
+                            groups="stock.group_stock_manager"
+                            icon="fa-truck"
+                        >
+                            <field
+                                name="transfer_product_count"
+                                widget="statinfo"
+                                string="Product"
+                            />
+                        </button>
+
+                </xpath>
+
+                <xpath expr="//header//field[@name='state']" position="before">
+                    <button name="button_transfer_materials" type="object"
+                            string="transfer Materials"
+
+                    />
+                </xpath>
+
+                <xpath expr="//group//field[@name='lot_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+                    <attribute name="attrs">{'required':[('create_if_not_exists', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='lot_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='location_dest_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
