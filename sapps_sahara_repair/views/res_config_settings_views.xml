@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_netc_repair" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.netc.repair</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Repair" string="Repair" data-key="repair">
+                    <h2>Repair Settings</h2>
+                    <div class="row mt16 o_settings_container" id="map_view">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="location_id" string="Default Repair Location: "/>
+                                <field name="location_id"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="repair_service_product" string="Repair Service Product: "/>
+                                <field name="repair_service_product"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="repair_area_id" string="Repair Area: "/>
+                                <field name="repair_area_id"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+
+                            <div class="o_setting_right_pane">
+                                <label for="picking_type_id" string="Raw Material Operation Type: "/>
+                                <field name="picking_type_id"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="transfer_product_op" string="Receipt From Customer: "/>
+                                <field name="transfer_product_op"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>
+                                <label for="transfer_product_receipt_new_serial" string="Receipt New Serial: "/>
+                                <field name="transfer_product_receipt_new_serial"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>
+<!--                                <label for="transfer_product_op2" string="To Repair Area: "/>-->
+<!--                                <field name="transfer_product_op2"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>-->
+<!--                                <label for="transfer_product_deliver" string="Transfer Product delivery: "/>-->
+<!--                                <field name="transfer_product_deliver"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>-->
+                            </div>
+                        </div>
+<!--                        <div class="col-12 col-lg-6 o_setting_box">-->
+
+<!--                            <div class="o_setting_right_pane">-->
+<!--                                <label for="finish_picking_type_id" string="Finish Repair Operation Type: "/>-->
+<!--                                <field name="finish_picking_type_id"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True,}"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
