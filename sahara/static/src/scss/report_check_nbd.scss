@@ -1,0 +1,89 @@
+.ckus_nbd_page {
+    .ckus_check {
+        top: 0in;
+    }
+    // .ckus_stub_1 {
+    //     top: 3.45in;
+    // }
+    // .ckus_stub_2 {
+    //     top: 7in;
+    // }
+
+    .ckus_check .sequence_number {
+        top: 0.1in;
+        left: 7.1in;
+        width: 0.7in;
+    }
+    .ckus_date_label {
+        top: 0.55in;
+        left: 6in;
+        width: .75in;
+        text-align: center;
+    }
+    .ckus_date {
+        top: 0.7in;//0
+        left: 6.50in;
+        width: 0.98in;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .ckus_date_format {
+        top: 0.75in;
+        left: 6.37in;
+        width: 1.47in;
+        text-align: center;
+        font-size: 0.8em;
+    }
+    .ckus_amount {
+        top: 2.0in;
+        left: 6.9in;// was 6.7
+        width: 1.07in;
+        text-align: center;
+        z-index: 1 !important;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .ckus_amount_in_word {
+        top: 1.6in;
+        left: 1.6in;
+        width: 4in;// was 7
+        // word-wrap: break-word;
+        text-align: left;
+        font-weight: bold;
+        // color: blue;
+        font-size: 16px;
+        height: fit-content !important;
+        overflow: wrap !important;
+        word-break: break-word !important; // IE & < Edge 18
+        overflow-wrap: break-word !important; 
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+        // border: 1px solid black !important;
+        z-index: 99999999 !important;
+        line-height: 40px !important;
+    }
+    .ckus_payee_name {
+        top: 1.3in;
+        left: 1.6in;
+        width: 4.5in;
+        text-align: left;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .ckus_payee_address {
+        top: 1.87in;
+        left: 0.5in;
+        width: 4.0in;
+        text-align: left;
+        font-size: 0.9em;
+    }
+    .ckus_memo {
+        top: 2.6in;
+        left: 0.65in;
+        width: 2.9in;
+        text-align: left;
+        font-size: 0.9em;
+        overflow: hidden;
+    }
+}
