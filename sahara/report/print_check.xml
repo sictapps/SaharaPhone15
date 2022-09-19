@@ -8,7 +8,7 @@
             <div class="o-watermark">VOID</div>
         </t> -->
         <!-- <div class="sequence_number" t-if="page['sequence_number'] and page['manual_sequencing']" t-esc="page['sequence_number']" /> -->
-        <div class="ckus_date" t-esc="page['date']"/>
+        <div class="ckus_date"  t-options='{"widget": "date","format": "dd/MM/yyyy"}' t-esc="page['getDueDate']"/>
         <!-- <div><span>Montagab33</span></div> -->
         <div class="ckus_payee_name" t-esc="page['partner_name']"/>
         <div class="ckus_amount_in_word" t-esc="page['amount_in_word']"/>

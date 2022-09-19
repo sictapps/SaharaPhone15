@@ -124,6 +124,29 @@ class TextAccountMove(models.Model):
 class SaharaAccountPayment(models.Model):
   _inherit = "account.payment"
 
+  duedate = fields.Date(string='Due Date', readonly=False)
+  getDueDate = fields.Date(string='get Due Date', readonly=False,store=True,compute="computeDueDate")
+
+  @api.depends('duedate')
+  def computeDueDate(self):
+       for rec in self:
+           if rec.duedate:
+                rec.getDueDate = self.duedate
+           else:
+                rec.getDueDate = self.date
+
+  def _check_build_page_info(self, i, p):
+        res = super(SaharaAccountPayment, self)._check_build_page_info(i,p)
+        # res.getDueDate = '01/01/2022'
+        for rec in self:
+            # res.update(getDueDate= '01/01/2025'+str(rec.getDueDate))
+            res.update(getDueDate= rec.getDueDate)
+        return res
+      
+  @api.onchange('duedate')
+  def onchange_duedate(self):
+        self.getDueDate = self.duedate
+
   def _check_fill_line(self, amount_str):
         return amount_str or ''      
 
