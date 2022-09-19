@@ -125,7 +125,7 @@ class SaharaAccountPayment(models.Model):
   _inherit = "account.payment"
 
   duedate = fields.Date(string='Due Date', readonly=False)
-  getDueDate = fields.Date(string='get Due Date', readonly=False,store=True,compute="computeDueDate")
+  getDueDate = fields.Date(string='get Due Date',readonly=False,compute="computeDueDate")
 
   @api.depends('duedate')
   def computeDueDate(self):
