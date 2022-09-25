@@ -10,6 +10,10 @@ class TextAccountMove(models.Model):
    discount_total = fields.Monetary("Discount Total",compute='total_discount')
     #  salesperson_id = fields.Many2one('hr.employee', string='Salesperson',compute="get_order_line_salesperson_id")
 
+   actual_vendor = fields.Many2one('res.partner', string='Actual Vendor', readonly=False)
+
+
+
    @api.depends('amount_total')
    def amount_to_words(self):
        for rec in self:

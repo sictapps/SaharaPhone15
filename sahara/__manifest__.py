@@ -43,7 +43,9 @@
         'views/payment_view.xml',
         'views/sahara_qrcode.xml',
         'views/purchaceview.xml',
+        'views/purchaceview2.xml',
         'views/custom_purchase_layout.xml',
+        'views/custom_purchase_layout2.xml',
         'views/sales_person.xml'
         #  'views/personviews.xml',
     ],
