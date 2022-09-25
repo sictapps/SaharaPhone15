@@ -11,6 +11,20 @@
                  </xpath>
             </field>
         </record>
+
+
+        <record model="ir.ui.view" id="sahara_actual_vendor">
+            <field name="name">sahara actual vendor</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='to_check']" position="after">
+                        <field name="actual_vendor"/>
+                 </xpath>
+            </field>
+        </record>
+
+
         <record model="ir.ui.view" id="sahara_scannedEmirateId">
             <field name="name">sahara scannedEmirateId</field>
             <field name="model">res.partner</field>
