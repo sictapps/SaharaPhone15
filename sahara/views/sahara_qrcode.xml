@@ -39,7 +39,7 @@
 
 
 
-         <record model="ir.ui.view" id="sahara_scannedEmirateId">
+         <record model="ir.ui.view" id="sahara_duedate">
             <field name="name">sahara DueDate</field>
             <field name="model">account.payment</field>
             <field name="inherit_id" ref="account.view_account_payment_form"/>
