@@ -14,11 +14,11 @@
             <!-- All your custom code here -->
                        
                         <table style="width: 100%;">
-                            <tr>
+                            <!-- <tr>
                                 <td>
                                     <p style="font-family: 'Arial';color:red;font-size:25px;" class="m-0" t-field="o.company_id.name"/>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td>
                                 <span t-field="o.company_id.street"/>
@@ -47,17 +47,17 @@
                                     Mail: <span class="m-0" t-field="o.company_id.email"/>
                                 </td>
                             </tr>
-                            <tr>    
+                            <!-- <tr>    
                                  <td>
                                     Web: 
                                 </td>
-                            </tr>
+                            </tr> -->
                         </table>
             </div>
-            <div class="col-xs-6">
-                    <div style="width: 400px;margin-top:150px;float:right;">
-                        <h3>صــــحـــارى فــــون</h3>
-                        <h3>SAHARA PHONE</h3>
+            <div class="col-xs-6" style="height:30px" >
+                    <div style="padding-left:70px;width: 400px;margin-top:150px;float:right !important;">
+                        <h4>صــــحـــارى فــــون</h4>
+                        <h4>SAHARA PHONE</h4>
                     </div>
             </div>
             <div class="col-xs-3">
