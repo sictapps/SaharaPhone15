@@ -3,7 +3,7 @@
     <data>
       <template id="purchase_invoice_with_payments2">
          <t t-call="sahara.custom_purchase_layout2">
-                <div class="page" style="font-family: 'Arial';">
+                <div  class="page" style="margin-top:160px !important;font-family: 'Arial';">
                     <h4 style="align:center; text-align: center" > ســند شــراء  </h4>   
                     <h4 style="align:center; text-align: center" >  Purchase Invoice </h4>
                     <table style="width: 100%; border:1px solid black;text-align:center;">
