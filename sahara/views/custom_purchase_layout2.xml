@@ -55,13 +55,13 @@
                         </table>
             </div>
             <div class="col-xs-6" style="height:30px" >
-                    <div style="padding-left:70px;width: 400px;margin-top:100px;float:right !important;">
+                    <div style="font-family: 'Arial';padding-left:70px;width: 400px;margin-top:70px;float:right !important;">
                         <h4>صــــحـــارى فــــون</h4>
                         <h4>SAHARA PHONE</h4>
                     </div>
             </div>
             <div class="col-xs-3">
-                <div style="width: 100%;float:right;margin-top:50px;margin-right:-150px;"> 
+                <div style="width: 100%;float:right;margin-top:20px;margin-right:-150px;"> 
                     <div style="width: 45%;float:right;">
                         <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;"/>
                     </div> 
@@ -72,7 +72,7 @@
             </div>
 
             <!-- <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:0px !important;"> -->
-            <div class="footer" style="position:absolute;margin-bottom:0px;width:100%;">
+            <div class="footer" style="position:absolute;width:100%;">
 
                     <!-- <table  style="width: 100%;font-family: 'Arial ';">
                         <tr>
