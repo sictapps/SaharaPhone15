@@ -274,7 +274,7 @@ class emirate_hid_account(models.Model):
                                                               'EmirateArabic': ee['EmirateArabic'],
                                                               'EmirateCode': ee['EmirateCode'],
                                                               'Phone': ee['Phone'],
-                                                              'name': ee['NameAr'],
+                                                              'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
