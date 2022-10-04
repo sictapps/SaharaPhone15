@@ -46,7 +46,7 @@ class emirate_hid_repair(models.Model):
                         'EmirateArabic' : ee['EmirateArabic'],
                         'EmirateCode' : ee['EmirateCode'],
                         'Phone' : ee['Phone'],
-                        'name' : ee['NameAr'],
+                        'name' : ee['Name'],
                         'email' : ee['Email'],
                         'phone' : ee['Phone'],
                         'mobile' : ee['Mobile'],
@@ -119,7 +119,7 @@ class emirate_hid_sale(models.Model):
                                                               'EmirateArabic': ee['EmirateArabic'],
                                                               'EmirateCode': ee['EmirateCode'],
                                                               'Phone': ee['Phone'],
-                                                              'name': ee['NameAr'],
+                                                              'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
@@ -190,7 +190,7 @@ class emirate_hid_purchase(models.Model):
                                                               'EmirateArabic': ee['EmirateArabic'],
                                                               'EmirateCode': ee['EmirateCode'],
                                                               'Phone': ee['Phone'],
-                                                              'name': ee['NameAr'],
+                                                              'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
@@ -246,6 +246,7 @@ class emirate_hid_account(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
+                        partner.name=partner.Name
                         if not self.is_accrual:
                             self.partner_id = partner.id
                         else:
