@@ -12,6 +12,7 @@ class TextAccountMove(models.Model):
 
    actual_vendor = fields.Many2one('res.partner', string='Actual Vendor', readonly=False)
 
+
 #    sahara_purchase_invoice_price_total = fields.Float(string="sahara purchase total price", required=False, compute="get_purchase_total_price" )
 
 #    @api.depends('amount_residual')
