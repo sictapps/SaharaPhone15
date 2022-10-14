@@ -101,7 +101,7 @@
                                 <span class="topage" />
                             <!-- </small> -->
                         <!-- </div> -->
-                         <span t-esc="time.strftime('(Date :%d/%m/%Y )')"/>
+                         <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Date :%d/%m/%Y )')"/>
 
                         <!-- <ul class="list-inline">
                             <li>Developed By: Hassan Enterprises</li>
