@@ -274,7 +274,7 @@
 
                     <div class="text-center" style="margin-top:160px ;font-family: 'cool_font';font-size:12px;">
                        <span t-esc="time.strftime('Date %d/%m/%Y  ')"/>
-                       <span t-esc="time.strftime(' Time: %H:%M:%S')"/>
+                       <span t-esc="context_timestamp(datetime.datetime.now()).strftime(' Time: %H:%M:%S')"/>
                     </div>
                 
                 </div>

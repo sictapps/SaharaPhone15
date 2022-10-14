@@ -92,7 +92,7 @@
                     </table> -->
                    <div class="text-center">
                        <span t-esc="time.strftime('Date %d/%m/%Y  ')"/>
-                       <span t-esc="time.strftime(' Time: %H:%M:%S')"/>
+                       <span t-esc="context_timestamp(datetime.datetime.now())..strftime(' Time: %H:%M:%S')"/>
                     </div>
                 </div>    
 
