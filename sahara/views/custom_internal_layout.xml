@@ -92,7 +92,7 @@
                         </tr>
                     </table> -->
                     <div class="text-center" style="font-family: 'cool_font';">
-                       <span t-esc="time.strftime('(Time: %H:%M:%S)')"/>
+                       <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
                        <!-- <div class="col-xs-2"> -->
                             <!-- <small> -->
                                 <span>Page</span>
@@ -101,7 +101,7 @@
                                 <span class="topage" />
                             <!-- </small> -->
                         <!-- </div> -->
-                         <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Date :%d/%m/%Y )')"/>
+                         <span t-esc="time.strftime('(Date :%d/%m/%Y )')"/>
 
                         <!-- <ul class="list-inline">
                             <li>Developed By: Hassan Enterprises</li>

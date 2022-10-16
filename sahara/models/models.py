@@ -17,12 +17,12 @@ class TextAccountMove(models.Model):
 
     actual_vendor = fields.Many2one('res.partner', string='Actual Vendor', readonly=False)
 
-    #    sahara_purchase_invoice_price_total = fields.Float(string="sahara purchase total price", required=False, compute="get_purchase_total_price" )
+    # sahara_purchase_invoice_price_total = fields.Float(string="sahara purchase total price", required=False,
+    # compute="get_purchase_total_price" )
 
-    #    @api.depends('amount_residual')
-    #    def get_purchase_total_price(self):
-    #        for rec in self:
-    #             rec.sahara_purchase_invoice_price_total = (rec.amount_residual-((4.761*rec.amount_residual)/100)+((5*rec.amount_residual)/100))
+    # @api.depends('amount_residual') def get_purchase_total_price(self): for rec in self:
+    # rec.sahara_purchase_invoice_price_total = (rec.amount_residual-((4.761*rec.amount_residual)/100)+((
+    # 5*rec.amount_residual)/100))
 
     @api.depends('amount_total')
     def amount_to_words(self):
@@ -182,12 +182,11 @@ class SaharaScannedEmirateId(models.Model):
 # class saharaaccountmoveline(models.Model):
 #     _inherit = 'account.move.line'
 
-#     sahara_purchase_invoice_price = fields.Float(string="sahara purchase line price", required=False, compute="get_purchase_line_price" )
+# sahara_purchase_invoice_price = fields.Float(string="sahara purchase line price", required=False,
+# compute="get_purchase_line_price" )
 
-#     @api.depends('price_total')
-#     def get_purchase_line_price(self):
-#        for rec in self:
-#             rec.sahara_purchase_invoice_price = (rec.price_total-((4.761*rec.price_total)/100)+((5*rec.price_total)/100))
+# @api.depends('price_total') def get_purchase_line_price(self): for rec in self: rec.sahara_purchase_invoice_price =
+# (rec.price_total-((4.761*rec.price_total)/100)+((5*rec.price_total)/100))
 
 
 class PosOrderSalesPersonReport(models.Model):
