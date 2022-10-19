@@ -142,7 +142,7 @@
                                     <t t-if="not line.display_type" name="account_invoice_line_accountable">
                                         <td style="border: 1px solid black;" >
                                             <span t-esc="i"/> 
-                                            <t t-set="i" t-value="i+1"/> 
+                                            <t t-set="i" t-value="i+1"/>
                                         </td>    
                                         <td style="border: 1px solid black;font-size:12px;" name="account_invoice_line_name"><span t-field="line.product_id.display_name" t-options="{'widget': 'text'}"/></td>
                                         <td style="border: 1px solid black;font-size:12px;"></td>
@@ -167,18 +167,18 @@
                                     <t t-if="k > i-1">
                                         <tr style="border: 1px solid black !important;">
                                             <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" >
-                                                <span t-esc="k"/> 
-                                                <t t-set="k" t-value="k+1"/> 
-                                            </td>    
+                                                <span t-esc="k"/>
+                                                <t t-set="k" t-value="k+1"/>
+                                            </td>
                                             <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" name="account_invoice_line_name"></td>
                                             <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;"></td>
                                             <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" class="text-right">
-                                        
+
                                             </td>
                                             <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             </td>
-                                        </tr> 
-                                    </t>    
+                                        </tr>
+                                    </t>
                             </t>
                         </tbody>
                         <tr>
@@ -310,7 +310,7 @@
          <report
             id="purchase_invoices"
             model="account.move"
-            string="Purchase Invoices"
+            string="Purchase Invoice - Used"
             report_type="qweb-pdf"
             name="sahara.report_purchaseinvoice"
             file="sahara.report_purchaseinvoice"
