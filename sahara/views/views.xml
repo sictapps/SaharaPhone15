@@ -337,7 +337,7 @@
                             </div>
                             <!-- <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto"> -->
                             <div t-attf-class="ml-auto">
-                                <table class="table table-sm" style="width:400px;page-break-inside: avoid;border: 0.5px solid gray;">
+                                <table class="table table-sm" style="width:125%;page-break-inside: avoid;border: 0.5px solid gray;">
                                     <!--Tax totals-->
                                     <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
 
