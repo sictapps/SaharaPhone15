@@ -15,7 +15,8 @@
                 
                 <div class="page" style="font-family: 'cool_font';">
                 <div>
-                    <img style="position:absolute;top:0px;right:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,220, 50)"/> 
+                    <img  style="position:absolute;top:3px;left:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,220, 50)"/>
+<!--                    <img style="position:absolute;top:0px;right:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_reference,220, 50)"/>-->
                 </div>
                 <br/>
                 <br/>
@@ -59,15 +60,15 @@
                      <br/>
                      <br/> -->
                         <br/>
-                        <table>
-                            <tr style="width: 100%;">
-                                <td style="width: 15%;">
+                        <table style="width: 100%;">
+                            <tr >
+                                <td>
                                     <strong>Customer Name :</strong>
                                 </td>
-                                <td style="width:65%;">
+                                <td >
                                     <p class="m-0" t-field="o.partner_id.name"/>
                                 </td>
-                                <td style="width: 20%;">
+                                <td>
                                     <strong> :  اسم العميل </strong>
                                 </td>
                             </tr>
@@ -145,7 +146,7 @@
                                       <!-- <p class="m-0" t-field="o.order_payment_method"/> -->
                                       <p t-if="o.invoice_payment_term_id">
                                             <span t-field="o.invoice_payment_term_id.name"/>
-                                      </p> 
+                                      </p>
                                 </td>
                                 <td>
                                     <strong> :  نوع الدفع </strong>
@@ -263,7 +264,7 @@
                                             <span t-esc="i"/> 
                                             <t t-set="i" t-value="i+1"/> 
                                         </td>    
-                                        <td style="border-top: 1px solid gray;border-bottom: 0px solid white;" name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                        <td style="border-top: 1px solid gray;border-bottom: 0px solid white;font-size:13px;" name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                         <td style="border: 1px solid gray;text-align:center;">
                                             <span t-field="line.quantity"/>
                                             <!-- <span t-field="line.product_uom_id"  groups="uom.group_uom"/> -->
@@ -302,7 +303,7 @@
                                 <tr>
                                   <t>   
                                         <td style="border: 1px solid gray" > SN  :</td>
-                                        <td style="width: 50%;border-top: 0px solid gray;border-right: 1px solid gray;border-bottom: 1px solid gray;border-top: none !important;"> 
+                                        <td style="font-size:13px;width: 50%;border-top: 0px solid gray;border-right: 1px solid gray;border-bottom: 1px solid gray;border-top: none !important;">
                                            <t t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
                                                  <!-- <span style="width: 33%;"> -->
                                                        <t t-esc="lot['lot_name']"/>&#160;&#160;&#160;&#160;
@@ -328,7 +329,7 @@
 
                     <div class="clearfix">
                         <div id="total" class="row" style="padding-left:14px;">
-                            <div style="width:526px;border:1px solid gray;font-size:12px;">
+                            <div style="width:520px;border:1px solid gray;font-size:12px;">
                                 Additional Details:<br />
                                 -   Reatailer acknowledges That the goods Are Received In Good condition<br />
                                 -   Manufacturer Warranty As Per terms From Invoice Date<br />
