@@ -60,15 +60,15 @@
                      <br/>
                      <br/> -->
                         <br/>
-                        <table style="width: 100%;">
-                            <tr >
-                                <td>
+                        <table>
+                            <tr style="width: 100%;">
+                                <td style="width: 15%;">
                                     <strong>Customer Name :</strong>
                                 </td>
-                                <td >
+                                <td style="width:65%;">
                                     <p class="m-0" t-field="o.partner_id.name"/>
                                 </td>
-                                <td>
+                                <td style="width: 20%;">
                                     <strong> :  اسم العميل </strong>
                                 </td>
                             </tr>
@@ -346,7 +346,7 @@
                                     <!-- added by montagab -->
                                     <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                     <tr class="border-black o_subtotal">
-                                        <td><strong> Amount Before VAT الإجمالي قبل الضريبة </strong></td>
+                                        <td style="font-size:14px;"><strong> Amount Before VAT الإجمالي قبل الضريبة </strong></td>
 
                                         <td class="text-right">
                                             <span
