@@ -56,7 +56,7 @@
    'qweb': ['static/src/xml/pos_payment_button_view.xml'],
     'assets':{
              'sahara.assets':[
-                    '/sahara/static/src/js/pos_set_price_default.js'
+                    # '/sahara/static/src/js/pos_set_price_default.js'
                     '/sahara/views/pos_templates.xml',
                  ],
               'web.report_assets_common': [
