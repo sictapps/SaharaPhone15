@@ -13,7 +13,7 @@
                         <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/></div>
                 </t> -->
                 
-                <div class="page" style="font-family: 'cool_font';">
+                <div class="page" style="font-family: 'Arial';">
                 <div>
                     <img  style="position:absolute;top:3px;left:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,220, 50)"/>
 <!--                    <img style="position:absolute;top:0px;right:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_reference,220, 50)"/>-->
@@ -494,7 +494,7 @@
                     <br/>
                     <br/>
                     <br/>
-                    <table  style="width: 100%;font-family: 'cool_font';font-size:12px;">
+                    <table  style="width: 100%;font-family: 'Arial';font-size:12px;">
                         <tr>
                                 <td style="align: left; text-align: left;width: 33%;">
                                        Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
