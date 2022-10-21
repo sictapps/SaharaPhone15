@@ -62,10 +62,10 @@
                         <br/>
                         <table>
                             <tr style="width: 100%;">
-                                <td style="width: 20%;">
+                                <td style="width: 15%;">
                                     <strong>Customer Name :</strong>
                                 </td>
-                                <td style="width:60%;">
+                                <td style="width:65%;">
                                     <p class="m-0" t-field="o.partner_id.name"/>
                                 </td>
                                 <td style="width: 20%;">
