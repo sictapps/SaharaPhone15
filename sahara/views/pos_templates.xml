@@ -6,7 +6,7 @@
                 <script type="text/javascript" src="/sahara/static/src/js/pos_payment_button.js"/>
                  <script type="text/javascript" src="/sahara/static/src/js/pos_set_price_default.js"/>
                  <script type="text/javascript" src="/sahara/static/src/js/pos_set_price_after_neworderline.js"/>   
-                 <script type="text/javascript" src="/sahara/static/src/js/pos_set_default_customer.js"/>              
+<!--                 <script type="text/javascript" src="/sahara/static/src/js/pos_set_default_customer.js"/>              -->
             </xpath>
         </template>
     </data>
