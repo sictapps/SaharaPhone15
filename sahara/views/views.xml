@@ -16,7 +16,9 @@
                 <div class="page" style="font-family: 'Arial';">
                 <div>
                     <img style="position:absolute;top:3px;left:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,220, 50)"/>
+                    <p t-if="o.pos_ref">
                     <img style="position:absolute;top:0px;right:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,220, 50)"/>
+                    </p>
                 </div>
                 <br/>
                 <br/>
