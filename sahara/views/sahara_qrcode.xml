@@ -19,8 +19,11 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
                  <xpath expr="//field[@name='to_check']" position="after">
-                        <field name="actual_vendor"/>
+                     <field name="actual_vendor"/>
+                     <label for="pos_ref" string="order Reference" />
+                     <field name="pos_ref" nolabel="1"/>
                  </xpath>
+
             </field>
         </record>
 
