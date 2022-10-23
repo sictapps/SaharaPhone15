@@ -4,8 +4,9 @@
                     <xpath expr="//div[hasclass('payment-controls')]" position="inside">
                         <div>
                             <div id="my_button" class="button js_invoice"
-                                t-on-click="IsCustomButton">
-                                <i class="fa fa-spinner fa-spin" /> My Button
+                                 t-on-click="IsCustomButton">
+                                <i class="fa fa-spinner fa-spin"/>
+                                My Button
                             </div>
                         </div>
                     </xpath>

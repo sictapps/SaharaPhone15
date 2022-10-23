@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-         <template id="report_invoice_document" inherit_id="account.report_invoice_with_payments">
+        <template id="report_invoice_document" inherit_id="account.report_invoice_with_payments">
             <xpath expr='//t[@t-call="account.report_invoice_document"]' position="replace">
-                <t t-call="sahara.report_invoice_document_sahara_edited_sheha" />
+                <t t-call="sahara.report_invoice_document_sahara_edited_sheha"/>
             </xpath>
-        </template> 
+        </template>
     </data>
 </odoo> 

@@ -26,8 +26,6 @@ class TextAccountMove(models.Model):
     # 5*rec.amount_residual)/100))
     pos_ref = fields.Char(string='Receipt Number', readonly=True, copy=False)
 
-
-
     @api.depends('amount_total')
     def amount_to_words(self):
         for rec in self:
@@ -190,7 +188,7 @@ class SaharaPosOrder(models.Model):
         self.ensure_one()
         timezone = pytz.timezone(self._context.get('tz') or self.env.user.tz or 'UTC')
         vals = {
-            'pos_ref' : self.pos_reference,
+            'pos_ref': self.pos_reference,
             'invoice_origin': self.name,
             'journal_id': self.session_id.config_id.invoice_journal_id.id,
             'move_type': 'out_invoice' if self.amount_total >= 0 else 'out_refund',
@@ -203,7 +201,8 @@ class SaharaPosOrder(models.Model):
             'fiscal_position_id': self.fiscal_position_id.id,
             'invoice_line_ids': self._prepare_invoice_lines(),
             'invoice_cash_rounding_id': self.config_id.rounding_method.id
-            if self.config_id.cash_rounding and (not self.config_id.only_round_cash_method or any(p.payment_method_id.is_cash_count for p in self.payment_ids))
+            if self.config_id.cash_rounding and (not self.config_id.only_round_cash_method or any(
+                p.payment_method_id.is_cash_count for p in self.payment_ids))
             else False
         }
         if self.note:

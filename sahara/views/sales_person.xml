@@ -64,7 +64,8 @@
                         <filter string="Salesperson" name="sales_person_id" context="{'group_by':'sales_person_id'}"/>
                         <filter string="Point of Sale" name="pos" context="{'group_by':'config_id'}"/>
                         <filter string="Product" name="product" context="{'group_by':'product_id'}"/>
-                        <filter string="Product Category" name="product_category" context="{'group_by':'product_categ_id'}"/>
+                        <filter string="Product Category" name="product_category"
+                                context="{'group_by':'product_categ_id'}"/>
                         <separator/>
                         <filter string="Order Date" name="order_month" context="{'group_by':'date:month'}"/>
                     </group>
@@ -81,13 +82,16 @@
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No data yet!
-                </p><p>
+                </p>
+                <p>
                     Create a new POS order
                 </p>
             </field>
-        </record>  
-        
-        <menuitem id="menu_report_order_sales_person_details" name="Sales persons Details" action="sahara.action_report_pos_order_all_extend" parent="point_of_sale.menu_point_rep" sequence="5"/>
+        </record>
+
+        <menuitem id="menu_report_order_sales_person_details" name="Sales persons Details"
+                  action="sahara.action_report_pos_order_all_extend" parent="point_of_sale.menu_point_rep"
+                  sequence="5"/>
 
         <!-- <record id="report_pos_order_search_extend" model="ir.ui.view">
             <field name="name">report.pos.order.search.extend</field>

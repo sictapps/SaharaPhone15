@@ -3,12 +3,14 @@
     <data>
         <template id="report_payment_receipt_document_sahara">
             <t t-call="web.external_layout">
-             <!-- <t t-call="sahara.custom_receipt_layout"> -->
+                <!-- <t t-call="sahara.custom_receipt_layout"> -->
                 <div>
                     <h1 style="border-bottom: 2px dotted black;">Sahara Phone L.L.C</h1>
                 </div>
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
-                <h3><strong>Receipt Voucher</strong></h3>
+                <h3>
+                    <strong>Receipt Voucher</strong>
+                </h3>
                 <table class="page">
                     <tr>
                         <td style="width:200px">
@@ -29,22 +31,23 @@
                     <tr>
                         <td style="width:200px">
                             <t t-if="o.partner_type == 'customer'">
-                                    Receipt From Mr:
-                                </t>
-                                <t t-if="o.partner_type == 'supplier'">
-                                    Vendor:
-                                </t>
+                                Receipt From Mr:
+                            </t>
+                            <t t-if="o.partner_type == 'supplier'">
+                                Vendor:
+                            </t>
                         </td>
                         <td style="width:200px">
-                             <span t-field="o.partner_id"/>
+                            <span t-field="o.partner_id"/>
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td style="width:200px">
                             The Sum Of Dhs:
                         </td>
                         <td style="width:200px">
-                            <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                            <span t-field="o.amount"
+                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +64,7 @@
                     </tr>
                     <tr>
                         <td style="width:200px">
-                           
+
                         </td>
                         <td style="width:200px">
                             Receiver's Sign
@@ -73,10 +76,12 @@
                     </tr>
                     <tr>
                         <td style="width:200px;font-size:10px;">
-                            Phone: <span t-field="o.company_id.phone"/>
-                            PO.Box:<span t-field="o.company_id.zip"/>
+                            Phone:
+                            <span t-field="o.company_id.phone"/>
+                            PO.Box:
+                            <span t-field="o.company_id.zip"/>
                         </td>
-                         <td style="width:200px;font-size:10px;">
+                        <td style="width:200px;font-size:10px;">
                             <span t-field="o.company_id.state_id"/>
                             <span t-field="o.company_id.email"/>
                         </td>
