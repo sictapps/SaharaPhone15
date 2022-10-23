@@ -6,9 +6,9 @@
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//field[@name='favicon']" position="before">
-                        <field name="qrcode" widget="image"/>
-                 </xpath>
+                <xpath expr="//field[@name='favicon']" position="before">
+                    <field name="qrcode" widget="image"/>
+                </xpath>
             </field>
         </record>
 
@@ -18,11 +18,11 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//field[@name='to_check']" position="after">
-                     <field name="actual_vendor"/>
-                     <label for="pos_ref" string="order Reference" />
-                     <field name="pos_ref" nolabel="1"/>
-                 </xpath>
+                <xpath expr="//field[@name='to_check']" position="after">
+                    <field name="actual_vendor"/>
+                    <label for="pos_ref" string="order Reference"/>
+                    <field name="pos_ref" nolabel="1"/>
+                </xpath>
 
             </field>
         </record>
@@ -33,23 +33,22 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//field[@name='category_id']" position="after">
-                        <field name="scannedEmirateId" widget="image"/>
-                        <field name="scannedEmirateIdsecond" widget="image"/>
-                 </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="scannedEmirateId" widget="image"/>
+                    <field name="scannedEmirateIdsecond" widget="image"/>
+                </xpath>
             </field>
         </record>
 
 
-
-         <record model="ir.ui.view" id="sahara_duedate">
+        <record model="ir.ui.view" id="sahara_duedate">
             <field name="name">sahara DueDate</field>
             <field name="model">account.payment</field>
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//field[@name='date']" position="after">
-                        <field name="duedate"/>
-                 </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="duedate"/>
+                </xpath>
             </field>
         </record>
 

@@ -19,16 +19,14 @@ odoo.define('sahara.PaymentScreenButton', function (require) {
                 }
 
 
-
                 //    this.currentOrder.set_to_invoice(true);
             }
 
             is_salesperson() {
                 for (let id in this.currentOrder.get_orderlines()) {
-                    if(!this.currentOrder.get_orderlines()[id].salesperson ){
+                    if (!this.currentOrder.get_orderlines()[id].salesperson) {
                         return false
-                    }
-                    else
+                    } else
                         return true
                 }
             }
@@ -84,7 +82,7 @@ odoo.define('sahara.PaymentScreenButton', function (require) {
                     return false;
                 }
                 for (let id in this.currentOrder.get_orderlines()) {
-                    if (!this.currentOrder.get_orderlines()[id].salesperson ) {
+                    if (!this.currentOrder.get_orderlines()[id].salesperson) {
                         const {confirmed} = await this.showPopup('ConfirmPopup', {
                             title: this.env._t('Please check the salesperson .'),
                             body: this.env._t(
