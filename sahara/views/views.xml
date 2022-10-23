@@ -21,9 +21,9 @@
 <!--                </style>-->
                 <div class="page">
                 <div>
-                    <img style="position:absolute;top:1.5px;left:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,220, 50)"/>
+                    <img style="position:absolute;top:1.5px;left:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,300, 60)"/>
                     <p t-if="o.pos_ref">
-                    <img style="position:absolute;top:0px;right:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,220, 50)"/>
+                    <img style="position:absolute;top:0px;right:5px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,300, 60)"/>
                     </p>
                 </div>
                 <br/>
