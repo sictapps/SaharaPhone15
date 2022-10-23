@@ -117,7 +117,7 @@
 
                     <br/>
                         
-                       <table style="font-family: 'Arial';text-align:center;"  name="invoice_line_table">
+                       <table style="width:100%;font-family: 'Arial';text-align:center;" name="invoice_line_table">
                         <thead>
                             <tr>
                                 <!-- TODO: remove in master -->
@@ -125,11 +125,11 @@
                                 <t t-set="i" t-value="1" />
                                 <t t-set="allSN" t-value="0" />
                                 <th style="width:3% !important;border: 1px solid black;" name="th_SN"><span></span></th>
-                                <th style="width:46%;border: 1px solid black;border-bottom: 1px solid black;align-text:center;font-size:12px;" name="th_description"><span>Phone Type نوع الهاتف </span></th>
+                                <th style="width:40%;border: 1px solid black;border-bottom: 1px solid black;align-text:center;font-size:12px;" name="th_description"><span>Phone Type نوع الهاتف </span></th>
                                 <th style="width:3% !important;border: 1px solid black;" name="th_SN"><span></span></th>
-                                <th style="width:24%;border: 1px solid black;align-text:center;font-size:12px;" name="th_quantity"><span>Seria Number الرقم التسلسلي</span></th>
-                                <th style="width:12%;border: 1px solid black;align-text:center;font-size:12px;" name="th_price_unit"><span>Price  السعر</span></th>
-                                <th style="width:12%;border: 1px solid black;align-text:center;font-size:12px;" name="th_priceunit"><span> Amount  الاجمالي</span></th>
+                                <th style="width:25%;border: 1px solid black;align-text:center;font-size:12px;" name="th_quantity"><span>Seria Number الرقم التسلسلي</span></th>
+                                <th style="width:10%;border: 1px solid black;align-text:center;font-size:12px;" name="th_price_unit"><span>Price  السعر</span></th>
+                                <th style="width:10%;border: 1px solid black;align-text:center;font-size:12px;" name="th_priceunit"><span> Amount  الاجمالي</span></th>
 <!--                                <th style="width:35%;border: 1px solid black;align-text:center;font-size:12px;" name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span> Amount  الاجمالي</span></th>-->
                             </tr>
                         </thead>
@@ -197,8 +197,8 @@
                             <td style="width:3%;border: 1px solid black;text-align:center;">
                                 <span t-esc="allSN"/> 
                             </td>
-                            <td style="border: 1px solid black;width:30%;text-align:center;color:red;"><strong>Due Amount:</strong></td>
-                            <td style="border: 1px solid black;width:20%;font-size:20px;" class="text-center">
+                            <td style="border: 1px solid black;text-align:center;color:red;"><strong>Due Amount:</strong></td>
+                            <td style="border: 1px solid black;font-size:20px;" class="text-center">
                                 <span t-esc="o.amount_residual"/>
                             </td>
                         </tr>
