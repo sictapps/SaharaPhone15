@@ -27,9 +27,9 @@
                 <div class="page">
                     <div>
                         <img style="position:absolute;top:1.5px;left:5px;"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,300, 60)"/>
-                        <img t-if="o.pos_ref" style="position:absolute;top:0px;right:5px;"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,300, 60)"/>
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,350, 60)"/>
+                        <img t-if="o.pos_ref" style="position:absolute;top:1.5px;right:5px;"
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,380, 60)"/>
                     </div>
                     <br/>
                     <br/>
