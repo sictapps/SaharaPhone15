@@ -1,5 +1,6 @@
 from num2words import num2words
 from odoo import fields, api, models, _
+import pytz
 
 from odoo import tools
 
@@ -23,6 +24,7 @@ class TextAccountMove(models.Model):
     # @api.depends('amount_residual') def get_purchase_total_price(self): for rec in self:
     # rec.sahara_purchase_invoice_price_total = (rec.amount_residual-((4.761*rec.amount_residual)/100)+((
     # 5*rec.amount_residual)/100))
+    pos_ref = fields.Char(string='Receipt Number', readonly=True, copy=False)
 
     @api.depends('amount_total')
     def amount_to_words(self):
@@ -179,8 +181,34 @@ class SaharaScannedEmirateId(models.Model):
     scannedEmirateIdsecond = fields.Binary('scannedEmirateIdSecond', readonly=False)
 
 
-# class saharaaccountmoveline(models.Model):
-#     _inherit = 'account.move.line'
+class SaharaPosOrder(models.Model):
+    _inherit = 'pos.order'
+
+    def _prepare_invoice_vals(self):
+        self.ensure_one()
+        timezone = pytz.timezone(self._context.get('tz') or self.env.user.tz or 'UTC')
+        vals = {
+            'pos_ref': self.pos_reference,
+            'invoice_origin': self.name,
+            'journal_id': self.session_id.config_id.invoice_journal_id.id,
+            'move_type': 'out_invoice' if self.amount_total >= 0 else 'out_refund',
+            'ref': self.name,
+            'partner_id': self.partner_id.id,
+            # considering partner's sale pricelist's currency
+            'currency_id': self.pricelist_id.currency_id.id,
+            'invoice_user_id': self.user_id.id,
+            'invoice_date': self.date_order.astimezone(timezone).date(),
+            'fiscal_position_id': self.fiscal_position_id.id,
+            'invoice_line_ids': self._prepare_invoice_lines(),
+            'invoice_cash_rounding_id': self.config_id.rounding_method.id
+            if self.config_id.cash_rounding and (not self.config_id.only_round_cash_method or any(
+                p.payment_method_id.is_cash_count for p in self.payment_ids))
+            else False
+        }
+        if self.note:
+            vals.update({'narration': self.note})
+        return vals
+
 
 # sahara_purchase_invoice_price = fields.Float(string="sahara purchase line price", required=False,
 # compute="get_purchase_line_price" )

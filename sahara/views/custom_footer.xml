@@ -17,12 +17,16 @@
 
                         <ul class="list-inline">
                             <li>Page:</li>
-                            <li><span class="page"/></li>
+                            <li>
+                                <span class="page"/>
+                            </li>
                             <li>/</li>
-                            <li><span class="topage"/></li>
+                            <li>
+                                <span class="topage"/>
+                            </li>
                         </ul>
                     </div>
-                </div>    
+                </div>
             </xpath>
         </template>
     </data>

@@ -1,21 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
 <openerp>
     <data>
-            <template id="sahara.custom_receipt_layout">
+        <template id="sahara.custom_receipt_layout">
             <div class="header">
                 <div class="row">
                     <div class="col-xs-3">
                         <div style="width: 45%;">
-                                <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 25px;"/>
+                            <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 25px;"/>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="footer">
-                       <span class="m-0" t-field="o.company_id.phone"/> - <span class="m-0" t-field="o.company_id.zip"/> -<span t-field="o.company_id.city"/>- <span class="m-0" t-field="o.company_id.email"/>        
-            </div>    
+                <span class="m-0" t-field="o.company_id.phone"/>
+                -
+                <span class="m-0" t-field="o.company_id.zip"/>
+                -<span t-field="o.company_id.city"/>-
+                <span class="m-0" t-field="o.company_id.email"/>
+            </div>
 
-            </template>
+        </template>
     </data>
 </openerp> 
