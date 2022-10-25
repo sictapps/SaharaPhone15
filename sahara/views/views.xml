@@ -636,14 +636,14 @@
                         -
                         <span t-field="o.invoice_incoterm_id.name"/>
                     </p>
-                    <div id="qrcode" t-if="o.display_qr_code and o.amount_residual &gt; 0">
-                        <p t-if="qr_code_urls.get(o.id)">
-                            <strong class="text-center">Scan me with your banking app.</strong>
-                            <br/>
-                            <br/>
-                            <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>
-                        </p>
-                    </div>
+<!--                    <div id="qrcode" t-if="o.display_qr_code and o.amount_residual &gt; 0">-->
+<!--                        <p t-if="qr_code_urls.get(o.id)">-->
+<!--                            <strong class="text-center">Scan me with your banking app.</strong>-->
+<!--                            <br/>-->
+<!--                            <br/>-->
+<!--                            <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>-->
+<!--                        </p>-->
+<!--                    </div>-->
                 </div>
             </t>
 
