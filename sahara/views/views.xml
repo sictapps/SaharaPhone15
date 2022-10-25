@@ -2,6 +2,7 @@
 <odoo>
     <data>
         <template id="report_invoice_document_sahara_edited_sheha">
+
             <t t-call="sahara.your_custom_layout_header">
                 <!-- <t t-call="web.external_layout"> -->
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
@@ -407,7 +408,7 @@
                                     <!-- <t t-call="account.document_tax_totals"/> -->
                                     <!-- added by montagab -->
                                     <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
-                                        <tr class="border-black o_subtotal">
+                                        <tr class="border-black o_subtotal" style="border-top: 1px solid black;">
                                             <td style="font-size:14px;font-family:'Arial'">
                                                 <strong>Amount Before VAT الإجمالي قبل الضريبة</strong>
                                             </td>
@@ -418,7 +419,7 @@
                                             </td>
                                         </tr>
 
-                                        <tr class="border-black o_subtotal">
+                                        <tr class="border-black o_subtotal" style="border-bottom: 1px solid black;">
                                             <td>
                                                 <strong>Discount الخصم</strong>
                                             </td>
@@ -433,7 +434,7 @@
                                         <!-- <t t-call="account.tax_groups_totals"/> -->
                                         <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]"
                                            t-as="amount_by_group">
-                                            <tr class="border-black o_subtotal">
+                                            <tr class="border-black o_subtotal" style="border-bottom: 1px solid black;">
                                                 <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) &gt; 1">
                                                     <td>
                                                         <!-- <span t-esc="amount_by_group['tax_group_name']"/> -->
@@ -462,12 +463,12 @@
                                     </t>
 
                                     <!--Total amount with all taxes-->
-                                    <tr class="border-black o_total">
+                                    <tr class="border-black o_total" style="border-bottom: 1px solid black;">
                                         <td>
                                             <strong>Net Amount الصافي</strong>
                                         </td>
                                         <td class="text-right">
-                                            <span t-esc="tax_totals['formatted_amount_total']"/>
+                                            <strong t-esc="tax_totals['formatted_amount_total']" style="color:red"/>
                                         </td>
                                     </tr>
                                     <!-- end of added by montagab  -->
@@ -478,7 +479,8 @@
                                             <t t-set="payments_vals"
                                                t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
                                             <t t-foreach="payments_vals" t-as="payment_vals">
-                                                <tr class="border-black o_subtotal">
+                                                <tr class="border-black o_subtotal"
+                                                    style="border-bottom: 1px solid black;">
                                                     <td>
                                                         <i class="oe_form_field text-right oe_payment_label">Paid on
                                                             <t t-esc="payment_vals['date']"
@@ -492,12 +494,12 @@
                                                 </tr>
                                             </t>
                                             <t t-if="len(payments_vals) &gt; 0">
-                                                <tr class="border-black">
+                                                <tr class="border-black" style="border-bottom: 1px solid black;">
                                                     <td>
                                                         <strong>Net Amount الصافي</strong>
                                                     </td>
                                                     <td class="text-right">
-                                                        <span t-field="o.amount_residual"/>
+                                                        <strong t-field="o.amount_residual" style="color:red"/>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -529,7 +531,7 @@
                     </p>
 
 
-                    <div style="margin-top:5px;align:center; text-align: center;border: 1px solid black;">
+                    <div style="align:center; text-align: center;border: 1px solid black;">
                         <p style="margin-bottom:3px;">
                             <span class="m-0" t-field="o.sapps_text_amount"/>
                             UAE Dirham Only
@@ -552,12 +554,12 @@
                     <!-- <br /> -->
                     <table style="width: 100%;">
                         <tr>
-                            <td style="position: absolute;padding:5px !important;margin:5px !important;height:80px; width: 33%;border: 1px dashed black;">
+                            <td style="position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
                                 Customer Signature
                             </td>
                             <td style="align: center; text-align: center;width: 33%;">
                             </td>
-                            <td style="position: absolute;padding:5px !important;margin:5px !important;height:80px;width: 32.5%;border: 1px dashed black;">
+                            <td style="margin-left: -3.5px;position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
                                 Sahara Phone Signature
                             </td>
                             <td style="align: center; text-align: center;width: 0.5%;">
