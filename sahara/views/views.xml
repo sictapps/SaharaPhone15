@@ -28,51 +28,12 @@
                 <div class="page">
                     <div>
                         <img style="position:absolute;top:1.5px;left:5px;"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,350, 60)"/>
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,280, 60)"/>
                         <img t-if="o.pos_ref" style="position:absolute;top:1.5px;right:5px;"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,380, 60)"/>
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,280, 60)"/>
                     </div>
                     <br/>
                     <br/>
-                    <!-- <h3 style="align:center; text-align: center" > فاتورة ضريبة    Tax Invoice </h3>     -->
-                    <!-- <h2>
-                        <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
-                        <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-                        <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
-                        <span t-if="o.move_type == 'out_refund'">Cblackit Note</span>
-                        <span t-if="o.move_type == 'in_refund'">Vendor Cblackit Note</span>
-                        <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
-                        <span t-if="o.name != '/'" t-field="o.name"/>
-                    </h2>
-
-                    <div id="informations" class="row mt32 mb32">
-                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date" name="invoice_date">
-                            <strong>Invoice Date:</strong>
-                            <p class="m-0" t-field="o.invoice_date"/>
-                        </div>
-                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
-                            <strong>Due Date:</strong>
-                            <p class="m-0" t-field="o.invoice_date_due"/>
-                        </div>
-                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_origin" name="origin">
-                            <strong>Source:</strong>
-                            <p class="m-0" t-field="o.invoice_origin"/>
-                        </div>
-                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.ref" name="customer_code">
-                            <strong>Customer Code:</strong>
-                            <p class="m-0" t-field="o.partner_id.ref"/>
-                        </div>
-                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.ref" name="reference">
-                            <strong>Reference:</strong>
-                            <p class="m-0" t-field="o.ref"/>
-                        </div>
-                    </div> -->
-                    <!-- . -->
-                    <!-- <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/> -->
                     <br/>
                     <table style="width: 100%;">
                         <tr>
@@ -214,8 +175,7 @@
                                 <strong>Notes :</strong>
                             </td>
                             <td>
-                                <t t-set="lines"
-                                   t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
                                 <t t-foreach="lines" t-as="line">
                                     <t t-if="line.display_type == 'line_note'">
                                         <!-- <td colspan="99"> -->
@@ -239,6 +199,7 @@
                             </td> -->
                         </tr>
                     </table>
+
 
                     <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
 
@@ -531,7 +492,7 @@
                     </p>
 
 
-                    <div style="align:center; text-align: center;border: 1px solid black;">
+                    <div style="margin-top:5px;align:center; text-align: center;border: 1px solid black;">
                         <p style="margin-bottom:3px;">
                             <span class="m-0" t-field="o.sapps_text_amount"/>
                             UAE Dirham Only
@@ -636,14 +597,14 @@
                         -
                         <span t-field="o.invoice_incoterm_id.name"/>
                     </p>
-<!--                    <div id="qrcode" t-if="o.display_qr_code and o.amount_residual &gt; 0">-->
-<!--                        <p t-if="qr_code_urls.get(o.id)">-->
-<!--                            <strong class="text-center">Scan me with your banking app.</strong>-->
-<!--                            <br/>-->
-<!--                            <br/>-->
-<!--                            <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>-->
-<!--                        </p>-->
-<!--                    </div>-->
+                    <!--                    <div id="qrcode" t-if="o.display_qr_code and o.amount_residual &gt; 0">-->
+                    <!--                        <p t-if="qr_code_urls.get(o.id)">-->
+                    <!--                            <strong class="text-center">Scan me with your banking app.</strong>-->
+                    <!--                            <br/>-->
+                    <!--                            <br/>-->
+                    <!--                            <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>-->
+                    <!--                        </p>-->
+                    <!--                    </div>-->
                 </div>
             </t>
 
