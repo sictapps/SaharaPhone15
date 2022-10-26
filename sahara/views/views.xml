@@ -374,7 +374,7 @@
                                                 <strong>Amount Before VAT الإجمالي قبل الضريبة</strong>
                                             </td>
 
-                                            <td class="text-right" style="font-size:14px;">
+                                            <td class="text-right" style="font-size:18px;">
                                                 <span t-att-class="oe_subtotal_footer_separator" t-esc="subtotal['formatted_amount']"/>
                                             </td>
                                         </tr>
@@ -384,7 +384,7 @@
                                                 <strong>Discount الخصم</strong>
                                             </td>
 
-                                            <td class="text-right" style="font-size:14px;">
+                                            <td class="text-right" style="font-size:18px;">
                                                 <span t-field="o.discount_total"/>
                                             </td>
                                         </tr>
@@ -402,7 +402,7 @@
                                                             <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
                                                         </span>
                                                     </td>
-                                                    <td class="text-right o_price_total" style="font-size:14px;">
+                                                    <td class="text-right o_price_total" style="font-size:18px;">
                                                         <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                                     </td>
                                                 </t>
@@ -411,7 +411,7 @@
                                                     <td>
                                                         <strong>VAT 5% ضريبة القيمة المضافة</strong>
                                                     </td>
-                                                    <td class="text-right o_price_total" style="font-size:14px;">
+                                                    <td class="text-right o_price_total" style="font-size:18px;">
                                                         <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                                     </td>
                                                 </t>
@@ -424,7 +424,7 @@
                                         <td>
                                             <strong>Net Amount الصافي</strong>
                                         </td>
-                                        <td class="text-right" style="font-size:14px;">
+                                        <td class="text-right" style="font-size:18px;">
                                             <strong t-esc="tax_totals['formatted_amount_total']" style="color:red"/>
                                         </td>
                                     </tr>
@@ -441,7 +441,7 @@
                                                             <t t-esc="payment_vals['date']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                                                         </i>
                                                     </td>
-                                                    <td class="text-right" style="font-size:14px;">
+                                                    <td class="text-right" style="font-size:18px;">
                                                         <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                                     </td>
                                                 </tr>
@@ -451,8 +451,8 @@
                                                     <td>
                                                         <strong>Net Amount الصافي</strong>
                                                     </td>
-                                                    <td class="text-right" style="font-size:14px;">
-                                                        <strong t-field="o.amount_residual" style="color:red"/>
+                                                    <td class="text-right" style="font-size:18px;">
+                                                        <strong t-field="o.amount_residual"/>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -508,12 +508,12 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
-                                Customer Signature
+                                <p style="margin-left: 7px;"> Customer Signature </p>
                             </td>
                             <td style="align: center; text-align: center;width: 33%;">
                             </td>
                             <td style="margin-left: -3.5px;position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
-                                Sahara Phone Signature
+                                <p style="margin-left: 7px;"> Sahara Phone Signature </p>
                             </td>
                             <td style="align: center; text-align: center;width: 0.5%;">
                             </td>
