@@ -165,7 +165,7 @@
                             <td>
                                 <strong>Payment Method :</strong>
                             </td>
-                            <td style="position:absolute;right:730px;">
+                            <td style="position:absolute;right:660px;">
                                 <p class="m-0" t-field="o.order_payment_method"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:436px;">
@@ -271,9 +271,9 @@
                                             <span t-esc="i"/>
                                             <t t-set="i" t-value="i+1"/>
                                         </td>
-                                        <td style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:13px;"
+                                        <td style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:14px;"
                                             name="account_invoice_line_name">
-                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <strong t-field="line.name" t-options="{'widget': 'text'}"/>
                                         </td>
                                         <td style="color:black;border: 1px solid black;text-align:center;">
                                             <span t-field="line.quantity"/>
@@ -324,12 +324,12 @@
                                 <tr>
                                     <t>
                                         <td style="color:black;border: 1px solid black">SN :</td>
-                                        <td style="color:black;font-size:13px;width: 50%;border-top: 0px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-top: none !important;">
-                                            <t t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
+                                        <td style="color:black;font-size:14px;width: 50%;border-top: 0px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-top: none !important;">
+                                            <strong t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
                                                 <!-- <span style="width: 33%;"> -->
-                                                <t t-esc="lot['lot_name']"/>    
+                                                <strong t-esc="lot['lot_name']"/>    
                                                 <!-- </span> -->
-                                            </t>
+                                            </strong>
                                         </td>
                                     </t>
                                 </tr>
@@ -425,7 +425,7 @@
                                             <strong>Net Amount الصافي</strong>
                                         </td>
                                         <td class="text-right" style="font-size:18px;">
-                                            <strong t-esc="tax_totals['formatted_amount_total']" style="color:red"/>
+                                            <strong t-esc="tax_totals['formatted_amount_total']" style="color:#8C001A"/>
                                         </td>
                                     </tr>
                                     <!-- end of added by montagab  -->
@@ -452,7 +452,7 @@
                                                         <strong>Net Amount الصافي</strong>
                                                     </td>
                                                     <td class="text-right" style="font-size:18px;">
-                                                        <strong t-field="o.amount_residual"/>
+                                                        <span t-field="o.amount_residual"/>
                                                     </td>
                                                 </tr>
                                             </t>
