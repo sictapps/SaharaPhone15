@@ -43,7 +43,7 @@
                             <td style="width:65%;">
                                 <p class="m-0" t-field="o.partner_id.name"/>
                             </td>
-                            <td style="width: 25%;">
+                            <td style="position:absolute;right:15px;">
                                 <strong>: اسم العميل</strong>
                             </td>
                         </tr>
@@ -53,19 +53,19 @@
                             <td>
                                 <strong>TRN :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:650px;">
                                 <p class="m-0" t-field="o.partner_id.vat"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:450px;">
                                 <strong>: الرقم الضريبي</strong>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Invoice No :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:200px;">
                                 <p class="m-0" t-field="o.name"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:-14px;">
                                 <strong>: رقم الفاتورة</strong>
                             </td>
 
@@ -74,19 +74,19 @@
                             <td>
                                 <strong>Phone No :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:655px;">
                                 <p class="m-0" t-field="o.partner_id.phone"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:425px;">
                                 <strong>: رقم الهاتف</strong>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Invoice Date :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:235px;">
                                 <p class="m-0" t-field="o.invoice_date"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:-8px;">
                                 <strong>: تاريخ الفاتورة</strong>
                             </td>
 
@@ -95,19 +95,19 @@
                             <td>
                                 <strong>Mail :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:745px;">
                                 <p class="m-0" t-field="o.partner_id.email"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:463px;">
                                 <strong>: البريد الالكتروني</strong>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Due Date :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:235px;">
                                 <span t-field="o.invoice_date_due"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:11px;">
                                 <strong>: تاريخ الاستحقاق</strong>
                             </td>
 
@@ -117,19 +117,19 @@
                             <td>
                                 <strong>Payment Type :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:745px;">
                                 <!-- <p class="m-0" t-field="o.order_payment_method"/> -->
                                 <p t-if="o.invoice_payment_term_id">
                                     <span t-field="o.invoice_payment_term_id.name"/>
                                 </p>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:410px;">
                                 <strong>: نوع الدفع</strong>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Sales Man :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:190px;">
                                 <!-- <p class="m-0" t-field="o.salesperson_id.name"/>  -->
                                 <!-- <t t-foreach="lines" t-as="line"> -->
                                 <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson">
@@ -139,7 +139,7 @@
                                 </t>
                                 <!-- </t>   -->
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:-33px;">
                                 <strong>: اسم البائع</strong>
                             </td>
                         </tr>
@@ -165,16 +165,16 @@
                             <td>
                                 <strong>Payment Method :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:730px;">
                                 <p class="m-0" t-field="o.order_payment_method"/>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:436px;">
                                 <strong>: طريقة الدفع</strong>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Notes :</strong>
                             </td>
-                            <td>
+                            <td style="position:absolute;right:200px;">
                                 <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
                                 <t t-foreach="lines" t-as="line">
                                     <t t-if="line.display_type == 'line_note'">
@@ -184,7 +184,7 @@
                                     </t>
                                 </t>
                             </td>
-                            <td>
+                            <td style="width: 15%;position:absolute;right:-41px;">
                                 <strong>: ملاحظات</strong>
                             </td>
 
@@ -346,6 +346,7 @@
                         </tbody>
                     </table>
 
+
                     <div class="clearfix" style="width:100%;color:black;">
                         <div id="total" class="row" style="padding-left:14px;color:black;">
                             <div style="padding-left:5px;color:black;width:50%;border:1px solid black;font-size:13px;">
@@ -360,8 +361,7 @@
                             </div>
                             <!-- <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto"> -->
                             <div style="color:black;width:48.5%;border-right:1px solid black;font-size:12px;">
-                                <table class="table table-sm"
-                                       style="color:black;width:100%;page-break-inside: avoid;border: 0.5px solid black;">
+                                <table class="table table-sm" style="color:black;width:100%;page-break-inside: avoid;border: 0.5px solid black;">
                                     <!--Tax totals-->
                                     <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
 
@@ -374,9 +374,8 @@
                                                 <strong>Amount Before VAT الإجمالي قبل الضريبة</strong>
                                             </td>
 
-                                            <td class="text-right">
-                                                <span t-att-class="oe_subtotal_footer_separator"
-                                                      t-esc="subtotal['formatted_amount']"/>
+                                            <td class="text-right" style="font-size:14px;">
+                                                <span t-att-class="oe_subtotal_footer_separator" t-esc="subtotal['formatted_amount']"/>
                                             </td>
                                         </tr>
 
@@ -385,7 +384,7 @@
                                                 <strong>Discount الخصم</strong>
                                             </td>
 
-                                            <td class="text-right">
+                                            <td class="text-right" style="font-size:14px;">
                                                 <span t-field="o.discount_total"/>
                                             </td>
                                         </tr>
@@ -393,8 +392,7 @@
                                         <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
                                         <!-- comment below row  -->
                                         <!-- <t t-call="account.tax_groups_totals"/> -->
-                                        <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]"
-                                           t-as="amount_by_group">
+                                        <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
                                             <tr class="border-black o_subtotal" style="border-bottom: 1px solid black;">
                                                 <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) &gt; 1">
                                                     <td>
@@ -404,9 +402,8 @@
                                                             <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
                                                         </span>
                                                     </td>
-                                                    <td class="text-right o_price_total">
-                                                        <span class="text-nowrap"
-                                                              t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                                    <td class="text-right o_price_total" style="font-size:14px;">
+                                                        <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                                     </td>
                                                 </t>
                                                 <t t-else="">
@@ -414,9 +411,8 @@
                                                     <td>
                                                         <strong>VAT 5% ضريبة القيمة المضافة</strong>
                                                     </td>
-                                                    <td class="text-right o_price_total">
-                                                        <span class="text-nowrap"
-                                                              t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                                    <td class="text-right o_price_total" style="font-size:14px;">
+                                                        <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                                     </td>
                                                 </t>
                                             </tr>
@@ -428,7 +424,7 @@
                                         <td>
                                             <strong>Net Amount الصافي</strong>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-right" style="font-size:14px;">
                                             <strong t-esc="tax_totals['formatted_amount_total']" style="color:red"/>
                                         </td>
                                     </tr>
@@ -437,20 +433,16 @@
                                     <t t-if="print_with_payments">
                                         <!-- <strong>ضريبة القيمة المضافة  VAT 5% </strong> -->
                                         <t t-if="o.payment_state != 'invoicing_legacy'">
-                                            <t t-set="payments_vals"
-                                               t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                            <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
                                             <t t-foreach="payments_vals" t-as="payment_vals">
-                                                <tr class="border-black o_subtotal"
-                                                    style="border-bottom: 1px solid black;">
+                                                <tr class="border-black o_subtotal" style="border-bottom: 1px solid black;">
                                                     <td>
                                                         <i class="oe_form_field text-right oe_payment_label">Paid on
-                                                            <t t-esc="payment_vals['date']"
-                                                               t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                                            <t t-esc="payment_vals['date']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                                                         </i>
                                                     </td>
-                                                    <td class="text-right">
-                                                        <span t-esc="payment_vals['amount']"
-                                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                                    <td class="text-right" style="font-size:14px;">
+                                                        <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -459,7 +451,7 @@
                                                     <td>
                                                         <strong>Net Amount الصافي</strong>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-right" style="font-size:14px;">
                                                         <strong t-field="o.amount_residual" style="color:red"/>
                                                     </td>
                                                 </tr>
