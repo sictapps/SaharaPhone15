@@ -2,11 +2,11 @@
 <odoo>
     <data>
         <template id="purchase_invoice_with_payments">
-            <t t-call="sahara.custom_purchase_layout">
-                <div class="page" style="font-family: 'cool_font';">
-                    <h3 style="align:center; text-align: center">ســند شــراء</h3>
-                    <h3 style="align:center; text-align: center">Purchase Invoice</h3>
-                    <table style="width: 100%; border:1px solid black;text-align:center;">
+            <t t-call="sahara.custom_purchase_layout2">
+                <div class="page" style="font-family: 'Arial';">
+                    <h4 style="align:center; text-align: center;font-family: 'Arial';">ســند شــراء</h4>
+                    <h4 style="align:center; text-align: center;font-family: 'Arial';">Purchase Invoice</h4>
+                    <table style="font-family: 'Arial';width: 100%; border:1px solid black;text-align:center;">
                         <tr>
                             <td style="width:20%;border:1px solid black;text-align:center;">
                                 <span>
@@ -44,7 +44,7 @@
                                 </span>
                             </td>
                             <td style="border:1px solid black;">
-                                <p class="m-0" t-field="o.partner_id.Name"/>
+                                <p class="m-0" t-field="o.actual_vendor.Name"/>
                             </td>
                             <td style="border:1px solid black;">
                                 <span>
@@ -59,7 +59,7 @@
                                 </span>
                             </td>
                             <td style="border:1px solid black;">
-                                <p class="m-0" t-field="o.partner_id.EIDNumber"/>
+                                <p class="m-0" t-field="o.actual_vendor.EIDNumber"/>
                             </td>
                             <td style="border:1px solid black;">
                                 <span>
@@ -74,7 +74,7 @@
                                 </span>
                             </td>
                             <td style="border:1px solid black;">
-                                <p class="m-0" t-field="o.partner_id.mobile"/>
+                                <p class="m-0" t-field="o.actual_vendor.mobile"/>
                             </td>
                             <td style="border:1px solid black;">
                                 <span>
@@ -117,31 +117,36 @@
 
                     <br/>
 
-                    <table style="text-align:center;" name="invoice_line_table">
+                    <table style="width:100%;font-family: 'Arial';text-align:center;" name="invoice_line_table">
                         <thead>
                             <tr>
                                 <!-- TODO: remove in master -->
                                 <t t-set="colspan" t-value="6"/>
                                 <t t-set="i" t-value="1"/>
-                                <th style="width:30px !important;border: 1px solid black;" name="th_SN">
+                                <t t-set="allSN" t-value="0"/>
+                                <th style="width:3% !important;border: 1px solid black;" name="th_SN">
                                     <span></span>
                                 </th>
-                                <th style="width:48%;border: 1px solid black;border-bottom: 1px solid black;align-text:center;font-size:12px;"
+                                <th style="width:40%;border: 1px solid black;border-bottom: 1px solid black;align-text:center;font-size:12px;"
                                     name="th_description">
                                     <span>Phone Type نوع الهاتف</span>
                                 </th>
-                                <th style="width:75px !important;border: 1px solid black;" name="th_SN">
+                                <th style="width:3% !important;border: 1px solid black;" name="th_SN">
                                     <span></span>
                                 </th>
                                 <th style="width:25%;border: 1px solid black;align-text:center;font-size:12px;"
                                     name="th_quantity">
                                     <span>Seria Number الرقم التسلسلي</span>
                                 </th>
-                                <th style="width:25%;border: 1px solid black;align-text:center;font-size:12px;"
-                                    name="th_priceunit"
-                                    t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <th style="width:10%;border: 1px solid black;align-text:center;font-size:12px;"
+                                    name="th_price_unit">
                                     <span>Price السعر</span>
                                 </th>
+                                <th style="width:10%;border: 1px solid black;align-text:center;font-size:12px;"
+                                    name="th_priceunit">
+                                    <span>Amount الاجمالي</span>
+                                </th>
+                                <!--                                <th style="width:35%;border: 1px solid black;align-text:center;font-size:12px;" name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span> Amount  الاجمالي</span></th>-->
                             </tr>
                         </thead>
                         <tbody class="invoice_tbody">
@@ -167,9 +172,13 @@
                                             <span t-field="line.product_id.display_name"
                                                   t-options="{'widget': 'text'}"/>
                                         </td>
-                                        <td style="border: 1px solid black;font-size:12px;"></td>
+                                        <td style="border: 1px solid black;font-size:12px;">
+                                            <t t-esc="len(o.get_line_lots(line))"/>
+                                        </td>
                                         <td style="border: 1px solid black;">
                                             <t>
+                                                <t t-set="SnLineCounts" t-value="len(o.get_line_lots(line))"/>
+                                                <t t-set="allSN" t-value="allSN+SnLineCounts"/>
                                                 <t t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
                                                     <!-- <span style="width: 33%;"> -->
                                                     <t t-esc="lot['lot_name']"/>&#160;&#160;&#160;&#160;
@@ -178,54 +187,55 @@
                                             </t>
                                         </td>
                                         <td style="border: 1px solid black !important;"
-                                            t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            <span class="text-nowrap" t-esc="'{:,.2f}'.format(line.price_unit)"/>
+                                        </td>
+                                        <td style="border: 1px solid black !important;"
+                                            t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span class="text-nowrap" t-esc="'{:,.2f}'.format(line.price_total)"/>
                                         </td>
 
                                     </t>
                                 </tr>
                             </t>
-                            <t t-esc="k"/>
-                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" t-as="k">
-                                <t t-if="k > i-1">
-                                    <tr style="border: 1px solid black !important;">
-                                        <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;">
-                                            <span t-esc="k"/>
-                                            <t t-set="k" t-value="k+1"/>
-                                        </td>
-                                        <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;"
-                                            name="account_invoice_line_name"></td>
-                                        <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;"></td>
-                                        <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;"
-                                            class="text-right">
-
-                                        </td>
-                                        <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;"
-                                            t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                        </td>
-                                    </tr>
-                                </t>
-                            </t>
+                            <!--                            <t t-esc="k" />-->
+                            <!--                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10]" t-as="k">-->
+                            <!--                                    <t t-if="k > i-1">-->
+                            <!--                                        <tr style="border: 1px solid black !important;">-->
+                            <!--                                            <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" >-->
+                            <!--                                                <span t-esc="k"/> -->
+                            <!--                                                <t t-set="k" t-value="k+1"/> -->
+                            <!--                                            </td>    -->
+                            <!--                                            <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" name="account_invoice_line_name"></td>-->
+                            <!--                                            <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;"></td>-->
+                            <!--                                            <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" class="text-right">-->
+                            <!--                                        -->
+                            <!--                                            </td>-->
+                            <!--                                            <td style="border-bottom: 1px solid black !important;border: 1px solid black !important;" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">-->
+                            <!--                                            </td>-->
+                            <!--                                        </tr> -->
+                            <!--                                    </t>    -->
+                            <!--                            </t>-->
                         </tbody>
                         <tr>
                             <td>
                             </td>
                             <td>
                             </td>
-                            <td style="width:7%;border: 1px solid black;text-align:center;">
-                                <span t-esc="i-1"/>
+                            <td style="width:3%;border: 1px solid black;text-align:center;">
+                                <span t-esc="allSN"/>
                             </td>
-                            <td style="border: 1px solid black;width:30%;text-align:center;">
-                                <strong>Total:</strong>
+                            <td style="border: 1px solid black;text-align:center;color:red;">
+                                <strong>Due Amount:</strong>
                             </td>
-                            <td style="border: 1px solid black;width:20%;font-size:20px;" class="text-right">
+                            <td style="border: 1px solid black;font-size:20px;" class="text-center">
                                 <span t-esc="o.amount_residual"/>
                             </td>
                         </tr>
                     </table>
 
 
-                    <table style="width: 100%; border:1px solid black;text-align:center;">
+                    <table style="font-family: 'Arial';width: 100%; border:1px solid black;text-align:center;margin-top:8px;">
                         <tr style="height:30px;">
                             <td style="width:20%;border:1px solid black;text-align:center;">
                                 <span>
@@ -241,7 +251,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr style="height:100px;">
+                        <tr style="height:80px;">
                             <td style="border:1px solid black;text-align:center;">
                                 <span>
                                     Signature
@@ -256,7 +266,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height:30px;">
                             <td style="border:1px solid black;text-align:center;">
                                 <span>
                                     Purcahsed By
@@ -271,21 +281,21 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="border:1px solid black;text-align:center;">
-                                <span>
-                                    Buyer Name
-                                </span>
-                            </td>
-                            <td style="border:1px solid black;">
+                        <!-- <tr style="height:30px;">
+                          <td style="border:1px solid black;text-align:center;">
+                               <span>
+                                       Buyer Name
+                               </span>
+                           </td>
+                           <td style="border:1px solid black;">
 
-                            </td>
-                            <td style="border:1px solid black;">
-                                <span>
-                                    اسم المشتري
-                                </span>
-                            </td>
-                        </tr>
+                           </td>
+                           <td style="border:1px solid black;">
+                               <span>
+                                   اسم المشتري
+                               </span>
+                           </td>
+                       </tr> -->
 
                     </table>
 
@@ -294,18 +304,18 @@
                     </div>
 
                     <div style="margin-top:5px;">
-                        <t t-if="o.partner_id.scannedEmirateId and o.partner_id.scannedEmirateIdsecond">
+                        <t t-if="o.actual_vendor.scannedEmirateId and o.actual_vendor.scannedEmirateIdsecond">
                             <img style="max-height:250px;width:49% !important;margin:1px;"
-                                 t-att-src="image_data_uri(o.partner_id.scannedEmirateId)"/>
+                                 t-att-src="image_data_uri(o.actual_vendor.scannedEmirateId)"/>
                             <img style="max-height:250px;width:49% !important;margin:1px;"
-                                 t-att-src="image_data_uri(o.partner_id.scannedEmirateIdsecond)"/>
+                                 t-att-src="image_data_uri(o.actual_vendor.scannedEmirateIdsecond)"/>
                         </t>
                     </div>
 
-                    <div class="text-center" style="margin-top:160px ;font-family: 'cool_font';font-size:12px;">
-                        <span t-esc="time.strftime('Date %d/%m/%Y  ')"/>
-                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime(' Time: %H:%M:%S')"/>
-                    </div>
+                    <!-- <div class="text-center" style="margin-top:160px ;font-family: 'Arial ';font-size:12px;">
+                       <span t-esc="time.strftime('Date %d/%m/%Y  ')"/>
+                       <span t-esc="time.strftime(' Time: %H:%M:%S')"/>
+                    </div> -->
 
                 </div>
             </t>
