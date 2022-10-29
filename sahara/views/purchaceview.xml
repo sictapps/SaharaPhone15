@@ -228,10 +228,10 @@
                             <td style="width:3%;border: 1px solid black;text-align:center;">
                                 <span t-esc="allSN"/>
                             </td>
-                            <td style="border: 1px solid black;text-align:center;color:#8C001A;">
+                            <td style="border: 1px solid black;text-align:center;">
                                 <strong>Due Amount:</strong>
                             </td>
-                            <td style="border: 1px solid black;font-size:20px;" class="text-center">
+                            <td style="border: 1px solid black;font-size:20px;color:#8C001A;" class="text-center">
                                 <span t-esc="o.amount_residual"/>
                             </td>
                         </tr>
