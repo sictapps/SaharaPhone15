@@ -228,7 +228,7 @@
                             <td style="width:3%;border: 1px solid black;text-align:center;">
                                 <span t-esc="allSN"/>
                             </td>
-                            <td style="border: 1px solid black;text-align:center;color:red;">
+                            <td style="border: 1px solid black;text-align:center;color:#8C001A;">
                                 <strong>Due Amount:</strong>
                             </td>
                             <td style="border: 1px solid black;font-size:20px;" class="text-center">
