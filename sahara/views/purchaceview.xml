@@ -127,22 +127,22 @@
                                 <th style="width:3% !important;border: 1px solid black;" name="th_SN">
                                     <span></span>
                                 </th>
-                                <th style="width:40%;border: 1px solid black;border-bottom: 1px solid black;align-text:center;font-size:12px;"
+                                <th style="vertical-align: middle;width:40%;border: 1px solid black;border-bottom: 1px solid black;align-text:center;font-size:12px;"
                                     name="th_description">
                                     <span>Phone Type نوع الهاتف</span>
                                 </th>
-                                <th style="width:3% !important;border: 1px solid black;" name="th_SN">
+                                <th style="vertical-align: middle;width:3% !important;border: 1px solid black;" name="th_SN">
                                     <span></span>
                                 </th>
-                                <th style="width:25%;border: 1px solid black;align-text:center;font-size:12px;"
+                                <th style="vertical-align: middle;width:25%;border: 1px solid black;align-text:center;font-size:12px;"
                                     name="th_quantity">
                                     <span>Seria Number الرقم التسلسلي</span>
                                 </th>
-                                <th style="width:10%;border: 1px solid black;align-text:center;font-size:12px;"
+                                <th style="vertical-align: middle;width:10%;border: 1px solid black;align-text:center;font-size:12px;"
                                     name="th_price_unit">
                                     <span>Price السعر</span>
                                 </th>
-                                <th style="width:10%;border: 1px solid black;align-text:center;font-size:12px;"
+                                <th style="vertical-align: middle;width:10%;border: 1px solid black;align-text:center;font-size:12px;"
                                     name="th_priceunit">
                                     <span>Amount الاجمالي</span>
                                 </th>
@@ -231,6 +231,7 @@
                             <td style="border: 1px solid black;text-align:center;">
                                 <span>Due Amount:</span>
                             </td>
+                            <td style="border: 1px solid black;text-align:center;"></td>
                             <td style="border: 1px solid black;font-size:20px;color:#8C001A;" class="text-center">
                                 <strong t-esc="o.amount_residual"/>
                             </td>
@@ -240,45 +241,45 @@
 
                     <table style="font-family: 'Arial';width: 100%; border:1px solid black;text-align:center;margin-top:8px;">
                         <tr style="height:30px;">
-                            <td style="width:20%;border:1px solid black;text-align:center;">
+                            <td style="vertical-align: middle;width:20%;border:1px solid black;text-align:center;">
                                 <span>
                                     Notes
                                 </span>
                             </td>
-                            <td style="width:60%;border:1px solid black;">
+                            <td style="vertical-align: middle;width:60%;border:1px solid black;">
 
                             </td>
-                            <td style="width:20%;border:1px solid black;">
+                            <td style="vertical-align: middle;width:20%;border:1px solid black;">
                                 <span>
                                     ملاحظات
                                 </span>
                             </td>
                         </tr>
                         <tr style="height:80px;">
-                            <td style="border:1px solid black;text-align:center;">
+                            <td style="vertical-align: middle;border:1px solid black;text-align:center;">
                                 <span>
                                     Signature
                                 </span>
                             </td>
-                            <td style="border:1px solid black;">
+                            <td style="vertical-align: middle;border:1px solid black;">
 
                             </td>
-                            <td style="border:1px solid black;">
+                            <td style="vertical-align: middle;border:1px solid black;">
                                 <span>
                                     التوقيع
                                 </span>
                             </td>
                         </tr>
                         <tr style="height:30px;">
-                            <td style="border:1px solid black;text-align:center;">
+                            <td style="vertical-align: middle;border:1px solid black;text-align:center;">
                                 <span>
                                     Purcahsed By
                                 </span>
                             </td>
-                            <td style="border:1px solid black;">
+                            <td style="vertical-align: middle;border:1px solid black;">
 
                             </td>
-                            <td style="border:1px solid black;">
+                            <td style="vertical-align: middle;border:1px solid black;">
                                 <span>
                                     منظم السند
                                 </span>
