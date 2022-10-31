@@ -53,7 +53,7 @@
                             <td>
                                 <strong>TRN :</strong>
                             </td>
-                            <td style="position:absolute;right:650px;">
+                            <td style="position:absolute;right:660px;">
                                 <p class="m-0" t-field="o.partner_id.vat"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:450px;">
@@ -74,7 +74,7 @@
                             <td>
                                 <strong>Phone No :</strong>
                             </td>
-                            <td style="position:absolute;right:655px;">
+                            <td style="position:absolute;right:708px;">
                                 <p class="m-0" t-field="o.partner_id.phone"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:425px;">
@@ -95,7 +95,7 @@
                             <td>
                                 <strong>Mail :</strong>
                             </td>
-                            <td style="position:absolute;right:745px;">
+                            <td style="position:absolute;right:705px;">
                                 <p class="m-0" t-field="o.partner_id.email"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:463px;">
@@ -117,7 +117,7 @@
                             <td>
                                 <strong>Payment Type :</strong>
                             </td>
-                            <td style="position:absolute;right:745px;">
+                            <td style="width: 15%;position:absolute;right:650px;">
                                 <!-- <p class="m-0" t-field="o.order_payment_method"/> -->
                                 <p t-if="o.invoice_payment_term_id">
                                     <span t-field="o.invoice_payment_term_id.name"/>
@@ -129,7 +129,7 @@
                             <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Sales Man :</strong>
                             </td>
-                            <td style="position:absolute;right:190px;">
+                            <td style="width: 25%;position:absolute;right:100px;">
                                 <!-- <p class="m-0" t-field="o.salesperson_id.name"/>  -->
                                 <!-- <t t-foreach="lines" t-as="line"> -->
                                 <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson">
@@ -174,7 +174,7 @@
                             <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Notes :</strong>
                             </td>
-                            <td style="position:absolute;right:200px;">
+                            <td style="position:absolute;right:160px;">
                                 <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
                                 <t t-foreach="lines" t-as="line">
                                     <t t-if="line.display_type == 'line_note'">
