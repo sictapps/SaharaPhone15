@@ -74,7 +74,7 @@
                             <td>
                                 <strong>Phone No :</strong>
                             </td>
-                            <td style="position:absolute;right:708px;">
+                            <td style="position:absolute;right:680px;">
                                 <p class="m-0" t-field="o.partner_id.phone"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:425px;">
@@ -95,7 +95,7 @@
                             <td>
                                 <strong>Mail :</strong>
                             </td>
-                            <td style="position:absolute;right:705px;">
+                            <td style="position:absolute;right:660px;">
                                 <p class="m-0" t-field="o.partner_id.email"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:463px;">
@@ -129,7 +129,7 @@
                             <td style="width: 15%;position:absolute;right:300px;">
                                 <strong>Sales Man :</strong>
                             </td>
-                            <td style="width: 25%;position:absolute;right:100px;">
+                            <td style="width: 25%;position:absolute;right:85px;">
                                 <!-- <p class="m-0" t-field="o.salesperson_id.name"/>  -->
                                 <!-- <t t-foreach="lines" t-as="line"> -->
                                 <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson">
