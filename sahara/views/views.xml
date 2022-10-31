@@ -16,10 +16,10 @@
                 </t> -->
                 <style type="text/css">
                     th {
-                    font-family: almarai;
+                    font-family: Arial;
                     }
                     td {
-                    font-family: almarai;
+                    font-family: Arial;
                     }
                     t{
                     color:black;
@@ -370,7 +370,7 @@
                                     <!-- added by montagab -->
                                     <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                         <tr class="border-black o_subtotal" style="border-top: 1px solid black;">
-                                            <td style="font-size:14px;font-family:'almarai'">
+                                            <td style="font-size:14px;font-family:'Arial'">
                                                 <strong>Amount Before VAT الإجمالي قبل الضريبة</strong>
                                             </td>
 
@@ -526,7 +526,7 @@
                     <br/>
                     <br/>
                     <br/>
-                    <table style="width: 100%;font-family: 'almarai';font-size:12px;">
+                    <table style="width: 100%;font-family: 'Arial';font-size:12px;">
                         <tr>
                             <td style="align: left; text-align: left;width: 33%;">
                                 Bank Name :
