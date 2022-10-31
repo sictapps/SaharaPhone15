@@ -3,10 +3,10 @@
     <data>
         <template id="purchase_invoice_with_payments2">
             <t t-call="sahara.custom_purchase_layout2">
-                <div class="page" style="font-family: 'almarai';">
-                    <h4 style="align:center; text-align: center;font-family: 'almarai';">ســند شــراء</h4>
-                    <h4 style="align:center; text-align: center;font-family: 'almarai';">Purchase Invoice</h4>
-                    <table style="font-family: 'almarai';width: 100%; border:1px solid black;text-align:center;">
+                <div class="page" style="font-family: 'Arial';">
+                    <h4 style="align:center; text-align: center;font-family: 'Arial';">ســند شــراء</h4>
+                    <h4 style="align:center; text-align: center;font-family: 'Arial';">Purchase Invoice</h4>
+                    <table style="font-family: 'Arial';width: 100%; border:1px solid black;text-align:center;">
                         <tr>
                             <td style="width:20%;border:1px solid black;text-align:center;">
                                 <span>
@@ -117,7 +117,7 @@
 
                     <br/>
 
-                    <table style="width:100%;font-family: 'almarai';text-align:center;" name="invoice_line_table">
+                    <table style="width:100%;font-family: 'Arial';text-align:center;" name="invoice_line_table">
                         <thead>
                             <tr>
                                 <!-- TODO: remove in master -->
@@ -238,7 +238,7 @@
                     </table>
 
 
-                    <table style="font-family: 'almarai';width: 100%; border:1px solid black;text-align:center;margin-top:8px;">
+                    <table style="font-family: 'Arial';width: 100%; border:1px solid black;text-align:center;margin-top:8px;">
                         <tr style="height:30px;">
                             <td style="vertical-align: middle;width:20%;border:1px solid black;text-align:center;">
                                 <span>
@@ -315,7 +315,7 @@
                         </t>
                     </div>
 
-                    <!-- <div class="text-center" style="margin-top:160px ;font-family: 'almarai ';font-size:12px;">
+                    <!-- <div class="text-center" style="margin-top:160px ;font-family: 'Arial ';font-size:12px;">
                        <span t-esc="time.strftime('Date %d/%m/%Y  ')"/>
                        <span t-esc="time.strftime(' Time: %H:%M:%S')"/>
                     </div> -->
