@@ -3,7 +3,7 @@
     <data>
         <template id="purchase_invoice_with_payments">
             <t t-call="sahara.custom_purchase_layout2">
-                <div class="page" style="font-family: 'Arial';">
+                <div class="page" style="margin-top:150px !important;font-family: 'Arial';">
                     <h4 style="align:center; text-align: center;font-family: 'Arial';">ســند شــراء</h4>
                     <h4 style="align:center; text-align: center;font-family: 'Arial';">Purchase Invoice</h4>
                     <table style="font-family: 'Arial';width: 100%; border:1px solid black;text-align:center;">
@@ -200,8 +200,7 @@
 
                                     </t>
                                 </tr>
-                            </t>
-                            <!--                            <t t-esc="k" />-->
+                            </t>                            <!--                            <t t-esc="k" />-->
                             <!--                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10]" t-as="k">-->
                             <!--                                    <t t-if="k > i-1">-->
                             <!--                                        <tr style="border: 1px solid black !important;">-->
