@@ -61,15 +61,15 @@
                         </table>
                     </div>
                     <div class="col-xs-6" style="height:30px">
-                        <div style="font-family: 'Arial';padding-left:50px;width: 400px;margin-top:70px;float:right !important;">
-                            <h4>صــــــحـــــارى فــــــون</h4>
+                        <div style="font-family: 'Arial';align:center;width: 400px;margin-top:70px;float:right !important;">
+                            <h4>صـــحــارى فــــــون</h4>
                             <h4>SAHARA PHONE</h4>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div style="width: 100%;float:right;margin-top:20px;margin-right:-150px;">
                             <div style="width: 45%;float:right;">
-                                <div  style="max-height: 100px;"/>
+                                <div style="max-height: 100px;"/>
                             </div>
                         </div>
                     </div>
