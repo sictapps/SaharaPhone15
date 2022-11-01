@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="purchase_invoice_with_payments">
-            <t t-call="sahara.custom_purchase_layout2">
+            <t t-call="sahara.custom_purchase_layout">
                 <div class="page" style="margin-top:150px !important;font-family: 'Arial';">
                     <h4 style="align:center; text-align: center;font-family: 'Arial';">ســند شــراء</h4>
                     <h4 style="align:center; text-align: center;font-family: 'Arial';">Purchase Invoice</h4>
