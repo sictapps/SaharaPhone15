@@ -27,7 +27,7 @@
                 </style>
                 <div class="page">
                     <div>
-                        <img style="position:absolute;top:1.5px;left:5px;"
+                        <img style="position:absolute;top:1.5px;left:5px;" t-if="o.name != '/'"
                              t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.name,280, 60)"/>
                         <img t-if="o.pos_ref" style="position:absolute;top:1.5px;right:5px;"
                              t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=0' % ('Code128', o.pos_ref,280, 60)"/>
