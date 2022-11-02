@@ -12,7 +12,7 @@
     'license': 'LGPL-3',
     'data': [
         'views/res_partner.xml',
-        'views/account_move.xml',
+        # 'views/account_move.xml',
         'views/sale_order.xml',
         'views/res_config_settings.xml',
     ],
