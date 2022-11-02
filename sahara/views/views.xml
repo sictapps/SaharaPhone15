@@ -74,7 +74,7 @@
                             <td>
                                 <strong>Phone No :</strong>
                             </td>
-                            <td style="position:absolute;right:695px;">
+                            <td style="width: 15%;position:absolute;right:680px;">
                                 <p class="m-0" t-field="o.partner_id.phone"/>
                             </td>
                             <td style="width: 15%;position:absolute;right:425px;">
