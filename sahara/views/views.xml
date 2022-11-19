@@ -38,6 +38,17 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="width: 18%;">
+                                <strong>Tag Number :</strong>
+                            </td>
+                            <td style="width:65%;">
+                                <p class="m-0" t-field="o.tag_num"/>
+                            </td>
+                            <td style="position:absolute;right:15px;">
+                                <strong>: رقم العلامة</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 18%;">
                                 <strong>Customer Name :</strong>
                             </td>
                             <td style="width:65%;">
@@ -598,6 +609,33 @@
                     <!--                        </p>-->
                     <!--                    </div>-->
                 </div>
+<!--                 <div class="planet_img" style="position:absolute;right:5px;">-->
+                 <div t-if="o.tag_num" class="planet_img" style="text-align: left;position:absolute;right:5px;">
+                    <table style="width: 100%;font-family: 'Barlow';">
+                        <tr>
+                            <td>
+                                <img src="/sahara/static/src/img/Planet_Circle_Black.png"
+                                     style="height: 20mm;"></img>
+
+                            </td>
+                            <td style=" text-align: left;width: 2%;">
+                            </td>
+
+                            <td style="color:#414141;font-size: 14px;">
+                                <span>By using our service, you agree to our terms<br/>
+                                      and conditions and Privacy Policy - visit<br/>
+                                      <strong> www.planetpayment.ae</strong> for full details.<br/>
+                                      Planet has been authorised by the FTA.</span><br/>
+                                <strong class="m-0" t-field="o.tag_num" style="font-size: 20px;"/><br/>
+                                <strong style="color:#37b45a">ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ</strong><br/>
+                                <strong style="font-size: 16px;">www.planetpayment.ae</strong>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
             </t>
 
 

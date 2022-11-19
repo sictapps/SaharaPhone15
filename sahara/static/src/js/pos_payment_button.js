@@ -32,6 +32,7 @@ odoo.define('sahara.PaymentScreenButton', function (require) {
             }
 
             async _isOrderValid(isForceValidate) {
+
                 if (this.currentOrder.get_orderlines().length === 0 && this.currentOrder.is_to_invoice()) {
                     this.showPopup('ErrorPopup', {
                         title: this.env._t('Empty Order'),
@@ -171,13 +172,13 @@ odoo.define('sahara.PaymentScreenButton', function (require) {
                 return true;
             }
 
-            IsCustomButton() {
-                // click_invoice
-                Gui.showPopup("ErrorPopup", {
-                    title: this.env._t('Payment Screen Custom Button Clicked'),
-                    body: this.env._t('Welcome to OWL'),
-                });
-            }
+            // IsCustomButton() {
+            //     // click_invoice
+            //     Gui.showPopup("ErrorPopup", {
+            //         title: this.env._t('Payment Screen Custom Button Clicked'),
+            //         body: this.env._t('Welcome to OWL'),
+            //     });
+            // }
         };
     Registries.Component.extend(PaymentScreen, CustomButtonPaymentScreen);
     return CustomButtonPaymentScreen;

@@ -83,6 +83,7 @@
 
             </div>
 
+
             <!-- <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:0px !important;"> -->
             <div class="footer" style="position:absolute;margin-bottom:30px;width:100%;">
 
@@ -102,6 +103,7 @@
                             </td>
                     </tr>
                 </table> -->
+
                 <div class="text-center" style="font-family: 'cool_font';">
                     <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
                     <!-- <div class="col-xs-2"> -->
