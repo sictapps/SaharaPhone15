@@ -31,6 +31,7 @@ odoo.define('sahara_planet.AddTaxFree', function (require) {
 
             json.tax_free_pos = this.tax_free_pos;
 
+
             return json
         },
 

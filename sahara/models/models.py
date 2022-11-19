@@ -25,6 +25,14 @@ class TextAccountMove(models.Model):
     # rec.sahara_purchase_invoice_price_total = (rec.amount_residual-((4.761*rec.amount_residual)/100)+((
     # 5*rec.amount_residual)/100))
     pos_ref = fields.Char(string='Receipt Number', readonly=True, copy=False)
+    tag_num = fields.Char("Tag Num", readonly=True, copy=False)
+
+    # def _get_tag_number(self):
+    #     self.tag_num = 0
+    #     pos_order = self.env['pos.order'].search([], limit=1)
+    #     for i in pos_order:
+    #         self.tag_num = i.tag_number
+    #         return self.tag_num
 
     @api.depends('amount_total')
     def amount_to_words(self):
@@ -187,7 +195,9 @@ class SaharaPosOrder(models.Model):
     def _prepare_invoice_vals(self):
         self.ensure_one()
         timezone = pytz.timezone(self._context.get('tz') or self.env.user.tz or 'UTC')
+        pos_order = self.env['pos.order'].search([], limit=1)
         vals = {
+            # 'tag_num': pos_order.tag_number,
             'pos_ref': self.pos_reference,
             'invoice_origin': self.name,
             'journal_id': self.session_id.config_id.invoice_journal_id.id,
@@ -207,6 +217,7 @@ class SaharaPosOrder(models.Model):
         }
         if self.note:
             vals.update({'narration': self.note})
+
         return vals
 
 
