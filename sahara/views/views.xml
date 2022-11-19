@@ -615,7 +615,7 @@
                         <tr>
                             <td>
                                 <img src="/sahara/static/src/img/Planet_Circle_Black.png"
-                                     style="height: 20mm;"></img>
+                                     style="height: 20mm;width:20mm"></img>
 
                             </td>
                             <td style=" text-align: left;width: 2%;">
