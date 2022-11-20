@@ -8,12 +8,6 @@
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <t t-set="forced_vat"
                    t-value="o.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
-                <!-- <t t-set="address">
-                    <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-                    <div t-if="o.partner_id.vat" class="mt16">
-                        <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                        <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/></div>
-                </t> -->
                 <style type="text/css">
                     th {
                     font-family: Arial;
@@ -36,17 +30,17 @@
                     <br/>
                     <br/>
                     <table style="width: 100%;">
-                        <tr>
-                            <td style="width: 18%;">
-                                <strong>Tag Number :</strong>
-                            </td>
-                            <td style="width:65%;">
-                                <p class="m-0" t-field="o.tag_num"/>
-                            </td>
-                            <td style="position:absolute;right:15px;">
-                                <strong>: رقم العلامة</strong>
-                            </td>
-                        </tr>
+                        <!--                        <tr>-->
+                        <!--                            <td style="width: 18%;">-->
+                        <!--                                <strong>Tag Number :</strong>-->
+                        <!--                            </td>-->
+                        <!--                            <td style="width:65%;">-->
+                        <!--                                <p class="m-0" t-field="o.tag_num"/>-->
+                        <!--                            </td>-->
+                        <!--                            <td style="position:absolute;right:15px;">-->
+                        <!--                                <strong>: رقم العلامة</strong>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
                         <tr>
                             <td style="width: 18%;">
                                 <strong>Customer Name :</strong>
@@ -141,37 +135,15 @@
                                 <strong>Sales Man :</strong>
                             </td>
                             <td style="width: 25%;position:absolute;right:85px;">
-                                <!-- <p class="m-0" t-field="o.salesperson_id.name"/>  -->
-                                <!-- <t t-foreach="lines" t-as="line"> -->
+
                                 <t t-foreach="o.get_order_line_salespersos(line)" t-as="salesperson">
-                                    <!-- <span style="width: 33%;"> -->
                                     <t t-esc="salesperson['name']"/>    
-                                    <!-- </span> -->
                                 </t>
-                                <!-- </t>   -->
                             </td>
                             <td style="width: 15%;position:absolute;right:-33px;">
                                 <strong>: اسم البائع</strong>
                             </td>
                         </tr>
-                        <!-- <tr>
-
-                            <td>
-                                <strong>Payment Type  :</strong>
-                            </td>
-                            <td>
-                                  <p class="m-0" t-field="o.order_payment_method"/>
-                            </td>
-                            <td>
-                                <strong> :  طريقة الدفع </strong>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                        </tr> -->
                         <tr>
                             <td>
                                 <strong>Payment Method :</strong>
@@ -186,28 +158,17 @@
                                 <strong>Notes :</strong>
                             </td>
                             <td style="position:absolute;right:160px;">
-                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                                <t t-set="lines"
+                                   t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
                                 <t t-foreach="lines" t-as="line">
                                     <t t-if="line.display_type == 'line_note'">
-                                        <!-- <td colspan="99"> -->
                                         <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                        <!-- </td> -->
                                     </t>
                                 </t>
                             </td>
                             <td style="width: 15%;position:absolute;right:-41px;">
                                 <strong>: ملاحظات</strong>
                             </td>
-
-                            <!-- <td>
-                                <strong>Currency  :</strong>
-                            </td>
-                            <td>
-                                 <p class="m-0" t-field="o.currency_id.name"/>
-                            </td>
-                            <td>
-                                <strong> :  العملة </strong>
-                            </td> -->
                         </tr>
                     </table>
 
@@ -326,20 +287,14 @@
                                         <t t-set="current_section" t-value="line"/>
                                         <t t-set="current_subtotal" t-value="0"/>
                                     </t>
-                                    <!-- <t t-if="line.display_type == 'line_note'">
-                                        <td colspan="99">
-                                            Note : <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                        </td>
-                                    </t> -->
+
                                 </tr>
                                 <tr>
                                     <t>
                                         <td style="color:black;border: 1px solid black">SN :</td>
                                         <td style="color:black;font-size:14px;width: 50%;border-top: 0px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-top: none !important;">
                                             <strong t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
-                                                <!-- <span style="width: 33%;"> -->
                                                 <strong t-esc="lot['lot_name']"/>    
-                                                <!-- </span> -->
                                             </strong>
                                         </td>
                                     </t>
@@ -370,15 +325,13 @@
                                 - In Case Of Mobile Warranty Will be Coveblack By Manufacturer
                                 <br/>
                             </div>
-                            <!-- <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto"> -->
                             <div style="color:black;width:48.5%;border-right:1px solid black;font-size:12px;">
-                                <table class="table table-sm" style="color:black;width:100%;page-break-inside: avoid;border: 0.5px solid black;">
+                                <table class="table table-sm"
+                                       style="color:black;width:100%;page-break-inside: avoid;border: 0.5px solid black;">
                                     <!--Tax totals-->
                                     <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
 
-                                    <!-- comment below line and added others -->
-                                    <!-- <t t-call="account.document_tax_totals"/> -->
-                                    <!-- added by montagab -->
+
                                     <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                         <tr class="border-black o_subtotal" style="border-top: 1px solid black;">
                                             <td style="font-size:14px;font-family:'Arial'">
@@ -386,7 +339,8 @@
                                             </td>
 
                                             <td class="text-right" style="font-size:18px;">
-                                                <span t-att-class="oe_subtotal_footer_separator" t-esc="subtotal['formatted_amount']"/>
+                                                <span t-att-class="oe_subtotal_footer_separator"
+                                                      t-esc="subtotal['formatted_amount']"/>
                                             </td>
                                         </tr>
 
@@ -401,29 +355,28 @@
                                         </tr>
 
                                         <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
-                                        <!-- comment below row  -->
-                                        <!-- <t t-call="account.tax_groups_totals"/> -->
-                                        <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
+                                        <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]"
+                                           t-as="amount_by_group">
                                             <tr class="border-black o_subtotal" style="border-bottom: 1px solid black;">
                                                 <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) &gt; 1">
                                                     <td>
-                                                        <!-- <span t-esc="amount_by_group['tax_group_name']"/> -->
                                                         <strong>VAT 5% ضريبة القيمة المضافة</strong>
                                                         <span class="text-nowrap">on
                                                             <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
                                                         </span>
                                                     </td>
                                                     <td class="text-right o_price_total" style="font-size:18px;">
-                                                        <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                                        <span class="text-nowrap"
+                                                              t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                                     </td>
                                                 </t>
                                                 <t t-else="">
-                                                    <!-- <td><span class="text-nowrap" t-esc="amount_by_group['tax_group_name']"/></td> -->
                                                     <td>
                                                         <strong>VAT 5% ضريبة القيمة المضافة</strong>
                                                     </td>
                                                     <td class="text-right o_price_total" style="font-size:18px;">
-                                                        <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                                        <span class="text-nowrap"
+                                                              t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                                     </td>
                                                 </t>
                                             </tr>
@@ -439,21 +392,23 @@
                                             <strong t-esc="tax_totals['formatted_amount_total']" style="color:#8C001A"/>
                                         </td>
                                     </tr>
-                                    <!-- end of added by montagab  -->
                                     <!--Payments-->
                                     <t t-if="print_with_payments">
-                                        <!-- <strong>ضريبة القيمة المضافة  VAT 5% </strong> -->
                                         <t t-if="o.payment_state != 'invoicing_legacy'">
-                                            <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                            <t t-set="payments_vals"
+                                               t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
                                             <t t-foreach="payments_vals" t-as="payment_vals">
-                                                <tr class="border-black o_subtotal" style="border-bottom: 1px solid black;">
+                                                <tr class="border-black o_subtotal"
+                                                    style="border-bottom: 1px solid black;">
                                                     <td>
                                                         <i class="oe_form_field text-right oe_payment_label">Paid on
-                                                            <t t-esc="payment_vals['date']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                                            <t t-esc="payment_vals['date']"
+                                                               t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                                                         </i>
                                                     </td>
                                                     <td class="text-right" style="font-size:18px;">
-                                                        <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                                        <span t-esc="payment_vals['amount']"
+                                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -473,23 +428,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <p t-if="o.move_type in ('out_invoice', 'in_refund') and o.payment_reference" name="payment_communication">
-                        Please use the following communication for your payment : <b><span t-field="o.payment_reference"/></b>
-                    </p>-->
 
-                    <!-- <br /> -->
-                    <!-- <p>
-                        Invoice Note :
-                         <t t-foreach="lines" t-as="line">
-                                    <t t-if="line.display_type == 'line_note'">
-                                        <td colspan="99">
-                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                        </td>
-                                    </t>
-
-                         </t>
-
-                    </p> -->
                     <p t-if="o.invoice_payment_term_id" name="payment_term">
                         <span t-field="o.invoice_payment_term_id.note"/>
                     </p>
@@ -501,30 +440,16 @@
                             UAE Dirham Only
                         </p>
                     </div>
-                    <!-- <p t-if="o.type in ('out_invoice', 'in_refund')">
-                        Please use the following communication for your payment : <b><span t-field="o.invoice_payment_ref"/></b>
-                    </p> -->
 
-                    <!-- <p>
-                        Additional Details:<br />
-                        -   Reatailer acknowledges That the goods Are Received In Good condition<br />
-                        -   Manufacturer Warranty As Per terms From Invoice Date<br />
-                        -   In Case Of Mobile Warranty Will be Coveblack By Manufacturer<br />
-                    </p> -->
-
-                    <!-- <p>
-                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                    </p> -->
-                    <!-- <br /> -->
                     <table style="width: 100%;">
                         <tr>
                             <td style="position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
-                                <p style="margin-left: 7px;"> Customer Signature </p>
+                                <p style="margin-left: 7px;">Customer Signature</p>
                             </td>
                             <td style="align: center; text-align: center;width: 33%;">
                             </td>
                             <td style="margin-left: -3.5px;position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
-                                <p style="margin-left: 7px;"> Sahara Phone Signature </p>
+                                <p style="margin-left: 7px;">Sahara Phone Signature</p>
                             </td>
                             <td style="align: center; text-align: center;width: 0.5%;">
                             </td>
@@ -572,21 +497,6 @@
                         </tr>
                     </table>
 
-                    <!-- <table  style="width: 100%;">
-                        <tr>
-                                <td style="align: left; text-align: left;width: 50%;">
-                                       Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
-                                       Account Number : <span class="m-0" t-if="o.company_id.bank_ids[0].acc_number" t-field="o.company_id.bank_ids[0].acc_number"/><br/>
-                                       IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_bic" t-field="o.company_id.bank_ids[0].bank_bic"/> <br/>
-                                </td>
-                                <td style="align: right;width: 50%;">
-                                       Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name" t-field="o.company_id.bank_ids[1].bank_name"/><br/>
-                                       Account Number : <span class="m-0" t-if="o.company_id.bank_ids[1].acc_number" t-field="o.company_id.bank_ids[1].acc_number"/><br/>
-                                       IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic" t-field="o.company_id.bank_ids[1].bank_bic"/> <br/>
-                                </td>
-                        </tr>
-                    </table> -->
-
 
                     <div t-if="not is_html_empty(o.narration)" name="comment">
                         <span t-field="o.narration"/>
@@ -600,40 +510,28 @@
                         -
                         <span t-field="o.invoice_incoterm_id.name"/>
                     </p>
-                    <!--                    <div id="qrcode" t-if="o.display_qr_code and o.amount_residual &gt; 0">-->
-                    <!--                        <p t-if="qr_code_urls.get(o.id)">-->
-                    <!--                            <strong class="text-center">Scan me with your banking app.</strong>-->
-                    <!--                            <br/>-->
-                    <!--                            <br/>-->
-                    <!--                            <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>-->
-                    <!--                        </p>-->
-                    <!--                    </div>-->
+
                 </div>
-<!--                 <div class="planet_img" style="position:absolute;right:5px;">-->
-                 <div t-if="o.tag_num" class="planet_img" style="text-align: left;position:absolute;right:5px;">
+                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;" >
                     <table style="width: 100%;font-family: 'Barlow';">
                         <tr>
-                            <td>
-                                <img src="/sahara/static/src/img/Planet_Circle_Black.png"
-                                     style="height: 20mm;width:20mm"></img>
-
+                            <td style="vertical-align: middle;">
+                                <img src="/sahara/static/src/img/Planet_Circle_Black.png" style="height: 20mm;"/>
                             </td>
-                            <td style=" text-align: left;width: 2%;">
+                            <td style=" text-align: left;width: 3px;">
                             </td>
-
-                            <td style="color:#414141;font-size: 14px;">
-                                <span>By using our service, you agree to our terms<br/>
+                            <td style="color:#414141;font-size: 11px;text-align:left;">
+                                <span>By using our service, you agree to our terms <br/>
                                       and conditions and Privacy Policy - visit<br/>
                                       <strong> www.planetpayment.ae</strong> for full details.<br/>
                                       Planet has been authorised by the FTA.</span><br/>
-                                <strong class="m-0" t-field="o.tag_num" style="font-size: 20px;"/><br/>
-                                <strong style="color:#37b45a">ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ</strong><br/>
-                                <strong style="font-size: 16px;">www.planetpayment.ae</strong>
+                                <strong t-field="o.tag_num" style="font-size: 16px;"/><br/>
+                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line><br/>
+                                <div  style="font-size: 14px;margin-top: -12px;"> <strong>www.planetpayment.ae</strong></div><br/>
                             </td>
                         </tr>
                     </table>
                 </div>
-
 
 
             </t>
@@ -642,13 +540,7 @@
         </template>
 
         <template id="document_tax_totals">
-            <!--
-                Generic template to display tax totals in pdf reports.
-                Used by invoices, SO and PO.
 
-                ARGUMENTS:
-                - tax_totals: dict in the form generated by account.move's _get_tax_totals.
-            -->
             <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                 <tr class="border-black o_subtotal">
                     <td>
@@ -679,13 +571,7 @@
         </template>
 
         <template id="tax_groups_totals">
-            <!--
-                Generic template to display a list of tax groups with the related amounts.
 
-                ARGUMENTS:
-                - tax_totals: dict in the form generated by account.move's _get_tax_totals.
-                - subtotal_to_show: The subtotal we need to render the groups from
-            -->
             <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
                 <tr>
                     <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) > 1">
@@ -734,9 +620,7 @@
             </t>
         </template>
 
-        <!--We need to create the following empty report template for the action report
-            "action_account_original_vendor_bill" to work. The action is merging the
-            original vendor bill(s) that were used to create the vendor bill(s) into one PDF. -->
+
         <template id="report_original_vendor_bill">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
