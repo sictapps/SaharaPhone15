@@ -11,7 +11,7 @@ class AddFullOrder(models.Model):
     _inherit = 'pos.order'
     _description = 'Add Full Order'
 
-    tag_number = fields.Char(string="tagNumber", readonly=True)
+    tag_number = fields.Char(string="Tag Number", readonly=True)
     tax_free = fields.Char(string='Tax Notes', readonly=True)
 
     @api.model
