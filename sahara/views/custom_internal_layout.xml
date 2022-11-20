@@ -17,9 +17,6 @@
                 <div class="row">
                     <div class="col-xs-3">
 
-                        <!-- <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/> -->
-                        <!-- All your custom code here -->
-
                         <table style="width: 100%;">
                             <tr>
                                 <td>
@@ -32,7 +29,6 @@
                                     <span t-field="o.company_id.street"/>
                                     <span t-field="o.company_id.city"/>
                                     <span t-field="o.company_id.state_id"/>
-                                    <!-- <address t-field="o.company_id.street"+" "+"o.company_id.city"+" "+"o.company_id.stateid" /> -->
                                 </td>
                             </tr>
                             <tr>
@@ -45,7 +41,7 @@
                                 <td>
                                     Tel:
                                     <span class="m-0"
-                                          t-field="o.company_id.phone"/> <!-- ,   Mob: <span class="m-0" t-field="o.company_id.mobile"/> -->
+                                          t-field="o.company_id.phone"/>
                                 </td>
                             </tr>
                             <tr>
@@ -84,54 +80,20 @@
             </div>
 
 
-            <!-- <div class="footer" style="border:1px solid gray;position: relative;margin-bottom:0px !important;"> -->
             <div class="footer" style="position:absolute;margin-bottom:30px;width:100%;">
 
-                <!-- <table  style="width: 100%;font-family: 'cool_font';">
-                    <tr>
-                            <td style="align: left; text-align: left;width: 33%;">
-                                   Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_name" t-field="o.company_id.bank_ids[0].bank_name"/><br/>
-                                   Account Number : <span class="m-0" t-if="o.company_id.bank_ids[0].acc_number" t-field="o.company_id.bank_ids[0].acc_number"/><br/>
-                                   IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[0].bank_bic" t-field="o.company_id.bank_ids[0].bank_bic"/> <br/>
-                            </td>
-                             <td style="align: left; text-align: left;width: 33%;">
-                             </td>
-                            <td style="align: right;width: 33%;">
-                                   Bank Name : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name" t-field="o.company_id.bank_ids[1].bank_name"/><br/>
-                                   Account Number : <span class="m-0" t-if="o.company_id.bank_ids[1].acc_number" t-field="o.company_id.bank_ids[1].acc_number"/><br/>
-                                   IBAN Number : <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic" t-field="o.company_id.bank_ids[1].bank_bic"/> <br/>
-                            </td>
-                    </tr>
-                </table> -->
 
                 <div class="text-center" style="font-family: 'cool_font';">
                     <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
-                    <!-- <div class="col-xs-2"> -->
-                    <!-- <small> -->
+
                     <span>Page</span>
                     <span class="page"/>
                     of
                     <span class="topage"/>
-                    <!-- </small> -->
-                    <!-- </div> -->
+
                     <span t-esc="time.strftime('(Date :%d/%m/%Y )')"/>
 
-                    <!-- <ul class="list-inline">
-                        <li>Developed By: Hassan Enterprises</li>
 
-                        <li>&amp;bull;</li>
-                        <li>Phone: +92 321 1234567</li>
-
-                        <li>&amp;bull;</li>
-                        <li>Email: abc@gmail.com</li>
-                    </ul>
-
-                    <ul class="list-inline">
-                        <li>Page:</li>
-                        <li><span class="page"/></li>
-                        <li>/</li>
-                        <li><span class="topage"/></li>
-                    </ul> -->
                 </div>
             </div>
 
