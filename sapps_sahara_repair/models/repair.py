@@ -523,3 +523,4 @@ class ProductProduct(models.Model):
         account_moves = self.env['account.move'].sudo().create(am_vals_list)
         if account_moves:
             account_moves._post()
+        product.standard_price = new_price
