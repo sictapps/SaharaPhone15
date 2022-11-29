@@ -94,9 +94,16 @@
 
 
        </xpath>
+          <xpath expr="//field[@name='to_check']" position="after">
+                      <button name="accrual" attrs="{'invisible': [('move_type', '==', 'entry')]}" string="Read Actual Vendor From Device" type="object" class="oe_highlight btn-readCard"/>
+
+
+                 </xpath>
            <xpath expr="//form" position="inside">
                     <footer>
                 <field name="jsondata" string="-"  class="simulateEidResponse" id="simulateEidResponse"/>
+                        <field name="is_accrual" invisible="1" force_save="1" ></field>
+
                     </footer>
             </xpath>
       </field>

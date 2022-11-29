@@ -46,7 +46,7 @@ class emirate_hid_repair(models.Model):
                         'EmirateArabic' : ee['EmirateArabic'],
                         'EmirateCode' : ee['EmirateCode'],
                         'Phone' : ee['Phone'],
-                        'name' : ee['NameAr'],
+                        'name' : ee['Name'],
                         'email' : ee['Email'],
                         'phone' : ee['Phone'],
                         'mobile' : ee['Mobile'],
@@ -119,7 +119,7 @@ class emirate_hid_sale(models.Model):
                                                               'EmirateArabic': ee['EmirateArabic'],
                                                               'EmirateCode': ee['EmirateCode'],
                                                               'Phone': ee['Phone'],
-                                                              'name': ee['NameAr'],
+                                                              'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
@@ -190,7 +190,7 @@ class emirate_hid_purchase(models.Model):
                                                               'EmirateArabic': ee['EmirateArabic'],
                                                               'EmirateCode': ee['EmirateCode'],
                                                               'Phone': ee['Phone'],
-                                                              'name': ee['NameAr'],
+                                                              'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
@@ -226,6 +226,14 @@ class emirate_hid_account(models.Model):
     _inherit = "account.move"
     jsondata = fields.Char("-")
 
+    is_accrual= fields.Boolean(default=False)
+
+
+
+    def accrual(self):
+        self.write({'is_accrual': True})
+
+
     @api.onchange('jsondata')
     def updateD(self):
         if self.jsondata:
@@ -238,7 +246,12 @@ class emirate_hid_account(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
-                        self.partner_id = partner.id
+                        partner.name=partner.Name
+                        if not self.is_accrual:
+                            self.partner_id = partner.id
+                        else:
+                            self.actual_vendor= partner.id
+
                         self.jsondata = ""
                 else:
                     data = ee['Photo']
@@ -262,7 +275,7 @@ class emirate_hid_account(models.Model):
                                                               'EmirateArabic': ee['EmirateArabic'],
                                                               'EmirateCode': ee['EmirateCode'],
                                                               'Phone': ee['Phone'],
-                                                              'name': ee['NameAr'],
+                                                              'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
@@ -290,8 +303,12 @@ class emirate_hid_account(models.Model):
                                                               'Signature': ee['Signature'],
                                                               'jsondata': "",
 
-                                                              })
-                    self.partner_id = partner.id
+                                                             })
+                    if not self.is_accrual:
+                        self.partner_id = partner.id
+                    else:
+                        self.actual_vendor = partner.id
+        self.write({'is_accrual': False})
 
 
 class emirate_hid(models.Model):
