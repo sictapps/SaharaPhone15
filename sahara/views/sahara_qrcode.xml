@@ -22,6 +22,8 @@
                     <field name="actual_vendor"/>
                     <label for="pos_ref" string="order Reference"/>
                     <field name="pos_ref" nolabel="1"/>
+                    <label for="tag_num" string="order Tag"/>
+                    <field name="tag_num" nolabel="1"/>
                 </xpath>
 
             </field>
