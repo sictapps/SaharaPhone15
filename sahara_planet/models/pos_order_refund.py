@@ -11,7 +11,7 @@ class RefundOrder(models.Model):
         if pos_order.amount_total < 0:
             verification = self.env['res.company'].search([], limit=1)
             token = verification.connection_pos()
-            url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
+            url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
             for i in pos_order.refunded_order_ids:
                 tag_number = i.tag_number
             note = pos_order.note
