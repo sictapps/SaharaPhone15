@@ -4,7 +4,7 @@ from odoo.exceptions import AccessDenied, ValidationError
 
 import requests
 import json
-import pytz
+import warnings
 
 
 class AddFullOrder(models.Model):
@@ -80,10 +80,11 @@ class AddFullOrder(models.Model):
                     pos_order.sudo().tag_number = tag_number
                     pos_order.sudo().account_move.tag_num = tag_number
                     # print('**1', tag_number)
-                    raise ValidationError('Tax Free tag successfully issued')
+                # raise ValidationError('Tax Free tag successfully issued')
+                warnings.warn('Tax Free tag successfully issued')
 
             except:
-                raise AccessDenied(_('%s' % json.loads(req.text)['message']))
+                warnings.warn(_('%s' % json.loads(req.text)['message']))
             return tag_number
 
     def get_tag(self):
