@@ -80,11 +80,12 @@ class AddFullOrder(models.Model):
                     pos_order.sudo().tag_number = tag_number
                     pos_order.sudo().account_move.tag_num = tag_number
                     # print('**1', tag_number)
-                raise ValidationError('Tax Free tag successfully issued')
+                print('Tax Free tag successfully issued')
 
 
             except:
-                raise AccessDenied(_('%s' % json.loads(req.text)['message']))
+                print(json.loads(req.text)['message'])
+                # raise AccessDenied(_('%s' % json.loads(req.text)['message']))
             return tag_number
 
     def get_tag(self):
