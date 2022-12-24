@@ -138,13 +138,13 @@
                         </group>
                         <group  >
 
-                            <field name="EIDNumber"  readonly="1" force_save="1"/>
-                            <field name="Name" readonly="1" force_save="1"/>
-                            <field name="NameAr" readonly="1" force_save="1"/>
-                            <field name="Phone" readonly="1" force_save="1"/>
-                            <field name="Mobile" readonly="1" force_save="1"/>
-                            <field name="Sex" string="Gender" readonly="1" force_save="1"/>
-                            <field name="DOB" readonly="1" force_save="1"/>
+                            <field name="EIDNumber"  />
+                            <field name="Name" />
+                            <field name="NameAr" />
+                            <field name="Phone" />
+                            <field name="Mobile" />
+                            <field name="Sex" string="Gender" />
+                            <field name="DOB" />
 
 
 
@@ -153,14 +153,14 @@
                         <group  >
 
 
-                            <field name="ResidencyIssue" readonly="1" force_save="1"/>
-                            <field name="ResidencyExpiry" readonly="1" force_save="1"/>
-                            <field name="Title" readonly="1" force_save="1"/>
+                            <field name="ResidencyIssue" />
+                            <field name="ResidencyExpiry" />
+                            <field name="Title" />
 
-                            <field name="Nationality" readonly="1" force_save="1"/>
-                            <field name="NationalityArabic" readonly="1" force_save="1"/>
-                            <field name="PassportNumber" readonly="1" force_save="1"/>
-                            <field name="SponsorNumber" readonly="1" force_save="1"/>
+                            <field name="Nationality" />
+                            <field name="NationalityArabic" />
+                            <field name="PassportNumber" />
+                            <field name="SponsorNumber" />
                             <field name="jsondata" string="-"  class="simulateEidResponse" id="simulateEidResponse"/>
 
 
