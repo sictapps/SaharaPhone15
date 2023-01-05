@@ -84,8 +84,6 @@ class AddFullOrder(models.Model):
                     # raise ValidationError('Tax Free tag successfully issued')
 
             except:
-                Authorization = 'Bearer %s' % token['access_token']
-                req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
                 raise AccessDenied(_('%s' % json.loads(req.text)['message']))
 
 
