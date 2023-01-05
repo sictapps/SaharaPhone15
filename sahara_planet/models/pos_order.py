@@ -25,7 +25,9 @@ class AddFullOrder(models.Model):
         if pos_order.tax_free == 'Tax free':
             verification = self.env['res.company'].search([], limit=1)
             token = verification.connection_pos()
-            url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+            Authorization = 'Bearer %s' % token['access_token']
+            # url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+            url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
             pos_config = self.env['pos.config'].search([], limit=1)
             receiptNumber = pos_order.account_move.name
             date_order = pos_order.date_order.strftime('%Y-%m-%dT%H:%M')
@@ -69,23 +71,24 @@ class AddFullOrder(models.Model):
                                    }
 
                        }
-
+            print('**2', payload)
             try:
-                Authorization = 'Bearer %s' % token['access_token']
                 req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
                 tag_number = json.loads(req.text)['taxRefundResponse']['taxRefundTagNumber']
 
-                # print('**2', req.text)
                 if req.ok:
                     pos_order.sudo().tag_number = tag_number
                     pos_order.sudo().account_move.tag_num = tag_number
-                    return tag_number
                     # print('**1', tag_number)
                     # raise ValidationError('Tax Free tag successfully issued')
+                    print('++++1', '----1', tag_number)
+                    return tag_number
+
 
             except:
-                raise AccessDenied(_('%s' % json.loads(req.text)['message']))
+                req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
 
+                raise AccessDenied(_('%s' % json.loads(req.text)['message']))
 
     def get_tag(self):
         pos_order = self.env['pos.order'].search([], limit=1)
