@@ -26,8 +26,8 @@ class AddFullOrder(models.Model):
             verification = self.env['res.company'].search([], limit=1)
             token = verification.connection_pos()
             Authorization = 'Bearer %s' % token['access_token']
-            # url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
-            url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+            url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+            # url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
             pos_config = self.env['pos.config'].search([], limit=1)
             receiptNumber = pos_order.account_move.name
             date_order = pos_order.date_order.strftime('%Y-%m-%dT%H:%M')
