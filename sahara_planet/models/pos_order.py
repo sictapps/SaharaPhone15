@@ -70,12 +70,11 @@ class AddFullOrder(models.Model):
 
                        }
 
-
-            Authorization = 'Bearer %s' % token['access_token']
-            req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
-            tag_number = json.loads(req.text)['taxRefundResponse']['taxRefundTagNumber']
-
             try:
+                Authorization = 'Bearer %s' % token['access_token']
+                req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
+                tag_number = json.loads(req.text)['taxRefundResponse']['taxRefundTagNumber']
+
                 # print('**2', req.text)
                 if req.ok:
                     pos_order.sudo().tag_number = tag_number
@@ -85,6 +84,8 @@ class AddFullOrder(models.Model):
                     # raise ValidationError('Tax Free tag successfully issued')
 
             except:
+                Authorization = 'Bearer %s' % token['access_token']
+                req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
                 raise AccessDenied(_('%s' % json.loads(req.text)['message']))
 
 
