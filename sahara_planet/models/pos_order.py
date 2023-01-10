@@ -28,8 +28,8 @@ class AddFullOrder(models.Model):
             Authorization = 'Bearer %s' % token['access_token']
             if pos_order.amount_total < 0:
 
-                # url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
-                url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
+                url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
+                # url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
                 for i in pos_order.refunded_order_ids:
                     if fields.Datetime.now().day - i.date_order.day < 90:
                         tag_number = i.tag_number
@@ -45,8 +45,8 @@ class AddFullOrder(models.Model):
                 else:
                     return json.loads(req.text)['message']
             else:
-                # url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
-                url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+                url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+                # url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
                 pos_config = self.env['pos.config'].search([], limit=1)
                 receiptNumber = pos_order.account_move.name
                 date_order = pos_order.date_order.strftime('%Y-%m-%dT%H:%M')
