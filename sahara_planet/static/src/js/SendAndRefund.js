@@ -3,37 +3,36 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
     var models = require('point_of_sale.models');
     var core = require('web.core');
     var rpc = require('web.rpc');
+    var Dialog = require('web.Dialog');
 
 
     var posModelSuper = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
-        send_invoice() {
-            var result = rpc.query({
-                model: 'pos.order',
-                method: 'send_order_pos',
-                args: [[]],
-            }).then(function (result2) {
-                try {
-                    if (result2.startsWith("Could not issue tax refund")) {
-                        alert(result2)//Stop instructions here;
-                    } else if (result2.startsWith("Tax-Free tag successfully")) {
-                        alert(result2) //continue to work;
-                    } else if (result2.startsWith("Tag has been voided")) {
-                        alert(result2) //continue to work;
-                    } else if (result2.startsWith("Can't void tag")) {
-                        alert(result2) //continue to work;
-                    } else if (result2.startsWith("Transaction does not exist")) {
-                        alert(result2) //continue to work;
-                    } else if (result2) {
-                        alert(result2)
-                        //continue to work;
-                    }
-                } catch (e) {
-
+        async send_invoice() {
+            try {
+                var result = await rpc.query({
+                    model: 'pos.order',
+                    method: 'send_order_pos',
+                    args: [[]],
+                });
+                if (result.startsWith("Could not issue tax refund")) {
+                    Dialog.alert(self, result, {title: 'Error', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Tax-Free tag successfully")) {
+                    Dialog.alert(self, result, {title: 'Success', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Tag has been voided")) {
+                    Dialog.alert(self, result, {title: 'Success', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Can't void tag")) {
+                    Dialog.alert(self, result, {title: 'Error', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Transaction does not exist")) {
+                    Dialog.alert(self, result, {title: 'Error', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result) {
+                    Dialog.alert(self, result, {title: 'Success', size: 'medium', dialogClass: 'custom-dialog-class'});
                 }
-
-            });
-        },
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        ,
 
 
         edit_tag_number() {
