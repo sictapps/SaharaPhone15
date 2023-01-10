@@ -39,5 +39,8 @@
         'web.assets_qweb': [
             'sahara_planet/static/src/xml/TaxRefundTag.xml',
         ],
+        "point_of_sale.assets": [
+            "sahara_planet/static/src/css/*",
+        ],
     },
 }
