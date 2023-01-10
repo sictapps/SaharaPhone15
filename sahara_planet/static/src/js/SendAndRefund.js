@@ -2,27 +2,40 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
     "use strict";
     var models = require('point_of_sale.models');
     var core = require('web.core');
+    var rpc = require('web.rpc');
 
 
     var posModelSuper = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
         send_invoice() {
-            this.rpc({
+            var result = rpc.query({
                 model: 'pos.order',
                 method: 'send_order_pos',
                 args: [[]],
+            }).then(function (result2) {
+                try {
+                   if (result2.startsWith("Could not issue tax refund")) {
+                    alert(result2)//Stop instructions here;
+                } else if (result2.startsWith("Tax-Free tag successfully")) {
+                    alert(result2) //continue to work;
+                }else if (result2.startsWith("Tag has been voided")) {
+                    alert(result2) //continue to work;
+                }else if (result2.startsWith("Can't void tag")) {
+                    alert(result2) //continue to work;
+                }else if (result2.startsWith("Transaction does not exist")) {
+                    alert(result2) //continue to work;
+                }else if (result2) {
+                    alert(result2)
+                    //continue to work;
+                }
+                }catch (e) {
+
+                }
+
             });
         },
 
-        refund_invoice() {
-            this.rpc({
-                model: 'pos.order',
-                method: 'refund_order_pos',
-                args: [[]],
 
-
-            });
-        },
         edit_tag_number() {
             this.rpc({
                 model: 'pos.order',
@@ -41,11 +54,11 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                 } else {
 
                     var order_id = self.db.add_order(order.export_as_JSON());
-                    // this.send_invoice()
-                    // this.refund_invoice()
+
 
 
                     self.flush_mutex.exec(async () => {
+
 
                         try {
 
@@ -53,8 +66,13 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                                 timeout: 30000,
                                 to_invoice: true,
                             });
-                            this.send_invoice()
-                            this.refund_invoice()
+                            try {
+                                this.send_invoice()
+                            }catch (e) {
+
+                            }
+
+
 
 
 
