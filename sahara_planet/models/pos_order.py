@@ -22,73 +22,124 @@ class AddFullOrder(models.Model):
 
     def send_order_pos(self):
         pos_order = self.env['pos.order'].search([], limit=1)
+        verification = self.env['res.company'].search([], limit=1)
         if pos_order.tax_free == 'Tax free':
-            verification = self.env['res.company'].search([], limit=1)
             token = verification.connection_pos()
             Authorization = 'Bearer %s' % token['access_token']
-            url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
-            # url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
-            pos_config = self.env['pos.config'].search([], limit=1)
-            receiptNumber = pos_order.account_move.name
-            date_order = pos_order.date_order.strftime('%Y-%m-%dT%H:%M')
-            terminal = pos_config.terminal_code
-            total = pos_order.amount_total
-            vatIncl = pos_order.amount_tax
-            totalBeforeVAT = total - vatIncl
-            pm_code = pos_order.account_move.order_payment_method
-            pm_name = pos_order.account_move.order_payment_method
-            pm_total = pos_order.amount_total
-            firstName = pos_order.partner_id.firstName
-            lastName = pos_order.partner_id.lastName
-            country_nationality_id = pos_order.partner_id.country_nationality_id.code
-            country_residence_id = pos_order.partner_id.country_residence_id.code
-            phoneNumber = pos_order.partner_id.phoneNumber
-            birthDate = pos_order.partner_id.birthDate
-            issuedBy = pos_order.partner_id.issuedBy.code
-            passportNumber = pos_order.partner_id.passportNumber
+            if pos_order.amount_total < 0:
 
-            payload = {'issueTaxRefundTag': True, 'date': '%s' % date_order, 'receiptNumber': '%s' % receiptNumber,
-                       'terminal': '%s' % terminal, 'taxFreeId': '', 'type': 'RECEIPT',
-                       "order": {"totalBeforeVAT": '%s' % totalBeforeVAT, "vatIncl": '%s' % vatIncl,
-                                 "total": '%s' % total,
-                                 "items": [{"grossAmount": '%s' % i.price_total, "code": '', "departmentCode": '',
-                                            "netAmount": '%s' % i.price_unit, "description": '%s' % i.name,
-                                            "discountAmount": None, "quantity": '%s' % i.quantity, "serialNumber": '',
-                                            "unitPrice": '%s' % i.price_unit, "vatRate": '5', "vatCode": '5',
-                                            "vatAmount": '%s' % (i.price_total - i.price_unit),
-                                            "merchandiseGroup": '121',
-                                            "taxRefundEligible": True} for i in
-                                           pos_order.account_move.invoice_line_ids],
-                                 "paymentMethods": [{"code": '%s' % pm_code, "name": '%s' % pm_name,
-                                                     "amount": '%s' % pm_total}]},
-                       "shopper": {"firstName": '%s' % firstName, "lastName": '%s' % lastName,
-                                   "nationality": '%s' % country_nationality_id,
-                                   "countryOfResidence": '%s' % country_residence_id, "phoneNumber": '%s' % phoneNumber,
-                                   "birth": {"date": '%s' % birthDate},
-                                   "shopperIdentityDocument": {"type": 'PASSPORT',
-                                                               "issuedBy": '%s' % issuedBy,
-                                                               "number": '%s' % passportNumber}
-                                   }
-
-                       }
-            print('**2', payload)
-            try:
+                # url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
+                url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/cancel-tax-refund-transaction'
+                for i in pos_order.refunded_order_ids:
+                    if fields.Datetime.now().day - i.date_order.day < 90:
+                        tag_number = i.tag_number
+                    else:
+                        tag_number = ''
+                note = pos_order.note
+                payload = {'tagNumber': '%s' % tag_number, 'note': '%s' % note}
                 req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
-                tag_number = json.loads(req.text)['taxRefundResponse']['taxRefundTagNumber']
+                if json.loads(req.text)['message'] == 11:
+                    return json.loads(req.text)['message']
+                elif json.loads(req.text)['message'] == 5:
+                    return json.loads(req.text)['message']
+                else:
+                    return json.loads(req.text)['message']
+            else:
+                # url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+                url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
+                pos_config = self.env['pos.config'].search([], limit=1)
+                receiptNumber = pos_order.account_move.name
+                date_order = pos_order.date_order.strftime('%Y-%m-%dT%H:%M')
+                terminal = pos_config.terminal_code
+                total = pos_order.amount_total
+                vatIncl = pos_order.amount_tax
+                totalBeforeVAT = total - vatIncl
+                pm_code = pos_order.account_move.order_payment_method
+                pm_name = pos_order.account_move.order_payment_method
+                pm_total = pos_order.amount_total
+                if pos_order.partner_id.firstName:
+                    firstName = pos_order.partner_id.firstName
+                else:
+                    firstName = ''
+                if pos_order.partner_id.lastName:
+                    lastName = pos_order.partner_id.lastName
+                else:
+                    lastName = ''
+                if pos_order.partner_id.country_nationality_id.code:
+                    country_nationality_id = pos_order.partner_id.country_nationality_id.code
+                else:
+                    country_nationality_id = ''
+                if pos_order.partner_id.country_residence_id.code:
+                    country_residence_id = pos_order.partner_id.country_residence_id.code
+                else:
+                    country_residence_id = ''
+                if pos_order.partner_id.phoneNumber:
+                    phoneNumber = pos_order.partner_id.phoneNumber
+                else:
+                    phoneNumber = ''
+                if pos_order.partner_id.birthDate:
+                    birthDate = pos_order.partner_id.birthDate
+                else:
+                    birthDate = ''
+                if pos_order.partner_id.issuedBy.code:
+                    issuedBy = pos_order.partner_id.issuedBy.code
+                else:
+                    issuedBy = ''
+                if pos_order.partner_id.passportNumber:
+                    passportNumber = pos_order.partner_id.passportNumber
+                else:
+                    passportNumber = ''
 
-                if req.ok:
-                    pos_order.sudo().tag_number = tag_number
-                    pos_order.sudo().account_move.tag_num = tag_number
-                    # print('**1', tag_number)
-                    # raise ValidationError('Tax Free tag successfully issued')
-                    print('++++1', '----1', tag_number)
-                    return tag_number
+                payload = {'issueTaxRefundTag': True, 'date': '%s' % date_order, 'receiptNumber': '%s' % receiptNumber,
+                           'terminal': '%s' % terminal, 'taxFreeId': '', 'type': 'RECEIPT',
+                           "order": {"totalBeforeVAT": '%s' % totalBeforeVAT, "vatIncl": '%s' % vatIncl,
+                                     "total": '%s' % total,
+                                     "items": [{"grossAmount": '%s' % i.price_total, "code": '', "departmentCode": '',
+                                                "netAmount": '%s' % i.price_unit, "description": '%s' % i.name,
+                                                "discountAmount": None, "quantity": '%s' % i.quantity,
+                                                "serialNumber": '',
+                                                "unitPrice": '%s' % i.price_unit, "vatRate": '5', "vatCode": '5',
+                                                "vatAmount": '%s' % (i.price_total - i.price_unit),
+                                                "merchandiseGroup": '121',
+                                                "taxRefundEligible": True} for i in
+                                               pos_order.account_move.invoice_line_ids],
+                                     "paymentMethods": [{"code": '%s' % pm_code, "name": '%s' % pm_name,
+                                                         "amount": '%s' % pm_total}]},
+                           "shopper": {"firstName": '%s' % firstName, "lastName": '%s' % lastName,
+                                       "nationality": '%s' % country_nationality_id,
+                                       "countryOfResidence": '%s' % country_residence_id,
+                                       "phoneNumber": '%s' % phoneNumber,
+                                       "birth": {"date": '%s' % birthDate},
+                                       "shopperIdentityDocument": {"type": 'PASSPORT',
+                                                                   "issuedBy": '%s' % issuedBy,
+                                                                   "number": '%s' % passportNumber}
+                                       }
 
+                           }
+                print('**2', payload)
+                try:
+                    req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
 
-            except:
-                req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
+                    if req.ok:
+                        tag_number = json.loads(req.text)['taxRefundResponse']['taxRefundTagNumber']
+                        pos_order.sudo().tag_number = tag_number
+                        pos_order.sudo().account_move.tag_num = tag_number
+                        print(tag_number, '---------------------------------------------')
+                        return "Tax-Free tag successfully %s" % tag_number
+                    else:
+                        # raise AccessDenied(_('%s' % json.loads(req.text)['message']))
+                        return json.loads(req.text)['message']
+                    # tag_number = ('No Tag Number %s' % json.loads(req.text)['message'])
+                    # raise AccessDenied(_('%s' % json.loads(req.text)['message']))
 
-                raise AccessDenied(_('%s' % json.loads(req.text)['message']))
+                except:
+                    pass
+
+                #     print(self.tag_number, '))))))))', json.loads(req.text)['message'])
+                #     req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
+                # #
+                #     raise AccessDenied(_('%s' % json.loads(req.text)['message']))
+                # return tag_number
 
     def get_tag(self):
         pos_order = self.env['pos.order'].search([], limit=1)
