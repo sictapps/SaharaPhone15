@@ -14,21 +14,21 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                 args: [[]],
             }).then(function (result2) {
                 try {
-                   if (result2.startsWith("Could not issue tax refund")) {
-                    alert(result2)//Stop instructions here;
-                } else if (result2.startsWith("Tax-Free tag successfully")) {
-                    alert(result2) //continue to work;
-                }else if (result2.startsWith("Tag has been voided")) {
-                    alert(result2) //continue to work;
-                }else if (result2.startsWith("Can't void tag")) {
-                    alert(result2) //continue to work;
-                }else if (result2.startsWith("Transaction does not exist")) {
-                    alert(result2) //continue to work;
-                }else if (result2) {
-                    alert(result2)
-                    //continue to work;
-                }
-                }catch (e) {
+                    if (result2.startsWith("Could not issue tax refund")) {
+                        alert(result2)//Stop instructions here;
+                    } else if (result2.startsWith("Tax-Free tag successfully")) {
+                        alert(result2) //continue to work;
+                    } else if (result2.startsWith("Tag has been voided")) {
+                        alert(result2) //continue to work;
+                    } else if (result2.startsWith("Can't void tag")) {
+                        alert(result2) //continue to work;
+                    } else if (result2.startsWith("Transaction does not exist")) {
+                        alert(result2) //continue to work;
+                    } else if (result2) {
+                        alert(result2)
+                        //continue to work;
+                    }
+                } catch (e) {
 
                 }
 
@@ -56,7 +56,6 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                     var order_id = self.db.add_order(order.export_as_JSON());
 
 
-
                     self.flush_mutex.exec(async () => {
 
 
@@ -68,12 +67,9 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                             });
                             try {
                                 this.send_invoice()
-                            }catch (e) {
+                            } catch (e) {
 
                             }
-
-
-
 
 
                             if (server_ids.length) {
