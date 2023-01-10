@@ -245,7 +245,7 @@
                                         </td>
                                         <td style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:14px;"
                                             name="account_invoice_line_name">
-                                            <strong t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <strong t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
                                         </td>
                                         <td style="color:black;border: 1px solid black;text-align:center;">
                                             <span t-field="line.quantity"/>
@@ -512,7 +512,7 @@
                     </p>
 
                 </div>
-                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;" >
+                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;">
                     <table style="width: 100%;font-family: 'Barlow';">
                         <tr>
                             <td style="vertical-align: middle;">
@@ -521,13 +521,24 @@
                             <td style=" text-align: left;width: 3px;">
                             </td>
                             <td style="color:#414141;font-size: 11px;text-align:left;">
-                                <span>By using our service, you agree to our terms <br/>
-                                      and conditions and Privacy Policy - visit<br/>
-                                      <strong> www.planetpayment.ae</strong> for full details.<br/>
-                                      Planet has been authorised by the FTA.</span><br/>
-                                <strong t-field="o.tag_num" style="font-size: 16px;"/><br/>
-                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line><br/>
-                                <div  style="font-size: 14px;margin-top: -12px;"> <strong>www.planetpayment.ae</strong></div><br/>
+                                <span>By using our service, you agree to our terms
+                                    <br/>
+                                    and conditions and Privacy Policy - visit
+                                    <br/>
+                                    <strong>www.planetpayment.ae</strong>
+                                    for full details.
+                                    <br/>
+                                    Planet has been authorised by the FTA.
+                                </span>
+                                <br/>
+                                <strong t-field="o.tag_num" style="font-size: 16px;"/>
+                                <br/>
+                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line>
+                                <br/>
+                                <div style="font-size: 14px;margin-top: -12px;">
+                                    <strong>www.planetpayment.ae</strong>
+                                </div>
+                                <br/>
                             </td>
                         </tr>
                     </table>

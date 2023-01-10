@@ -66,7 +66,7 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                                 to_invoice: true,
                             });
                             try {
-                                this.send_invoice()
+                                await this.send_invoice()
                             } catch (e) {
 
                             }
