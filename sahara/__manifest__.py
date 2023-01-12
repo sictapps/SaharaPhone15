@@ -44,9 +44,7 @@
         'views/purchaceview2.xml',
         'views/custom_purchase_layout.xml',
         'views/custom_purchase_layout2.xml',
-        'views/sales_person.xml',
-        'views/report_stockpicking_operations.xml',
-        'views/external_layout_standard.xml',
+        'views/sales_person.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
