@@ -45,6 +45,7 @@ class AddFullOrder(models.Model):
                 else:
                     return json.loads(req.text)['message']
             else:
+                serialNumber = []
                 url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
                 # url = 'https://frontoffice.qa-tax.planetpayment.ae/services/transactions/api/v2/new-transaction'
                 pos_config = self.env['pos.config'].search([], limit=1)
@@ -89,17 +90,23 @@ class AddFullOrder(models.Model):
                     passportNumber = pos_order.partner_id.passportNumber
                 else:
                     passportNumber = ''
+                for s in pos_order.lines.pack_lot_ids:
+                    if s.lot_name:
+                        serialNumber.append(s.lot_name)
+                    else:
+                        serialNumber = []
 
                 payload = {'issueTaxRefundTag': True, 'date': '%s' % date_order, 'receiptNumber': '%s' % receiptNumber,
                            'terminal': '%s' % terminal, 'taxFreeId': '', 'type': 'RECEIPT',
                            "order": {"totalBeforeVAT": '%s' % totalBeforeVAT, "vatIncl": '%s' % vatIncl,
                                      "total": '%s' % total,
                                      "items": [{"grossAmount": '%s' % i.price_total, "code": '', "departmentCode": '',
-                                                "netAmount": '%s' % i.price_unit, "description": '%s' % i.name,
+                                                "netAmount": '%s' % (i.price_unit * i.quantity),
+                                                "description": '%s' % i.name,
                                                 "discountAmount": None, "quantity": '%s' % i.quantity,
-                                                "serialNumber": '',
+                                                "serialNumber": '%s' % serialNumber,
                                                 "unitPrice": '%s' % i.price_unit, "vatRate": '5', "vatCode": '5',
-                                                "vatAmount": '%s' % (i.price_total - i.price_unit),
+                                                "vatAmount": '%s' % (i.price_total - (i.price_unit * i.quantity)),
                                                 "merchandiseGroup": '121',
                                                 "taxRefundEligible": True} for i in
                                                pos_order.account_move.invoice_line_ids],
