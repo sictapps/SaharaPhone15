@@ -540,6 +540,11 @@
                                 </div>
                                 <br/>
                             </td>
+                            <td style="vertical-align: middle;">
+                                <img t-att-src="image_data_uri(o.qr_code)" style="height: 35mm;width:35mm"/>
+                            </td>
+                            <td style=" text-align: left;width: 3px;">
+                            </td>
                         </tr>
                     </table>
                 </div>

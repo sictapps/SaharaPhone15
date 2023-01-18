@@ -13,6 +13,13 @@ class AddFullOrder(models.Model):
 
     tag_number = fields.Char(string="Tag Number", readonly=True)
     tax_free = fields.Char(string='Tax Notes', readonly=True)
+    tax_refund_status = fields.Char()
+    tax_refund_qr_code = fields.Char()
+    tax_message = fields.Char()
+    tax_refund_status_code = fields.Float()
+    refund_amount = fields.Float()
+    tax_refund_excluded_items = fields.Char()
+
 
     @api.model
     def _order_fields(self, ui_order):
@@ -128,8 +135,21 @@ class AddFullOrder(models.Model):
                     req = requests.post(url, json=payload, headers={'Authorization': '%s' % Authorization})
 
                     if req.ok:
+
                         tag_number = json.loads(req.text)['taxRefundResponse']['taxRefundTagNumber']
+                        tax_refund_status = json.loads(req.text)['taxRefundResponse']['taxRefundStatus']
+                        tax_refund_qr_code = json.loads(req.text)['taxRefundResponse']['taxRefundQrCode']
+                        tax_message = json.loads(req.text)['taxRefundResponse']['message']
+                        tax_refund_status_code = json.loads(req.text)['taxRefundResponse']['taxRefundStatusCode']
+                        refund_amount = json.loads(req.text)['taxRefundResponse']['refundAmount']
+                        tax_refund_excluded_items = json.loads(req.text)['taxRefundResponse']['taxRefundExcludedItems']
                         pos_order.sudo().tag_number = tag_number
+                        pos_order.sudo().tax_refund_status = tax_refund_status
+                        pos_order.sudo().tax_refund_qr_code = tax_refund_qr_code
+                        pos_order.sudo().tax_message = tax_message
+                        pos_order.sudo().tax_refund_status_code = tax_refund_status_code
+                        pos_order.sudo().refund_amount = refund_amount
+                        pos_order.sudo().tax_refund_excluded_items = tax_refund_excluded_items
                         pos_order.sudo().account_move.tag_num = tag_number
                         print(tag_number, '---------------------------------------------')
                         return "Tax-Free tag successfully %s" % tag_number

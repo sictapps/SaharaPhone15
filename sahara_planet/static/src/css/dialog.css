@@ -6,6 +6,7 @@
     align-items: center;
     height: 140px;
     background: #6EC89B;
+    color: wheat;
     left: 34%;
     top: 43%;
     margin-top: -55px;
@@ -27,6 +28,7 @@
 
 .custom-dialog-class .ui-dialog, .modal-dialog .modal-header {
     text-align: center;
+    color: brown;
 }
 
 .custom-dialog-class .ui-dialog, .modal-dialog {
