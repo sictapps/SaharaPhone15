@@ -29,6 +29,8 @@
         'views/pos_config_views.xml',
         'views/pos_order_views.xml',
         'views/qr_code_views.xml',
+        'report/cousto_header_and_footer.xml',
+        'report/stock_report_views.xml',
     ],
     # only loaded in demonstration mode
     'assets': {
