@@ -79,7 +79,7 @@
             </div>
 
 
-            <div class="footer o_standard_footer" >
+            <div class="footer o_standard_footer">
 
                 <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;">
                     <table style="width: 100%;font-family: 'Barlow';">
@@ -116,7 +116,8 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="text-center" style="font-family: 'cool_font'; position: absolute;right: 15em;width: 100%;">
+                    <div class="text-center"
+                         style="font-family: 'cool_font'; position: absolute;right: 15em;width: 100%;">
                         <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
 
                         <span>Page</span>
@@ -128,6 +129,19 @@
 
 
                     </div>
+                </div>
+                <div t-if="not o.tag_num" class="text-center"
+                     style="font-family: 'cool_font'; position: absolute;right: 15em;width: 100%;">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
+
+                    <span>Page</span>
+                    <span class="page"/>
+                    of
+                    <span class="topage"/>
+
+                    <span t-esc="time.strftime('(Date :%d/%m/%Y )')"/>
+
+
                 </div>
 
 
