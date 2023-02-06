@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <div t-if="not o.tag_num" class="text-center"
-                     style="font-family: 'cool_font'; position: absolute;right: 15em;width: 100%;">
+                     style="font-family: 'cool_font'; align:center; text-align: center;">
                     <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
 
                     <span>Page</span>
