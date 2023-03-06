@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_repair_order_form_inherit" model="ir.ui.view">
+            <field name="name">view repair order form inherit</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+                    <button name="return_" string="Return" type="object"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
