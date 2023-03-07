@@ -10,8 +10,15 @@
                 <xpath expr="//header" position="inside">
                     <button name="return_" string="Return" type="object"/>
                 </xpath>
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_repair"
+                        icon="fa-undo">
+                        <field string="Repair" name="repair_count" widget="statinfo"/>
+                    </button>
+                </div>
 
             </field>
         </record>
+        <!-- Inherit Form View to Modify it -->
     </data>
 </odoo>

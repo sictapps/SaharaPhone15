@@ -3,8 +3,21 @@
 from odoo import models, fields, api
 
 
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    repair_id = fields.Char()
+
+
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
+
+    repair_count = fields.Integer(compute='compute_count')
+
+    def compute_count(self):
+        for record in self:
+            record.repair_count = self.env['stock.picking'].search_count(
+                [('repair_id', '=', self.name)])
 
     def return_(self):
         self.ensure_one()
@@ -12,6 +25,7 @@ class RepairOrder(models.Model):
         type = self.env['stock.picking.type'].search([('id', '=', 1)])
 
         vals = {
+            'repair_id': self.name,
             'partner_id': self.partner_id.id,
             'picking_type_id': type.id,
             'location_id': self.partner_id.property_stock_supplier.id,
@@ -39,3 +53,14 @@ class RepairOrder(models.Model):
         action['target'] = 'new'
 
         return action
+
+    def get_repair(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Vehicles',
+            'view_mode': 'tree',
+            'res_model': 'stock.picking',
+            'domain': [('repair_id', '=', self.name)],
+            'context': "{'create': False}"
+        }
