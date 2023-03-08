@@ -34,14 +34,16 @@ class RepairOrder(models.Model):
         }
 
         for operation in self.operations:
+            lot_ids = [(lot.name, False, False) for lot in operation.lot_id]
+            print(lot_ids,'++++')
             order1_vals = {
                 'product_id': operation.product_id.id,
+                'lot_ids': lot_ids,
                 'name': operation.product_id.name,
                 'product_uom': operation.product_uom.id,
                 'location_id': vals['location_id'],
                 'location_dest_id': vals['location_dest_id'],
             }
-
             vals['move_ids_without_package'].append((0, None, order1_vals))
 
         picking = self.env['stock.picking'].create(vals)
@@ -52,13 +54,14 @@ class RepairOrder(models.Model):
         action['context'] = {'default_vals': vals}
         action['target'] = 'new'
 
+
         return action
 
     def get_repair(self):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Vehicles',
+            'name': 'Repair Return',
             'view_mode': 'tree',
             'res_model': 'stock.picking',
             'domain': [('repair_id', '=', self.name)],
