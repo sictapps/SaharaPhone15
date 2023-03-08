@@ -51,7 +51,7 @@ class RepairOrder(models.Model):
         action['res_id'] = picking.id
         action['context'] = {'default_vals': vals}
         action['target'] = 'new'
-        
+
 
         return action
 
@@ -60,7 +60,7 @@ class RepairOrder(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Repair Return',
-            'view_mode': 'tree',
+            'view_mode': 'tree,form',
             'res_model': 'stock.picking',
             'domain': [('repair_id', '=', self.name)],
             'context': "{'create': False}"
