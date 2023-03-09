@@ -22,13 +22,15 @@ class RepairOrder(models.Model):
     def return_(self):
         self.ensure_one()
 
-        type = self.env['stock.picking.type'].search([('id', '=', 1)])
+        type = self.env['stock.picking.type'].search([('id', '=', 15)])
 
         vals = {
             'repair_id': self.name,
             'partner_id': self.partner_id.id,
             'picking_type_id': type.id,
-            'location_id': self.partner_id.property_stock_supplier.id,
+            'location_id': self.partner_id.property_stock_customer.id,
+            # 'location_id': self.partner_id.property_stock_supplier.id,
+
             'location_dest_id': type.default_location_dest_id.id,
             'move_ids_without_package': []
         }
@@ -51,9 +53,19 @@ class RepairOrder(models.Model):
         action['res_id'] = picking.id
         action['context'] = {'default_vals': vals}
         action['target'] = 'new'
+        picking.action_confirm()
 
-
+        for i in picking.move_line_ids_without_package:
+            print(i.lot_id.name, 'stock.immediate.transfer')
+            i.lot_id = operation.lot_id
+            i.qty_done = i.product_uom_qty
+        if picking.repair_id:
+            # picking.button_validate()
+            print('----------')
+        else:
+            print('++++++++++++')
         return action
+
 
     def get_repair(self):
         self.ensure_one()
