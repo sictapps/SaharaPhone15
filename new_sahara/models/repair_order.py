@@ -28,9 +28,7 @@ class RepairOrder(models.Model):
             'repair_id': self.name,
             'partner_id': self.partner_id.id,
             'picking_type_id': type.id,
-            'location_id': self.partner_id.property_stock_customer.id,
-            # 'location_id': self.partner_id.property_stock_supplier.id,
-
+            'location_id': type.default_location_src_id.id,
             'location_dest_id': type.default_location_dest_id.id,
             'move_ids_without_package': []
         }
@@ -55,15 +53,22 @@ class RepairOrder(models.Model):
         action['target'] = 'new'
         picking.action_confirm()
 
+        lot_ids = self.operations.mapped('lot_id')
         for i in picking.move_line_ids_without_package:
             print(i.lot_id.name, 'stock.immediate.transfer')
-            i.lot_id = operation.lot_id
+            i.lot_id = lot_ids[0]  # set first lot_id by default
+            if lot_ids:
+                lot_id = lot_ids[0]
+                lot_ids = lot_ids[1:]
+                i.lot_id = lot_id
             i.qty_done = i.product_uom_qty
+
         if picking.repair_id:
             # picking.button_validate()
             print('----------')
         else:
             print('++++++++++++')
+
         return action
 
 
