@@ -9,6 +9,36 @@ class StockPicking(models.Model):
     repair_id = fields.Char()
 
 
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    qty_avail = fields.Float('On Hand Qty', related='product_id.qty_available')
+
+
+class SaleOrder(models.Model):
+    _inherit = 'product.template'
+
+    qty_avail = fields.Float('On Hand Qty')
+
+    @api.depends('product_variant_ids', 'product_variant_ids.qty_available')
+    def _compute_quantities(self):
+        super()._compute_quantities()
+        for template in self:
+            template.qty_avail = template.qty_available
+
+
+class SaleReport(models.Model):
+    _inherit = "sale.report"
+
+    qty_avail = fields.Float('Qty On Hand', readonly=True)
+
+
+    def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
+        fields['qty_avail'] = ", t.qty_avail as qty_avail"
+        groupby += ', t.qty_avail'
+        return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
+
+
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
 
@@ -70,7 +100,6 @@ class RepairOrder(models.Model):
             print('++++++++++++')
 
         return action
-
 
     def get_repair(self):
         self.ensure_one()
