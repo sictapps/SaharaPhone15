@@ -24,6 +24,6 @@
             </field>
         </record>
         <!-- Inherit Form View to Modify it -->
-        
+
     </data>
 </odoo>
