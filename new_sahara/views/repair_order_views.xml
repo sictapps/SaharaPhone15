@@ -7,12 +7,16 @@
             <field name="inherit_id" ref="repair.view_repair_order_form"/>
             <field name="arch" type="xml">
 
+                <xpath expr="//notebook/page/field/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+
                 <xpath expr="//header" position="inside">
                     <button name="return_" string="Return" type="object"/>
                 </xpath>
                 <div name="button_box" position="inside">
                     <button class="oe_stat_button" type="object" name="get_repair"
-                        icon="fa-undo">
+                            icon="fa-undo">
                         <field string="Repair Return" name="repair_count" widget="statinfo"/>
                     </button>
                 </div>
@@ -20,33 +24,6 @@
             </field>
         </record>
         <!-- Inherit Form View to Modify it -->
-<!--        <record id="product_temp" model="ir.ui.view">-->
-<!--            <field name="name">product temp</field>-->
-<!--            <field name="model">product.product</field>-->
-<!--            <field name="inherit_id" ref="product.product_normal_form_view"/>-->
-<!--            <field name="arch" type="xml">-->
-
-<!--                <xpath expr="//field[@name='name']" position="after">-->
-<!--                    <group>-->
-<!--                    <field name="qty_avail"></field></group>-->
-<!--                </xpath>-->
-
-<!--            </field>-->
-<!--        </record>-->
-        <!-- Inherit Form View to Modify it -->
-
-        <!-- Inherit Form View to Modify it -->
-<!--        <record id="view_order_product_pivot1" model="ir.ui.view">-->
-<!--            <field name="name">view order product pivot1</field>-->
-<!--            <field name="model">sale.report</field>-->
-<!--            <field name="inherit_id" ref="sale.view_order_product_pivot"/>-->
-<!--            <field name="arch" type="xml">-->
-
-<!--                <xpath expr="//field[@name='price_subtotal']" position="after">-->
-<!--                    <field name="qty_avail" type="measure"/>-->
-<!--                </xpath>-->
-
-<!--            </field>-->
-<!--        </record>-->
+        
     </data>
 </odoo>
