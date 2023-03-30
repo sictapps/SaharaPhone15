@@ -71,6 +71,7 @@ class RepairOrder(models.Model):
 
         return action
 
+
     def get_repair(self):
         self.ensure_one()
         return {
