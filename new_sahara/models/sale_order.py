@@ -3,26 +3,24 @@
 from odoo import models, fields, api
 
 
-# class SaleOrderLine(models.Model):
-#     _inherit = "sale.order"
-#
-#     cost_qq = fields.Float('Cost', compute='_compute_cost', store=True)
-#
-#     def _compute_cost(self):
-#         for product in self:
-#             if product.team_id.name != 'Sales':
-#                 product.costq = product.price_total
-#             else:
-#                 product.costq = product.price_total - product.margin
-
-
 class SaleReport(models.Model):
     _inherit = "sale.report"
 
-    costq = fields.Float('Cost', readonly=True)
-    margin = fields.Float('Margin')
+    cost_sale = fields.Float('Cost', readonly=True)
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
-        fields['costq'] = ",(l.price_total - l.margin) as costq"
+        fields['cost_sale'] = ",(l.price_total - l.margin) as cost_sale"
         groupby += ', (l.price_total - l.margin)'
         return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
+
+
+class PosOrderReport(models.Model):
+    _inherit = "report.pos.order"
+    cost_pos = fields.Float('Cost', readonly=True)
+
+    def _select(self):
+        return super(PosOrderReport, self)._select() + \
+               ',(SUM(ROUND((l.qty * l.price_unit) * (100 - l.discount) / 100 / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END, cu.decimal_places)) - SUM(l.price_subtotal - l.total_cost / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END)) AS cost_pos'
+
+    # def _group_by(self):
+    #     return super(PosOrderReport, self)._group_by() + ',(price_total - margin)'
