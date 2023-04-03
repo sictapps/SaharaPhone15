@@ -2,27 +2,39 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
     "use strict";
     var models = require('point_of_sale.models');
     var core = require('web.core');
+    var rpc = require('web.rpc');
+    var Dialog = require('web.Dialog');
 
 
     var posModelSuper = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
-        send_invoice() {
-            this.rpc({
-                model: 'pos.order',
-                method: 'send_order_pos',
-                args: [[]],
-            });
-        },
+        async send_invoice() {
+            try {
+                var result = await rpc.query({
+                    model: 'pos.order',
+                    method: 'send_order_pos',
+                    args: [[]],
+                });
+                if (result.startsWith("Could not issue tax refund")) {
+                    Dialog.alert(self, result, {title: 'Error', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Tax-Free tag successfully")) {
+                    Dialog.alert(self, result, {title: 'Success', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Tag has been voided")) {
+                    Dialog.alert(self, result, {title: 'Success', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Can't void tag")) {
+                    Dialog.alert(self, result, {title: 'Error', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result.startsWith("Transaction does not exist")) {
+                    Dialog.alert(self, result, {title: 'Error', size: 'medium', dialogClass: 'custom-dialog-class'});
+                } else if (result) {
+                    Dialog.alert(self, result, {title: 'Success', size: 'medium', dialogClass: 'custom-dialog-class'});
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        ,
 
-        refund_invoice() {
-            this.rpc({
-                model: 'pos.order',
-                method: 'refund_order_pos',
-                args: [[]],
 
-
-            });
-        },
         edit_tag_number() {
             this.rpc({
                 model: 'pos.order',
@@ -41,11 +53,10 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                 } else {
 
                     var order_id = self.db.add_order(order.export_as_JSON());
-                    // this.send_invoice()
-                    // this.refund_invoice()
 
 
                     self.flush_mutex.exec(async () => {
+
 
                         try {
 
@@ -53,9 +64,11 @@ odoo.define('sahara_planet.SendAndRefund', function (require) {
                                 timeout: 30000,
                                 to_invoice: true,
                             });
-                            this.send_invoice()
-                            this.refund_invoice()
+                            try {
+                                await this.send_invoice()
+                            } catch (e) {
 
+                            }
 
 
                             if (server_ids.length) {

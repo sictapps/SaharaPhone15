@@ -17,7 +17,8 @@ class Company(models.Model):
         company_field = self.env['res.company'].search([], limit=1)
         client_id = company_field.client_id
         secret = company_field.client_secret
-        url = 'https://auth.qa-tax.planetpayment.ae/auth/realms/planet/protocol/openid-connect/token'
+        url = 'https://auth.tax.planetpayment.ae/auth/realms/planet/protocol/openid-connect/token'
+        # url = 'https://auth.qa-tax.planetpayment.ae/auth/realms/planet/protocol/openid-connect/token'
         payload = {'client_id': '%s' % client_id, 'client_secret': '%s' % secret, 'grant_type': 'client_credentials'}
 
         try:

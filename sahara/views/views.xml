@@ -100,10 +100,10 @@
                             <td>
                                 <strong>Mail :</strong>
                             </td>
-                            <td style="position:absolute;right:660px;">
+                            <td style="position:absolute;right:610px;">
                                 <p class="m-0" t-field="o.partner_id.email"/>
                             </td>
-                            <td style="width: 15%;position:absolute;right:463px;">
+                            <td style="width: 16%;position:absolute;right:450px;">
                                 <strong>: البريد الالكتروني</strong>
                             </td>
                             <td style="width: 15%;position:absolute;right:300px;">
@@ -176,7 +176,7 @@
                     <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
 
                     <table class="table table-sm o_main_table" name="invoice_line_table">
-                        <thead>
+                        <thead t-repeat="page">
                             <tr>
                                 <!-- TODO: remove in master -->
                                 <t t-set="colspan" t-value="6"/>
@@ -243,7 +243,18 @@
                                             <span t-esc="i"/>
                                             <t t-set="i" t-value="i+1"/>
                                         </td>
-                                        <td style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:14px;"
+                                        <t t-set="sn_list" t-value="''"/>
+                                        <t t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
+                                            <t t-if="lot['lot_name']" t-set="sn_list"
+                                               t-value="sn_list + lot['lot_name'] + ', '"/>
+                                        </t>
+                                        <td t-if="not sn_list"
+                                            style="color:black;border: 1px solid black;color:black;font-size:14px;"
+                                            name="account_invoice_line_name">
+                                            <strong t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                        <td t-if="sn_list"
+                                            style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:14px;"
                                             name="account_invoice_line_name">
                                             <strong t-field="line.name" t-options="{'widget': 'text'}"/>
                                         </td>
@@ -289,15 +300,18 @@
                                     </t>
 
                                 </tr>
-                                <tr>
-                                    <t>
-                                        <td style="color:black;border: 1px solid black">SN :</td>
-                                        <td style="color:black;font-size:14px;width: 50%;border-top: 0px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-top: none !important;">
-                                            <strong t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
-                                                <strong t-esc="lot['lot_name']"/>    
-                                            </strong>
-                                        </td>
-                                    </t>
+                                <t t-set="sn_list" t-value="''"/>
+                                <t t-foreach="o.get_line_lots(line)" t-as="lot" t-key="lot.cid">
+                                    <t t-if="lot['lot_name']" t-set="sn_list"
+                                       t-value="sn_list + lot['lot_name'] + '  '"/>
+                                </t>
+                                <tr t-if="sn_list">
+                                    <td style="color:black;border: 1px solid black">SN:</td>
+                                    <td style="color:black;font-size:14px;width: 50%;border-top: 0px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-top: none ! important;">
+
+
+                                        <strong t-esc="sn_list"/>
+                                    </td>
                                 </tr>
                                 <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
                                     <tr class="is-subtotal text-right">
@@ -457,7 +471,7 @@
                     </table>
 
 
-                    <br/>
+
                     <br/>
                     <br/>
                     <br/>
@@ -512,26 +526,42 @@
                     </p>
 
                 </div>
-                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;" >
-                    <table style="width: 100%;font-family: 'Barlow';">
-                        <tr>
-                            <td style="vertical-align: middle;">
-                                <img src="/sahara/static/src/img/Planet_Circle_Black.png" style="height: 20mm;"/>
-                            </td>
-                            <td style=" text-align: left;width: 3px;">
-                            </td>
-                            <td style="color:#414141;font-size: 11px;text-align:left;">
-                                <span>By using our service, you agree to our terms <br/>
-                                      and conditions and Privacy Policy - visit<br/>
-                                      <strong> www.planetpayment.ae</strong> for full details.<br/>
-                                      Planet has been authorised by the FTA.</span><br/>
-                                <strong t-field="o.tag_num" style="font-size: 16px;"/><br/>
-                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line><br/>
-                                <div  style="font-size: 14px;margin-top: -12px;"> <strong>www.planetpayment.ae</strong></div><br/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+<!--                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;">-->
+<!--                    <table style="width: 100%;font-family: 'Barlow';">-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle;">-->
+<!--                                <img src="/sahara/static/src/img/Planet_Circle_Black.png" style="height: 20mm;"/>-->
+<!--                            </td>-->
+<!--                            <td style=" text-align: left;width: 3px;">-->
+<!--                            </td>-->
+<!--                            <td style="color:#414141;font-size: 11px;text-align:left;">-->
+<!--                                <span>By using our service, you agree to our terms-->
+<!--                                    <br/>-->
+<!--                                    and conditions and Privacy Policy - visit-->
+<!--                                    <br/>-->
+<!--                                    <strong>www.planetpayment.ae</strong>-->
+<!--                                    for full details.-->
+<!--                                    <br/>-->
+<!--                                    Planet has been authorised by the FTA.-->
+<!--                                </span>-->
+<!--                                <br/>-->
+<!--                                <strong t-field="o.tag_num" style="font-size: 16px;"/>-->
+<!--                                <br/>-->
+<!--                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line>-->
+<!--                                <br/>-->
+<!--                                <div style="font-size: 14px;margin-top: -12px;">-->
+<!--                                    <strong>www.planetpayment.ae</strong>-->
+<!--                                </div>-->
+<!--                                <br/>-->
+<!--                            </td>-->
+<!--                            <td style="vertical-align: middle;">-->
+<!--                                <img t-att-src="image_data_uri(o.qr_code)" style="height: 35mm;width:35mm"/>-->
+<!--                            </td>-->
+<!--                            <td style=" text-align: left;width: 3px;">-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
 
 
             </t>
@@ -630,6 +660,35 @@
             </t>
         </template>
 
+<!--        <report-->
+<!--                id="account_invoices1"-->
+<!--                model="account.move"-->
+<!--                string="Sahara Invoices"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="sahara.report_invoice_with_payments"-->
+<!--                file="sahara.report_invoice_with_payments"-->
+<!--                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"-->
+<!--                print_report_name="(object._get_report_base_filename())"-->
+<!--                groups="account.group_account_invoice"-->
+<!--        />-->
+
+            <record id="paperformat_sahara_invoices" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">52.00</field>
+            <field name="margin_bottom">40.00</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">50</field>
+            <field name="dpi">90</field>
+        </record>
+
         <report
                 id="account_invoices1"
                 model="account.move"
@@ -641,6 +700,11 @@
                 print_report_name="(object._get_report_base_filename())"
                 groups="account.group_account_invoice"
         />
+        <record id="account_invoices1" model="ir.actions.report">
 
+            <field name="paperformat_id"
+                   ref="sahara.paperformat_sahara_invoices"/> <!-- Put Your Custom PaperFormat Id -->
+
+        </record>
     </data>
 </odoo>

@@ -8,19 +8,19 @@
                 <t t-raw="0"/>
             </div>
             <div class="header">
-                <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:0px;font-size:20px;font-weight: bold;">
+                <div style="align:center; text-align: center;font-family: 'Arial';margin-top:0px;font-size:20px;font-weight: bold;">
                     فاتورة ضريبة
-                </h3>
-                <h3 style="align:center; text-align: center;font-family: 'cool_font';margin-top:0px;font-size:20px;font-weight: bold;">
+                </div>
+                <div style="align:center; text-align: center;font-family: 'Arial';margin-top:0px;font-size:20px;font-weight: bold;">
                     TAX Invoice
-                </h3>
+                </div>
                 <div class="row">
                     <div class="col-xs-3">
 
                         <table style="width: 100%;">
                             <tr>
                                 <td>
-                                    <p style="font-family: 'cool_font';color:#8C001A;font-size:25px;" class="m-0"
+                                    <p style="font-family: 'cool_font';color:#8C001A;font-size:23px;" class="m-0"
                                        t-field="o.company_id.name"/>
                                 </td>
                             </tr>
@@ -40,8 +40,7 @@
                             <tr>
                                 <td>
                                     Tel:
-                                    <span class="m-0"
-                                          t-field="o.company_id.phone"/>
+                                    <span class="m-0" t-field="o.company_id.phone"/>
                                 </td>
                             </tr>
                             <tr>
@@ -80,10 +79,59 @@
             </div>
 
 
-            <div class="footer" style="position:absolute;margin-bottom:30px;width:100%;">
+            <div class="footer o_standard_footer">
+
+                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;">
+                    <table style="width: 100%;font-family: 'Barlow';">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <img src="/sahara/static/src/img/Planet_Circle_Black.png" style="height: 20mm;"/>
+                            </td>
+                            <td style=" text-align: left;width: 3px;">
+                            </td>
+                            <td style="color:#414141;font-size: 11px;text-align:left;">
+                                <span>By using our service, you agree to our terms
+                                    <br/>
+                                    and conditions and Privacy Policy - visit
+                                    <br/>
+                                    <strong>www.planetpayment.ae</strong>
+                                    for full details.
+                                    <br/>
+                                    Planet has been authorised by the FTA.
+                                </span>
+                                <br/>
+                                <strong t-field="o.tag_num" style="font-size: 16px;"/>
+                                <br/>
+                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line>
+                                <br/>
+                                <div style="font-size: 14px;margin-top: -12px;">
+                                    <strong>www.planetpayment.ae</strong>
+                                </div>
+                                <br/>
+                            </td>
+                            <td style="vertical-align: middle;">
+                                <img t-att-src="image_data_uri(o.qr_code)" style="height: 35mm;width:35mm"/>
+                            </td>
+                            <td style=" text-align: left;width: 3px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="text-center"
+                         style="font-family: 'cool_font'; position: absolute;right: 15em;width: 100%;">
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
+
+                        <span>Page</span>
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
+
+                        <span t-esc="time.strftime('(Date :%d/%m/%Y )')"/>
 
 
-                <div class="text-center" style="font-family: 'cool_font';">
+                    </div>
+                </div>
+                <div t-if="not o.tag_num" class="text-center"
+                     style="font-family: 'cool_font'; align:center; text-align: center;">
                     <span t-esc="context_timestamp(datetime.datetime.now()).strftime('(Time: %H:%M:%S)')"/>
 
                     <span>Page</span>
@@ -95,7 +143,10 @@
 
 
                 </div>
+
+
             </div>
+
 
         </template>
     </data>
