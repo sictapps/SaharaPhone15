@@ -8,7 +8,7 @@
     'sequence': 11,
     'website': 'https://www.odoomates.tech',
     'live_test_url': 'https://www.youtube.com/watch?v=wNhWs29T5Zs',
-    'depends': ['account', 'sale'],
+    'depends': ['account', 'sale', 'sale_margin'],
     'license': 'LGPL-3',
     'data': [
         'views/res_partner.xml',

@@ -12,6 +12,18 @@ class StockPicking(models.Model):
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
 
+    repair_cost = fields.Float(string='Repair Cost', compute='_compute_cost', store=True)
+    inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total', store=True)
+
+    def _compute_cost(self):
+        for this in self:
+            this.repair_cost = this.invoice_id.amount_total - this.amount_total
+
+    def _compute_inv_total(self):
+        for this in self:
+            this.inv_total = this.invoice_id.amount_total
+
+
     repair_count = fields.Integer(compute='compute_count')
 
     def compute_count(self):
