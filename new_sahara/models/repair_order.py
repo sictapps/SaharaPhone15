@@ -20,8 +20,8 @@ class RepairOrder(models.Model):
             this.repair_cost = this.invoice_id.amount_total - this.amount_total
 
     def _compute_inv_total(self):
-        for order in self:
-            order.inv_total = sum(invoice.amount_total for invoice in order.invoice_ids)
+        for this in self:
+            this.inv_total = this.invoice_id.amount_total
 
 
     repair_count = fields.Integer(compute='compute_count')
