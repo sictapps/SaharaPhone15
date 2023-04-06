@@ -16,14 +16,12 @@ class RepairOrder(models.Model):
     inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total', store=True)
 
     def _compute_cost(self):
-        for order in self:
-            order.repair_cost = 0.0
-            for invoice in order.invoice_ids:
-                order.repair_cost += invoice.amount_total - order.amount_total
+        for this in self:
+            this.repair_cost = this.invoice_id.amount_total - this.amount_total
 
     def _compute_inv_total(self):
-        for order in self:
-            order.inv_total = sum(invoice.amount_total for invoice in order.invoice_ids)
+        for this in self:
+            this.inv_total = this.invoice_id.amount_total
 
 
     repair_count = fields.Integer(compute='compute_count')
