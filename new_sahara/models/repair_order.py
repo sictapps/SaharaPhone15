@@ -14,8 +14,8 @@ class RepairOrder(models.Model):
 
     repair_cost = fields.Float(string='Margin', compute='_compute_cost')
     inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total')
-    total_cost = fields.Float(string='Invoice Total', compute='_compute_total_cost', store=True)
-    total_margin = fields.Float(string='Margin', compute='_compute_Margin', store=True)
+    total_cost = fields.Float(string='Invoice Total1', compute='_compute_total_cost', store=True)
+    total_margin = fields.Float(string='Margin1', compute='_compute_Margin', store=True)
 
     def _compute_cost(self):
         for this in self:
