@@ -17,14 +17,15 @@ class RepairOrder(models.Model):
     total_cost = fields.Float(string='Invoice Total', compute='_compute_total_cost', store=True)
     total_margin = fields.Float(string='Margin', compute='_compute_Margin', store=True)
 
-
+    @api.depends('invoice_id','amount_total')
     def _compute_cost(self):
         for this in self:
-            this.repair_cost = this.invoice_id.amount_total - this.amount_total
+            this.repair_cost = this.pricelist_id.currency_id.round(this.invoice_id.amount_total - this.amount_total)
 
+    @api.depends('invoice_id')
     def _compute_inv_total(self):
         for this in self:
-            this.inv_total = this.invoice_id.amount_total
+            this.inv_total = this.pricelist_id.currency_id.round(this.invoice_id.amount_total)
 
 
     @api.depends('inv_total')
