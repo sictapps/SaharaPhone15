@@ -3,6 +3,12 @@
 from odoo import models, fields, api
 
 
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    repair_id = fields.Char()
+
+
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
 
