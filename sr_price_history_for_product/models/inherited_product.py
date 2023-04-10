@@ -96,6 +96,16 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
+    name_with_variants = fields.Char(
+        'Product Name with Variants', compute='_compute_name_with_variants', store=True)
+
+    @api.depends('product_template_attribute_value_ids', 'product_tmpl_id.name')
+    def _compute_name_with_variants(self):
+        for variant in self:
+            name = variant.product_tmpl_id.name
+            attribute_values = variant.product_template_attribute_value_ids.mapped('name')
+            variant.name_with_variants = '{} ({})'.format(name, ', '.join(attribute_values))
+
     
     def _get_sale_price_history(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
@@ -117,20 +127,21 @@ class ProductProduct(models.Model):
 
         sale_order_line_ids = self.env['sale.order.line'].sudo().search(domain,limit=sale_order_line_record_limit,order ='create_date desc')
         for line in sale_order_line_ids:
-            sale_price_history_id = sale_history_obj.create({
-                    'name':line.id,
-                    'partner_id' : line.order_partner_id.id,
-                    'user_id' : line.salesman_id.id,
-                    'product_tmpl_id' : line.product_id.product_tmpl_id.id,
-                    'variant_id' : line.product_id.id,
-                    'sale_order_id' : line.order_id.id,
-                    'sale_order_date' : line.order_id.date_order,
-                    'product_uom_qty' : line.product_uom_qty,
-                    'unit_price' : line.price_unit,
-                    'currency_id' : line.currency_id.id,
-                    'total_price' : line.price_subtotal
-                })
-            sale_history_ids.append(sale_price_history_id.id)
+            if line.name == self.name_with_variants:
+                sale_price_history_id = sale_history_obj.create({
+                        'name':line.id,
+                        'partner_id' : line.order_partner_id.id,
+                        'user_id' : line.salesman_id.id,
+                        'product_tmpl_id' : line.product_id.product_tmpl_id.id,
+                        'variant_id' : line.product_id.id,
+                        'sale_order_id' : line.order_id.id,
+                        'sale_order_date' : line.order_id.date_order,
+                        'product_uom_qty' : line.product_uom_qty,
+                        'unit_price' : line.price_unit,
+                        'currency_id' : line.currency_id.id,
+                        'total_price' : line.price_subtotal
+                    })
+                sale_history_ids.append(sale_price_history_id.id)
         self.sale_price_history_ids = sale_history_ids
         
     def _get_purchase_price_history(self):
@@ -153,20 +164,21 @@ class ProductProduct(models.Model):
 
         purchase_order_line_ids = self.env['purchase.order.line'].sudo().search(domain,limit=purchase_order_line_record_limit,order ='create_date desc')
         for line in purchase_order_line_ids:
-            purchase_price_history_id = purchase_history_obj.create({
-                    'name':line.id,
-                    'partner_id' : line.partner_id.id,
-                    'user_id' : line.order_id.user_id.id,
-                    'product_tmpl_id' : line.product_id.product_tmpl_id.id,
-                    'variant_id' : line.product_id.id,
-                    'purchase_order_id' : line.order_id.id,
-                    'purchase_order_date' : line.order_id.date_order,
-                    'product_uom_qty' : line.product_qty,
-                    'unit_price' : line.price_unit,
-                    'currency_id' : line.currency_id.id,
-                    'total_price' : line.price_total
-                })
-            purchase_history_ids.append(purchase_price_history_id.id)
+            if line.name == self.name_with_variants:
+                purchase_price_history_id = purchase_history_obj.create({
+                        'name':line.id,
+                        'partner_id' : line.partner_id.id,
+                        'user_id' : line.order_id.user_id.id,
+                        'product_tmpl_id' : line.product_id.product_tmpl_id.id,
+                        'variant_id' : line.product_id.id,
+                        'purchase_order_id' : line.order_id.id,
+                        'purchase_order_date' : line.order_id.date_order,
+                        'product_uom_qty' : line.product_qty,
+                        'unit_price' : line.price_unit,
+                        'currency_id' : line.currency_id.id,
+                        'total_price' : line.price_total
+                    })
+                purchase_history_ids.append(purchase_price_history_id.id)
         self.purchase_price_history_ids = purchase_history_ids
 
 

@@ -31,4 +31,9 @@
     'demo': [
         'demo/demo.xml',
     ],
-}
+    "assets": {
+        "point_of_sale.assets": [
+            "new_sahara/static/src/js/Screens/ProductScreen/*",
+        ],
+
+    }, }

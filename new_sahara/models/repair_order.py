@@ -12,8 +12,10 @@ class StockPicking(models.Model):
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
 
-    repair_cost = fields.Float(string='Margin', compute='_compute_cost', store=True)
-    inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total', store=True)
+    repair_cost = fields.Float(string='Margin', compute='_compute_cost')
+    inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total')
+    total_cost = fields.Float(string='Invoice Total', compute='_compute_total_cost', store=True)
+    total_margin = fields.Float(string='Margin', compute='_compute_Margin', store=True)
 
     def _compute_cost(self):
         for this in self:
@@ -23,6 +25,13 @@ class RepairOrder(models.Model):
         for this in self:
             this.inv_total = this.invoice_id.amount_total
 
+    def _compute_total_cost(self):
+        for this in self:
+            this.total_cost = this.inv_total
+
+    def _compute_Margin(self):
+        for this in self:
+            this.total_margin = this.repair_cost
 
     repair_count = fields.Integer(compute='compute_count')
 
