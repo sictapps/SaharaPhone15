@@ -203,6 +203,8 @@ class Repair(models.Model):
                          'product_uom_qty': move.product_uom_qty, 'name': move.name,
                          'company_id': self.company_id.id, 'location_id': pick_type_id.default_location_src_id.id,
                          'location_dest_id': pick_type_id.default_location_dest_id.id,
+                         'operation_id': move.id
+                         # 'lot_id': move.lot_id.id if move.lot_id else False
                          }
 
             move_lines.append(move_line)
