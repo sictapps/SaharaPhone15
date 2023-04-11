@@ -14,8 +14,8 @@ class RepairOrder(models.Model):
 
     repair_cost = fields.Float(string='Margin', compute='_compute_cost')
     inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total')
-    computed_repair_cost = fields.Float(string='Margin', compute='_compute_computed_repair_cost', store=True)
-    computed_inv_total = fields.Float(string='Invoice Total', compute='_compute_computed_inv_total', store=True)
+    total_cost = fields.Float(string='Margin', compute='_compute_computed_repair_cost', store=True)
+    total_margin = fields.Float(string='Invoice Total', compute='_compute_computed_inv_total', store=True)
 
     @api.depends('invoice_id.amount_total', 'amount_total', 'state')
     def _compute_cost(self):
@@ -36,12 +36,12 @@ class RepairOrder(models.Model):
     @api.depends('repair_cost')
     def _compute_computed_repair_cost(self):
         for order in self:
-            order.computed_repair_cost = order.repair_cost
+            order.total_cost = order.repair_cost
 
     @api.depends('inv_total')
     def _compute_computed_inv_total(self):
         for order in self:
-            order.computed_inv_total = order.inv_total
+            order.total_margin = order.inv_total
 
 
 
