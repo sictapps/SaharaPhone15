@@ -14,24 +14,38 @@ class RepairOrder(models.Model):
 
     repair_cost = fields.Float(string='Margin', compute='_compute_cost')
     inv_total = fields.Float(string='Invoice Total', compute='_compute_inv_total')
-    total_cost = fields.Float(string='Invoice Total', compute='_compute_total_cost', store=True)
-    total_margin = fields.Float(string='Margin', compute='_compute_Margin', store=True)
+    computed_repair_cost = fields.Float(string='Margin', compute='_compute_computed_repair_cost', store=True)
+    computed_inv_total = fields.Float(string='Invoice Total', compute='_compute_computed_inv_total', store=True)
 
+    @api.depends('invoice_id.amount_total', 'amount_total', 'state')
     def _compute_cost(self):
-        for this in self:
-            this.repair_cost = this.invoice_id.amount_total - this.amount_total
+        for order in self:
+            if order.state == 'done':
+                order.repair_cost = order.invoice_id.amount_total - order.amount_total
+            else:
+                order.repair_cost = 0.0
 
+    @api.depends('invoice_id.amount_total')
     def _compute_inv_total(self):
-        for this in self:
-            this.inv_total = this.invoice_id.amount_total
+        for order in self:
+            if order.state == 'done':
+                order.inv_total = order.invoice_id.amount_total
+            else:
+                order.inv_total = 0.0
 
-    def _compute_total_cost(self):
-        for this in self:
-            this.total_cost = this.inv_total
+    @api.depends('repair_cost')
+    def _compute_computed_repair_cost(self):
+        for order in self:
+            order.computed_repair_cost = order.repair_cost
 
-    def _compute_Margin(self):
-        for this in self:
-            this.total_margin = this.repair_cost
+    @api.depends('inv_total')
+    def _compute_computed_inv_total(self):
+        for order in self:
+            order.computed_inv_total = order.inv_total
+
+
+
+
 
     repair_count = fields.Integer(compute='compute_count')
 

@@ -26,21 +26,21 @@
         <!-- Inherit Form View to Modify it -->
 
         <!-- Inherit Form View to Modify it -->
-        <record id="repair_view_repair_order_form" model="ir.ui.view">
-            <field name="name">repair view repair order form</field>
-            <field name="model">repair.order</field>
-            <field name="inherit_id" ref="repair.view_repair_order_form"/>
-            <field name="arch" type="xml">
+<!--        <record id="repair_view_repair_order_form" model="ir.ui.view">-->
+<!--            <field name="name">repair view repair order form</field>-->
+<!--            <field name="model">repair.order</field>-->
+<!--            <field name="inherit_id" ref="repair.view_repair_order_form"/>-->
+<!--            <field name="arch" type="xml">-->
 
-                <xpath expr="//field[@name='tag_ids']" position="after">
-                    <field name="inv_total"/>
-                    <field name="repair_cost"/>
-                    <field name="total_cost"/>
-                    <field name="total_margin"/>
-                </xpath>
+<!--                <xpath expr="//field[@name='tag_ids']" position="after">-->
+<!--                    <field name="inv_total"/>-->
+<!--                    <field name="repair_cost"/>-->
+<!--                    <field name="computed_repair_cost"/>-->
+<!--                    <field name="computed_inv_total"/>-->
+<!--                </xpath>-->
 
-            </field>
-        </record>
+<!--            </field>-->
+<!--        </record>-->
 
 
     </data>
