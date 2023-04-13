@@ -26,6 +26,13 @@ class resConfigSettings(models.TransientModel):
         [('purchase', 'Purchase order'), ('done', 'Done (Locked)'), ('both', 'Both')], string="Price History Based On",
         default="purchase", config_parameter='purchase_order_status')
 
+
+    pos_order_line_record_limit = fields.Integer(string="Record Limit", default=10,
+                                                  config_parameter='pos_order_line_record_limit')
+    pos_order_status = fields.Selection([('invoiced', 'Confirm order'), ('done', 'Done (Locked)'), ('both', 'Both')],
+                                         string="Price History Based On", default="invoiced",
+                                         config_parameter='pos_order_status')
+
     def get_values(self):
         res = super(resConfigSettings, self).get_values()
         ICPSudo = self.env['ir.config_parameter'].sudo()
@@ -33,10 +40,14 @@ class resConfigSettings(models.TransientModel):
         sale_order_status = ICPSudo.get_param('sale_order_status')
         purchase_order_line_record_limit = ICPSudo.get_param('purchase_order_line_record_limit')
         purchase_order_status = ICPSudo.get_param('purchase_order_status')
+        pos_order_line_record_limit = ICPSudo.get_param('pos_order_line_record_limit')
+        pos_order_status = ICPSudo.get_param('pos_order_status')
         res.update(
             sale_order_line_record_limit=int(sale_order_line_record_limit),
             sale_order_status=sale_order_status,
             purchase_order_line_record_limit=int(purchase_order_line_record_limit),
-            purchase_order_status=purchase_order_status
+            purchase_order_status=purchase_order_status,
+            pos_order_line_record_limit=int(pos_order_line_record_limit),
+            pos_order_status=pos_order_status
         )
         return res
