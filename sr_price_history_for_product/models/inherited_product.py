@@ -145,15 +145,10 @@ class ProductProduct(models.Model):
     name_with_variants = fields.Char(
         'Product Name with Variants', compute='_compute_name_with_variants')
 
-    @api.depends('product_template_attribute_value_ids', 'product_tmpl_id.name')
+    @api.depends('product_template_attribute_value_ids', 'product_tmpl_id.display_name')
     def _compute_name_with_variants(self):
         for variant in self:
-            name = variant.product_tmpl_id.name
-            attribute_values = variant.product_template_attribute_value_ids.mapped('name')
-            if attribute_values:
-                variant.name_with_variants = '{} ({})'.format(name, ', '.join(attribute_values))
-            else:
-                variant.name_with_variants = name
+            variant.name_with_variants = variant.display_name
 
     def _get_sale_price_history(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
