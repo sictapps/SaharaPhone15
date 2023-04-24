@@ -123,7 +123,7 @@ class ProductTemplate(models.Model):
                 'variant_id': line.product_id.id,
                 'pos_order_id': line.order_id.id,
                 'pos_order_date': line.order_id.date_order,
-                'product_uom_qty': line.product_uom_qty,
+                'product_uom_qty': line.qty,
                 'unit_price': line.price_unit,
                 'currency_id': line.currency_id.id,
                 'total_price': line.price_subtotal
