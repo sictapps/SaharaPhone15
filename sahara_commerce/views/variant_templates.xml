@@ -1,0 +1,14 @@
+<odoo>
+    <template id="badge_extra_price_mohammad" inherit_id="sale.badge_extra_price" name="Badge Extra Price">
+            <xpath expr="//span[hasclass('badge')]" position="replace">
+                <div></div>
+            </xpath>
+    </template>
+</odoo>
+
+
+
+
+
+
+
