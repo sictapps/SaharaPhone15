@@ -7,13 +7,5 @@
         <template id="custom_short_cart_summary" inherit_id="website_sale.short_cart_summary">
             <xpath expr="//hr[1]" position="replace"/>
         </template>
-        <template id="custom_short_address" inherit_id="website_sale.address">
-            <xpath expr="//form/div/t[2]" position="replace">
-                <t></t>
-            </xpath>
-            <xpath expr="//form/div/t[3]" position="replace">
-                <t></t>
-            </xpath>
-        </template>
     </data>
 </odoo>
