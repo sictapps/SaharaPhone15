@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
-from odoo import http
 from odoo.addons.website_sale.controllers.main import WebsiteSale
+
+import logging
+from werkzeug.exceptions import Forbidden, NotFound
+
+from odoo import fields, http, SUPERUSER_ID, tools, _
 from odoo.http import request
+
+from odoo.exceptions import AccessError, MissingError, ValidationError
+_logger = logging.getLogger(__name__)
 
 
 class WebsiteSaleInherit(WebsiteSale):
