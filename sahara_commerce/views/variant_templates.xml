@@ -8,9 +8,7 @@
         <xpath expr="//tr[@id='order_total_untaxed']" position="replace"/>
         <xpath expr="//tr[@id='order_total_taxes']" position="replace"/>
     </template>
-    <template id="custom_short_cart_summary" inherit_id="website_sale.short_cart_summary">
-        <xpath expr="//hr[1]" position="replace"/>
-    </template>
+
 </odoo>
 
 
