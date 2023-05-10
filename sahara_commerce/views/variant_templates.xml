@@ -4,10 +4,6 @@
             <div></div>
         </xpath>
     </template>
-    <template id="custom_total" inherit_id="website_sale.total">
-        <xpath expr="//tr[@id='order_total_untaxed']" position="replace"/>
-        <xpath expr="//tr[@id='order_total_taxes']" position="replace"/>
-    </template>
 
 </odoo>
 
