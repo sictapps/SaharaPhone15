@@ -7,5 +7,31 @@
         <template id="custom_short_cart_summary" inherit_id="website_sale.short_cart_summary">
             <xpath expr="//hr[1]" position="replace"/>
         </template>
+                <template id="custom_short_address" inherit_id="website_sale.address">
+            <xpath expr="//t/div/div/div/div/div/form/div/t[1]" position="replace">
+                <t t-set='zip_city' t-value='country and [x for x in country.get_address_fields() if x in ["zip", "city"]] or ["city", "zip"]'/>
+                <t>
+                    <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-4 div_zip">
+                        <label class="col-form-label label-optional" for="zip">Zip Code</label>
+                        <input type="text" name="zip"
+                               t-attf-class="form-control #{error.get('zip') and 'is-invalid' or ''}"
+                               t-att-value="'zip' in checkout and checkout['zip']"/>
+                    </div>
+                </t>
+
+            </xpath>
+            <xpath expr="//t/div/div/div/div/div/form/div/t[3]" position="replace">
+                <t>
+                    <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-4 div_zip">
+                        <label class="col-form-label label-optional" for="zip">Zip Code</label>
+                        <input type="text" name="zip"
+                               t-attf-class="form-control #{error.get('zip') and 'is-invalid' or ''}"
+                               t-att-value="'zip' in checkout and checkout['zip']"/>
+                    </div>
+                </t>
+
+            </xpath>
+        </template>
+
     </data>
 </odoo>
