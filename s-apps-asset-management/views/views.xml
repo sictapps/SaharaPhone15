@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+
+
+        <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_dest_id']" position="after">
+                <field name="is_cusdoty" invisible="1"/>
+                 <field name="is_Maintenance" invisible="1"/>
+                <field name="product_ids" invisible="1"/>
+                <field name="lots_ids" invisible="1"/>
+                <field name="is_cusdoty" invisible="1"/>
+                <field name="is_cusdoty_r" invisible="1"/>
+                <field name="is_cusdoty_d" invisible="1"/>
+                <field name="employee_id" attrs="{'required': [('is_cusdoty', '=', True)],'invisible': [('is_cusdoty', '=', False)],'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="asset_model" attrs="{'required': [('is_Maintenance', '=', True)],'invisible': [('is_Maintenance', '=', False)],'readonly': [('state', '!=', 'draft')]}" />
+           <field name="asset_serial" attrs="{'required': [('is_Maintenance', '=', True)],'invisible': [('is_Maintenance', '=', False)],'readonly': [('state', '!=', 'draft')]}" />
+
+            </xpath>
+
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                  <attribute name="attrs">{'readonly': ['|',('is_cusdoty_d', '=', True),('is_Maintenance', '=', True)]}</attribute>
+
+                <attribute name="force_save">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='location_dest_id']" position="attributes">
+                  <attribute name="attrs">{'readonly': ['|',('is_cusdoty_r', '=', True),('is_Maintenance', '=', True)],'force_save':1}</attribute>
+                 <attribute name="force_save">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//notebook//page[@name='operations']//field[@name='product_id']" position="replace">
+                <field name="product_id" required="1" context="{'default_detailed_type': 'product'}" domain="[('id', 'in', parent.product_ids)]"
+                       attrs="{'readonly': ['|', '&amp;', ('state', '!=', 'draft'), ('additional', '=', False), ('move_lines_count', '&gt;', 0)]}"/>
+
+
+            </xpath>
+
+            <xpath expr="//sheet//notebook//page[@name='operations']//field[@name='lot_ids']" position="replace">
+
+            <field name="lot_ids" widget="many2many_tags"
+                                        groups="stock.group_production_lot"
+                                        attrs="{'invisible': ['|', ('show_details_visible', '=', False), ('has_tracking', '!=', 'serial')]}"
+                                        optional="hide"
+                                        options="{'create': [('parent.use_create_lots', '=', True)]}"
+                                        context="{'default_company_id': company_id, 'default_product_id': product_id, 'active_picking_id': parent.id}"
+                                        domain="[('product_id','=',product_id),('id', 'in', parent.lots_ids)]"
+                                    />
+            </xpath>
+
+
+
+        </field>
+    </record>
+
+        <record id="view_category_property_asset_form" model="ir.ui.view">
+            <field name="name">product.category.stock.property.form.asset</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="stock.product_category_form_view_inherit"/>
+            <field name="arch" type="xml">
+            <xpath expr='//field[@name="parent_id"]' position='after'>
+
+                <field name="is_asset_category" attrs="{'invisible': [('property_valuation', '!=', 'manual_periodic')]}"/>
+
+            </xpath>
+            </field>
+
+         </record>
+
+
+      <record id="view_product_asset_form" model="ir.ui.view">
+            <field name="name">product.template.asset.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                       <field name="show_asset_property" invisible="1"></field>
+                        <field name="can_be_asset" invisible="1"/>
+                         </div>
+                </div>
+
+
+            </field>
+        </record>
+
+
+      <record id="view_move_form_expiry" model="ir.ui.view">
+        <field name="name">stock.production.lot.asset.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='description']" position="after">
+                <page string="Assets" attrs="{'invisible': [('has_asset', '=', False)]}">
+                    <group>
+                            <field name="asset_id" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='main_group']//group" position="after">
+                <field name="has_asset" invisible="1"></field>
+                <group string="Asset Values" attrs="{'invisible': [('has_asset', '=', False)]}">
+
+                    <field name="book_value" readonly="1" />
+                    <field name="tcp_capital" readonly="1" />
+                    <field name="analytic_account_id"  />
+                    <field name="tcp_operation" readonly="1" />
+                    <field name="classification_id" />
+            </group>
+
+
+
+                </xpath>
+        </field>
+    </record>
+
+      <record model="ir.ui.view" id="view_account_asset_product_form">
+        <field name="name">account.asset.product.form</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='depreciation_board']" position="after">
+                <page string="Related Product Serials" name="Serial_product">
+                    <div>
+                        <label for="product_serials"></label>
+                            <field name="product_serials" widget="many2many"  options="{'no_create':True}">
+                                    <tree>
+                                        <field name="product_id"></field>
+                                        <field name="name"></field>
+                                    </tree>
+                            </field>
+
+                                </div>
+
+
+                </page>
+            </xpath>
+        </field>
+      </record>
+
+
+<!--        <record id="force_delete_action" model="ir.ui.view">-->
+<!--            <field name="name">force.delete.asset.action</field>-->
+<!--            <field name="model">asset</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <p class="oe_grey">-->
+<!--                        Are you sure you want to delete-->
+<!--                    </p>-->
+<!--                    <footer>-->
+<!--                        <button name="force_delete" string="Confirm" type="object"/>-->
+<!--                        <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+<!--                    </footer>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="30"/>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                  <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="custody" string="Fixed Asset" data-key="custody" >
+<h2>Custody</h2>
+                     <div class="row mt16 o_settings_container" name="default_taxes_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="default_custody"
+                                >
+ <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+
+
+
+
+<div class=" mt24">
+                                    <field name="locked_location" invisible="1"/>
+
+
+                                    <label for="custody_location"/>
+
+                                    <field name="custody_location" attrs="{'readonly': [('locked_location', '=', True)]}"></field>
+
+</div>
+
+
+
+
+
+
+                               <div class=" mt24">
+                                    <label for="delivering_custody_picking_id"/>
+
+                                    <field name="delivering_custody_picking_id" attrs="{'readonly': [('locked_location', '=', True)]}"/>
+                                    </div>
+
+
+
+
+                                <div class="mt24">
+                                       <label for="receiving_custody_picking_id"/>
+                                    <field name="receiving_custody_picking_id" attrs="{'readonly': [('locked_location', '=', True)]}"/>
+                                </div>
+
+                            </div>
+                                </div>
+
+</div>
+
+
+
+
+
+                      <h2>Capital Internal Maintenance</h2>
+                     <div class="row mt16 o_settings_container" name="default_taxes_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="default_Maintenance"
+                                >
+ <div class="o_setting_left_pane"/>
+                                <div >
+
+
+
+
+<div class=" mt24">
+
+
+                                    <field name="Maintenance_picking_ids_str" invisible="1"/>
+                                    <label for="Maintenance_picking_ids"/>
+
+                                    <field name="Maintenance_picking_ids" widget="many2many_tags"></field>
+
+</div>
+
+
+ </div>
+
+
+
+
+
+                                </div>
+
+</div>
+
+                </div>
+
+
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="s-apps-asset-management.custody">
+          <field name="name">Custody list</field>
+          <field name="model">custody</field>
+          <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="employee_id"/>
+              <field name="product_id"/>
+              <field name="serial_id"/>
+                <field name="qty"/>
+            </tree>
+          </field>
+        </record>
+
+
+           <record id="view_employee_inherits" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherits</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//div[@name='button_box']" position="inside" >
+                    <button name="action_get_custody" icon="fa-usd" class="oe_stat_button" string="Custody" type="object" />
+                </xpath>
+            </field>
+        </record>
+
+<record id="action_custody" model="ir.actions.act_window">
+            <field name="name">Custody</field>
+            <field name="res_model">custody</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="s-apps-asset-management.custody"/>
+
+
+
+        </record>
+
+<!--        <act_window name="Force Delete"-->
+<!--                    id="act_window_force_delete_action"-->
+<!--                    res_model="asset"-->
+<!--                    binding_model="account.asset"-->
+<!--                    binding_views="form"-->
+<!--                    view_mode="form"-->
+<!--                    target="new"-->
+<!--        />-->
+
+
+
+<record model="ir.ui.view" id="view_stock_quant_tree_editable_inherit_custody">
+        <field name="name">stock.quant.tree.editable.inherit_custody</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='inventory_quantity']" position="after">
+                <field name="is_cusdoty" invisible="1"/>
+
+            </xpath>
+            <xpath expr="//field[@name='inventory_quantity']"  position="attributes" >
+                <attribute name="attrs">{'readonly': [('is_cusdoty','=', True)]}</attribute>
+              </xpath>
+        </field>
+    </record>
+
+        <record id="stock_location_route_view_form_inherit_custody" model="ir.ui.view">
+            <field name="name">stock.location.custody.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='return_location']" position="after">
+                <field name="is_custody" string="Is Custody Location?" attrs="{'invisible': [('usage', '!=',  'internal')]}"/>
+                <field name="employee_id" attrs="{'required': [('is_custody', '=', True)],'invisible': [('is_custody', '=', False)]}"/>
+           </xpath>
+            </field>
+        </record>
+
+<record id="view_stock_move_line_detailed_operation_tree_mrp" model="ir.ui.view">
+        <field name="name">stock.move.line.operations.tree.mrp</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="replace">
+               <field name="lot_id" domain="[('product_id','=',product_id),('id', 'in', parent.lots_ids)]" groups="stock.group_production_lot" attrs="{'column_invisible': [('parent.show_lots_text', '=', True)], 'invisible': [('lots_visible', '=', False)]}" context="{'default_product_id': product_id, 'default_company_id': company_id, 'active_picking_id': picking_id}" optional="show" />
+                   </xpath>
+        </field>
+    </record>
+
+
+
+    </data>
+</odoo>
