@@ -8,7 +8,19 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//page[@name='internal_notes']" position="after">
-                    <page string="Passport Information" name="Passportinformation" >
+                    <page string="Passport Information" name="Passportinformation">
+                        <group>
+                            <group>
+                                <field name="passport_barcode"/>
+                            </group>
+                            <group>
+                                <button string="Fill Information" type="object" name="passport_information"
+                                        style="background-color: green; color: white;border-radius: 5px;padding: 5px 10px;"/>
+
+                            </group>
+
+                        </group>
+
                         <group col="2">
                             <group>
                                 <field name="code"/>
