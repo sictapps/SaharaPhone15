@@ -10,7 +10,7 @@ class PassportConnection(models.Model):
     _name = 'res.partner'
     _inherit = 'res.partner'
 
-    passport_barcode = fields.Char(string='Passport Barcode')
+
 
     def Passport_Connection(self):
         company_field = self.env['res.company'].search([], limit=1)
@@ -25,7 +25,9 @@ class PassportConnection(models.Model):
             token = request.json()
             return token
         except:
-            raise AccessError(_("No connection.Please contact the manager to confirm contact information..."))
+            response_data = json.loads(request.text)
+            error_message = response_data.get("message", "Unknown error")
+            raise AccessError(_(error_message))
 
     def passport_information(self):
         # verification = self.env['res.company'].search([], limit=1)
