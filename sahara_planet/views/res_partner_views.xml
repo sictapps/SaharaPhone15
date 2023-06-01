@@ -11,7 +11,7 @@
                     <page string="Passport Information" name="Passportinformation">
                         <group>
                             <group>
-<!--                                <field name="passport_barcode"/>-->
+                                <field name="passport_barcode"/>
                             </group>
                             <group>
                                 <button string="Fill Information" type="object" name="passport_information"
