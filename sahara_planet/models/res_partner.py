@@ -11,7 +11,7 @@ class Partner(models.Model):
     _name = 'res.partner'
     _inherit = 'res.partner'
 
-    passport_barcode = fields.Char(string='Passport Barcode')
+    # passport_barcode = fields.Char(string='Passport Barcode')
     code = fields.Char(string='Code', tracking=True)
     firstName = fields.Char(string='First Name', tracking=True, readonly=True)
     lastName = fields.Char(string='Last Name', tracking=True, readonly=True)
