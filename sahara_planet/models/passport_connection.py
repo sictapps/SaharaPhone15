@@ -21,12 +21,12 @@ class PassportConnection(models.Model):
 
         try:
             request = requests.post(url, data=payload)
+            request.raise_for_status()  # Raise an exception for non-successful response codes (e.g., 4xx or 5xx)
 
             token = request.json()
             return token
-        except:
-            response_data = json.loads(request.text)
-            error_message = response_data.get("message", "Unknown error")
+        except requests.exceptions.RequestException as e:
+            error_message = str(e)
             raise AccessError(_(error_message))
 
     def passport_information(self):
