@@ -11,7 +11,7 @@ class PassportConnection(models.Model):
     _inherit = 'res.partner'
 
 
-    passport_barcode = fields.Char(string='Passport Barcode')
+    passport_barcode = fields.Text(string='Passport Barcode')
 
     def Passport_Connection(self):
         company_field = self.env['res.company'].search([], limit=1)
