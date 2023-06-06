@@ -37,7 +37,7 @@ class PassportConnection(models.Model):
         Authorization = 'Bearer %s' % token['access_token']
         print('Authorization', Authorization)
         url = 'https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/mrz-decoded'
-        self.passport_barcode = self.passport_barcode.replace('\\r\\n', '\r\n')
+        self.passport_barcode = self.passport_barcode[::-1].replace('\n', '', self.passport_barcode.count('\n') - 1)[::-1].replace('\n', '\r\n', 1)
         payload = {"mrz": self.passport_barcode}
         print('payload', payload)
         try:
