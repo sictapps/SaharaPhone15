@@ -73,12 +73,12 @@ class AddFullOrder(models.Model):
                     lastName = pos_order.partner_id.lastName
                 else:
                     lastName = ''
-                if pos_order.partner_id.country_nationality_id.code:
-                    country_nationality_id = pos_order.partner_id.country_nationality_id.code
+                if pos_order.partner_id.country_nationality_id:
+                    country_nationality_id = pos_order.partner_id.country_nationality_id
                 else:
                     country_nationality_id = ''
-                if pos_order.partner_id.country_residence_id.code:
-                    country_residence_id = pos_order.partner_id.country_residence_id.code
+                if pos_order.partner_id.country_residence_id:
+                    country_residence_id = pos_order.partner_id.country_residence_id
                 else:
                     country_residence_id = ''
                 if pos_order.partner_id.phoneNumber:
@@ -89,8 +89,8 @@ class AddFullOrder(models.Model):
                     birthDate = pos_order.partner_id.birthDate
                 else:
                     birthDate = ''
-                if pos_order.partner_id.issuedBy.code:
-                    issuedBy = pos_order.partner_id.issuedBy.code
+                if pos_order.partner_id.issuedBy:
+                    issuedBy = pos_order.partner_id.issuedBy
                 else:
                     issuedBy = ''
                 if pos_order.partner_id.passportNumber:
