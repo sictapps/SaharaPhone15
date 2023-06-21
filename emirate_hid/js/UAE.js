@@ -26,17 +26,14 @@ var UAEFormRenderer = FormRenderer.extend({
         "click .btn-readCard": "_callExtenion",
         "click .simulateEidResponse": "_getdata"
     }),
-    /*
-     * Open the m2o item selection from another button
+    /*Ïï½
+     * Open the m2o ÏÍÑÔ1Vitem selection from another button
      */
        _callExtenion: function (event) {
         var event = document.createEvent('Event');
           event.initEvent('EID_EVENT');
           document.dispatchEvent(event);
          // document.getElementById("simulateEidResponse").style.display = "none";
-
-
-
 
     },
 
@@ -46,7 +43,7 @@ var UAEFormRenderer = FormRenderer.extend({
           var response = this.$('.simulateEidResponse').text();
           if (response.length >10)
           {
-          var jsondata = $.parseJSON(response);
+          var jsondata = JSON.parse(response);
           let le=document.getElementsByName('jsondata')[0];
           le.value=response;
           var event = new Event('change');
@@ -56,7 +53,6 @@ var UAEFormRenderer = FormRenderer.extend({
 
 
          // self.fieldIdsToNames.simulateEidResponse =jsondata;
-
 
 
 
