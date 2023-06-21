@@ -259,13 +259,13 @@ class emirate_hid_account(models.Model):
                                                               'is_company': False,
                                                               'company_type': 'person',
 
-                                                              'OccupationFieldCode': ee['OccupationFieldCode'],
-                                                              'CityID': ee['CityID'],
+
+
                                                               'OccupationTypeArabic': ee['OccupationTypeArabic'],
                                                               'City': ee['City'],
                                                               'Area': ee['Area'],
                                                               'AreaArabic': ee['AreaArabic'],
-                                                              'AreaCode': ee['AreaCode'],
+
                                                               'CityArabic': ee['CityArabic'],
                                                               'CompanyName': ee['CompanyName'],
                                                               'CompanyNameArabic': ee['CompanyNameArabic'],
@@ -273,15 +273,13 @@ class emirate_hid_account(models.Model):
                                                               'Email': ee['Email'],
                                                               'Emirate': ee['Emirate'],
                                                               'EmirateArabic': ee['EmirateArabic'],
-                                                              'EmirateCode': ee['EmirateCode'],
+
                                                               'Phone': ee['Phone'],
                                                               'name': ee['Name'],
                                                               'email': ee['Email'],
                                                               'phone': ee['Phone'],
                                                               'mobile': ee['Mobile'],
-                                                              'Photo': data,
-                                                              'image_1920': data,
-                                                              'PhotoPath': ee['PhotoPath'],
+
                                                               'PassportNumber': ee['PassportNumber'],
                                                               'Mobile': ee['Mobile'],
                                                               'NameAr': ee['NameAr'],
@@ -290,18 +288,18 @@ class emirate_hid_account(models.Model):
                                                               'NationalityArabic': ee['NationalityArabic'],
                                                               'NationalityID': ee['NationalityID'],
                                                               'OccupationArabic': ee['OccupationArabic'],
-                                                              'Occupation': ee['Occupation'],
+
                                                               'OccupationTypeArabic': ee['OccupationTypeArabic'],
                                                               'ResidencyType': ee['ResidencyType'],
-                                                              'ResidencyIssue': ee['ResidencyIssue'],
+
                                                               'ResidencyExpiry': ee['ResidencyExpiry'],
                                                               'ResidencyNumber': ee['ResidencyNumber'],
                                                               'Sex': ee['Sex'],
                                                               'SponsorName': ee['SponsorName'],
                                                               'SponsorNumber': ee['SponsorNumber'],
                                                               'SponsorType': ee['SponsorType'],
-                                                              'Signature': ee['Signature'],
-                                                              'jsondata': "",
+
+                                                              'jsondata':None
 
                                                              })
                     if not self.is_accrual:
@@ -315,6 +313,9 @@ class emirate_hid(models.Model):
     _inherit = "res.partner"
     jsondata = fields.Char("-")
 
+    @api.model_create_multi
+    def create(self, vals):
+        return super(emirate_hid, self).create(vals)
 
 
     @api.onchange('jsondata')
