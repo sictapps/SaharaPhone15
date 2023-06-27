@@ -56,7 +56,7 @@ class RepairOrder(models.Model):
         lot_ids = self.operations.mapped('lot_id')
         for i in picking.move_line_ids_without_package:
             print(i.lot_id.name, 'stock.immediate.transfer')
-            i.lot_id = lot_ids[0]  # set first lot_id by default
+            # i.lot_id = lot_ids[0]  # set first lot_id by default
             if lot_ids:
                 lot_id = lot_ids[0]
                 lot_ids = lot_ids[1:]
