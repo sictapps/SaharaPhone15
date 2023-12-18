@@ -238,6 +238,7 @@ class emirate_hid_account(models.Model):
     def updateD(self):
         if self.jsondata:
             ee = json.loads(self.jsondata)
+            print(ee,'--------------------------------------')
             if ee['HasData']:
                 self.jsondata = ""
 
@@ -356,9 +357,13 @@ class emirate_hid(models.Model):
                 self.EmirateCode = ee['EmirateCode']
                 self.Phone = ee['Phone']
                 self.name=ee['NameAr']
-                self.email=ee['Email'] if len(ee['Email'])>0 else self.email
-                self.phone=ee['Phone'] if len(ee['Phone'])>0 else self.phone
-                self.mobile=ee['Mobile'] if len(ee['Mobile'])>0 else self.mobile
+                self.email = ee['Email'] if ee['Email'] and len(ee['Email']) > 0 else self.email
+                self.email = ee['Phone'] if ee['Phone'] and len(ee['Phone']) > 0 else self.email
+                self.email = ee['Mobile'] if ee['Mobile'] and len(ee['Mobile']) > 0 else self.email
+
+                # self.email=ee['Email'] if len(ee['Email'])>0 else self.email
+                # self.phone=ee['Phone'] if len(ee['Phone'])>0 else self.phone
+                # self.mobile=ee['Mobile'] if len(ee['Mobile'])>0 else self.mobile
 
                 data =ee['Photo']
 
@@ -395,130 +400,130 @@ class emirate_hid(models.Model):
 
     EIDNumber  = fields.Char("EIDNumber")
 
-     
+
     Name  = fields.Char("Name")
 
-     
+
     NameAr  = fields.Char("NameAr")
 
-     
+
     Phone  = fields.Char("Phone")
 
-     
+
     Mobile  = fields.Char("Mobile")
 
-     
+
     Email  = fields.Char("Email")
 
-     
+
     Pobox  = fields.Char("Pobox")
 
-     
+
     EmirateCode  = fields.Char("EmirateCode")
 
-     
+
     EmirateArabic  = fields.Char("EmirateArabic")
 
-     
+
     Emirate  = fields.Char("Emirate")
 
-     
+
     City  = fields.Char("City")
 
-     
+
     CityArabic  = fields.Char("CityArabic")
 
-     
+
     CityID  = fields.Char("CityID")
 
-     
+
     AreaCode  = fields.Char("AreaCode")
 
-     
+
     AreaArabic  = fields.Char("AreaArabic")
 
-     
+
     Area  = fields.Char("Area")
 
-     
+
     Sex  = fields.Char("Sex")
 
-     
+
     OccupationCode  = fields.Char("OccupationCode")
 
-     
+
     OccupationArabic  = fields.Char("OccupationArabic")
 
-     
+
     Occupation  = fields.Char("Occupation")
 
-     
+
     OccupationFieldCode  = fields.Char("OccupationFieldCode")
 
-     
+
     OccupationTypeArabic  = fields.Char("OccupationTypeArabic")
 
-     
+
     OccupationType  = fields.Char("OccupationType")
 
-     
+
     SponsorType  = fields.Char("SponsorType")
 
-     
+
     ResidencyType  = fields.Char("ResidencyType")
 
-     
+
     DOB  = fields.Char("DOB")
 
-     
+
     ResidencyIssue  = fields.Char("ResidencyIssue")
 
-     
+
     ResidencyExpiry  = fields.Char("ResidencyExpiry")
 
-     
+
     Title  = fields.Char("Title")
 
-     
+
     TitleAr  = fields.Char("TitleAr")
 
-     
+
     NationalityID  = fields.Char("NationalityID")
 
-     
+
     Nationality  = fields.Char("Nationality")
 
-     
+
     NationalityArabic  = fields.Char("NationalityArabic")
 
-     
+
     PassportNumber  = fields.Char("PassportNumber")
 
-     
+
     SponsorNumber  = fields.Char("SponsorNumber")
 
-     
+
     SponsorName  = fields.Char("SponsorName")
 
-     
+
     CompanyName  = fields.Char("CompanyName")
 
-     
+
     CompanyNameArabic  = fields.Char("CompanyNameArabic")
 
-     
+
     ResidencyNumber  = fields.Char("ResidencyNumber")
 
-     
+
     cardVersion  = fields.Char("cardVersion")
 
-     
+
     PhotoPath  = fields.Char("PhotoPath")
 
-     
+
     Photo  = fields.Image("Photo")
 
-     
+
     Signature  = fields.Char("Signature")
 
 #     _name = 'emirate_hid.emirate_hid'

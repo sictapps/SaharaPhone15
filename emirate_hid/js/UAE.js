@@ -1,73 +1,55 @@
-
-
 odoo.define('EmirateHID.Read', function (require) {
     'use strict';
 
-var core = require('web.core');
-var Widget = require('web.Widget');
-var field_registry = require('web.field_registry');
-var widget_registry = require('web.widget_registry');
-var Dialog = require('web.Dialog');
-var basic_fields = require('web.basic_fields');
-var FormRenderer = require('web.FormRenderer');
-var FormView = require('web.FormView');
-var viewRegistry = require('web.view_registry');
-var AbstractField = require('web.AbstractField');
+    var core = require('web.core');
+    var FormRenderer = require('web.FormRenderer');
+    var FormView = require('web.FormView');
+    var viewRegistry = require('web.view_registry');
 
-var field_utils = require('web.field_utils');
+    var QWeb = core.qweb;
+    var _t = core._t;
 
-var QWeb = core.qweb;
-var _t = core._t;
+    var UAEFormRenderer = FormRenderer.extend({
+            events: _.extend({}, FormRenderer.prototype.events, {
+                "click .btn-readCard": "_callExtension",
+                "click .simulateEidResponse": "_getData"
+            }),
 
+            _callExtension: function (event) {
+                var customEvent = new Event('EID_EVENT');
+                document.dispatchEvent(customEvent);
+            },
 
+            _getData: function (event) {
+                event.preventDefault();
+                var self = this;
+                var simulateEidResponseField = this.$('.simulateEidResponse');
 
-var UAEFormRenderer = FormRenderer.extend({
-    events: _.extend({}, FormRenderer.prototype.events, {
-        "click .btn-readCard": "_callExtenion",
-        "click .simulateEidResponse": "_getdata"
-    }),
-    /*Ïï½
-     * Open the m2o ÏÍÑÔ1Vitem selection from another button
-     */
-       _callExtenion: function (event) {
-        var event = document.createEvent('Event');
-          event.initEvent('EID_EVENT');
-          document.dispatchEvent(event);
-         // document.getElementById("simulateEidResponse").style.display = "none";
+                if (simulateEidResponseField.length > 0) {
+                    var response = simulateEidResponseField.text();
 
-    },
+                    if (response.length > 10) {
+                        try {
+                            var jsonData = JSON.parse(response);
+                            var jsonField = this.$('input[name="jsondata"]');
+                            jsonField.val(response).change();  // Trigger the change event
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error);
+                            // Handle the error as needed
+                        }
+                    }
+                }
+            },
+        })
+    ;
 
-    _getdata: function (event) {
-     event.preventDefault();
-        var self = this;
-          var response = this.$('.simulateEidResponse').text();
-          if (response.length >10)
-          {
-          var jsondata = JSON.parse(response);
-          let le=document.getElementsByName('jsondata')[0];
-          le.value=response;
-          var event = new Event('change');
-          le.dispatchEvent(event);
-          }
+    var Read = FormView.extend({
+        config: _.extend({}, FormView.prototype.config, {
+            Renderer: UAEFormRenderer,
+        }),
+    });
 
-
-
-         // self.fieldIdsToNames.simulateEidResponse =jsondata;
-
-
-
-    },
-});
-
-var Read = FormView.extend({
-    config: _.extend({}, FormView.prototype.config, {
-        Renderer: UAEFormRenderer,
-    }),
-});
-
-viewRegistry.add("UAE", Read);
+    viewRegistry.add("UAE", Read);
 
     return Read;
-
-
 });
