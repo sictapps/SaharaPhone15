@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='pos-receipt-contact']" position="inside">
+            <t t-if='receipt.client'>
+                <div>--------------------------------</div>
+                <div>Client:
+                    <t t-esc='receipt.client.name'/>
+                </div>
+                <div>Tel:
+                    <t t-esc='receipt.client.phone'/>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[@class='pos-receipt-order-data']" position="before">
+            <div style="width: 100%; text-align: center; margin: 0 auto;">
+                <div>--------------------------------</div>
+                <div style="padding-left:5px; color:black; width:100%; font-size:13px;">
+                    Additional Details:
+                    <br/>
+                    - Retailer acknowledges that the goods are received in good condition
+                    <br/>
+                    - Manufacturer warranty as per terms from invoice date
+                    <br/>
+                    - In case of mobile, warranty will be covered by the manufacturer
+                    <br/>
+                </div>
+                <div>--------------------------------</div>
+            </div>
+        </xpath>
+
+    </t>
+</templates>
