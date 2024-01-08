@@ -30,19 +30,20 @@
         </xpath>
 
     </t>
-    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderLinesReceipt"
-       t-inherit-mode="extension" owl="1">
-        <xpath expr="//t[@t-if='isSimple(line)']" position="inside">
-                <t t-foreach="props.order.orderlines.models"
-                   t-as="salesperson">
-                    <div class="pos-receipt-left-padding"
-                         t-if="salesperson.salesperson and line.id==salesperson.id">
+    <t t-name="OrderLinesReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[@class='responsive-price']" position="before">
+<!--        <t t-foreach="props.order.orderlines.models"-->
+        <!--                   t-as="salesperson">-->
+        <div class="pos-receipt-left-padding"
+             t-if="props.order.orderlines.models[0].salesperson and line.id==props.order.orderlines.models[0].id">
                         <span>SalesPerson:</span>
-                        <span t-esc="salesperson.salesperson"/>
+            <span t-esc="props.order.orderlines.models[0].salesperson"/>
+            <div>--------------------------------</div>
                     </div>
-                </t>
-        </xpath>
-    </t>
+
+        <!--                </t>-->
+    </xpath>
+</t>
 
 
 </templates>
