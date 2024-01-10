@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sahara', 'sahara_planet'],
+    'depends': ['base', 'sahara'],
 
     # always loaded
     'data': [
