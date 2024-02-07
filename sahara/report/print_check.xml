@@ -12,8 +12,8 @@
         <!-- <div><span>Montagab33</span></div> -->
         <div class="ckus_payee_name" t-esc="page['partner_name']"/>
         <div class="ckus_amount_in_word" t-esc="page['amount_in_word']"/>
-        <div class="ckus_amount">
-            <t t-esc="page['amount'].replace(o.currency_id.symbol, '')"/>
+        <div class="ckus_amount" t-esc="page['amount'].replace(o.currency_id.symbol, '')">
+<!--            <t t-esc="page['amount'].replace(o.currency_id.symbol, '')"/>-->
         </div>
         <!-- <div class="ckus_payee_addr" t-esc="page['partner_id']" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
         <div class="ckus_memo" t-esc="page['memo']"/> -->

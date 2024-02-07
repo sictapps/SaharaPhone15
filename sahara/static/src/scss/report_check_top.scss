@@ -27,6 +27,15 @@
         text-align: center;
         font-size: 16px;
         font-weight: bold;
+        height: fit-content !important;
+        overflow: wrap !important;
+        word-break: break-word !important; // IE & < Edge 18
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+        // border: 1px solid black !important;
+        z-index: 99999999 !important;
+        line-height: 50px !important;
     }
     .ckus_date_format {
         top: 0.75in;
@@ -43,6 +52,15 @@
         z-index: 1 !important;
         font-size: 16px;
         font-weight: bold;
+        height: fit-content !important;
+        overflow: wrap !important;
+        word-break: break-word !important; // IE & < Edge 18
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+        // border: 1px solid black !important;
+        z-index: 99999999 !important;
+        line-height: 50px !important;
     }
     .ckus_amount_in_word {
         top: 1.45in;
@@ -55,7 +73,7 @@
         height: fit-content !important;
         overflow: wrap !important;
         word-break: break-word !important; // IE & < Edge 18
-        overflow-wrap: break-word !important; 
+        overflow-wrap: break-word !important;
         word-wrap: break-word !important;
         white-space: pre-wrap !important;
         // border: 1px solid black !important;
@@ -69,6 +87,15 @@
         text-align: left;
         font-size: 16px;
         font-weight: bold;
+        height: fit-content !important;
+        overflow: wrap !important;
+        word-break: break-word !important; // IE & < Edge 18
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+        // border: 1px solid black !important;
+        z-index: 99999999 !important;
+        line-height: 50px !important;
     }
     .ckus_payee_address {
         top: 1.87in;
