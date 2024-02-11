@@ -1,4 +1,4 @@
-.ckus_top_page_s {
+.ckus_top_page {
     .ckus_check {
         top: 0in;
     }
@@ -22,20 +22,20 @@
     }
     .ckus_date {
         top: 0in;//0.05
-        left: 7.0in;
+        left: 6.0in;
         width: 0.98in;
         text-align: center;
         font-size: 16px;
         font-weight: bold;
-        //height: fit-content !important;
-        //overflow: wrap !important;
-        //word-break: break-word !important; // IE & < Edge 18
-        //overflow-wrap: break-word !important;
-        //word-wrap: break-word !important;
-        //white-space: pre-wrap !important;
-        //// border: 1px solid black !important;
-        //z-index: 99999999 !important;
-        //line-height: 50px !important;
+        height: fit-content !important;
+        overflow: wrap !important;
+        word-break: break-word !important; // IE & < Edge 18
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+        // border: 1px solid black !important;
+        z-index: 99999999 !important;
+        line-height: 50px !important;
     }
     .ckus_date_format {
         top: 0.75in;
@@ -46,25 +46,25 @@
     }
     .ckus_amount {
         top: 2.0in;
-        left: 7.3in;// was 6.7
+        left: 6.3in;// was 6.7
         width: 1.07in;
         text-align: center;
         z-index: 1 !important;
         font-size: 16px;
         font-weight: bold;
-        //height: fit-content !important;
-        //overflow: wrap !important;
-        //word-break: break-word !important; // IE & < Edge 18
-        //overflow-wrap: break-word !important;
-        //word-wrap: break-word !important;
-        //white-space: pre-wrap !important;
-        //// border: 1px solid black !important;
-        //z-index: 99999999 !important;
-        //line-height: 50px !important;
+        height: fit-content !important;
+        overflow: wrap !important;
+        word-break: break-word !important; // IE & < Edge 18
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+        // border: 1px solid black !important;
+        z-index: 99999999 !important;
+        line-height: 50px !important;
     }
     .ckus_amount_in_word {
         top: 1.45in;
-        left: 2.4in;
+        left: 1.3in;
         width: 4in;// was 7
         // word-wrap: break-word;
         text-align: left;
@@ -82,7 +82,7 @@
     }
     .ckus_payee_name {
         top: 1.0in;
-        left: 2.4in;
+        left: 1.3in;
         width: 4.5in;
         text-align: left;
         font-size: 16px;
