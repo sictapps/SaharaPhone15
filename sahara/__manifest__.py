@@ -56,7 +56,7 @@
             '/sahara/views/pos_templates.xml',
         ],
         'web.report_assets_common': [
-            '/sahara/static/**/*',
+            '/sahara/static/src/**/*',
         ]
     },
 }
