@@ -33,7 +33,7 @@
         'views/paymentreceipt.xml',
         'views/receiptview.xml',
         'report/print_check.xml',
-        'report/print_check_top.xml',
+        'report/print_check_sahara_top.xml',
         'report/print_check_nbd.xml',
         'report/print_check_nbf.xml',
         'report/print_check_rak.xml',
