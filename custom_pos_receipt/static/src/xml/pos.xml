@@ -10,6 +10,9 @@
                 <div>Tel:
                     <t t-esc='receipt.client.phone'/>
                 </div>
+                <div>Tax ID:
+                    <t t-esc='receipt.client.vat'/>
+                </div>
             </t>
         </xpath>
         <xpath expr="//div[@class='pos-receipt-order-data']" position="before">
