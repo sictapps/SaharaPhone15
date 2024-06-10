@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sapps_sahara_privacy_policy_sapps_sahara_privacy_policy,sapps_sahara_privacy_policy.sapps_sahara_privacy_policy,model_sapps_sahara_privacy_policy_sapps_sahara_privacy_policy,base.group_user,1,1,1,1

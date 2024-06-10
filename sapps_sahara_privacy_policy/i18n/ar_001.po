@@ -1,0 +1,615 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sapps_sahara_privacy_policy
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20230815\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-10 07:33+0000\n"
+"PO-Revision-Date: 2024-06-10 07:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"A breach or violation of any of the Terms will result in an immediate "
+"termination of your Services."
+msgstr ""
+"أي خرق أو انتهاك لأي من الشروط سيؤدي إلى الإنهاء الفوري لخدماتك."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Account information including your username, password, security questions."
+msgstr ""
+"معلومات الحساب بما في ذلك اسم المستخدم، كلمة المرور، وأسئلة الأمان."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Any information we obtain from third parties will be treated in accordance "
+"with this Privacy Policy. We are not responsible or liable for the accuracy "
+"of the information provided to us by third parties and are not responsible "
+"for any third party's policies or practices. For more information, see the "
+"section below, Third Party Websites and Links."
+msgstr ""
+"أي معلومات نحصل عليها من أطراف ثالثة سيتم التعامل معها وفقًا لسياسة الخصوصية هذه. نحن لسنا مسؤولين أو ملزمين بدقة المعلومات التي تقدمها لنا الأطراف الثالثة ولا نتحمل مسؤولية سياسات أو ممارسات أي طرف ثالث. لمزيد من المعلومات، راجع القسم أدناه، مواقع وروابط الأطراف الثالثة."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"Any new features or tools which are added to the current store shall also be"
+" subject to the Terms of Service. You can review the most current version of"
+" the Terms of Service at any time on this page. We reserve the right to "
+"update, change or replace any part of these Terms of Service by posting "
+"updates and/or changes to our website. It is your responsibility to check "
+"this page periodically for changes. Your continued use of or access to the "
+"website following the posting of any changes constitutes acceptance of those"
+" changes."
+msgstr ""
+"أي ميزات أو أدوات جديدة تتم إضافتها إلى المتجر الحالي ستكون خاضعة أيضًا لشروط الخدمة. يمكنك مراجعة النسخة الأحدث من شروط الخدمة في أي وقت على هذه الصفحة. نحن نحتفظ بالحق في تحديث أو تغيير أو استبدال أي جزء من شروط الخدمة هذه عن طريق نشر التحديثات و/أو التغييرات على موقعنا الإلكتروني. إن مسؤوليتك هي مراجعة هذه الصفحة بشكل دوري للتحقق من التغييرات. استمرارك في استخدام أو الوصول إلى الموقع بعد نشر أي تغييرات يشكل قبولًا لتلك التغييرات."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Basic contact details including your name, address, phone number, email."
+msgstr ""
+"تفاصيل الاتصال الأساسية بما في ذلك اسمك، عنوانك، رقم هاتفك، بريدك الإلكتروني."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"By agreeing to these Terms of Service, you represent that you are at least "
+"the age of majority in your state or province of residence, or that you are "
+"the age of majority in your state or province of residence and you have "
+"given us your consent to allow any of your minor dependents to use this "
+"site."
+msgstr ""
+"بالموافقة على شروط الخدمة هذه، فإنك تقر بأنك تبلغ على الأقل سن الرشد في ولايتك أو مقاطعتك السكنية، أو أنك تبلغ سن الرشد في ولايتك أو مقاطعتك السكنية وقد منحتنا موافقتك للسماح لأي من القُصَّر التابعين لك باستخدام هذا الموقع."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"By visiting our site and/ or purchasing something from us, you engage in our"
+" “Service” and agree to be bound by the following terms and conditions "
+"(“Terms of Service”, “Terms”), including those additional terms and "
+"conditions and policies referenced herein and/or available by hyperlink. "
+"These Terms of Service apply to all users of the site, including without "
+"limitation users who are browsers, vendors, customers, merchants, and/ or "
+"contributors of content."
+msgstr ""
+"بزيارتك لموقعنا و/أو شراء شيء منا، فإنك تشارك في “الخدمة” الخاصة بنا وتوافق على الالتزام بالشروط والأحكام التالية (“شروط الخدمة”، “الشروط”)، بما في ذلك الشروط والأحكام والسياسات الإضافية المشار إليها هنا و/أو المتاحة عبر رابط. تنطبق شروط الخدمة هذه على جميع مستخدمي الموقع، بما في ذلك دون حصر المستخدمين الذين يتصفحون، والبائعين، والعملاء، والتجار، و/أو المساهمين في المحتوى."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"Certain products or Services may be available exclusively online through the"
+" website. These products or Services may have limited quantities and are "
+"subject to return or exchange only according to our Refund Policy."
+msgstr ""
+"قد تتوفر بعض المنتجات أو الخدمات حصريًا عبر الإنترنت من خلال الموقع. قد تكون هذه المنتجات أو الخدمات بكميات محدودة وتخضع للإرجاع أو التبادل فقط وفقًا لسياسة الاسترداد الخاصة بنا."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"Certain types of items cannot be returned, like perishable goods (such as "
+"Any Order Under 50 DH), custom products as special orders or personalized "
+"items. Please get in touch if you have questions or concerns about your "
+"specific item."
+msgstr ""
+"لا يمكن إرجاع أنواع معينة من العناصر، مثل السلع القابلة للتلف (مثل أي طلب أقل من 50 درهم)، المنتجات المخصصة مثل الطلبات الخاصة أو العناصر المخصصة. يرجى التواصل معنا إذا كان لديك أي أسئلة أو مخاوف بشأن عنصر معين لديك."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "Changes to This Privacy Policy"
+msgstr ""
+"تغييرات على سياسة الخصوصية هذه"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "Companies who support our Site and Services,"
+msgstr ""
+"الشركات التي تدعم موقعنا وخدماتنا،"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Customer support information including the information you choose to include"
+" in communications with us, for example, when sending a message through the "
+"Services."
+msgstr ""
+"معلومات دعم العملاء بما في ذلك المعلومات التي تختار تضمينها في الاتصالات معنا، على سبيل المثال، عند إرسال رسالة من خلال الخدمات."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Damages and issues"
+msgstr ""
+"الأضرار والمشكلات"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "European Union 14 day cooling off period"
+msgstr ""
+"فترة التراجع لمدة 14 يومًا في الاتحاد الأوروبي"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Exceptions / non-returnable items"
+msgstr ""
+"الاستثناءات / العناصر غير القابلة للإرجاع"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Exchanges"
+msgstr ""
+"التبادلات"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Finally, we may obtain information about you from third parties, including "
+"from vendors and service providers who may collect information on our "
+"behalf,"
+msgstr ""
+"أخيرًا، قد نحصل على معلومات عنك من أطراف ثالثة، بما في ذلك من البائعين ومقدمي الخدمات الذين قد يجمعون المعلومات نيابة عنا،"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "How We Collect and Use Your Personal Information"
+msgstr ""
+"كيف نجمع ونستخدم معلوماتك الشخصية"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "How We Use Your Personal Information"
+msgstr ""
+"كيف نستخدم معلوماتك الشخصية"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"If your return is accepted, we’ll send you a return shipping label, as well "
+"as instructions on how and where to send your package. Items sent back to us"
+" without first requesting a return will not be accepted."
+msgstr ""
+"إذا تم قبول طلب الإرجاع الخاص بك، سنرسل لك ملصق شحن الإرجاع، بالإضافة إلى تعليمات حول كيفية وأين ترسل الطرد الخاص بك. لن يتم قبول العناصر المرسلة إلينا دون طلب إرجاع أولاً."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"In addition to the specific uses set out below, we may use information we "
+"collect about you to communicate with you, provide the Services, comply with"
+" any applicable legal obligations, enforce any applicable terms of service, "
+"and to protect or defend the Services, our rights, and the rights of our "
+"users or others."
+msgstr ""
+"بالإضافة إلى الاستخدامات المحددة الموضحة أدناه، قد نستخدم المعلومات التي نجمعها عنك للتواصل معك، وتقديم الخدمات، والامتثال لأي التزامات قانونية قابلة للتطبيق، وتنفيذ أي شروط خدمة قابلة للتطبيق، وحماية أو الدفاع عن الخدمات وحقوقنا وحقوق مستخدمينا أو الآخرين."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "Information We Collect Directly from You"
+msgstr ""
+"المعلومات التي نجمعها منك مباشرة"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "Information We Collect through Cookies"
+msgstr ""
+"المعلومات التي نجمعها من خلال ملفات تعريف الارتباط"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "Information We Obtain from Third Parties"
+msgstr ""
+"المعلومات التي نحصل عليها من أطراف ثالثة"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Information that you directly submit to us through our Services may include:"
+msgstr ""
+"المعلومات التي تقدمها لنا مباشرة من خلال خدماتنا قد تشمل:"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"Notwithstanding the above, if the merchandise is being shipped into the "
+"European Union, you have the right to cancel or return your order within 14 "
+"days, for any reason and without a justification. As above, your item must "
+"be in the same condition that you received it, unused, with tags, and in its"
+" original packaging. You’ll also need the receipt or proof of purchase."
+msgstr ""
+"بالرغم مما سبق، إذا تم شحن البضائع إلى الاتحاد الأوروبي، لديك الحق في إلغاء أو إرجاع طلبك خلال 14 يومًا، لأي سبب ودون تبرير. كما هو مذكور أعلاه، يجب أن يكون العنصر في نفس الحالة التي استلمته بها، غير مستخدم، مع العلامات، وفي عبوته الأصلية. ستحتاج أيضًا إلى الإيصال أو إثبات الشراء."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Order information including your name, billing address, shipping address, "
+"payment confirmation, email address, phone number."
+msgstr ""
+"معلومات الطلب بما في ذلك اسمك، عنوان الفواتير، عنوان الشحن، تأكيد الدفع، عنوان البريد الإلكتروني، رقم الهاتف."
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Our payment processors, who collect payment information (e.g., bank account,"
+" credit or debit card information, billing address) to process your payment "
+"in order to fulfill your orders and provide you with products or services "
+"you have requested, in order to perform our contract with you."
+msgstr ""
+"معالجو الدفع لدينا، الذين يجمعون معلومات الدفع (مثل الحساب البنكي، معلومات بطاقة الائتمان أو الخصم، عنوان الفواتير) لمعالجة دفعتك من أجل تنفيذ طلباتك وتزويدك بالمنتجات أو الخدمات التي طلبتها، من أجل تنفيذ عقدنا معك."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"Our store is hosted on Odoo.sh They provide us with the online e-commerce "
+"platform that allows us to sell our products and Services to you."
+msgstr ""
+"متجرنا مستضاف على Odoo.sh. إنهم يوفرون لنا المنصة الإلكترونية التي تتيح لنا بيع منتجاتنا وخدماتنا لك."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"Please inspect your order upon reception and contact us immediately if the "
+"item is defective, damaged or if you receive the wrong item, so that we can "
+"evaluate the issue and make it right."
+msgstr ""
+"يرجى فحص طلبك عند الاستلام والاتصال بنا فورًا إذا كان العنصر معيبًا أو تالفًا أو إذا استلمت العنصر الخطأ، حتى نتمكن من تقييم المشكلة ومعالجتها."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"Please read these Terms of Service carefully before accessing or using our "
+"website. By accessing or using any part of the site, you agree to be bound "
+"by these Terms of Service. If you do not agree to all the terms and "
+"conditions of this agreement, then you may not access the website or use any"
+" Services. If these Terms of Service are considered an offer, acceptance is "
+"expressly limited to these Terms of Service."
+msgstr ""
+"يرجى قراءة شروط الخدمة هذه بعناية قبل الوصول إلى موقعنا الإلكتروني أو استخدامه. من خلال الوصول إلى أي جزء من الموقع أو استخدامه، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على جميع الشروط والأحكام الواردة في هذا الاتفاق، فلا يجوز لك الوصول إلى الموقع أو استخدام أي من الخدمات. إذا اعتُبرت شروط الخدمة هذه عرضًا، فإن القبول يقتصر صراحة على هذه الشروط."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Please read this Privacy Policy carefully. By using and accessing any of the"
+" Services, you agree to the collection, use, and disclosure of your "
+"information as described in this Privacy Policy. If you do not agree to this"
+" Privacy Policy, please do not use or access any of the Services."
+msgstr ""
+"يرجى قراءة سياسة الخصوصية هذه بعناية. من خلال استخدام أي من الخدمات والوصول إليها، فإنك توافق على جمع واستخدام والإفصاح عن معلوماتك كما هو موضح في سياسة الخصوصية هذه. إذا كنت لا توافق على سياسة الخصوصية هذه، يرجى عدم استخدام أو الوصول إلى أي من الخدمات."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "Prices for our products are subject to change without notice."
+msgstr ""
+"أسعار منتجاتنا عرضة للتغيير دون إشعار مسبق."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "Privacy Policy"
+msgstr ""
+"سياسة الخصوصية"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Providing Products and Services. We use your personal information to provide"
+" you with the Services in order to perform our contract with you, including "
+"to process your payments, fulfill your orders, to send"
+msgstr ""
+"تقديم المنتجات والخدمات. نحن نستخدم معلوماتك الشخصية لتزويدك بالخدمات من أجل تنفيذ عقدنا معك، بما في ذلك معالجة دفعاتك، وتنفيذ طلباتك، لإرسال"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Refunds"
+msgstr ""
+"المبالغ المستردة"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Return Policy"
+msgstr ""
+"سياسة الإرجاع"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "SECTION 1 - ONLINE STORE TERMS"
+msgstr ""
+"القسم 1 - شروط المتجر الإلكتروني"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "SECTION 2 - GENERAL CONDITIONS"
+msgstr ""
+"القسم 2 - الشروط العامة"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION"
+msgstr ""
+"القسم 3 - دقة واكتمال وتوقيت المعلومات"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES"
+msgstr ""
+"القسم 4 - تعديلات على الخدمة والأسعار"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "SECTION 5 - PRODUCTS OR SERVICES (if applicable)"
+msgstr ""
+"القسم 5 - المنتجات أو الخدمات (إذا كان ذلك ينطبق)"
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Sahara-e@saharaphone.com"
+msgstr ""
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Shopping information including the items you view, put in your cart or add "
+"to your wishlist."
+msgstr ""
+"معلومات التسوق بما في ذلك العناصر التي تشاهدها، تضعها في عربة التسوق الخاصة بك أو تضيفها إلى قائمة الرغبات الخاصة بك."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"Some features of the Services may require you to directly provide us with "
+"certain information about yourself. You may elect not to provide this "
+"information, but doing so may prevent you from using or accessing these "
+"features."
+msgstr ""
+"قد تتطلب بعض ميزات الخدمات منك تزويدنا ببعض المعلومات عن نفسك مباشرة. يمكنك اختيار عدم تقديم هذه المعلومات، ولكن قد يمنعك ذلك من استخدام أو الوصول إلى هذه الميزات."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid "Terms of Service"
+msgstr ""
+"شروط الخدمة"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"The fastest way to ensure you get what you want is to return the item you "
+"have, and once the return is accepted, make a separate purchase for the new "
+"item."
+msgstr ""
+"أسرع طريقة لضمان الحصول على ما تريد هي إعادة العنصر الذي لديك، وبمجرد قبول الإرجاع، قم بعملية شراء منفصلة للعنصر الجديد."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"The headings used in this agreement are included for convenience only and "
+"will not limit or otherwise affect these Terms."
+msgstr ""
+"العناوين المستخدمة في هذا الاتفاق مدرجة للتسهيل فقط ولن تحد من أو تؤثر على هذه الشروط بأي شكل من الأشكال."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"The types of personal information we obtain about you depends on how you "
+"interact with our Site and use our Services. When we use the term \"personal"
+" information\", we are referring to information that identifies, relates to,"
+" describes or can be associated with you. The following sections describe "
+"the categories and specific types of personal information we collect."
+msgstr ""
+"أنواع المعلومات الشخصية التي نحصل عليها عنك تعتمد على كيفية تفاعلك مع موقعنا واستخدام خدماتنا. عندما نستخدم مصطلح \"المعلومات الشخصية\"، فإننا نشير إلى المعلومات التي تحدد هويتك أو تتعلق بك أو تصفك أو يمكن ربطها بك. تصف الأقسام التالية الفئات وأنواع المعلومات الشخصية التي نجمعها."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"This Privacy Policy describes how Sahara Phone LLC (the \"Site\", \"we\", "
+"\"us\", or \"our\") collects, uses, and discloses your personal information "
+"when you visit, use our services, or make a purchase from Sahara Phone LLC "
+"(the \"Site\") or otherwise communicate with us (collectively, the "
+"\"Services\"). For purposes of this Privacy Policy, \"you\" and \"your\" "
+"means you as the user of the Services, whether you are a customer, website "
+"visitor, or another individual whose information we have collected pursuant "
+"to this Privacy Policy."
+msgstr ""
+"تصف سياسة الخصوصية هذه كيف تقوم Sahara Phone LLC (\"الموقع\"، \"نحن\"، \"لنا\" أو \"خاصتنا\") بجمع واستخدام والكشف عن معلوماتك الشخصية عند زيارتك، استخدام خدماتنا، أو الشراء من Sahara Phone LLC (\"الموقع\") أو التواصل معنا بطرق أخرى (يُشار إليها مجتمعة باسم \"الخدمات\"). لأغراض سياسة الخصوصية هذه، يعني \"أنت\" و\"خاصتك\" المستخدم للخدمات، سواء كنت عميلاً، زائراً للموقع، أو فردًا آخر جمعنا معلوماته وفقًا لسياسة الخصوصية هذه."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"This site may contain certain historical information. Historical "
+"information, necessarily, is not current and is provided for your reference "
+"only. We reserve the right to modify the contents of this site at any time, "
+"but we have no obligation to update any information on our site. You agree "
+"that it is your responsibility to monitor changes to our site."
+msgstr ""
+"قد يحتوي هذا الموقع على معلومات تاريخية معينة. المعلومات التاريخية، بطبيعتها، ليست حالية وتُقدَّم للمرجع فقط. نحتفظ بالحق في تعديل محتويات هذا الموقع في أي وقت، ولكننا لسنا ملزمين بتحديث أي معلومات على موقعنا. أنت توافق على أن من مسؤوليتك مراقبة التغييرات في موقعنا."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"This website is operated by Sahara Phone LLC. Throughout the site, the terms"
+" “we”, “us” and “our” refer to Sahara Phone LLC offers this website, "
+"including all information, tools and Services available from this site to "
+"you, the user, conditioned upon your acceptance of all terms, conditions, "
+"policies and notices stated here."
+msgstr ""
+"يتم تشغيل هذا الموقع بواسطة Sahara Phone LLC. في جميع أنحاء الموقع، تشير المصطلحات \"نحن\" و\"لنا\" و\"خاصتنا\" إلى Sahara Phone LLC. تقدم Sahara Phone LLC هذا الموقع، بما في ذلك جميع المعلومات والأدوات والخدمات المتاحة من هذا الموقع لك، المستخدم، بشرط قبولك لجميع الشروط والأحكام والسياسات والإشعارات المذكورة هنا."
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"To be eligible for a return, your item must be in the same condition that "
+"you received it, unused, with tags, and in its original packaging. You’ll "
+"also need the receipt or proof of purchase."
+msgstr ""
+"لتكون مؤهلاً للإرجاع، يجب أن يكون العنصر الخاص بك في نفس الحالة التي تلقيته فيها، غير مستخدم، مع العلامات، وفي عبوته الأصلية. ستحتاج أيضًا إلى الإيصال أو إثبات الشراء."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"To provide the Services, we collect and have collected over the past 12 "
+"months personal information about you from a variety of sources, as set out "
+"below. The information that we collect and use varies depending on how you "
+"interact with us."
+msgstr ""
+"لتقديم الخدمات، نقوم بجمع وقد جمعنا خلال الـ 12 شهرًا الماضية معلومات شخصية عنك من مجموعة متنوعة من المصادر، كما هو موضح أدناه. تختلف المعلومات التي نجمعها ونستخدمها اعتمادًا على كيفية تفاعلك معنا."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "To start a return, you can contact us at"
+msgstr ""
+"لبدء عملية الإرجاع، يمكنك الاتصال بنا على"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "Unfortunately, we cannot accept returns on sale items or gift cards."
+msgstr ""
+"للأسف، لا يمكننا قبول إرجاع العناصر المباعة أو بطاقات الهدايا."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"We also automatically collect certain information about your interaction "
+"with the Services (\"Usage Data\"). To do this, we may use cookies, pixels "
+"and similar technologies (\"Cookies\"). Usage Data may include information "
+"about how you access and use our Site and your account, including device "
+"information, browser information, information about your network connection,"
+" your IP address and other information regarding your interaction with the "
+"Services."
+msgstr ""
+"نقوم أيضًا بجمع بعض المعلومات تلقائيًا حول تفاعلك مع الخدمات (\"بيانات الاستخدام\"). للقيام بذلك، قد نستخدم الكوكيز، البكسلات والتقنيات المشابهة (\"الكوكيز\"). قد تتضمن بيانات الاستخدام معلومات حول كيفية وصولك واستخدامك لموقعنا وحسابك، بما في ذلك معلومات الجهاز، معلومات المتصفح، معلومات حول اتصال الشبكة الخاص بك، عنوان IP الخاص بك ومعلومات أخرى تتعلق بتفاعلك مع الخدمات."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"We are not responsible if information made available on this site is not "
+"accurate, complete or current. The material on this site is provided for "
+"general information only and should not be relied upon or used as the sole "
+"basis for making decisions without consulting primary, more accurate, more "
+"complete or more timely sources of information. Any reliance on the material"
+" on this site is at your own risk."
+msgstr ""
+"نحن لسنا مسؤولين إذا كانت المعلومات المتاحة على هذا الموقع غير دقيقة، كاملة أو حديثة. المواد الموجودة على هذا الموقع مقدمة لأغراض معلوماتية عامة فقط ولا ينبغي الاعتماد عليها أو استخدامها كأساس وحيد لاتخاذ القرارات دون استشارة مصادر المعلومات الأولية، الأكثر دقة، الأكثر اكتمالاً أو الأكثر حداثة. أي اعتماد على المواد الموجودة على هذا الموقع هو على مسؤوليتك الخاصة."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"We have a 14-day return policy, which means you have 14 days after receiving"
+" your item to request a return."
+msgstr ""
+"لدينا سياسة إرجاع لمدة 14 يومًا، مما يعني أن لديك 14 يومًا بعد استلام العنصر الخاص بك لطلب الإرجاع."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"We have made every effort to display as accurately as possible the colors "
+"and images of our products."
+msgstr ""
+"لقد بذلنا كل جهد ممكن لعرض الألوان والصور لمنتجاتنا بدقة قدر الإمكان."
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"We may update this Privacy Policy from time to time, including to reflect "
+"changes to our practices or for other operational, legal, or regulatory "
+"reasons. We will post the revised Privacy Policy on the Site, update the "
+"\"Last updated\" date and take any other steps required by applicable law."
+msgstr ""
+"قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر، بما في ذلك لعكس التغييرات في ممارساتنا أو لأسباب تشغيلية أو قانونية أو تنظيمية أخرى. سنقوم بنشر سياسة الخصوصية المعدلة على الموقع، وتحديث تاريخ \"آخر تحديث\" واتخاذ أي خطوات أخرى مطلوبة بموجب القانون المعمول به."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"We reserve the right at any time to modify or discontinue the Service (or "
+"any part or content thereof) without notice at any time."
+msgstr ""
+"نحتفظ بالحق في أي وقت في تعديل أو إيقاف الخدمة (أو أي جزء أو محتوى منها) دون إشعار في أي وقت."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"We reserve the right to refuse Service to anyone for any reason at any time."
+msgstr ""
+"نحتفظ بالحق في رفض الخدمة لأي شخص لأي سبب في أي وقت."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"We shall not be liable to you or to any third-party for any modification, "
+"price change, suspension or discontinuance of the Service."
+msgstr ""
+"لن نكون مسؤولين تجاهك أو تجاه أي طرف ثالث عن أي تعديل أو تغيير في السعر أو تعليق أو إيقاف الخدمة."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid ""
+"We will notify you once we’ve received and inspected your return, and let "
+"you know if the refund was approved or not. If approved, you’ll be "
+"automatically refunded on your original payment method within 10 business "
+"days. Please remember it can take some time for your bank or credit card "
+"company to process and post the refund too. If more than 15 business days "
+"have passed since we’ve approved your return, please contact us at"
+msgstr ""
+"سنقوم بإخطارك بمجرد استلام وإجراء فحص لإرجاعك، وإعلامك إذا تمت الموافقة على الاسترداد أم لا. إذا تمت الموافقة، ستتم إعادة المبلغ تلقائيًا إلى طريقة الدفع الأصلية الخاصة بك في غضون 10 أيام عمل. يرجى تذكر أن الأمر قد يستغرق بعض الوقت حتى تقوم المصرف أو شركة بطاقة الائتمان بمعالجة ونشر الاسترداد أيضًا. إذا مرت أكثر من 15 يوم عمل منذ أن قمنا بالموافقة على إرجاعك، يرجى الاتصال بنا على"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid "What Personal Information We Collect"
+msgstr ""
+"ما هي المعلومات الشخصية التي نجمعها"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.privacy_policy
+msgid ""
+"When you visit our Site, open or click on emails we send you, or interact "
+"with our Services or advertisements, we, or third parties we work with, may "
+"automatically collect certain information using online tracking technologies"
+" such as pixels, web beacons, software developer kits, third-party "
+"libraries, and cookies."
+msgstr ""
+"عندما تزور موقعنا، تفتح أو تنقر على الرسائل الإلكترونية التي نرسلها لك، أو تتفاعل مع خدماتنا أو إعلاناتنا، قد نقوم نحن أو الأطراف الثالثة التي نتعامل معها بجمع معلومات معينة تلقائيًا باستخدام تقنيات التتبع عبر الإنترنت مثل البيكسلات، منارات الويب، مجموعات تطوير البرمجيات، المكتبات التابعة لطرف ثالث، والكوكيز."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"You agree not to reproduce, duplicate, copy, sell, resell or exploit any "
+"portion of the Service, use of the Service, or access to the Service or any "
+"contact on the website through which the Service is provided, without "
+"express written permission by us."
+msgstr ""
+"توافق على عدم إعادة إنتاج أو تكرار أو نسخ أو بيع أو إعادة بيع أو استغلال أي جزء من الخدمة، أو استخدام الخدمة، أو الوصول إلى الخدمة أو أي اتصال على الموقع الذي يتم من خلاله تقديم الخدمة، دون إذن كتابي صريح منا."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.return_policy
+msgid "You can always contact us for any return question at"
+msgstr ""
+"يمكنك دائمًا الاتصال بنا لأي استفسار بشأن الإرجاع على"
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"You may not use our products for any illegal or unauthorized purpose nor may"
+" you, in the use of the Service, violate any laws in your jurisdiction "
+"(including but not limited to copyright laws)."
+msgstr ""
+"لا يجوز لك استخدام منتجاتنا لأي غرض غير قانوني أو غير مصرح به ولا يجوز لك، عند استخدام الخدمة، انتهاك أي قوانين في نطاق اختصاصك (بما في ذلك على سبيل المثال لا الحصر قوانين حقوق النشر)."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"You must not transmit any worms or viruses or any code of a destructive "
+"nature."
+msgstr ""
+"يجب عليك عدم نقل أي فيروسات أو ديدان أو أي كود ذو طبيعة مدمرة."
+
+#. module: sapps_sahara_privacy_policy
+#: model_terms:ir.ui.view,arch_db:sapps_sahara_privacy_policy.terms_of_service
+msgid ""
+"You understand that your content (not including credit card information), "
+"may be transferred unencrypted and involve (a) transmissions over various "
+"networks; and (b) changes to conform and adapt to technical requirements of "
+"connecting networks or devices. Credit card information is always encrypted "
+"during transfer over networks."
+msgstr ""
+"تفهم أن المحتوى الخاص بك (باستثناء معلومات بطاقة الائتمان)، قد يتم نقله بدون تشفير ويتضمن (أ) عمليات نقل عبر شبكات مختلفة؛ و (ب) تغييرات للتوافق والتكيف مع المتطلبات التقنية للشبكات أو الأجهزة المتصلة. يتم دائمًا تشفير معلومات بطاقة الائتمان أثناء النقل عبر الشبكات."
