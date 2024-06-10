@@ -4,7 +4,7 @@
       <t t-call="website.layout">
         <div class="oe_structure">
           <div class="container">
-            <center>
+<!--            <center>-->
               <h1>Terms of Service</h1>
               <p>This website is operated by Sahara Phone LLC. Throughout the site, the terms “we”, “us” and “our” refer to Sahara Phone LLC offers this website, including all information, tools and Services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
               <p>By visiting our site and/ or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.</p>
@@ -31,7 +31,7 @@
               <h2>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</h2>
               <p>Certain products or Services may be available exclusively online through the website. These products or Services may have limited quantities and are subject to return or exchange only according to our Refund Policy.</p>
               <p>We have made every effort to display as accurately as possible the colors and images of our products.</p>
-            </center>
+<!--            </center>-->
           </div>
         </div>
       </t>
