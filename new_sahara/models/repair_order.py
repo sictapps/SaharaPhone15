@@ -8,6 +8,40 @@ class StockPicking(models.Model):
 
     repair_id = fields.Char()
 
+    def on_barcode_scanned(self, barcode):
+        serial = self.env['stock.production.lot'].search([('name', '=', barcode)])
+        if serial and serial.product_id:
+            # العثور على خط الطلب المناسب
+            order_lines = self.move_ids_without_package.filtered(
+                lambda r: r.product_id.id == serial.product_id.id)
+
+            if order_lines:
+                # إذا كان هناك خط طلب موجود، تحديث الكمية وإضافة السيريال
+                order_line = order_lines[0]
+                qty = order_line.product_uom_qty
+                order_line.write({
+                    'product_uom_qty': qty + 1,
+                    'lot_ids': [(4, serial.id)]  # إضافة السيريال الحالي
+                })
+            else:
+                # إذا لم يكن هناك خط طلب، إنشاء خط طلب جديد
+                self.env['stock.move'].create({
+                    'picking_id': self.id,
+                    'product_id': serial.product_id.id,
+                    'product_uom_qty': 1,
+                    'location_id': self.location_id.id,
+                    'location_dest_id': self.location_dest_id.id,
+                    'product_uom': serial.product_id.uom_id.id,
+                    'lot_ids': [(6, 0, [serial.id])],  # تعيين السيريال بشكل صحيح هنا
+                    'state': 'draft',  # سيتم تأكيده لاحقاً
+                    'name': serial.name,
+                })
+        else:
+            raise UserError(
+                'Scanned Serial %s is not defined; or cannot be sold please verify product configuration' %
+                barcode)
+
+
 
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
