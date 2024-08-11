@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo noupdate="1">
+    <record id="payment_acquirer_masterCard" model="payment.acquirer">
+        <field name="name">Master Card</field>
+        <field name="provider">mpgs</field>
+        <field name="redirect_form_view_id" ref="payment_mpgs_redirect_form"/>
+        <field name="support_authorization">False</field>
+        <field name="support_fees_computation">True</field>
+        <field name="support_refund"></field>
+        <field name="support_tokenization">False</field>
+
+    </record>
+
+    <record id="payment_method_mastercard" model="account.payment.method">
+        <field name="name">mpgs</field>
+        <field name="code">Mastercard</field>
+        <field name="payment_type">inbound</field>
+    </record>
+
+</odoo>
