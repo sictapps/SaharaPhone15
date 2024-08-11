@@ -25,7 +25,7 @@ class StockPicking(models.Model):
                 })
             else:
                 # إذا لم يكن هناك خط طلب، إنشاء خط طلب جديد
-                self.env['stock.move'].create({
+                self.env['stock.move'].new({
                     'picking_id': self.id,
                     'product_id': serial.product_id.id,
                     'product_uom_qty': 1,
