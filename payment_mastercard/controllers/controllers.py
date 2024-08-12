@@ -1,14 +1,19 @@
 import requests
+import logging
+
 
 from odoo import http
 from odoo.http import request
 
+_logger = logging.getLogger(__name__)
 
 class MPGSController(http.Controller):
-    @http.route('/payment/mpgs/redirect', type='http', auth='public', methods=['POST'], csrf=False)
+    @http.route('/payment/mpgs/redirect', type='http', auth='public', methods=['POST'], csrf=False, website=True)
     def mpgs_redirect(self, **post):
         reference = post.get('reference')
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', post.get('reference'))])
+        _logger.debug("%d is the reference of payment", post.get('reference'))
+        self.message_post(body=post.get('reference'))
         if tx:
 
             credentials = tx.acquirer_id._get_mpgs_credentials()
@@ -49,14 +54,15 @@ class MPGSController(http.Controller):
 
             # إرسال الطلب إلى MPGS والحصول على عنوان إعادة التوجيه
             response = requests.post(mpgs_url, json=data, auth=("merchant."+credentials['merchant_id'], credentials['api_secret']))
-            redirect_url = response.json().get('paymentLink').get('url')
 
+            redirect_url = response.json().get('paymentLink').get('url')
+            _logger.debug("%d is the redirect URL", redirect_url)
 
             return request.redirect(redirect_url, local=False)
 
 
 
-    @http.route('/payment/mpgs/feedback', type='http', auth='public', methods=['GET', 'POST'])
+    @http.route('/payment/mpgs/feedback', type='http', auth='public', methods=['GET', 'POST'], website=True)
     def mpgs_feedback(self, **post):
         data = request.params
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', data.get('order_id'))])
