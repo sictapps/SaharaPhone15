@@ -1,3 +1,5 @@
+import json
+
 import requests
 import logging
 
@@ -13,7 +15,7 @@ class MPGSController(http.Controller):
         reference = post.get('reference')
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', post.get('reference'))])
         _logger.debug("%d is the reference of payment", post.get('reference'))
-        # self.message_post(body=post.get('reference'))
+
         if tx:
 
             credentials = tx.acquirer_id._get_mpgs_credentials()
@@ -37,9 +39,6 @@ class MPGSController(http.Controller):
                              "mobilePhone": "+971 544210311", "phone": "+971 544210311"},
                 "checkoutMode": "PAYMENT_LINK",
                 "paymentLink": {"expiryDateTime": "2024-09-25T10:00:00.04Z", "numberOfAllowedAttempts": 5},
-                "3DSecure": {
-                    "acsReturnUrl": request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/payment/mpgs/feedback',
-                },
                 'interaction': {
                     'operation': 'PURCHASE',
                     'redirectMerchantUrl':request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/payment/mpgs/feedback',
@@ -51,6 +50,9 @@ class MPGSController(http.Controller):
                     #     'web.base.url') + '/payment/mpgs/feedback'
                 }
             }
+
+
+
 
             # إرسال الطلب إلى MPGS والحصول على عنوان إعادة التوجيه
             response = requests.post(mpgs_url, json=data, auth=("merchant."+credentials['merchant_id'], credentials['api_secret']))
