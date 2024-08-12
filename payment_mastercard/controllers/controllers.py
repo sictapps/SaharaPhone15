@@ -13,7 +13,7 @@ class MPGSController(http.Controller):
         reference = post.get('reference')
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', post.get('reference'))])
         _logger.debug("%d is the reference of payment", post.get('reference'))
-        self.message_post(body=post.get('reference'))
+        # self.message_post(body=post.get('reference'))
         if tx:
 
             credentials = tx.acquirer_id._get_mpgs_credentials()
