@@ -67,10 +67,17 @@ class MPGSController(http.Controller):
     @http.route('/payment/mpgs/feedback', type='http', auth='public', methods=['GET', 'POST'], website=True)
     def mpgs_feedback(self, **post):
         data = request.params
+        _logger.debug("%d is MHD MASTERCARD", request)
+        _logger.debug("%d is MHD MASTERCARD", data)
+        _logger.debug("%d is MHD MASTERCARD", post)
+        _logger.debug("%d is MHD MASTERCARD", json.loads(request.httprequest.data))
+        _logger.debug("%d is MHD MASTERCARD",json.loads(request.httprequest))
+
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', data.get('order_id'))])
         if tx:
             if data.get('result') == 'SUCCESS':
                 tx.write({'state': 'done'})
+                request.redirect('/my')
             else:
                 tx.write({'state': 'error', 'state_message': data.get('error_description', 'Unknown error')})
             return request.render('payment_mpgs.payment_feedback', {'transaction': tx})
