@@ -82,6 +82,7 @@ class MPGSController(http.Controller):
         tx = request.env['payment.transaction'].sudo().search([('successIndicator', '=', post.get('resultIndicator'))])
         if tx:
                 tx._set_done()
+                return request.redirect(request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/my')
 
 
 
