@@ -6,7 +6,7 @@ import logging
 
 from odoo import http
 from odoo.http import request
-
+from datetime import datetime, timedelta
 _logger = logging.getLogger(__name__)
 
 class MPGSController(http.Controller):
@@ -21,6 +21,14 @@ class MPGSController(http.Controller):
             credentials = tx.acquirer_id._get_mpgs_credentials()
             mpgs_url = "https://eu-gateway.mastercard.com/api/rest/version/80/merchant/"+credentials['merchant_id']+"/session"
             desc =""
+            now = datetime.now()
+
+            # Calculate the date and time for one day after now
+            one_day_later = now + timedelta(days=1)
+
+            # Format the date and time in the desired format
+            formatted_date = one_day_later.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-4] + "Z"
+
             for order in tx.sale_order_ids:
                 for line in order.order_line:
                     desc += " + " + line.product_id.name
@@ -35,13 +43,13 @@ class MPGSController(http.Controller):
                     'id': tx.reference,
                 },
 
-                "customer": {"email": "peteMorris@mail.us.com", "firstName": "John", "lastName": "Doe",
-                             "mobilePhone": "+971 544210311", "phone": "+971 544210311"},
+                "customer": {"email": tx.partner_email, "firstName": tx.partner_name, "lastName": tx.partner_name,
+                             "phone": tx.partner_phone},
                 "checkoutMode": "PAYMENT_LINK",
-                "paymentLink": {"expiryDateTime": "2024-09-25T10:00:00.04Z", "numberOfAllowedAttempts": 5},
+                "paymentLink": {"expiryDateTime": formatted_date, "numberOfAllowedAttempts": 5},
                 'interaction': {
                     'operation': 'PURCHASE',
-                    'redirectMerchantUrl':request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/payment/mpgs/feedback',
+                    'redirectMerchantUrl':request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/my',
                     "returnUrl": request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/payment/mpgs/feedback',
                     # "timeoutUrl": "https://www.google.com",
                     "cancelUrl" :request.env['ir.config_parameter'].sudo().get_param('web.base.url') + '/payment/mpgs/feedback',
@@ -58,6 +66,8 @@ class MPGSController(http.Controller):
             response = requests.post(mpgs_url, json=data, auth=("merchant."+credentials['merchant_id'], credentials['api_secret']))
 
             redirect_url = response.json().get('paymentLink').get('url')
+            successIndicator= response.json().get('successIndicator')
+            tx.write({'successIndicator': successIndicator})
             _logger.debug("%d is the redirect URL", redirect_url)
 
             return request.redirect(redirect_url, local=False)
@@ -67,20 +77,14 @@ class MPGSController(http.Controller):
     @http.route('/payment/mpgs/feedback', type='http', auth='public', methods=['GET', 'POST'], website=True)
     def mpgs_feedback(self, **post):
         data = request.params
-        _logger.debug("%d is MHD MASTERCARD", request)
-        _logger.debug("%d is MHD MASTERCARD", data)
-        _logger.debug("%d is MHD MASTERCARD", post)
-        _logger.debug("%d is MHD MASTERCARD", json.loads(request.httprequest.data))
-        _logger.debug("%d is MHD MASTERCARD",json.loads(request.httprequest))
 
-        tx = request.env['payment.transaction'].sudo().search([('reference', '=', data.get('order_id'))])
+
+        tx = request.env['payment.transaction'].sudo().search([('successIndicator', '=', post.get('resultIndicator'))])
         if tx:
-            if data.get('result') == 'SUCCESS':
-                tx.write({'state': 'done'})
-                request.redirect('/my')
-            else:
-                tx.write({'state': 'error', 'state_message': data.get('error_description', 'Unknown error')})
-            return request.render('payment_mpgs.payment_feedback', {'transaction': tx})
+                tx._set_done()
+
+
+
         else:
             return request.redirect('/shop/payment')
 
