@@ -77,6 +77,7 @@ class PaymentTransaction(models.Model):
     _inherit = 'payment.transaction'
 
     desc = fields.Char()
+    successIndicator = fields.Char()
 
 
 
