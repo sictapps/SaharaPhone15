@@ -1,0 +1,52 @@
+
+<odoo>
+    <odoo>
+
+    <record id="payment_acquirer_form" model="ir.ui.view">
+        <field name="name">Master Acquirer Form</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.payment_acquirer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="acquirer"]' position='inside'>
+                <group attrs="{'invisible': [('provider', '!=', 'mpgs')]}">
+                    <field name="mpgs_api_key" />
+                    <field name="mpgs_api_secret" />
+                    <field name="mpgs_merchant_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    </odoo>
+<!--    <record id="payment_acquirer_form" model="ir.ui.view">-->
+<!--        <field name="name">payment.acquirer.form.inherit</field>-->
+<!--        <field name="model">payment.acquirer</field>-->
+<!--        <field name="inherit_id" ref="payment.payment_acquirer_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr='//group[@name="acquirer"]' position='inside'>-->
+<!--                <group attrs="{'invisible': [('provider', 'not in', ('mastercard'))]}">-->
+
+<!--                   <div class="form-group">-->
+<!--                        <label for="mastercard_card_number">Card Number</label>-->
+<!--                        <input type="text" id="mastercard_card_number" name="mastercard_card_number" required="required" class="form-control" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="mastercard_expiry_date">Expiry Date</label>-->
+<!--                        <input type="text" id="mastercard_expiry_date" name="mastercard_expiry_date" placeholder="MM/YY" required="required" class="form-control" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="mastercard_cvv">CVV</label>-->
+<!--                        <input type="text" id="mastercard_cvv" name="mastercard_cvv" required="required" class="form-control" />-->
+<!--                    </div>-->
+
+<!--                </group>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+
+
+
+</odoo>

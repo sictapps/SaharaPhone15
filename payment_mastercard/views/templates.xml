@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <template id="payment_mpgs_redirect_form" >
+
+                    <form id="mpgs_redirect_form" action="/payment/mpgs/redirect" method="post">
+                        <input type="hidden" name="reference" t-att-value="reference"/>
+                        <button type="submit" class="btn btn-primary">Pay Now</button>
+                    </form>
+
+        </template>
+    </data>
+</odoo>
