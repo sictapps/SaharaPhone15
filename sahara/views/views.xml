@@ -251,12 +251,12 @@
                                         <td t-if="not sn_list"
                                             style="color:black;border: 1px solid black;color:black;font-size:14px;"
                                             name="account_invoice_line_name">
-                                            <strong t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <strong t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
                                         </td>
                                         <td t-if="sn_list"
                                             style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:14px;"
                                             name="account_invoice_line_name">
-                                            <strong t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <strong t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
                                         </td>
                                         <td style="color:black;border: 1px solid black;text-align:center;">
                                             <span t-field="line.quantity"/>
