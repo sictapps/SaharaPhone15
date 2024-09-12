@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', "mail", "web", "purchase", "sale", "account", "repair"],
+    'depends': ['base',"mail","web","purchase","sale","account","repair"],
 
     # always loaded
     'data': [
@@ -33,14 +33,10 @@
     'demo': [
         'demo/demo.xml',
     ],
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'emirate_hid/js/UAE.js',
-    #     ],
-    # }
     'assets': {
         'web.assets_backend': [
+
             'emirate_hid/js/UAE.js',
-        ],
-    },
+                               ],
+            }
 }
