@@ -252,11 +252,33 @@
                                             style="color:black;border: 1px solid black;color:black;font-size:14px;"
                                             name="account_invoice_line_name">
                                             <strong t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
+                                            <t t-if="line.product_id.product_template_variant_value_ids">
+                                                (
+                                                <t t-foreach="line.product_id.product_template_variant_value_ids"
+                                                   t-as="variant">
+                                                    <strong t-field="variant.name" t-options="{'widget': 'text'}"/>
+                                                    <t t-if="variant != line.product_id.product_template_variant_value_ids[-1]">
+                                                        ,
+                                                    </t>
+                                                </t>
+                                                )
+                                            </t>
                                         </td>
                                         <td t-if="sn_list"
                                             style="color:black;border-top: 1px solid black;border-bottom: 0px solid white;font-size:14px;"
                                             name="account_invoice_line_name">
                                             <strong t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
+                                            <t t-if="line.product_id.product_template_variant_value_ids">
+                                                (
+                                                <t t-foreach="line.product_id.product_template_variant_value_ids"
+                                                   t-as="variant">
+                                                    <strong t-field="variant.name" t-options="{'widget': 'text'}"/>
+                                                    <t t-if="variant != line.product_id.product_template_variant_value_ids[-1]">
+                                                        ,
+                                                    </t>
+                                                </t>
+                                                )
+                                            </t>
                                         </td>
                                         <td style="color:black;border: 1px solid black;text-align:center;">
                                             <span t-field="line.quantity"/>
@@ -276,8 +298,8 @@
                                             <!-- <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/> -->
                                             <!-- <span t-esc="lineprice"/>  -->
                                             <!-- <span t-set="lineprice" t-value="o.check_tax_amount(line)" /> -->
-<!--                                            <span t-set="lineprice" t-esc="'%.2f'% o.check_tax_amount(line)"/>-->
-<!--                                            <span t-esc="lineprice"/>-->
+                                            <!--                                            <span t-set="lineprice" t-esc="'%.2f'% o.check_tax_amount(line)"/>-->
+                                            <!--                                            <span t-esc="lineprice"/>-->
                                             <span class="text-nowrap" t-field="line.tax_amount"/>
                                         </td>
                                         <td style="color:black;border: 1px solid black;text-align:center;"
@@ -472,7 +494,6 @@
                     </table>
 
 
-
                     <br/>
                     <br/>
                     <br/>
@@ -527,42 +548,42 @@
                     </p>
 
                 </div>
-<!--                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;">-->
-<!--                    <table style="width: 100%;font-family: 'Barlow';">-->
-<!--                        <tr>-->
-<!--                            <td style="vertical-align: middle;">-->
-<!--                                <img src="/sahara/static/src/img/Planet_Circle_Black.png" style="height: 20mm;"/>-->
-<!--                            </td>-->
-<!--                            <td style=" text-align: left;width: 3px;">-->
-<!--                            </td>-->
-<!--                            <td style="color:#414141;font-size: 11px;text-align:left;">-->
-<!--                                <span>By using our service, you agree to our terms-->
-<!--                                    <br/>-->
-<!--                                    and conditions and Privacy Policy - visit-->
-<!--                                    <br/>-->
-<!--                                    <strong>www.planetpayment.ae</strong>-->
-<!--                                    for full details.-->
-<!--                                    <br/>-->
-<!--                                    Planet has been authorised by the FTA.-->
-<!--                                </span>-->
-<!--                                <br/>-->
-<!--                                <strong t-field="o.tag_num" style="font-size: 16px;"/>-->
-<!--                                <br/>-->
-<!--                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line>-->
-<!--                                <br/>-->
-<!--                                <div style="font-size: 14px;margin-top: -12px;">-->
-<!--                                    <strong>www.planetpayment.ae</strong>-->
-<!--                                </div>-->
-<!--                                <br/>-->
-<!--                            </td>-->
-<!--                            <td style="vertical-align: middle;">-->
-<!--                                <img t-att-src="image_data_uri(o.qr_code)" style="height: 35mm;width:35mm"/>-->
-<!--                            </td>-->
-<!--                            <td style=" text-align: left;width: 3px;">-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!--                </div>-->
+                <!--                <div t-if="o.tag_num" class="planet_img" style="position:absolute;right:5px;margin-top:2.8em;">-->
+                <!--                    <table style="width: 100%;font-family: 'Barlow';">-->
+                <!--                        <tr>-->
+                <!--                            <td style="vertical-align: middle;">-->
+                <!--                                <img src="/sahara/static/src/img/Planet_Circle_Black.png" style="height: 20mm;"/>-->
+                <!--                            </td>-->
+                <!--                            <td style=" text-align: left;width: 3px;">-->
+                <!--                            </td>-->
+                <!--                            <td style="color:#414141;font-size: 11px;text-align:left;">-->
+                <!--                                <span>By using our service, you agree to our terms-->
+                <!--                                    <br/>-->
+                <!--                                    and conditions and Privacy Policy - visit-->
+                <!--                                    <br/>-->
+                <!--                                    <strong>www.planetpayment.ae</strong>-->
+                <!--                                    for full details.-->
+                <!--                                    <br/>-->
+                <!--                                    Planet has been authorised by the FTA.-->
+                <!--                                </span>-->
+                <!--                                <br/>-->
+                <!--                                <strong t-field="o.tag_num" style="font-size: 16px;"/>-->
+                <!--                                <br/>-->
+                <!--                                <line style="margin-top: -10px;width:45mm;border-bottom: 1px solid #37b45a;height: 10px;position: absolute;"></line>-->
+                <!--                                <br/>-->
+                <!--                                <div style="font-size: 14px;margin-top: -12px;">-->
+                <!--                                    <strong>www.planetpayment.ae</strong>-->
+                <!--                                </div>-->
+                <!--                                <br/>-->
+                <!--                            </td>-->
+                <!--                            <td style="vertical-align: middle;">-->
+                <!--                                <img t-att-src="image_data_uri(o.qr_code)" style="height: 35mm;width:35mm"/>-->
+                <!--                            </td>-->
+                <!--                            <td style=" text-align: left;width: 3px;">-->
+                <!--                            </td>-->
+                <!--                        </tr>-->
+                <!--                    </table>-->
+                <!--                </div>-->
 
 
             </t>
@@ -661,22 +682,22 @@
             </t>
         </template>
 
-<!--        <report-->
-<!--                id="account_invoices1"-->
-<!--                model="account.move"-->
-<!--                string="Sahara Invoices"-->
-<!--                report_type="qweb-pdf"-->
-<!--                name="sahara.report_invoice_with_payments"-->
-<!--                file="sahara.report_invoice_with_payments"-->
-<!--                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"-->
-<!--                print_report_name="(object._get_report_base_filename())"-->
-<!--                groups="account.group_account_invoice"-->
-<!--        />-->
+        <!--        <report-->
+        <!--                id="account_invoices1"-->
+        <!--                model="account.move"-->
+        <!--                string="Sahara Invoices"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="sahara.report_invoice_with_payments"-->
+        <!--                file="sahara.report_invoice_with_payments"-->
+        <!--                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"-->
+        <!--                print_report_name="(object._get_report_base_filename())"-->
+        <!--                groups="account.group_account_invoice"-->
+        <!--        />-->
 
-            <record id="paperformat_sahara_invoices" model="report.paperformat">
+        <record id="paperformat_sahara_invoices" model="report.paperformat">
             <field name="name">A4</field>
             <field name="orientation">Portrait</field>
-            <field name="default" eval="True" />
+            <field name="default" eval="True"/>
             <field name="format">A4</field>
             <field name="page_height">0</field>
             <field name="page_width">0</field>
@@ -685,7 +706,7 @@
             <field name="margin_bottom">40.00</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
-            <field name="header_line" eval="False" />
+            <field name="header_line" eval="False"/>
             <field name="header_spacing">50</field>
             <field name="dpi">90</field>
         </record>
