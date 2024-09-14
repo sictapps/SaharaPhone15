@@ -59,6 +59,7 @@ class emirate_hid_repair(models.Model):
                         'SponsorName': ee['SponsorName'],
                         'SponsorNumber': ee['SponsorNumber'],
                         'SponsorType': ee['SponsorType'],
+                        'ResidencyExpiry': ee['ResidencyExpiry'],
 
                         'jsondata': "",
 
@@ -120,6 +121,7 @@ class emirate_hid_sale(models.Model):
                         'SponsorName': ee['SponsorName'],
                         'SponsorNumber': ee['SponsorNumber'],
                         'SponsorType': ee['SponsorType'],
+                        'ResidencyExpiry': ee['ResidencyExpiry'],
 
                         'jsondata': "",
 
@@ -179,6 +181,7 @@ class emirate_hid_purchase(models.Model):
                         'SponsorName': ee['SponsorName'],
                         'SponsorNumber': ee['SponsorNumber'],
                         'SponsorType': ee['SponsorType'],
+                        'ResidencyExpiry': ee['ResidencyExpiry'],
 
                         'jsondata': "",
 
@@ -484,3 +487,4 @@ class emirate_hid(models.Model):
 #     def _value_pc(self):
 #         for record in self:
 #             record.value2 = float(record.value) / 100
+
