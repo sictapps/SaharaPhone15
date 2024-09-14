@@ -42,14 +42,14 @@ class emirate_hid_repair(models.Model):
                         'Emirate': ee['Emirate'],
 
                         'Phone': ee['Phone'],
-                        'name': ee['NameAr'],
+                        'name': ee['Name'].replace(',',' '),
                         'email': ee['Email'],
                         'phone': ee['Phone'],
                         'mobile': ee['Mobile'],
                         'PassportNumber': ee['PassportNumber'],
                         'Mobile': ee['Mobile'],
-                        'NameAr': ee['NameAr'],
-                        'Name': ee['Name'],
+                        'NameAr': ee['NameAr'].replace(',',' '),
+                        'Name': ee['Name'].replace(',',' '),
                         'Occupation': ee['Occupation'],
 
                         'ResidencyType': ee['ResidencyType'],
@@ -103,14 +103,14 @@ class emirate_hid_sale(models.Model):
                         'Emirate': ee['Emirate'],
 
                         'Phone': ee['Phone'],
-                        'name': ee['NameAr'],
+                        'name': ee['Name'].replace(',',' '),
                         'email': ee['Email'],
                         'phone': ee['Phone'],
                         'mobile': ee['Mobile'],
                         'PassportNumber': ee['PassportNumber'],
                         'Mobile': ee['Mobile'],
-                        'NameAr': ee['NameAr'],
-                        'Name': ee['Name'],
+                        'NameAr': ee['NameAr'].replace(',',' '),
+                        'Name': ee['Name'].replace(',',' '),
                         'Occupation': ee['Occupation'],
 
                         'ResidencyType': ee['ResidencyType'],
@@ -162,14 +162,14 @@ class emirate_hid_purchase(models.Model):
                         'Emirate': ee['Emirate'],
 
                         'Phone': ee['Phone'],
-                        'name': ee['NameAr'],
+                        'name': ee['Name'].replace(',',' '),
                         'email': ee['Email'],
                         'phone': ee['Phone'],
                         'mobile': ee['Mobile'],
                         'PassportNumber': ee['PassportNumber'],
                         'Mobile': ee['Mobile'],
-                        'NameAr': ee['NameAr'],
-                        'Name': ee['Name'],
+                        'NameAr': ee['NameAr'].replace(',',' '),
+                        'Name': ee['Name'].replace(',',' '),
                         'Occupation': ee['Occupation'],
 
                         'ResidencyType': ee['ResidencyType'],
@@ -238,14 +238,14 @@ class emirate_hid_account(models.Model):
                                                             'Emirate' : ee['Emirate'],
                                             
                                                             'Phone' : ee['Phone'],
-                                                            'name':ee['NameAr'],
+                                                            'name':ee['Name'].replace(',',' '),
                                                             'email':ee['Email'] ,
                                                             'phone':ee['Phone'] ,
                                                             'mobile':ee['Mobile'] ,
                                                             'PassportNumber' : ee['PassportNumber'],
                                                             'Mobile' : ee['Mobile'],
-                                                            'NameAr' : ee['NameAr'],
-                                                            'Name' : ee['Name'],
+                                                            'NameAr' : ee['NameAr'].replace(',',' '),
+                                                            'Name' : ee['Name'].replace(',',' '),
                                                             'Occupation' : ee['Occupation'],
                                             
                                                             'ResidencyType' : ee['ResidencyType'],
@@ -310,7 +310,8 @@ class emirate_hid(models.Model):
                 self.Emirate = ee['Emirate']
 
                 self.Phone = ee['Phone']
-                self.name=ee['NameAr']
+                self.name=ee['Name'].replace(',',' ')
+
                 self.email=ee['Email'] if len(ee['Email'])>0 else self.email
                 self.phone=ee['Phone'] if len(ee['Phone'])>0 else self.phone
                 self.mobile=ee['Mobile'] if len(ee['Mobile'])>0 else self.mobile
@@ -322,8 +323,8 @@ class emirate_hid(models.Model):
 
                 self.PassportNumber = ee['PassportNumber']
                 self.Mobile = ee['Mobile']
-                self.NameAr = ee['NameAr']
-                self.Name = ee['Name']
+                self.NameAr = ee['NameAr'].replace(',',' '),
+                self.Name = ee['Name'].replace(',',' '),
                 self.Occupation = ee['Occupation']
 
                 self.ResidencyType = ee['ResidencyType']
@@ -333,6 +334,7 @@ class emirate_hid(models.Model):
                 self.SponsorName = ee['SponsorName']
                 self.SponsorNumber = ee['SponsorNumber']
                 self.SponsorType = ee['SponsorType']
+                self.Nationality= ee['Nationality']
 
                 self.jsondata=""
 
@@ -482,4 +484,3 @@ class emirate_hid(models.Model):
 #     def _value_pc(self):
 #         for record in self:
 #             record.value2 = float(record.value) / 100
-
