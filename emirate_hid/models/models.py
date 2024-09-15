@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 from PIL import Image
 import io
 from odoo import models, fields, api, http, tools, exceptions, _
@@ -22,6 +24,9 @@ class emirate_hid_repair(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
                         self.partner_id = partner.id
                         self.jsondata = ""
                 else:
@@ -42,14 +47,14 @@ class emirate_hid_repair(models.Model):
                         'Emirate': ee['Emirate'],
 
                         'Phone': ee['Phone'],
-                        'name': ee['Name'].replace(',',' '),
+                        'name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                         'email': ee['Email'],
                         'phone': ee['Phone'],
                         'mobile': ee['Mobile'],
                         'PassportNumber': ee['PassportNumber'],
                         'Mobile': ee['Mobile'],
-                        'NameAr': ee['NameAr'].replace(',',' '),
-                        'Name': ee['Name'].replace(',',' '),
+                        'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
+                        'Name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                         'Occupation': ee['Occupation'],
 
                         'ResidencyType': ee['ResidencyType'],
@@ -84,6 +89,9 @@ class emirate_hid_sale(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
                         self.partner_id = partner.id
                         self.jsondata = ""
                 else:
@@ -104,14 +112,14 @@ class emirate_hid_sale(models.Model):
                         'Emirate': ee['Emirate'],
 
                         'Phone': ee['Phone'],
-                        'name': ee['Name'].replace(',',' '),
+                        'name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                         'email': ee['Email'],
                         'phone': ee['Phone'],
                         'mobile': ee['Mobile'],
                         'PassportNumber': ee['PassportNumber'],
                         'Mobile': ee['Mobile'],
-                        'NameAr': ee['NameAr'].replace(',',' '),
-                        'Name': ee['Name'].replace(',',' '),
+                        'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
+                        'Name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                         'Occupation': ee['Occupation'],
 
                         'ResidencyType': ee['ResidencyType'],
@@ -144,6 +152,9 @@ class emirate_hid_purchase(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
                         self.partner_id = partner.id
                         self.jsondata = ""
                 else:
@@ -164,14 +175,14 @@ class emirate_hid_purchase(models.Model):
                         'Emirate': ee['Emirate'],
 
                         'Phone': ee['Phone'],
-                        'name': ee['Name'].replace(',',' '),
+                        'name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                         'email': ee['Email'],
                         'phone': ee['Phone'],
                         'mobile': ee['Mobile'],
                         'PassportNumber': ee['PassportNumber'],
                         'Mobile': ee['Mobile'],
-                        'NameAr': ee['NameAr'].replace(',',' '),
-                        'Name': ee['Name'].replace(',',' '),
+                        'NameAr':re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',',' ')) ,
+                        'Name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                         'Occupation': ee['Occupation'],
 
                         'ResidencyType': ee['ResidencyType'],
@@ -213,6 +224,9 @@ class emirate_hid_account(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
                         partner.name=partner.Name
                         if not self.is_accrual:
                             self.partner_id = partner.id
@@ -241,14 +255,14 @@ class emirate_hid_account(models.Model):
                                                             'Emirate' : ee['Emirate'],
                                             
                                                             'Phone' : ee['Phone'],
-                                                            'name':ee['Name'].replace(',',' '),
+                                                            'name':re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                                                             'email':ee['Email'] ,
                                                             'phone':ee['Phone'] ,
                                                             'mobile':ee['Mobile'] ,
                                                             'PassportNumber' : ee['PassportNumber'],
                                                             'Mobile' : ee['Mobile'],
-                                                            'NameAr' : ee['NameAr'].replace(',',' '),
-                                                            'Name' : ee['Name'].replace(',',' '),
+                                                            'NameAr' : re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
+                                                            'Name' : re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                                                             'Occupation' : ee['Occupation'],
                                             
                                                             'ResidencyType' : ee['ResidencyType'],
@@ -288,12 +302,20 @@ class emirate_hid(models.Model):
             if partners:
                 partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                 if partner:
+                    partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                    partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
+                    partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+
+
+
                     self.jsondata = ""
                     raise exceptions.UserError(
                         _('The Partner  %(empl_name)s, Is Already Exist.') % {
                             'empl_name': partner.name, })
 
-                    self.partner_id = partner.id
+
+
+
 
             else:
                 self.is_company= False
@@ -313,7 +335,7 @@ class emirate_hid(models.Model):
                 self.Emirate = ee['Emirate']
 
                 self.Phone = ee['Phone']
-                self.name=ee['Name'].replace(',',' ')
+                self.name=re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' '))
 
                 self.email=ee['Email'] if len(ee['Email'])>0 else self.email
                 self.phone=ee['Phone'] if len(ee['Phone'])>0 else self.phone
@@ -326,8 +348,8 @@ class emirate_hid(models.Model):
 
                 self.PassportNumber = ee['PassportNumber']
                 self.Mobile = ee['Mobile']
-                self.NameAr = ee['NameAr'].replace(',',' '),
-                self.Name = ee['Name'].replace(',',' '),
+                self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
+                self.Name = re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
                 self.Occupation = ee['Occupation']
 
                 self.ResidencyType = ee['ResidencyType']
@@ -487,4 +509,3 @@ class emirate_hid(models.Model):
 #     def _value_pc(self):
 #         for record in self:
 #             record.value2 = float(record.value) / 100
-
