@@ -1,0 +1,503 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_customer_limit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20221109\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-19 09:44+0000\n"
+"PO-Revision-Date: 2024-09-19 13:17+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "(Resto en facturas - Pagos)"
+msgstr "(Remainder in invoices - Payments)"
+
+#. module: bi_customer_limit
+#: model:mail.template,body_html:bi_customer_limit.email_template_edi_credit_limit
+msgid ""
+"<div style=\"font-family:Quicksand; font-size: 20px; color: rgb(34, 34, 34); background-color: #FFF;\">\n"
+"                   <p>Dear Administrator,</p>\n"
+"                   <p>In Sale Order <t t-out=\"object.name\"/>, User <t t-out=\"object.partner_id.name\"/> has exceeded its credit limit by <t t-out=\"object.exceeded_amount\"/>. Sale order has still been placed. You can put hold on that particular customer.</p>\n"
+"                   <p>You can review particular order from <u> <a t-att-href=\"'%s' % object.sale_url\">this link</a></u> </p>\n"
+"                   </div>\n"
+"            "
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__is_credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__is_credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__is_credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__is_credit_limit
+#, python-format
+msgid "Activar"
+msgstr "Activate"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__credit_on_hold
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__credit_on_hold
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__credit_on_hold
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__credit_on_hold
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__credit_on_hold
+#, python-format
+msgid "Bloquear Cliente"
+msgstr "Block Client"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_wizard_credit_limit_form
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__company_currency_id
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__company_currency_id
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__company_currency_id
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__company_currency_id
+#, python-format
+msgid "Company Currency"
+msgstr "Company Currency"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_wizard_credit_limit_form
+msgid "Confirm"
+msgstr "Confirm"
+
+#. module: bi_customer_limit
+#: model:ir.model,name:bi_customer_limit.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__currency_id
+msgid "Credit Currency"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__customer_credit_limit
+msgid "Credit Limit"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:mail.template,subject:bi_customer_limit.email_template_edi_credit_limit
+msgid "Credit limit exceeded of in sale order"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/res_partner.py:0
+#, python-format
+msgid "Credito por pagar"
+msgstr "Unpaid credit"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Crédito"
+msgstr "Credit"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__used_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__used_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__used_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__used_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__used_credit
+#, python-format
+msgid "Crédito Usado"
+msgstr "Used Credit"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Crédito de Cliente"
+msgstr "Customer Credit"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__so_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__so_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__so_credit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__so_credit
+#, python-format
+msgid "Crédito por NV"
+msgstr "Credit by NV"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,help:bi_customer_limit.field_res_partner__so_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_res_users__so_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_school_parent__so_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_student_student__so_credit
+#, python-format
+msgid "Crédito por Notas de Venta no facturadas"
+msgstr "Credit for uninvoiced sales notes"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_sale_order_form
+msgid "Crédito total usado"
+msgstr "Total credit used"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,help:bi_customer_limit.field_res_partner__used_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_res_users__used_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_sale_order__used_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_school_parent__used_credit
+#: model:ir.model.fields,help:bi_customer_limit.field_student_student__used_credit
+#, python-format
+msgid "Crédito usado en Notas de Venta y Facturas"
+msgstr "Credit used in Sales Notes and Invoices"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__sale_name
+msgid "Current Order :"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__current_quotation
+msgid "Current Quotation"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__customer_due_amt
+msgid "Customer Due Amount"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_sale_order_form
+msgid "Deuda por Facturas Impagas del cliente, es de"
+msgstr "Debt for Unpaid Bills of the client, is of"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__due_before
+msgid "Due after this Quotation"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#, python-format
+msgid ""
+"El Cliente ha sido bloqueado por exceder su Límite de Crédito. Por favor contacte al Administrador.\n"
+"Gracias!"
+msgstr ""
+"The Customer has been blocked for exceeding his Credit Limit. Please contact the Administrator.\n"
+"Thank you!"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_sale_order_form
+msgid "El límite de Credito del cliente ha sido sobrepasado"
+msgstr "The customer’s credit limit has been exceeded"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__exceeded_amount
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__exceeded_amount
+msgid "Exceeded Amount"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__balance_invoice_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__balance_invoice_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__balance_invoice_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__balance_invoice_ids
+#, python-format
+msgid "Facturas"
+msgstr "Invoices"
+
+#. module: bi_customer_limit
+#. openerp-web
+#: code:addons/bi_customer_limit/static/src/xml/account_payment.xml:0
+#, python-format
+msgid "Fecha"
+msgstr "Date"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__id
+msgid "ID"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__is_confirm
+msgid "Is Confirm"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__is_warning
+msgid "Is Warning"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model,name:bi_customer_limit.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#, python-format
+msgid ""
+"Lo sentimos, se ha excedido el Límite de Crédito del cliente\n"
+"                        Límite de Crédito     : %s\n"
+"                        Credito por NV        : %s\n"
+"                        Total deuda facturada : %s\n"
+"                        Cantidad Excedida     : %s"
+msgstr ""
+"Sorry, the customer’s Credit Limit has been exceeded\n"
+"                       Credit Limit             : %s\n"
+"                       NV Credit                : %s\n"
+"                       Total Billed Debt    : %s\n"
+"                       Exceeded Amount : %s"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__credit_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__credit_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_sale_order_form
+#, python-format
+msgid "Límite de Crédito"
+msgstr "Credit Limit"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__blocking_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__blocking_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__blocking_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__blocking_limit
+#, python-format
+msgid "Límite de bloqueo para facturas impagas"
+msgstr "Block limit for unpaid invoices"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Monto en Facturas Pendientes"
+msgstr "Amount in Outstanding Invoices"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,help:bi_customer_limit.field_res_partner__blocking_limit
+#: model:ir.model.fields,help:bi_customer_limit.field_res_users__blocking_limit
+#: model:ir.model.fields,help:bi_customer_limit.field_school_parent__blocking_limit
+#: model:ir.model.fields,help:bi_customer_limit.field_student_student__blocking_limit
+#, python-format
+msgid "Monto máximo adeudado en facturas no pagadas"
+msgstr "Maximum amount owed on unpaid invoices"
+
+#. module: bi_customer_limit
+#. openerp-web
+#: code:addons/bi_customer_limit/static/src/xml/account_payment.xml:0
+#, python-format
+msgid "Monto restante"
+msgstr "Remaining amount"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__customer_name
+msgid "Name :"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:mail.template,name:bi_customer_limit.email_template_edi_credit_limit
+msgid "Need Attention"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__balance_sale_order_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__balance_sale_order_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__balance_sale_order_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__balance_sale_order_ids
+#, python-format
+msgid "Notas de Venta"
+msgstr "Sales Notes"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Notas de Venta no facturadas"
+msgstr "Unbilled Sales Notes"
+
+#. module: bi_customer_limit
+#. openerp-web
+#: code:addons/bi_customer_limit/static/src/xml/account_payment.xml:0
+#, python-format
+msgid "Número"
+msgstr "Number"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/res_partner_back.py:0
+#, python-format
+msgid "Outstanding credits"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/res_partner_back.py:0
+#, python-format
+msgid "Outstanding debits"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__res_partner_credits
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__res_partner_credits
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__res_partner_credits
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__res_partner_credits
+msgid "Pagos"
+msgstr "Payments"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_partner__balance_payment_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_res_users__balance_payment_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_school_parent__balance_payment_ids
+#: model:ir.model.fields,field_description:bi_customer_limit.field_student_student__balance_payment_ids
+#, python-format
+msgid "Pagos no Conciliados"
+msgstr "Unreconciled Payments"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Pagos no conciliados (Anticipos)"
+msgstr "Unreconciled payments (Advances)"
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Resto"
+msgstr "Rest"
+
+#. module: bi_customer_limit
+#: model:ir.model,name:bi_customer_limit.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: bi_customer_limit
+#. openerp-web
+#: code:addons/bi_customer_limit/static/src/xml/account_payment.xml:0
+#, python-format
+msgid "Sin pagos."
+msgstr "No payments."
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_wizard_credit_limit_form
+msgid ""
+"Sorry, your Credit limit has exceeded. You can still confirm\n"
+"\t\t\t\t\t\tOrder but a mail will be sent to administration department."
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#, python-format
+msgid ""
+"Sorry, your Credit limit has exceeded. You can still confirm\n"
+"                                Order but a mail will be sent to administration department.\n"
+"                                Credit Limit     : %s\n"
+"                                Credit for SO    : %s\n"
+"                                Total Receivable : %s\n"
+"                                Current SO       : %s\n"
+"                                Exceeded Amount  : %s"
+msgstr ""
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#, python-format
+msgid "The Customer is in blocking stage and has to pay "
+msgstr ""
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Total"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Total Adeudado"
+msgstr "Total Owed"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__so_credit
+msgid "Total Nota de Venta"
+msgstr "Total Sales Note"
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__total_receivable
+#: model:ir.model.fields,field_description:bi_customer_limit.field_wizard_custom_credit__total_receivable
+msgid "Total Receivable"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,help:bi_customer_limit.field_sale_order__customer_due_amt
+msgid "Total amount this customer owes you."
+msgstr ""
+
+#. module: bi_customer_limit
+#: model_terms:ir.ui.view,arch_db:bi_customer_limit.view_res_partner_form
+msgid "Total en NV"
+msgstr "Total in NV"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#, python-format
+msgid ""
+"Usuario con crédito 0, favor contactar a administración.\n"
+"Gracias"
+msgstr ""
+"User with 0 credit, please contact administration.\n"
+"Thank you"
+
+#. module: bi_customer_limit
+#: code:addons/bi_customer_limit/models/credit_limit.py:0
+#: model:ir.model.fields,help:bi_customer_limit.field_res_partner__company_currency_id
+#: model:ir.model.fields,help:bi_customer_limit.field_res_users__company_currency_id
+#: model:ir.model.fields,help:bi_customer_limit.field_school_parent__company_currency_id
+#: model:ir.model.fields,help:bi_customer_limit.field_student_student__company_currency_id
+#, python-format
+msgid "Utility field to express amount currency"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model.fields,field_description:bi_customer_limit.field_sale_order__sale_url
+msgid "url"
+msgstr ""
+
+#. module: bi_customer_limit
+#: model:ir.model,name:bi_customer_limit.model_wizard_custom_credit
+msgid "wizard_custom_credit"
+msgstr ""
