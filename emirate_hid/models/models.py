@@ -24,52 +24,44 @@ class emirate_hid_repair(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
-                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
-                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
-                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['NameAr']))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
                         self.partner_id = partner.id
                         self.jsondata = ""
                 else:
-
-                    partner = self.env['res.partner'].create({
-                        'EIDNumber': ee['EIDNumber'],
-                        'is_company': False,
-                        'company_type': 'person',
-
-                        'OccupationTypeArabic': ee['Occupation'],
-                        'City': ee['City'],
-                        'Area': ee['Area'],
-
-                        'CompanyName': ee['CompanyName'],
-
-                        'DOB': ee['DOB'],
-                        'Email': ee['Email'],
-                        'Emirate': ee['Emirate'],
-
-                        'Phone': ee['Phone'],
-                        'name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                        'email': ee['Email'],
-                        'phone': ee['Phone'],
-                        'mobile': ee['Mobile'],
-                        'PassportNumber': ee['PassportNumber'],
-                        'Mobile': ee['Mobile'],
-                        'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
-                        'Name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                        'Occupation': ee['Occupation'],
-
-                        'ResidencyType': ee['ResidencyType'],
-
-                        'ResidencyNumber': ee['ResidencyNumber'],
-                        'Sex': ee['Sex'],
-                        'SponsorName': ee['SponsorName'],
-                        'SponsorNumber': ee['SponsorNumber'],
-                        'SponsorType': ee['SponsorType'],
-                        'ResidencyExpiry': ee['ResidencyExpiry'],
-
-                        'jsondata': "",
-
-                    })
-                    self.partner_id=partner.id
+                        self.is_company = False
+                        self.company_type = 'person'
+                        self.EIDNumber = ee['EIDNumber']
+                        self.OccupationTypeArabic = ee['Occupation']
+                        self.City = ee['City']
+                        self.Area = ee['Area']
+                        self.CompanyName = ee['CompanyName']
+                        self.DOB = ee['DOB']
+                        self.Email = ee['Email']
+                        self.Emirate = ee['Emirate']
+                        self.Phone = ee['Phone']
+                        self.name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))
+                        self.email = ee['Email'] if len(ee['Email']) > 0 else self.email
+                        self.phone = ee['Phone'] if len(ee['Phone']) > 0 else self.phone
+                        self.mobile = ee['Mobile'] if len(ee['Mobile']) > 0 else self.mobile
+                        self.PassportNumber = ee['PassportNumber']
+                        self.Mobile = ee['Mobile']
+                        self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Occupation = ee['Occupation']
+                        self.ResidencyType = ee['ResidencyType']
+                        self.ResidencyExpiry = ee['ResidencyExpiry']
+                        self.ResidencyNumber = ee['ResidencyNumber']
+                        self.Sex = ee['Sex']
+                        self.SponsorName = ee['SponsorName']
+                        self.SponsorNumber = ee['SponsorNumber']
+                        self.SponsorType = ee['SponsorType']
+                        self.Nationality = ee['Nationality']
+                        self.NationalityArabic = ee['NationalityArabic']
+                        image_base64_string = ee.get('Photo')
+                        self.image_1920 = image_base64_string
+                        self.jsondata = ""
 
 
 
@@ -89,52 +81,45 @@ class emirate_hid_sale(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
-                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
-                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
-                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['NameAr']))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
+
                         self.partner_id = partner.id
                         self.jsondata = ""
                 else:
-
-                    partner = self.env['res.partner'].create({
-                        'EIDNumber': ee['EIDNumber'],
-                        'is_company': False,
-                        'company_type': 'person',
-
-                        'OccupationTypeArabic': ee['Occupation'],
-                        'City': ee['City'],
-                        'Area': ee['Area'],
-
-                        'CompanyName': ee['CompanyName'],
-
-                        'DOB': ee['DOB'],
-                        'Email': ee['Email'],
-                        'Emirate': ee['Emirate'],
-
-                        'Phone': ee['Phone'],
-                        'name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                        'email': ee['Email'],
-                        'phone': ee['Phone'],
-                        'mobile': ee['Mobile'],
-                        'PassportNumber': ee['PassportNumber'],
-                        'Mobile': ee['Mobile'],
-                        'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
-                        'Name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                        'Occupation': ee['Occupation'],
-
-                        'ResidencyType': ee['ResidencyType'],
-
-                        'ResidencyNumber': ee['ResidencyNumber'],
-                        'Sex': ee['Sex'],
-                        'SponsorName': ee['SponsorName'],
-                        'SponsorNumber': ee['SponsorNumber'],
-                        'SponsorType': ee['SponsorType'],
-                        'ResidencyExpiry': ee['ResidencyExpiry'],
-
-                        'jsondata': "",
-
-                    })
-                    self.partner_id = partner.id
+                        self.is_company = False
+                        self.company_type = 'person'
+                        self.EIDNumber = ee['EIDNumber']
+                        self.OccupationTypeArabic = ee['Occupation']
+                        self.City = ee['City']
+                        self.Area = ee['Area']
+                        self.CompanyName = ee['CompanyName']
+                        self.DOB = ee['DOB']
+                        self.Email = ee['Email']
+                        self.Emirate = ee['Emirate']
+                        self.Phone = ee['Phone']
+                        self.name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))
+                        self.email = ee['Email'] if len(ee['Email']) > 0 else self.email
+                        self.phone = ee['Phone'] if len(ee['Phone']) > 0 else self.phone
+                        self.mobile = ee['Mobile'] if len(ee['Mobile']) > 0 else self.mobile
+                        self.PassportNumber = ee['PassportNumber']
+                        self.Mobile = ee['Mobile']
+                        self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Occupation = ee['Occupation']
+                        self.ResidencyType = ee['ResidencyType']
+                        self.ResidencyExpiry = ee['ResidencyExpiry']
+                        self.ResidencyNumber = ee['ResidencyNumber']
+                        self.Sex = ee['Sex']
+                        self.SponsorName = ee['SponsorName']
+                        self.SponsorNumber = ee['SponsorNumber']
+                        self.SponsorType = ee['SponsorType']
+                        self.Nationality = ee['Nationality']
+                        self.NationalityArabic = ee['NationalityArabic']
+                        image_base64_string = ee.get('Photo')
+                        self.image_1920 = image_base64_string
+                        self.jsondata = ""
 
 
 class emirate_hid_purchase(models.Model):
@@ -152,52 +137,45 @@ class emirate_hid_purchase(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
-                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
-                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
-                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['NameAr']))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
+
                         self.partner_id = partner.id
                         self.jsondata = ""
                 else:
-
-                    partner = self.env['res.partner'].create({
-                        'EIDNumber': ee['EIDNumber'],
-                        'is_company': False,
-                        'company_type': 'person',
-
-                        'OccupationTypeArabic': ee['Occupation'],
-                        'City': ee['City'],
-                        'Area': ee['Area'],
-
-                        'CompanyName': ee['CompanyName'],
-
-                        'DOB': ee['DOB'],
-                        'Email': ee['Email'],
-                        'Emirate': ee['Emirate'],
-
-                        'Phone': ee['Phone'],
-                        'name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                        'email': ee['Email'],
-                        'phone': ee['Phone'],
-                        'mobile': ee['Mobile'],
-                        'PassportNumber': ee['PassportNumber'],
-                        'Mobile': ee['Mobile'],
-                        'NameAr':re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',',' ')) ,
-                        'Name': re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                        'Occupation': ee['Occupation'],
-
-                        'ResidencyType': ee['ResidencyType'],
-
-                        'ResidencyNumber': ee['ResidencyNumber'],
-                        'Sex': ee['Sex'],
-                        'SponsorName': ee['SponsorName'],
-                        'SponsorNumber': ee['SponsorNumber'],
-                        'SponsorType': ee['SponsorType'],
-                        'ResidencyExpiry': ee['ResidencyExpiry'],
-
-                        'jsondata': "",
-
-                    })
-                    self.partner_id = partner.id
+                        self.is_company = False
+                        self.company_type = 'person'
+                        self.EIDNumber = ee['EIDNumber']
+                        self.OccupationTypeArabic = ee['Occupation']
+                        self.City = ee['City']
+                        self.Area = ee['Area']
+                        self.CompanyName = ee['CompanyName']
+                        self.DOB = ee['DOB']
+                        self.Email = ee['Email']
+                        self.Emirate = ee['Emirate']
+                        self.Phone = ee['Phone']
+                        self.name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))
+                        self.email = ee['Email'] if len(ee['Email']) > 0 else self.email
+                        self.phone = ee['Phone'] if len(ee['Phone']) > 0 else self.phone
+                        self.mobile = ee['Mobile'] if len(ee['Mobile']) > 0 else self.mobile
+                        self.PassportNumber = ee['PassportNumber']
+                        self.Mobile = ee['Mobile']
+                        self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Occupation = ee['Occupation']
+                        self.ResidencyType = ee['ResidencyType']
+                        self.ResidencyExpiry = ee['ResidencyExpiry']
+                        self.ResidencyNumber = ee['ResidencyNumber']
+                        self.Sex = ee['Sex']
+                        self.SponsorName = ee['SponsorName']
+                        self.SponsorNumber = ee['SponsorNumber']
+                        self.SponsorType = ee['SponsorType']
+                        self.Nationality = ee['Nationality']
+                        self.NationalityArabic = ee['NationalityArabic']
+                        image_base64_string = ee.get('Photo')
+                        self.image_1920 = image_base64_string
+                        self.jsondata = ""
 
 
 class emirate_hid_account(models.Model):
@@ -224,9 +202,9 @@ class emirate_hid_account(models.Model):
                 if partners:
                     partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                     if partner:
-                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
-                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
-                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                        partner._write({'name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
+                        partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['NameAr']))})
+                        partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))})
                         partner.name=partner.Name
                         if not self.is_accrual:
                             self.partner_id = partner.id
@@ -235,51 +213,38 @@ class emirate_hid_account(models.Model):
 
                         self.jsondata = ""
                 else:
-
-                    partner = self.env['res.partner'].create({
-                                                            'EIDNumber': ee['EIDNumber'],
-                                                            'is_company': False,
-                                                            'company_type' : 'person',
-                                                            
-                                            
-                                            
-                                                            'OccupationTypeArabic' : ee['Occupation'],
-                                                            'City' : ee['City'],
-                                                            'Area' : ee['Area'],
-                                            
-                                            
-                                                            'CompanyName' : ee['CompanyName'],
-                                            
-                                                            'DOB' : ee['DOB'],
-                                                            'Email' :  ee['Email'],
-                                                            'Emirate' : ee['Emirate'],
-                                            
-                                                            'Phone' : ee['Phone'],
-                                                            'name':re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                                                            'email':ee['Email'] ,
-                                                            'phone':ee['Phone'] ,
-                                                            'mobile':ee['Mobile'] ,
-                                                            'PassportNumber' : ee['PassportNumber'],
-                                                            'Mobile' : ee['Mobile'],
-                                                            'NameAr' : re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
-                                                            'Name' : re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
-                                                            'Occupation' : ee['Occupation'],
-                                            
-                                                            'ResidencyType' : ee['ResidencyType'],
-                                            
-                                                            'ResidencyNumber' : ee['ResidencyNumber'],
-                                                            'Sex' : ee['Sex'],
-                                                            'SponsorName' : ee['SponsorName'],
-                                                            'SponsorNumber' : ee['SponsorNumber'],
-                                                            'SponsorType' : ee['SponsorType'],
-                                            
-                                                            'jsondata': "",
-                                            
-                                                            })
-                    if not self.is_accrual:
-                        self.partner_id = partner.id
-                    else:
-                        self.actual_vendor = partner.id
+                        self.is_company = False
+                        self.company_type = 'person'
+                        self.EIDNumber = ee['EIDNumber']
+                        self.OccupationTypeArabic = ee['Occupation']
+                        self.City = ee['City']
+                        self.Area = ee['Area']
+                        self.CompanyName = ee['CompanyName']
+                        self.DOB = ee['DOB']
+                        self.Email = ee['Email']
+                        self.Emirate = ee['Emirate']
+                        self.Phone = ee['Phone']
+                        self.name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))
+                        self.email = ee['Email'] if len(ee['Email']) > 0 else self.email
+                        self.phone = ee['Phone'] if len(ee['Phone']) > 0 else self.phone
+                        self.mobile = ee['Mobile'] if len(ee['Mobile']) > 0 else self.mobile
+                        self.PassportNumber = ee['PassportNumber']
+                        self.Mobile = ee['Mobile']
+                        self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name'])),
+                        self.Occupation = ee['Occupation']
+                        self.ResidencyType = ee['ResidencyType']
+                        self.ResidencyExpiry = ee['ResidencyExpiry']
+                        self.ResidencyNumber = ee['ResidencyNumber']
+                        self.Sex = ee['Sex']
+                        self.SponsorName = ee['SponsorName']
+                        self.SponsorNumber = ee['SponsorNumber']
+                        self.SponsorType = ee['SponsorType']
+                        self.Nationality = ee['Nationality']
+                        self.NationalityArabic = ee['NationalityArabic']
+                        image_base64_string = ee.get('Photo')
+                        self.image_1920 = image_base64_string
+                        self.jsondata = ""
         self.write({'is_accrual': False})
 
 
@@ -302,9 +267,13 @@ class emirate_hid(models.Model):
             if partners:
                 partner = self.env['res.partner'].search([('EIDNumber', '=', EIDNumber)])[0]
                 if partner:
-                    partner._write({'name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
-                    partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', ee['NameAr'].replace(',', ' '))})
-                    partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', ee['Name'].replace(',', ' '))})
+                    partner._write({'name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']) )})
+                    partner._write({'NameAr': re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['NameAr']) )})
+                    partner._write({'Name': re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']) )})
+                    image_base64_string = ee.get('Photo')
+
+
+                    partner.write({'image_1920':image_base64_string})
 
 
 
@@ -321,46 +290,34 @@ class emirate_hid(models.Model):
                 self.is_company= False
                 self.company_type = 'person'
                 self.EIDNumber = ee['EIDNumber']
-
-
                 self.OccupationTypeArabic = ee['Occupation']
                 self.City = ee['City']
                 self.Area = ee['Area']
-
-
                 self.CompanyName = ee['CompanyName']
-
                 self.DOB = ee['DOB']
                 self.Email =  ee['Email']
                 self.Emirate = ee['Emirate']
-
                 self.Phone = ee['Phone']
-                self.name=re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' '))
-
+                self.name=re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name']))
                 self.email=ee['Email'] if len(ee['Email'])>0 else self.email
                 self.phone=ee['Phone'] if len(ee['Phone'])>0 else self.phone
                 self.mobile=ee['Mobile'] if len(ee['Mobile'])>0 else self.mobile
-
-
-
-
-
-
                 self.PassportNumber = ee['PassportNumber']
                 self.Mobile = ee['Mobile']
-                self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '',ee['NameAr'].replace(',',' ')),
-                self.Name = re.sub(r'[^A-Za-z\s]', '',ee['Name'].replace(',',' ')),
+                self.NameAr = re.sub(r'[^\u0600-\u06FF\s]', '', re.sub(r",+", " ", ee['Name'])),
+                self.Name = re.sub(r'[^A-Za-z\s]', '', re.sub(r",+", " ", ee['Name'])),
                 self.Occupation = ee['Occupation']
-
                 self.ResidencyType = ee['ResidencyType']
-
+                self.ResidencyExpiry=ee['ResidencyExpiry']
                 self.ResidencyNumber = ee['ResidencyNumber']
                 self.Sex = ee['Sex']
                 self.SponsorName = ee['SponsorName']
                 self.SponsorNumber = ee['SponsorNumber']
                 self.SponsorType = ee['SponsorType']
                 self.Nationality= ee['Nationality']
-
+                self.NationalityArabic = ee['NationalityArabic']
+                image_base64_string = ee.get('Photo')
+                self.image_1920 = image_base64_string
                 self.jsondata=""
 
 
