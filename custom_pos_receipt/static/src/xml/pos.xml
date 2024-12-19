@@ -35,7 +35,9 @@
                 <div>--------------------------------</div>
             </div>
         </xpath>
-        
+        <xpath expr="//t[@t-if='isTaxIncluded']" position="replace">
+            <!-- فارغ: نستخدم replace لإزالة العنصر -->
+        </xpath>
 
         <!-- نقل ضرائب المبلغ الكلي قبل جزء TOTAL -->
         <xpath expr="//div[@class='pos-receipt-amount']" position="before">
