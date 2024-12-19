@@ -35,6 +35,25 @@
                 <div>--------------------------------</div>
             </div>
         </xpath>
+        <xpath expr="//t[@t-if='isTaxIncluded']" position="replace">
+            <!-- فارغ: نستخدم replace لإزالة العنصر -->
+        </xpath>
+
+        <!-- نقل ضرائب المبلغ الكلي قبل جزء TOTAL -->
+        <xpath expr="//div[@class='pos-receipt-amount']" position="before">
+            <t t-if="isTaxIncluded">
+                <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+                    <div>
+                        <t t-esc="tax.name"/>
+                        <span t-esc="env.pos.format_currency_no_symbol(tax.amount)" class="pos-receipt-right-align"/>
+                    </div>
+                </t>
+                <div>
+                    Total Taxes
+                    <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
+                </div>
+            </t>
+        </xpath>
 
     </t>
     <t t-name="OrderLinesReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
