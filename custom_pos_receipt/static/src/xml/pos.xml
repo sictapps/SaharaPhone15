@@ -35,7 +35,7 @@
                 <div>--------------------------------</div>
             </div>
         </xpath>
-        <xpath expr="//t[t-if='isTaxIncluded']" position="replace">
+        <xpath expr="//t[@t-if='isTaxIncluded']" position="replace">
             <!-- فارغ: نستخدم replace لإزالة العنصر -->
         </xpath>
 
