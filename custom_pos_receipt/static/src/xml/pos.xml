@@ -42,12 +42,6 @@
         <!-- نقل ضرائب المبلغ الكلي قبل جزء TOTAL -->
         <xpath expr="//div[@class='pos-receipt-amount']" position="before">
             <t t-if="isTaxIncluded">
-                <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
-                    <div>
-                        <t t-esc="tax.name"/>
-                        <span t-esc="env.pos.format_currency_no_symbol(tax.amount)" class="pos-receipt-right-align"/>
-                    </div>
-                </t>
                 <div>
                     Total Taxes
                     <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
