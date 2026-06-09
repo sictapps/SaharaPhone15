@@ -143,17 +143,20 @@ class TextAccountMove(models.Model):
         if lot_values == []:
             account_move = self.env['account.move'].browse(line.move_id.id)
             if account_move.move_type == 'out_refund':
-                # Credit note: only show SNs from return pickings (incoming from customer)
+                # Credit note: only show SNs from return moves (origin_returned_move_id is set)
                 src_invoice = account_move.reversed_entry_id or account_move
                 sale_orders = src_invoice.invoice_line_ids.sale_line_ids.order_id
-                pickings = sale_orders.picking_ids.filtered(
-                    lambda p: p.picking_type_id.code == 'incoming' and p.state == 'done'
-                )
+                all_picking_ids = sale_orders.picking_ids.ids
+                order_lines = self.env['stock.move.line'].search([
+                    ('picking_id', 'in', all_picking_ids),
+                    ('product_id', '=', line.product_id.id),
+                    ('move_id.origin_returned_move_id', '!=', False),
+                ])
             else:
                 pickings = account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids
-            order_lines = self.env['stock.move.line'].search(
-                [('picking_id', 'in', pickings.ids),
-                 ('product_id', '=', line.product_id.id)])
+                order_lines = self.env['stock.move.line'].search(
+                    [('picking_id', 'in', pickings.ids),
+                     ('product_id', '=', line.product_id.id)])
             if order_lines:
                 for lot in order_lines:
                     obj = {
