@@ -516,7 +516,7 @@
                             </td>
                             <td style="align: left; text-align: left;width: 33%;">
                             </td>
-                            <td style="align: right;width: 33%;">
+                            <!-- <td style="align: right;width: 33%;">
                                 <t t-if="len(o.company_id.bank_ids) &gt; 1">
                                 Bank Name :
                                 <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name"
@@ -531,7 +531,7 @@
                                       t-field="o.company_id.bank_ids[1].bank_bic"/>
                                 <br/>
                                 </t>
-                            </td>
+                            </td> -->
                         </tr>
                     </table>
 
