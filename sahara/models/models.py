@@ -143,15 +143,28 @@ class TextAccountMove(models.Model):
         if lot_values == []:
             account_move = self.env['account.move'].browse(line.move_id.id)
             if account_move.move_type == 'out_refund':
-                # Credit note: only show SNs from return moves (origin_returned_move_id is set)
                 src_invoice = account_move.reversed_entry_id or account_move
                 sale_orders = src_invoice.invoice_line_ids.sale_line_ids.order_id
                 all_picking_ids = sale_orders.picking_ids.ids
+                # First try: return moves only (physical return to warehouse)
                 order_lines = self.env['stock.move.line'].search([
                     ('picking_id', 'in', all_picking_ids),
                     ('product_id', '=', line.product_id.id),
                     ('move_id.origin_returned_move_id', '!=', False),
                 ])
+                # Fallback: get SNs from original invoice's outgoing delivery
+                if not order_lines and account_move.reversed_entry_id:
+                    orig_line = account_move.reversed_entry_id.invoice_line_ids.filtered(
+                        lambda l: l.product_id == line.product_id
+                    )
+                    orig_sale_orders = orig_line.sale_line_ids.order_id
+                    orig_pickings = orig_sale_orders.picking_ids.filtered(
+                        lambda p: p.picking_type_id.code == 'outgoing' and p.state == 'done'
+                    )
+                    order_lines = self.env['stock.move.line'].search([
+                        ('picking_id', 'in', orig_pickings.ids),
+                        ('product_id', '=', line.product_id.id),
+                    ])
             else:
                 pickings = account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids
                 order_lines = self.env['stock.move.line'].search(
