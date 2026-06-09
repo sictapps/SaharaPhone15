@@ -486,7 +486,7 @@
                             <td style="align: center; text-align: center;width: 33%;">
                             </td>
                             <td style="margin-left: -3.5px;position: absolute;margin-top:5px;height:80px; width: 33%;border: 1px dashed black;">
-                                <p style="margin-left: 7px;">Sahara Gulf Signature</p>
+                                <p style="margin-left: 7px;">Sahara Phone Signature</p>
                             </td>
                             <td style="align: center; text-align: center;width: 0.5%;">
                             </td>
@@ -517,6 +517,7 @@
                             <td style="align: left; text-align: left;width: 33%;">
                             </td>
                             <td style="align: right;width: 33%;">
+                                <t t-if="len(o.company_id.bank_ids) &gt; 1">
                                 Bank Name :
                                 <span class="m-0" t-if="o.company_id.bank_ids[1].bank_name"
                                       t-field="o.company_id.bank_ids[1].bank_name"/>
@@ -529,6 +530,7 @@
                                 <span class="m-0" t-if="o.company_id.bank_ids[1].bank_bic"
                                       t-field="o.company_id.bank_ids[1].bank_bic"/>
                                 <br/>
+                                </t>
                             </td>
                         </tr>
                     </table>
