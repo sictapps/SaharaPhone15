@@ -2,30 +2,30 @@
 <odoo>
     <data>
 
-        <record id="action_report_print_thermal_so" model="ir.actions.report">
-            <field name="name">Thermal Invoice</field>
-            <field name="model">account.move</field>
+        <!-- =====================================================================
+             Report Action - single "Thermal Repair Order" action, 80mm.
+             ===================================================================== -->
+
+        <record id="action_report_thermal_repair_order" model="ir.actions.report">
+            <field name="name">Thermal Repair Order</field>
+            <field name="model">repair.order</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">thermal_sale_report.report_thermal</field>
-            <field name="report_file">thermal_sale_report.report_thermal</field>
-            <field name="print_report_name">(object._get_report_base_filename())</field>
-            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="report_name">thermal_repair_report.report_thermal_repair</field>
+            <field name="report_file">thermal_repair_report.report_thermal_repair</field>
+            <field name="print_report_name">'Repair Order - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="repair.model_repair_order"/>
             <field name="binding_type">report</field>
-            <field name="paperformat_id" ref="paperformat_thermal_paper_80mm"/>
+            <field name="paperformat_id" ref="thermal_sale_report.paperformat_thermal_paper_80mm"/>
         </record>
 
         <!-- =====================================================================
-             QWeb Template - mirrors the actual POS receipt (point_of_sale
-             core OrderReceipt.xml + the custom_pos_receipt module's xpath
-             additions: "Tax Invoice" title, Client/Tel/Tax ID block,
-             SalesPerson line, "Additional Details" warranty text) as closely
-             as a backend qweb-pdf report can: monospace font, plain-text
-             dashed-line separators (no boxes/colors/grid borders), prices
-             right-floated, order reference + date printed at the very
-             bottom - same structure/order as the POS ticket.
+             QWeb Template - same POS-receipt design language as
+             thermal_sale_report/report/thermal_report.xml (identical CSS,
+             identical structure/order). Do not edit this <style> block
+             without mirroring the change back into thermal_report.xml.
              ===================================================================== -->
 
-        <template id="report_thermal">
+        <template id="report_thermal_repair">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
                     <t t-set="cur" t-value="doc.currency_id.name or doc.currency_id.symbol"/>
@@ -77,10 +77,10 @@
                             <div class="rc-company-name"><t t-esc="doc.company_id.name"/></div>
                         </t>
 
-                        <!-- ===== "Tax Invoice" title (matches custom_pos_receipt xpath) ===== -->
+                        <!-- ===== Title ===== -->
                         <div class="rc-title">
-                            <span t-if="is_arabic">فاتورة ضريبية</span>
-                            <span t-else="">Tax Invoice</span>
+                            <span t-if="is_arabic">أمر صيانة</span>
+                            <span t-else="">Repair Order</span>
                         </div>
 
                         <!-- ===== Contact block ===== -->
@@ -96,7 +96,7 @@
                             <div t-if="doc.company_id.website"><t t-esc="doc.company_id.website"/></div>
                         </div>
 
-                        <!-- ===== Client block (matches custom_pos_receipt xpath) ===== -->
+                        <!-- ===== Client block ===== -->
                         <t t-if="doc.partner_id">
                             <div class="rc-dash">--------------------------------</div>
                             <div><span t-if="is_arabic">العميل: </span><span t-else="">Client: </span><t t-esc="doc.partner_id.name"/></div>
@@ -104,84 +104,107 @@
                             <div t-if="doc.partner_id.vat"><span t-if="is_arabic">الرقم الضريبي: </span><span t-else="">Tax ID: </span><t t-esc="doc.partner_id.vat"/></div>
                         </t>
 
-                        <!-- ===== Salesperson (matches custom_pos_receipt xpath) ===== -->
-                        <t t-if="doc.invoice_user_id">
+                        <!-- ===== Product / Serial being repaired ===== -->
+                        <t t-if="doc.product_id">
                             <div class="rc-dash">--------------------------------</div>
-                            <div class="rc-pad"><span t-if="is_arabic">البائع: </span><span t-else="">SalesPerson: </span><t t-esc="doc.invoice_user_id.name"/></div>
+                            <div class="rc-pad">
+                                <span t-if="is_arabic">المنتج: </span><span t-else="">Product: </span>
+                                <t t-esc="doc.product_id.name"/>
+                                <t t-if="doc.product_id.default_code"> [<t t-esc="doc.product_id.default_code"/>]</t>
+                            </div>
+                            <div class="rc-pad" t-if="doc.lot_id"><span t-if="is_arabic">الرقم التسلسلي: </span><span t-else="">Serial/Lot: </span><t t-esc="doc.lot_id.name"/></div>
+                        </t>
+
+                        <!-- ===== Responsible ===== -->
+                        <t t-if="doc.user_id">
+                            <div class="rc-dash">--------------------------------</div>
+                            <div class="rc-pad"><span t-if="is_arabic">المسؤول: </span><span t-else="">Responsible: </span><t t-esc="doc.user_id.name"/></div>
                         </t>
                         <div class="rc-dash">--------------------------------</div>
 
+                        <!-- ===== Repair description ===== -->
+                        <t t-if="doc.description">
+                            <div class="rc-pad rc-small">
+                                <span t-if="is_arabic">وصف الصيانة: </span><span t-else="">Repair Description: </span><t t-esc="doc.description"/>
+                            </div>
+                            <div class="rc-dash">--------------------------------</div>
+                        </t>
+
                         <div class="rc-spacer"/>
 
-                        <!-- ===== Order lines ===== -->
-                        <t t-foreach="doc.invoice_line_ids" t-as="line">
-                            <t t-if="line.display_type == 'line_section'">
-                                <div class="rc-bold"><span t-field="line.name" t-options="{'widget': 'text'}"/></div>
-                            </t>
-                            <t t-elif="line.display_type == 'line_note'">
-                                <div class="rc-small"><span t-field="line.name" t-options="{'widget': 'text'}"/></div>
-                            </t>
-                            <t t-else="">
+                        <!-- ===== Parts ===== -->
+                        <t t-if="doc.operations">
+                            <div class="rc-bold"><span t-if="is_arabic">القطع</span><span t-else="">Parts</span></div>
+                            <t t-foreach="doc.operations" t-as="line">
                                 <div>
-                                    <t t-if="line.product_id.default_code">[<t t-esc="line.product_id.default_code"/>] </t>
+                                    <t t-if="line.type == 'remove'">(<span t-if="is_arabic">إزالة</span><span t-else="">Remove</span>) </t>
                                     <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                 </div>
-                                <t t-if="line.discount">
-                                    <div class="rc-pad"><span t-if="is_arabic">خصم: </span><span t-else="">Discount: </span><t t-esc="'%.2f' % line.discount"/>%</div>
-                                </t>
                                 <div class="rc-row rc-pad">
-                                    <t t-esc="line.quantity"/>
-                                    <t groups="uom.group_uom"> <t t-esc="line.product_uom_id.name"/></t>
-                                    x <t t-esc="'{:,.2f}'.format(line.price_unit)"/>
-                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(line.price_subtotal, cur)"/></span>
+                                    <span t-field="line.product_uom_qty"/>
+                                    <t groups="uom.group_uom"> <t t-esc="line.product_uom.name"/></t>
+                                    <span class="rc-row-amt">
+                                        <t t-if="doc.invoice_method != 'none'"><t t-esc="'{:,.2f} {}'.format(line.price_subtotal, cur)"/></t>
+                                    </span>
                                 </div>
-                                <t t-if="line.tax_ids">
-                                    <div class="rc-pad rc-small"><span t-if="is_arabic">الضريبة: </span><span t-else="">Tax: </span><t t-esc="', '.join(line.tax_ids.mapped('name'))"/></div>
-                                </t>
-                                <t t-set="sn_list" t-value="', '.join([l['lot_name'] for l in doc.get_line_lots(line) if l.get('lot_name')])"/>
-                                <t t-if="sn_list">
-                                    <div class="rc-pad rc-small">SN: <span class="rc-bold" t-esc="sn_list"/></div>
-                                </t>
+                                <div class="rc-pad rc-small" t-if="line.lot_id">SN: <span class="rc-bold" t-esc="line.lot_id.name"/></div>
                             </t>
+                            <div class="rc-dash rc-center">--------</div>
                         </t>
 
-                        <!-- ===== Subtotal + tax breakdown ===== -->
-                        <div class="rc-row rc-center rc-dash">--------</div>
-                        <t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>
-                        <div class="rc-row">
-                            <span t-if="is_arabic">المجموع غير شامل الضريبة</span><span t-else="">Subtotal</span>
-                            <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(tax_totals['amount_untaxed'], cur)"/></span>
-                        </div>
-                        <t t-foreach="tax_totals.get('subtotals', [])" t-as="subtotal">
-                            <t t-foreach="tax_totals.get('groups_by_subtotal', {}).get(subtotal['name'], [])" t-as="grp">
+                        <!-- ===== Operations / Labor ===== -->
+                        <t t-if="doc.fees_lines">
+                            <div class="rc-bold"><span t-if="is_arabic">أعمال الصيانة</span><span t-else="">Operations</span></div>
+                            <t t-foreach="doc.fees_lines" t-as="fee">
+                                <div><span t-field="fee.name" t-options="{'widget': 'text'}"/></div>
+                                <div class="rc-row rc-pad">
+                                    <span t-field="fee.product_uom_qty"/>
+                                    <t groups="uom.group_uom"> <t t-esc="fee.product_uom.name"/></t>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(fee.price_subtotal, cur)"/></span>
+                                </div>
+                            </t>
+                            <div class="rc-dash rc-center">--------</div>
+                        </t>
+
+                        <!-- ===== Financial summary (only when meant to be invoiced) ===== -->
+                        <t t-if="doc.invoice_method != 'none'">
+                            <t t-if="doc.operations">
                                 <div class="rc-row">
-                                    <t t-esc="grp['tax_group_name']"/>
-                                    <span class="rc-row-amt"><t t-esc="'{:,.2f}'.format(grp['tax_group_amount'])"/></span>
+                                    <span t-if="is_arabic">مجموع القطع</span><span t-else="">Parts Subtotal</span>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(sum(doc.operations.mapped('price_subtotal')), cur)"/></span>
                                 </div>
                             </t>
+                            <t t-if="doc.fees_lines">
+                                <div class="rc-row">
+                                    <span t-if="is_arabic">أعمال الصيانة</span><span t-else="">Operations / Labor</span>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(sum(doc.fees_lines.mapped('price_subtotal')), cur)"/></span>
+                                </div>
+                            </t>
+                            <div class="rc-row">
+                                <span t-if="is_arabic">المجموع غير شامل الضريبة</span><span t-else="">Subtotal</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_untaxed, cur)"/></span>
+                            </div>
+                            <div class="rc-row">
+                                <span t-if="is_arabic">الضريبة</span><span t-else="">Taxes</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_tax, cur)"/></span>
+                            </div>
+
+                            <div class="rc-row rc-center rc-dash">--------</div>
+                            <div class="rc-row rc-total-row">
+                                <span t-if="is_arabic">المجموع الكلي</span><span t-else="">TOTAL</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_total, cur)"/></span>
+                            </div>
+
+                            <div class="rc-spacer"/>
                         </t>
 
-                        <!-- ===== Total ===== -->
-                        <div class="rc-row rc-center rc-dash">--------</div>
-                        <div class="rc-row rc-total-row">
-                            <span t-if="is_arabic">المجموع الكلي</span><span t-else="">TOTAL</span>
-                            <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(tax_totals['amount_total'], cur)"/></span>
+                        <!-- ===== Repair status ===== -->
+                        <div class="rc-row">
+                            <span t-if="is_arabic">حالة الطلب</span><span t-else="">Repair Status</span>
+                            <span class="rc-row-amt" t-esc="dict(doc._fields['state'].selection).get(doc.state, doc.state)"/>
                         </div>
 
                         <div class="rc-spacer"/>
-
-                        <!-- ===== Payment info (posted customer invoices/credit notes only) ===== -->
-                        <t t-if="doc.move_type in ('out_invoice', 'out_refund') and doc.state == 'posted'">
-                            <div class="rc-row">
-                                <span t-if="is_arabic">حالة الدفع</span><span t-else="">Payment Status</span>
-                                <span class="rc-row-amt" t-esc="dict(doc._fields['payment_state'].selection).get(doc.payment_state, doc.payment_state)"/>
-                            </div>
-                            <div class="rc-row">
-                                <span t-if="is_arabic">المبلغ المتبقي</span><span t-else="">Amount Due</span>
-                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_residual, cur)"/></span>
-                            </div>
-                            <div class="rc-spacer"/>
-                        </t>
 
                         <!-- ===== Footer thank-you ===== -->
                         <div class="rc-center rc-bold">
@@ -189,7 +212,7 @@
                             <span t-else="">Thank You For Your Business!</span>
                         </div>
 
-                        <!-- ===== Additional Details (matches custom_pos_receipt xpath) ===== -->
+                        <!-- ===== Additional Details ===== -->
                         <div class="rc-dash rc-center">--------------------------------</div>
                         <div class="rc-pad rc-small">
                             <span t-if="is_arabic">تفاصيل إضافية:</span><span t-else="">Additional Details:</span><br/>
@@ -202,10 +225,10 @@
                         </div>
                         <div class="rc-dash rc-center">--------------------------------</div>
 
-                        <!-- ===== Order reference + date (very bottom, matches receipt.name/date) ===== -->
+                        <!-- ===== Order reference + date (very bottom) ===== -->
                         <div class="rc-spacer"/>
                         <div class="rc-center"><t t-esc="doc.name"/></div>
-                        <div class="rc-center" t-if="doc.invoice_date"><span t-field="doc.invoice_date"/></div>
+                        <div class="rc-center" t-if="doc.create_date"><span t-field="doc.create_date" t-options="{'widget': 'date'}"/></div>
 
                         <div class="rc-end-space"/>
 

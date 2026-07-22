@@ -141,19 +141,24 @@ class TextAccountMove(models.Model):
                     if not obj in lot_values:
                         lot_values.append(obj)
         if lot_values == []:
-            account_move = self.env['account.move'].browse(line.move_id.id)
-            if account_move.move_type == 'out_refund':
-                # Credit note: only show SNs from return pickings (incoming from customer)
-                src_invoice = account_move.reversed_entry_id or account_move
-                sale_orders = src_invoice.invoice_line_ids.sale_line_ids.order_id
-                pickings = sale_orders.picking_ids.filtered(
-                    lambda p: p.picking_type_id.code == 'incoming' and p.state == 'done'
+            move_id = line.move_id.id
+            account_move = self.env['account.move'].search([('id', '=', line.move_id.id)])
+            if account_move.move_type == 'out_refund' and account_move.reversed_entry_id:
+                orig_invoice = account_move.reversed_entry_id
+                orig_line = orig_invoice.invoice_line_ids.filtered(
+                    lambda l: l.product_id == line.product_id
                 )
+                orig_pickings = orig_line.sale_line_ids.order_id.picking_ids.filtered(
+                    lambda p: p.picking_type_id.code == 'outgoing' and p.state == 'done'
+                )
+                order_lines = self.env['stock.move.line'].search([
+                    ('picking_id', 'in', orig_pickings.ids),
+                    ('product_id', '=', line.product_id.id),
+                ])
             else:
-                pickings = account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids
-            order_lines = self.env['stock.move.line'].search(
-                [('picking_id', 'in', pickings.ids),
-                 ('product_id', '=', line.product_id.id)])
+                order_lines = self.env['stock.move.line'].search(
+                    [('picking_id', 'in', account_move.invoice_line_ids.sale_line_ids.order_id.picking_ids.ids),
+                     ('product_id', '=', line.product_id.id)])
             if order_lines:
                 for lot in order_lines:
                     obj = {

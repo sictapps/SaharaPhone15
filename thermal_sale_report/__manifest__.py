@@ -8,7 +8,11 @@
     'author': "Mohammad Salman in S-apps",
     'website': "https://www.s-apps.io/",
     'company': 'SAPPS LLC',
-    'depends': ['base', 'sale'],
+    # 'sahara' is required for account.move.get_line_lots() - the serial/lot
+    # number lookup already used by the "Sahara Invoices" report
+    # (sahara/views/views.xml), reused here on purpose instead of
+    # reimplementing the same logic.
+    'depends': ['base', 'sale', 'account', 'sahara'],
     'data': [
         'data/report_paperformat_data.xml',
         'report/thermal_report.xml',
