@@ -1,84 +1,249 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* =========================================================================
+   Thermal Invoice / Thermal Repair Order - shared print stylesheet
+   -------------------------------------------------------------------------
+   Design language: plain black & white, dashed-line separators, classic
+   "Label  :  Value" two-column layout with right-aligned values - matches
+   a standard, well-known thermal invoice layout (label left / colon /
+   value right, dashed rules between sections, no color fills). No CSS
+   flexbox/grid (Odoo 15's wkhtmltopdf/QtWebKit support for it is
+   unreliable) - all column layouts use plain <table> markup.
+   All widths are percentage-based so the same markup adapts to both the
+   58mm and 80mm paper formats without duplicating the QWeb template.
+   No external @import / remote fonts: wkhtmltopdf renders offline on the
+   report worker: a remote font request can stall or fail PDF generation.
+   ========================================================================= */
 
-body {
-    font-family: 'VT323', monospace;
-
-
-}
-
-.my_container {
-    font-family: 'VT323', monospace;
-
-    font-size: 20px;
-    width: 100% ; /* اجعل الحاوية تأخذ العرض الكامل */
-    padding: 0; /* إزالة أي مسافات داخلية */
-    margin: 0; /* إزالة أي مسافات خارجية */
-
-}
-.my_product_table {
-    width: 140%;
-    table-layout: fixed;
-    border: transparent;
-    border-spacing: 0; /* يقلل المسافة بين الخلايا */
-    border-collapse: collapse; /* يجعل الخلايا تتشارك الحواف */
-}
-
-.my_product_table td {
-    padding: 2px 5px; /* تقليل المسافة داخل الخلايا */
-    line-height: 1.2; /* تقليل المسافة بين النصوص */
-}
-.my_product_table td:first-child {
-    width: 60% !important; /* عرض العمود الأول (المنتج) */
-}
-
-
-.my_product_table td:nth-child(2) {
-    width: 20% !important; /* عرض الأعمدة الأخرى */
-}.my_product_table td:nth-child(3) {
-    width: 50% !important; /* عرض الأعمدة الأخرى */
-}
-
-.my_table {
-    width: 90%;
-    border: transparent;
-}
-
-.my_table{
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-
-.my_product_table tr:first-child {
-    border-bottom: 1px;
-    border-style: dashed;
-
-}
-
-.cntr {
-    display: flex;
-    justify-content: center;
+.thermal-doc {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.35;
+    color: #000000;
     width: 100%;
-}
-.my_section{
-    width: 90%;
-    position: relative;
-
+    margin: 0;
+    padding: 1mm 2mm;
+    -webkit-font-smoothing: antialiased;
 }
 
-.detail_section{
-    text-align:left;
+.thermal-doc * {
+    box-sizing: border-box;
 }
-.date_section{
-    position: absolute;
+
+/* ---------- generic helpers ---------- */
+.thermal-center { text-align: center; }
+.thermal-right { text-align: right; }
+.thermal-left { text-align: left; }
+.thermal-bold { font-weight: 700; }
+.thermal-muted { color: #333333; }
+.thermal-small { font-size: 9px; }
+.thermal-nowrap { white-space: nowrap; }
+.thermal-mt-1 { margin-top: 1mm; }
+.thermal-mt-2 { margin-top: 2mm; }
+.thermal-mb-1 { margin-bottom: 1mm; }
+
+.thermal-divider {
+    border: 0;
+    border-top: 1px dashed #000000;
+    margin: 1.5mm 0;
+    height: 0;
+}
+
+.thermal-divider.thermal-divider-solid {
+    border-top: 1px solid #000000;
+}
+
+/* ---------- header ---------- */
+.thermal-logo {
+    max-width: 35%;
+    max-height: 10mm;
+    margin: 0 auto 1.5mm auto;
+    display: block;
+}
+
+.thermal-company-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0.5mm 0;
+}
+
+.thermal-company-line {
+    font-size: 9.5px;
+    line-height: 1.15;
+    margin: 0.2mm 0;
+}
+
+.thermal-doc-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 1.5mm 0 0.5mm 0;
+    letter-spacing: 0.5px;
+}
+
+.thermal-doc-subtitle {
+    font-size: 10px;
+    text-align: center;
+    margin: 0 0 1mm 0;
+}
+
+.thermal-section-title {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 1.5mm 0 1mm 0;
+}
+
+/* ---------- "Label :   Value" info table ----------
+   Two fixed-width columns: label (with the colon baked into its own text,
+   left-aligned) and value (right-aligned). Kept to 2 columns on purpose -
+   more robust across wkhtmltopdf table-layout quirks than a 3rd narrow
+   colon column. Use the "left" modifier on the value cell for prose-like
+   content (e.g. a customer name) that reads better left-aligned. ---------- */
+table.thermal-info-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 10px;
+    margin: 1mm 0;
+    border: 1px solid #000000;
+}
+
+table.thermal-info-table td {
+    padding: 0.7mm 1mm;
+    vertical-align: top;
+    border: 1px solid #000000;
+}
+
+table.thermal-info-table td.til {
+    width: 38%;
     text-align: left;
-    right: 0;
-    top:10px;
+    white-space: nowrap;
 }
 
-
-.my_table  tr td:nth-child(3n+3) {
+table.thermal-info-table td.tiv {
+    width: 62%;
     text-align: right;
+    word-wrap: break-word;
 }
 
+table.thermal-info-table td.tiv.left {
+    text-align: left;
+}
 
+/* ---------- product / line table ----------
+   Real grid: outer border + border on every cell, same visible-grid
+   language as the official "Sahara Invoices" report (confirmed it
+   renders cleanly on this wkhtmltopdf setup) - rows and columns are
+   now genuinely ruled, not just aligned by whitespace. ---------- */
+table.thermal-lines {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 10px;
+    margin-top: 0.5mm;
+    border: 1px solid #000000;
+}
+
+table.thermal-lines thead td {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid #000000;
+    padding: 0.5mm 0.5mm 1mm 0.5mm;
+}
+
+table.thermal-lines tbody td {
+    padding: 1mm 0.5mm;
+    vertical-align: top;
+    word-wrap: break-word;
+    border: 1px solid #000000;
+}
+
+.thermal-line-name {
+    font-weight: 400;
+    font-size: 10px;
+}
+
+.thermal-line-meta {
+    font-size: 8.5px;
+    color: #333333;
+    margin-top: 0.3mm;
+}
+
+.thermal-col-desc { width: 54%; text-align: left; }
+.thermal-col-qty { width: 16%; text-align: right; }
+.thermal-col-total { width: 30%; text-align: right; }
+
+/* ---------- totals (same "Label :   Value" pattern as the info table) ---------- */
+table.thermal-totals {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    margin-top: 1mm;
+    border: 1px solid #000000;
+}
+
+table.thermal-totals td {
+    padding: 0.6mm 1mm;
+    border: 1px solid #000000;
+}
+
+table.thermal-totals td.ttl {
+    width: 60%;
+    text-align: left;
+}
+
+table.thermal-totals td.ttv {
+    width: 40%;
+    text-align: right;
+    white-space: nowrap;
+}
+
+table.thermal-totals tr.thermal-grand-total td {
+    border-top: 2px solid #000000;
+    padding-top: 1.2mm;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+table.thermal-totals tr.thermal-paid-total td {
+    font-weight: 700;
+}
+
+/* ---------- badges / status pill ---------- */
+.thermal-badge {
+    display: inline-block;
+    border: 1px solid #000000;
+    padding: 0.4mm 2.5mm;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* ---------- footer ---------- */
+.thermal-footer {
+    text-align: center;
+    font-size: 9.5px;
+    margin-top: 2mm;
+}
+
+.thermal-footer .thermal-thanks {
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 1mm;
+}
+
+.thermal-footer p {
+    margin: 0.5mm 0;
+}
+
+/* ---------- avoid splitting a line/section across a page break ---------- */
+.thermal-avoid-break {
+    page-break-inside: avoid;
+}
+
+/* ---------- trailing blank space (paper feed/cut margin) ---------- */
+.thermal-end-space {
+    height: 18mm;
+}

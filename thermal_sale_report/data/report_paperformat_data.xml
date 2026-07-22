@@ -1,20 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="paperformat_thermal_paper" model="report.paperformat">
-            <field name="name">Thermal Paper</field>
+
+        <!-- 80mm thermal paper - default width, matches the most common thermal
+             printers in the branches. -->
+        <record id="paperformat_thermal_paper_80mm" model="report.paperformat">
+            <field name="name">Thermal Paper 80mm</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
-            <field name="page_height">75</field>
-            <field name="page_width">58</field>
+            <field name="page_height">297</field>
+            <field name="page_width">80</field>
             <field name="orientation">Portrait</field>
-            <field name="margin_top">0</field>
-            <field name="margin_bottom">0</field>
-            <field name="margin_left">0</field>
-            <field name="margin_right">0</field>
+            <field name="margin_top">2</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
             <field name="header_line" eval="False"/>
             <field name="header_spacing">0</field>
             <field name="dpi">96</field>
         </record>
+
+        <!-- 58mm thermal paper - offered as a secondary print option, same
+             template/logic, only the physical width differs. -->
+        <record id="paperformat_thermal_paper_58mm" model="report.paperformat">
+            <field name="name">Thermal Paper 58mm</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">58</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">2</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <!-- Backward-compatible alias: some views/customizations may still
+             reference the original external id "paperformat_thermal_paper"
+             (58mm, defined by this module prior to this update). Keep it
+             pointing at the 58mm format so nothing that referenced it by
+             xml_id breaks. -->
+        <record id="paperformat_thermal_paper" model="report.paperformat">
+            <field name="name">Thermal Paper</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">58</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">2</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
     </data>
 </odoo>
