@@ -4,8 +4,6 @@
 
         <!-- =====================================================================
              Report Action - single "Thermal Repair Order" action, 80mm.
-             binding_model_id/binding_type automatically add the entry to the
-             Print menu of the Repair Order form - no view changes required.
              ===================================================================== -->
 
         <record id="action_report_thermal_repair_order" model="ir.actions.report">
@@ -21,402 +19,218 @@
         </record>
 
         <!-- =====================================================================
-             QWeb Template - identical design language/CSS to the Thermal
-             Invoice (thermal_sale_report/report/thermal_report.xml) on
-             purpose, so both printouts look like the same family of
-             document. Do not edit this <style> block without mirroring the
-             change back into thermal_report.xml (and vice versa).
+             QWeb Template - same POS-receipt design language as
+             thermal_sale_report/report/thermal_report.xml (identical CSS,
+             identical structure/order). Do not edit this <style> block
+             without mirroring the change back into thermal_report.xml.
              ===================================================================== -->
 
         <template id="report_thermal_repair">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
                     <t t-set="cur" t-value="doc.currency_id.name or doc.currency_id.symbol"/>
-
-                    <!-- Language Detection -->
                     <t t-set="is_arabic" t-value="doc.partner_id.lang and 'ar' in doc.partner_id.lang"/>
                     <t t-set="doc_dir" t-value="'rtl' if is_arabic else 'ltr'"/>
 
-                    <!-- Embedded CSS for Guaranteed wkhtmltopdf Rendering -->
                     <style type="text/css">
                         .thermal-doc {
-                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-                            font-size: 10px !important;
-                            line-height: 1.3 !important;
+                            font-family: 'Courier New', Courier, monospace !important;
+                            font-size: 13px !important;
+                            line-height: 1.4 !important;
                             color: #000000 !important;
                             width: 100% !important;
                             margin: 0 !important;
                             padding: 0 !important;
                         }
+                        .thermal-doc[dir="rtl"] { text-align: right !important; direction: rtl !important; }
+                        .thermal-doc[dir="ltr"] { text-align: left !important; direction: ltr !important; }
 
-                        .thermal-doc[dir="rtl"] { text-align: right !important; }
-                        .thermal-doc[dir="ltr"] { text-align: left !important; }
+                        .rc-center { text-align: center !important; }
+                        .rc-bold { font-weight: bold !important; }
+                        .rc-small { font-size: 11px !important; }
 
-                        .thermal-center { text-align: center !important; }
-                        .thermal-bold { font-weight: bold !important; }
-                        .thermal-small { font-size: 8.5px !important; color: #333333 !important; }
+                        .rc-logo { max-width: 60% !important; max-height: 18mm !important; display: block !important; margin: 0 auto 1mm auto !important; }
+                        .rc-company-name { font-size: 17px !important; font-weight: bold !important; text-align: center !important; margin: 0 0 1mm 0 !important; }
+                        .rc-title { text-align: center !important; font-weight: bold !important; margin: 1mm 0 !important; }
 
-                        .thermal-logo {
-                            max-width: 40mm !important;
-                            max-height: 15mm !important;
-                            margin: 0 auto 2mm auto !important;
-                            display: block !important;
-                        }
+                        .rc-dash { margin: 0.8mm 0 !important; letter-spacing: -0.5px !important; }
 
-                        .thermal-company-name {
-                            font-size: 14px !important;
-                            font-weight: bold !important;
-                            margin-bottom: 1mm !important;
-                        }
+                        .rc-row { width: 100% !important; overflow: hidden !important; }
+                        .thermal-doc[dir="ltr"] .rc-row-amt { float: right !important; }
+                        .thermal-doc[dir="rtl"] .rc-row-amt { float: left !important; }
 
-                        .thermal-company-line {
-                            font-size: 8.5px !important;
-                            margin: 0.5mm 0 !important;
-                        }
+                        .rc-pad { padding-left: 8px !important; }
+                        .thermal-doc[dir="rtl"] .rc-pad { padding-left: 0 !important; padding-right: 8px !important; }
 
-                        .thermal-doc-title {
-                            font-size: 11px !important;
-                            font-weight: bold !important;
-                            text-align: center !important;
-                            margin: 2mm 0 !important;
-                            padding: 1.5mm !important;
-                            border: 1px solid #000000 !important;
-                            background-color: #f2f2f2 !important;
-                        }
-
-                        .thermal-section-title {
-                            font-size: 9px !important;
-                            font-weight: bold !important;
-                            text-transform: uppercase !important;
-                            margin: 2mm 0 1mm 0 !important;
-                            border-bottom: 1px solid #000000 !important;
-                            padding-bottom: 0.5mm !important;
-                        }
-
-                        .thermal-divider {
-                            border: none !important;
-                            border-top: 1px dashed #000000 !important;
-                            margin: 2mm 0 !important;
-                        }
-
-                        .thermal-divider-double {
-                            border: none !important;
-                            border-top: 2.5px double #000000 !important;
-                            margin: 2mm 0 !important;
-                        }
-
-                        /* Info Table */
-                        table.thermal-info-table {
-                            width: 100% !important;
-                            border-collapse: collapse !important;
-                            margin: 1mm 0 !important;
-                            table-layout: fixed !important;
-                        }
-
-                        table.thermal-info-table td {
-                            padding: 0.6mm 0 !important;
-                            vertical-align: top !important;
-                            font-size: 9px !important;
-                        }
-
-                        .thermal-doc[dir="rtl"] table.thermal-info-table td.til { text-align: right !important; font-weight: bold !important; width: 38% !important; }
-                        .thermal-doc[dir="rtl"] table.thermal-info-table td.tiv { text-align: left !important; width: 62% !important; word-wrap: break-word !important; }
-
-                        .thermal-doc[dir="ltr"] table.thermal-info-table td.til { text-align: left !important; font-weight: bold !important; width: 38% !important; }
-                        .thermal-doc[dir="ltr"] table.thermal-info-table td.tiv { text-align: right !important; width: 62% !important; word-wrap: break-word !important; }
-
-                        /* Structured Lines Table */
-                        table.thermal-lines {
-                            width: 100% !important;
-                            border-collapse: collapse !important;
-                            margin-top: 1mm !important;
-                            table-layout: fixed !important;
-                            border: 1px solid #000000 !important;
-                        }
-
-                        /* Center aligned headers both horizontally and vertically */
-                        table.thermal-lines th {
-                            font-size: 8.5px !important;
-                            font-weight: bold !important;
-                            background-color: #f2f2f2 !important;
-                            border: 1px solid #000000 !important;
-                            padding: 1.5mm 1mm !important;
-                            text-align: center !important;
-                            vertical-align: middle !important;
-                        }
-
-                        table.thermal-lines td {
-                            padding: 1.2mm 1mm !important;
-                            vertical-align: top !important;
-                            border: 1px solid #000000 !important;
-                            font-size: 9px !important;
-                        }
-
-                        .thermal-col-desc { width: 50% !important; }
-                        .thermal-col-qty { width: 18% !important; text-align: center !important; }
-
-                        .thermal-doc[dir="rtl"] .thermal-col-total { width: 32% !important; text-align: left !important; font-weight: bold !important; }
-                        .thermal-doc[dir="ltr"] .thermal-col-total { width: 32% !important; text-align: right !important; font-weight: bold !important; }
-
-                        .thermal-line-name { font-weight: bold !important; font-size: 9px !important; }
-                        .thermal-line-meta { font-size: 8px !important; color: #444444 !important; margin-top: 0.3mm !important; }
-
-                        /* Totals Table */
-                        table.thermal-totals {
-                            width: 100% !important;
-                            border-collapse: collapse !important;
-                            margin-top: 1mm !important;
-                            table-layout: fixed !important;
-                        }
-
-                        table.thermal-totals td {
-                            padding: 0.6mm 0 !important;
-                            font-size: 9.5px !important;
-                            vertical-align: middle !important;
-                        }
-
-                        .thermal-doc[dir="rtl"] table.thermal-totals td.ttl { text-align: right !important; width: 55% !important; }
-                        .thermal-doc[dir="rtl"] table.thermal-totals td.ttv { text-align: left !important; width: 45% !important; font-weight: bold !important; }
-
-                        .thermal-doc[dir="ltr"] table.thermal-totals td.ttl { text-align: left !important; width: 55% !important; }
-                        .thermal-doc[dir="ltr"] table.thermal-totals td.ttv { text-align: right !important; width: 45% !important; font-weight: bold !important; }
-
-                        table.thermal-totals tr.thermal-grand-total td {
-                            border-top: 1px solid #000000 !important;
-                            border-bottom: 1px solid #000000 !important;
-                            padding: 1.5mm 0 !important;
-                            font-weight: bold !important;
-                            font-size: 11px !important;
-                        }
-
-                        /* Perfectly Centered Payment/Status Badge */
-                        .thermal-badge {
-                            display: inline-block !important;
-                            border: 1px solid #000000 !important;
-                            padding: 2px 8px !important;
-                            font-size: 9px !important;
-                            font-weight: bold !important;
-                            text-align: center !important;
-                            line-height: 1.0 !important;
-                            text-transform: uppercase !important;
-                            vertical-align: middle !important;
-                        }
-
-                        .thermal-footer {
-                            text-align: center !important;
-                            font-size: 8.5px !important;
-                            margin-top: 3mm !important;
-                        }
-
-                        .thermal-footer .thermal-thanks {
-                            font-size: 9.5px !important;
-                            font-weight: bold !important;
-                            margin-bottom: 1mm !important;
-                        }
-
-                        .thermal-end-space { height: 10mm !important; }
+                        .rc-total-row { font-weight: bold !important; font-size: 15px !important; }
+                        .rc-spacer { height: 3mm !important; }
+                        .rc-end-space { height: 10mm !important; }
                     </style>
 
                     <div class="thermal-doc" t-att-dir="doc_dir">
 
-                        <!-- ===== Header ===== -->
-                        <div class="thermal-center">
-                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
-                                 class="thermal-logo" alt="Logo"/>
-                            <div class="thermal-company-name" t-field="doc.company_id.name"/>
+                        <!-- ===== Header : logo or company name ===== -->
+                        <t t-if="doc.company_id.logo">
+                            <img t-att-src="image_data_uri(doc.company_id.logo)" class="rc-logo" alt="Logo"/>
+                        </t>
+                        <t t-else="">
+                            <div class="rc-company-name"><t t-esc="doc.company_id.name"/></div>
+                        </t>
 
-                            <p class="thermal-company-line" t-if="doc.company_id.city or doc.company_id.state_id or doc.company_id.country_id">
+                        <!-- ===== Title ===== -->
+                        <div class="rc-title">
+                            <span t-if="is_arabic">أمر صيانة</span>
+                            <span t-else="">Repair Order</span>
+                        </div>
+
+                        <!-- ===== Contact block ===== -->
+                        <div class="rc-center">
+                            <div t-if="doc.company_id.city or doc.company_id.state_id or doc.company_id.country_id">
                                 <t t-if="doc.company_id.city"><t t-esc="doc.company_id.city"/></t>
                                 <t t-if="doc.company_id.state_id"><t t-if="doc.company_id.city">, </t><t t-esc="doc.company_id.state_id.name"/></t>
                                 <t t-if="doc.company_id.country_id"><t t-if="doc.company_id.city or doc.company_id.state_id">, </t><t t-esc="doc.company_id.country_id.name"/></t>
-                            </p>
-                            <p class="thermal-company-line" t-if="doc.company_id.phone or doc.company_id.mobile">
-                                <t t-if="doc.company_id.phone"><span t-if="is_arabic">هاتف: </span><span t-else="">Tel: </span><t t-esc="doc.company_id.phone"/></t>
-                                <t t-if="doc.company_id.mobile"><t t-if="doc.company_id.phone"> | </t><span t-if="is_arabic">جوال: </span><span t-else="">Mobile: </span><t t-esc="doc.company_id.mobile"/></t>
-                            </p>
-                            <p class="thermal-company-line" t-if="doc.company_id.email"><t t-esc="doc.company_id.email"/></p>
-                            <p class="thermal-company-line" t-if="doc.company_id.vat">
-                                <t t-esc="doc.company_id.account_fiscal_country_id.vat_label or ('الرقم الضريبي' if is_arabic else 'VAT')"/>: <t t-esc="doc.company_id.vat"/>
-                            </p>
+                            </div>
+                            <div t-if="doc.company_id.phone">Tel: <t t-esc="doc.company_id.phone"/></div>
+                            <div t-if="doc.company_id.vat"><t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'VAT'"/>: <t t-esc="doc.company_id.vat"/></div>
+                            <div t-if="doc.company_id.email"><t t-esc="doc.company_id.email"/></div>
+                            <div t-if="doc.company_id.website"><t t-esc="doc.company_id.website"/></div>
                         </div>
 
-                        <div class="thermal-doc-title">
-                            <span t-if="is_arabic">أمر صيانة</span>
-                            <span t-else="">REPAIR ORDER</span>
-                        </div>
+                        <!-- ===== Client block ===== -->
+                        <t t-if="doc.partner_id">
+                            <div class="rc-dash">--------------------------------</div>
+                            <div><span t-if="is_arabic">العميل: </span><span t-else="">Client: </span><t t-esc="doc.partner_id.name"/></div>
+                            <div t-if="doc.partner_id.phone"><span t-if="is_arabic">هاتف: </span><span t-else="">Tel: </span><t t-esc="doc.partner_id.phone"/></div>
+                            <div t-if="doc.partner_id.vat"><span t-if="is_arabic">الرقم الضريبي: </span><span t-else="">Tax ID: </span><t t-esc="doc.partner_id.vat"/></div>
+                        </t>
 
-                        <!-- ===== Repair / Customer information ===== -->
-                        <table class="thermal-info-table">
-                            <tr t-if="doc.name">
-                                <td class="til"><span t-if="is_arabic">رقم الأمر:</span><span t-else="">Repair Order No:</span></td>
-                                <td class="tiv"><t t-esc="doc.name"/></td>
-                            </tr>
-                            <tr t-if="doc.create_date">
-                                <td class="til"><span t-if="is_arabic">التاريخ:</span><span t-else="">Date:</span></td>
-                                <td class="tiv"><span t-field="doc.create_date" t-options="{'widget': 'date'}"/></td>
-                            </tr>
-                            <tr t-if="doc.partner_id">
-                                <td class="til"><span t-if="is_arabic">العميل:</span><span t-else="">Customer:</span></td>
-                                <td class="tiv"><t t-esc="doc.partner_id.name"/></td>
-                            </tr>
-                            <tr t-if="doc.partner_id.phone">
-                                <td class="til"><span t-if="is_arabic">رقم الهاتف:</span><span t-else="">Phone:</span></td>
-                                <td class="tiv"><t t-esc="doc.partner_id.phone"/></td>
-                            </tr>
-                            <tr t-if="doc.product_id">
-                                <td class="til"><span t-if="is_arabic">المنتج:</span><span t-else="">Product:</span></td>
-                                <td class="tiv">
-                                    <t t-esc="doc.product_id.name"/>
-                                    <t t-if="doc.product_id.default_code"> [<t t-esc="doc.product_id.default_code"/>]</t>
-                                </td>
-                            </tr>
-                            <tr t-if="doc.lot_id">
-                                <td class="til"><span t-if="is_arabic">الرقم التسلسلي:</span><span t-else="">Serial/Lot:</span></td>
-                                <td class="tiv"><t t-esc="doc.lot_id.name"/></td>
-                            </tr>
-                            <tr t-if="doc.user_id">
-                                <td class="til"><span t-if="is_arabic">المسؤول:</span><span t-else="">Responsible:</span></td>
-                                <td class="tiv"><t t-esc="doc.user_id.name"/></td>
-                            </tr>
-                        </table>
+                        <!-- ===== Product / Serial being repaired ===== -->
+                        <t t-if="doc.product_id">
+                            <div class="rc-dash">--------------------------------</div>
+                            <div class="rc-pad">
+                                <span t-if="is_arabic">المنتج: </span><span t-else="">Product: </span>
+                                <t t-esc="doc.product_id.name"/>
+                                <t t-if="doc.product_id.default_code"> [<t t-esc="doc.product_id.default_code"/>]</t>
+                            </div>
+                            <div class="rc-pad" t-if="doc.lot_id"><span t-if="is_arabic">الرقم التسلسلي: </span><span t-else="">Serial/Lot: </span><t t-esc="doc.lot_id.name"/></div>
+                        </t>
+
+                        <!-- ===== Responsible ===== -->
+                        <t t-if="doc.user_id">
+                            <div class="rc-dash">--------------------------------</div>
+                            <div class="rc-pad"><span t-if="is_arabic">المسؤول: </span><span t-else="">Responsible: </span><t t-esc="doc.user_id.name"/></div>
+                        </t>
+                        <div class="rc-dash">--------------------------------</div>
 
                         <!-- ===== Repair description ===== -->
                         <t t-if="doc.description">
-                            <hr class="thermal-divider"/>
-                            <div class="thermal-section-title">
-                                <span t-if="is_arabic">وصف الصيانة</span>
-                                <span t-else="">Repair Description</span>
+                            <div class="rc-pad rc-small">
+                                <span t-if="is_arabic">وصف الصيانة: </span><span t-else="">Repair Description: </span><t t-esc="doc.description"/>
                             </div>
-                            <p class="thermal-small"><t t-esc="doc.description"/></p>
+                            <div class="rc-dash">--------------------------------</div>
                         </t>
+
+                        <div class="rc-spacer"/>
 
                         <!-- ===== Parts ===== -->
                         <t t-if="doc.operations">
-                            <hr class="thermal-divider"/>
-                            <div class="thermal-section-title">
-                                <span t-if="is_arabic">القطع</span>
-                                <span t-else="">Parts</span>
-                            </div>
-                            <table class="thermal-lines">
-                                <thead>
-                                    <tr>
-                                        <th class="thermal-col-desc"><span t-if="is_arabic">الصنف</span><span t-else="">Item Description</span></th>
-                                        <th class="thermal-col-qty"><span t-if="is_arabic">الكمية</span><span t-else="">Qty</span></th>
-                                        <th class="thermal-col-total"><span t-if="is_arabic">المبلغ</span><span t-else="">Amount</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <t t-foreach="doc.operations" t-as="line">
-                                        <tr>
-                                            <td class="thermal-col-desc">
-                                                <div class="thermal-line-name">
-                                                    <t t-if="line.type == 'remove'">(<span t-if="is_arabic">إزالة</span><span t-else="">Remove</span>) </t>
-                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                                </div>
-                                                <div class="thermal-line-meta" t-if="line.lot_id">
-                                                    SN: <span class="thermal-bold" t-esc="line.lot_id.name"/>
-                                                </div>
-                                            </td>
-                                            <td class="thermal-col-qty">
-                                                <span t-field="line.product_uom_qty"/>
-                                                <t groups="uom.group_uom"> <t t-esc="line.product_uom.name"/></t>
-                                            </td>
-                                            <td class="thermal-col-total">
-                                                <t t-if="doc.invoice_method != 'none'">
-                                                    <t t-esc="'{:,.2f} {}'.format(line.price_subtotal, cur)"/>
-                                                </t>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                </tbody>
-                            </table>
+                            <div class="rc-bold"><span t-if="is_arabic">القطع</span><span t-else="">Parts</span></div>
+                            <t t-foreach="doc.operations" t-as="line">
+                                <div>
+                                    <t t-if="line.type == 'remove'">(<span t-if="is_arabic">إزالة</span><span t-else="">Remove</span>) </t>
+                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                </div>
+                                <div class="rc-row rc-pad">
+                                    <span t-field="line.product_uom_qty"/>
+                                    <t groups="uom.group_uom"> <t t-esc="line.product_uom.name"/></t>
+                                    <span class="rc-row-amt">
+                                        <t t-if="doc.invoice_method != 'none'"><t t-esc="'{:,.2f} {}'.format(line.price_subtotal, cur)"/></t>
+                                    </span>
+                                </div>
+                                <div class="rc-pad rc-small" t-if="line.lot_id">SN: <span class="rc-bold" t-esc="line.lot_id.name"/></div>
+                            </t>
+                            <div class="rc-dash rc-center">--------</div>
                         </t>
 
                         <!-- ===== Operations / Labor ===== -->
                         <t t-if="doc.fees_lines">
-                            <hr class="thermal-divider"/>
-                            <div class="thermal-section-title">
-                                <span t-if="is_arabic">أعمال الصيانة</span>
-                                <span t-else="">Operations</span>
-                            </div>
-                            <table class="thermal-lines">
-                                <thead>
-                                    <tr>
-                                        <th class="thermal-col-desc"><span t-if="is_arabic">الصنف</span><span t-else="">Item Description</span></th>
-                                        <th class="thermal-col-qty"><span t-if="is_arabic">الكمية</span><span t-else="">Qty</span></th>
-                                        <th class="thermal-col-total"><span t-if="is_arabic">المبلغ</span><span t-else="">Amount</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <t t-foreach="doc.fees_lines" t-as="fee">
-                                        <tr>
-                                            <td class="thermal-col-desc">
-                                                <div class="thermal-line-name">
-                                                    <span t-field="fee.name" t-options="{'widget': 'text'}"/>
-                                                </div>
-                                            </td>
-                                            <td class="thermal-col-qty">
-                                                <span t-field="fee.product_uom_qty"/>
-                                                <t groups="uom.group_uom"> <t t-esc="fee.product_uom.name"/></t>
-                                            </td>
-                                            <td class="thermal-col-total">
-                                                <t t-esc="'{:,.2f} {}'.format(fee.price_subtotal, cur)"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                </tbody>
-                            </table>
+                            <div class="rc-bold"><span t-if="is_arabic">أعمال الصيانة</span><span t-else="">Operations</span></div>
+                            <t t-foreach="doc.fees_lines" t-as="fee">
+                                <div><span t-field="fee.name" t-options="{'widget': 'text'}"/></div>
+                                <div class="rc-row rc-pad">
+                                    <span t-field="fee.product_uom_qty"/>
+                                    <t groups="uom.group_uom"> <t t-esc="fee.product_uom.name"/></t>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(fee.price_subtotal, cur)"/></span>
+                                </div>
+                            </t>
+                            <div class="rc-dash rc-center">--------</div>
                         </t>
 
-                        <!-- ===== Financial summary (only when this order is meant to be invoiced) ===== -->
+                        <!-- ===== Financial summary (only when meant to be invoiced) ===== -->
                         <t t-if="doc.invoice_method != 'none'">
-                            <hr class="thermal-divider"/>
-                            <table class="thermal-totals">
-                                <tr t-if="doc.operations">
-                                    <td class="ttl"><span t-if="is_arabic">مجموع القطع:</span><span t-else="">Parts Subtotal:</span></td>
-                                    <td class="ttv"><t t-esc="'{:,.2f} {}'.format(sum(doc.operations.mapped('price_subtotal')), cur)"/></td>
-                                </tr>
-                                <tr t-if="doc.fees_lines">
-                                    <td class="ttl"><span t-if="is_arabic">أعمال الصيانة:</span><span t-else="">Operations / Labor:</span></td>
-                                    <td class="ttv"><t t-esc="'{:,.2f} {}'.format(sum(doc.fees_lines.mapped('price_subtotal')), cur)"/></td>
-                                </tr>
-                                <tr>
-                                    <td class="ttl"><span t-if="is_arabic">المجموع غير شامل الضريبة:</span><span t-else="">Subtotal:</span></td>
-                                    <td class="ttv"><t t-esc="'{:,.2f} {}'.format(doc.amount_untaxed, cur)"/></td>
-                                </tr>
-                                <tr>
-                                    <td class="ttl"><span t-if="is_arabic">الضريبة:</span><span t-else="">Taxes:</span></td>
-                                    <td class="ttv"><t t-esc="'{:,.2f} {}'.format(doc.amount_tax, cur)"/></td>
-                                </tr>
-                                <tr class="thermal-grand-total">
-                                    <td class="ttl"><span t-if="is_arabic">المجموع الكلي:</span><span t-else="">TOTAL:</span></td>
-                                    <td class="ttv"><t t-esc="'{:,.2f} {}'.format(doc.amount_total, cur)"/></td>
-                                </tr>
-                            </table>
+                            <t t-if="doc.operations">
+                                <div class="rc-row">
+                                    <span t-if="is_arabic">مجموع القطع</span><span t-else="">Parts Subtotal</span>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(sum(doc.operations.mapped('price_subtotal')), cur)"/></span>
+                                </div>
+                            </t>
+                            <t t-if="doc.fees_lines">
+                                <div class="rc-row">
+                                    <span t-if="is_arabic">أعمال الصيانة</span><span t-else="">Operations / Labor</span>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(sum(doc.fees_lines.mapped('price_subtotal')), cur)"/></span>
+                                </div>
+                            </t>
+                            <div class="rc-row">
+                                <span t-if="is_arabic">المجموع غير شامل الضريبة</span><span t-else="">Subtotal</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_untaxed, cur)"/></span>
+                            </div>
+                            <div class="rc-row">
+                                <span t-if="is_arabic">الضريبة</span><span t-else="">Taxes</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_tax, cur)"/></span>
+                            </div>
+
+                            <div class="rc-row rc-center rc-dash">--------</div>
+                            <div class="rc-row rc-total-row">
+                                <span t-if="is_arabic">المجموع الكلي</span><span t-else="">TOTAL</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_total, cur)"/></span>
+                            </div>
+
+                            <div class="rc-spacer"/>
                         </t>
 
-                        <!-- ===== Repair Status ===== -->
-                        <hr class="thermal-divider"/>
-                        <table class="thermal-totals">
-                            <tr>
-                                <td class="ttl thermal-bold"><span t-if="is_arabic">حالة الطلب:</span><span t-else="">Repair Status:</span></td>
-                                <td class="ttv">
-                                    <span class="thermal-badge" t-esc="dict(doc._fields['state'].selection).get(doc.state, doc.state)"/>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <!-- ===== Footer ===== -->
-                        <hr class="thermal-divider thermal-divider-double"/>
-                        <div class="thermal-footer">
-                            <p class="thermal-thanks">
-                                <span t-if="is_arabic">شكراً لزيارتكم!</span>
-                                <span t-else="">Thank You For Your Business!</span>
-                            </p>
-                            <p t-if="doc.company_id.website"><t t-esc="doc.company_id.website"/></p>
+                        <!-- ===== Repair status ===== -->
+                        <div class="rc-row">
+                            <span t-if="is_arabic">حالة الطلب</span><span t-else="">Repair Status</span>
+                            <span class="rc-row-amt" t-esc="dict(doc._fields['state'].selection).get(doc.state, doc.state)"/>
                         </div>
 
-                        <div class="thermal-end-space"/>
+                        <div class="rc-spacer"/>
+
+                        <!-- ===== Footer thank-you ===== -->
+                        <div class="rc-center rc-bold">
+                            <span t-if="is_arabic">شكراً لزيارتكم!</span>
+                            <span t-else="">Thank You For Your Business!</span>
+                        </div>
+
+                        <!-- ===== Additional Details ===== -->
+                        <div class="rc-dash rc-center">--------------------------------</div>
+                        <div class="rc-pad rc-small">
+                            <span t-if="is_arabic">تفاصيل إضافية:</span><span t-else="">Additional Details:</span><br/>
+                            <span t-if="is_arabic">- يقر المستلم بأن البضاعة استُلمت بحالة جيدة</span>
+                            <span t-else="">- Retailer acknowledges that the goods are received in good condition</span><br/>
+                            <span t-if="is_arabic">- ضمان الشركة المصنعة حسب الشروط من تاريخ الفاتورة</span>
+                            <span t-else="">- Manufacturer warranty as per terms from invoice date</span><br/>
+                            <span t-if="is_arabic">- في حال الجوال، الضمان مشمول من الشركة المصنعة</span>
+                            <span t-else="">- In case of mobile, warranty will be covered by the manufacturer</span><br/>
+                        </div>
+                        <div class="rc-dash rc-center">--------------------------------</div>
+
+                        <!-- ===== Order reference + date (very bottom) ===== -->
+                        <div class="rc-spacer"/>
+                        <div class="rc-center"><t t-esc="doc.name"/></div>
+                        <div class="rc-center" t-if="doc.create_date"><span t-field="doc.create_date" t-options="{'widget': 'date'}"/></div>
+
+                        <div class="rc-end-space"/>
 
                     </div>
                 </t>
