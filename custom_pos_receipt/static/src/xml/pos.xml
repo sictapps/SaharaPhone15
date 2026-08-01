@@ -5,6 +5,13 @@
                 <div style="text-align: center;">Tax Invoice</div>
         </xpath>
 
+        <!-- Fixed support contact numbers (constant values, not sourced from
+             company data - same two numbers on every receipt), right under Tel:. -->
+        <xpath expr="//t[@t-if='receipt.company.phone']" position="after">
+            <div>Landline: +97165726664</div>
+            <div>Repair: +97165726634</div>
+        </xpath>
+
         <xpath expr="//div[@class='pos-receipt-contact']" position="inside">
             <t t-if='receipt.client'>
                 <div>--------------------------------</div>
