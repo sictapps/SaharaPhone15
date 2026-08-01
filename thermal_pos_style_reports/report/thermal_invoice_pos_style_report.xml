@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- =====================================================================
+             Additive report action only - "Thermal (POS Style)" appears as a
+             SECOND option in the Customer Invoice Print menu, alongside the
+             existing "Thermal Invoice" (thermal_sale_report) and the default
+             PDF. Nothing here overwrites or references any existing report
+             action, template, or paperformat_id.
+             ===================================================================== -->
+
+        <record id="action_report_thermal_invoice_pos_style" model="ir.actions.report">
+            <field name="name">Thermal (POS Style)</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">thermal_pos_style_reports.report_thermal_invoice_pos_style</field>
+            <field name="report_file">thermal_pos_style_reports.report_thermal_invoice_pos_style</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_pos_style_80mm"/>
+        </record>
+
+        <!-- =====================================================================
+             QWeb Template - rebuilt directly against the reference PDF
+             (Odoo POS.pdf, the actual printed POS receipt for this
+             deployment), element by element, in the exact same order:
+
+             logo -> "Tax Invoice" -> company name -> Tel -> Tax ID -> email
+             -> website -> dashes -> "Served by X" -> dashes -> "Client: X"
+             -> "Tel: X" -> "Tax ID: X" -> blank gap -> "SalesPerson:X"
+             (padded) -> dashes -> lines (simple one-line style when
+             qty==1/no discount, matching point_of_sale's isSimple(), else
+             name + discount + "qty x unit_price  line_total" breakdown,
+             per-line price WITHOUT currency symbol) -> SN (no colon) ->
+             short right-aligned dashes -> "Total Taxes" -> "TOTAL" (bigger/
+             bold) -> blank gap -> payment lines (no symbol) -> blank gap ->
+             "Amount Due" (bigger/bold, same visual slot as the POS
+             receipt's CHANGE row) -> dashes -> "Additional Details" block
+             -> dashes -> invoice number -> date/time.
+
+             Font is plain sans-serif (Arial/Helvetica), NOT monospace/bold
+             everywhere - matches the reference exactly (only the
+             TOTAL/Amount Due row is bigger+bold, same as the POS
+             receipt's .pos-receipt-amount).
+
+             One deliberate deviation from the reference, flagged rather
+             than silently "improved": the reference PDF prints the literal
+             string "false" for "Tax ID: false" when the customer has no
+             VAT set (a missing-guard bug in the POS receipt's own
+             customization, not an intentional design element). This
+             template hides that line instead when there's no VAT, since
+             copying a known bug into a brand-new report isn't something to
+             do silently.
+             ===================================================================== -->
+
+        <template id="report_thermal_invoice_pos_style">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="cur" t-value="doc.currency_id.name or doc.currency_id.symbol"/>
+                    <t t-set="is_arabic" t-value="doc.partner_id.lang and 'ar' in doc.partner_id.lang"/>
+                    <t t-set="doc_dir" t-value="'rtl' if is_arabic else 'ltr'"/>
+
+                    <style type="text/css">
+                        .thermal-doc {
+                            font-family: Arial, Helvetica, sans-serif !important;
+                            font-size: 12px !important;
+                            font-weight: normal !important;
+                            line-height: 1.35 !important;
+                            color: #000000 !important;
+                            width: 100% !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                        }
+                        .thermal-doc[dir="rtl"] { text-align: right !important; direction: rtl !important; }
+                        .thermal-doc[dir="ltr"] { text-align: left !important; direction: ltr !important; }
+
+                        .rc-center { text-align: center !important; }
+                        .rc-amount { font-weight: bold !important; font-size: 16px !important; }
+
+                        .rc-logo { max-width: 55% !important; max-height: 20mm !important; display: block !important; margin: 0 auto 1mm auto !important; }
+
+                        .rc-row { width: 100% !important; overflow: hidden !important; }
+                        .thermal-doc[dir="ltr"] .rc-row-amt { float: right !important; }
+                        .thermal-doc[dir="rtl"] .rc-row-amt { float: left !important; }
+
+                        .rc-pad { padding-left: 8px !important; }
+                        .thermal-doc[dir="rtl"] .rc-pad { padding-left: 0 !important; padding-right: 8px !important; }
+
+                        .thermal-doc[dir="ltr"] .rc-dash-r { text-align: right !important; }
+                        .thermal-doc[dir="rtl"] .rc-dash-r { text-align: left !important; }
+
+                        .rc-gap { height: 4mm !important; }
+                        .rc-gap-sm { height: 2mm !important; }
+                        .rc-stamp-space { height: 35mm !important; }
+                        .rc-end-space { height: 10mm !important; }
+                    </style>
+
+                    <div class="thermal-doc" t-att-dir="doc_dir">
+
+                        <!-- ===== Logo ===== -->
+                        <t t-if="doc.company_id.logo">
+                            <img t-att-src="image_data_uri(doc.company_id.logo)" class="rc-logo rc-center" alt="Logo"/>
+                        </t>
+
+                        <!-- ===== Title ===== -->
+                        <div class="rc-center">
+                            <span t-if="is_arabic">فاتورة ضريبية</span>
+                            <span t-else="">Tax Invoice</span>
+                        </div>
+
+                        <!-- ===== Company info ===== -->
+                        <div class="rc-center">
+                            <div><t t-esc="doc.company_id.name"/></div>
+                            <div t-if="doc.company_id.phone">Tel:<t t-esc="doc.company_id.phone"/></div>
+                            <div t-if="doc.company_id.vat"><t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:<t t-esc="doc.company_id.vat"/></div>
+                            <div t-if="doc.company_id.email"><t t-esc="doc.company_id.email"/></div>
+                            <div t-if="doc.company_id.website"><t t-esc="doc.company_id.website"/></div>
+                        </div>
+
+                        <!-- ===== "Served by" (cashier/salesperson, matches receipt.cashier) ===== -->
+                        <t t-if="doc.invoice_user_id">
+                            <div class="rc-center">--------------------------------</div>
+                            <div class="rc-center"><span t-if="is_arabic">خدمكم: </span><span t-else="">Served by </span><t t-esc="doc.invoice_user_id.name"/></div>
+                        </t>
+
+                        <!-- ===== Client block ===== -->
+                        <t t-if="doc.partner_id">
+                            <div class="rc-center">--------------------------------</div>
+                            <div class="rc-center"><span t-if="is_arabic">العميل: </span><span t-else="">Client: </span><t t-esc="doc.partner_id.name"/></div>
+                            <div class="rc-center" t-if="doc.partner_id.phone"><span t-if="is_arabic">هاتف: </span><span t-else="">Tel: </span><t t-esc="doc.partner_id.phone"/></div>
+                            <div class="rc-center" t-if="doc.partner_id.vat"><span t-if="is_arabic">الرقم الضريبي: </span><span t-else="">Tax ID: </span><t t-esc="doc.partner_id.vat"/></div>
+                        </t>
+
+                        <div class="rc-gap"/>
+
+                        <!-- ===== SalesPerson (matches custom_pos_receipt xpath) ===== -->
+                        <t t-if="doc.invoice_user_id">
+                            <div class="rc-pad"><span t-if="is_arabic">البائع:</span><span t-else="">SalesPerson:</span><t t-esc="doc.invoice_user_id.name"/></div>
+                        </t>
+                        <div class="rc-center">--------------------------------</div>
+
+                        <!-- ===== Order lines ===== -->
+                        <t t-foreach="doc.invoice_line_ids" t-as="line">
+                            <t t-if="line.display_type == 'line_section'">
+                                <div><span t-field="line.name" t-options="{'widget': 'text'}"/></div>
+                            </t>
+                            <t t-elif="line.display_type == 'line_note'">
+                                <div><span t-field="line.name" t-options="{'widget': 'text'}"/></div>
+                            </t>
+                            <t t-elif="line.discount == 0 and line.quantity == 1">
+                                <!-- "simple" line, matches point_of_sale's isSimple(): name + price on one row, no qty breakdown -->
+                                <div class="rc-row">
+                                    <t t-if="line.product_id.default_code">[<t t-esc="line.product_id.default_code"/>] </t>
+                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f}'.format(line.price_subtotal)"/></span>
+                                </div>
+                                <t t-if="line.tax_ids">
+                                    <div class="rc-pad"><span t-if="is_arabic">الضريبة: </span><span t-else="">Tax: </span><t t-esc="', '.join(line.tax_ids.mapped('name'))"/></div>
+                                </t>
+                                <t t-set="sn_list" t-value="', '.join([l['lot_name'] for l in doc.get_line_lots(line) if l.get('lot_name')])"/>
+                                <div class="rc-pad" t-if="sn_list">SN <t t-esc="sn_list"/></div>
+                            </t>
+                            <t t-else="">
+                                <div>
+                                    <t t-if="line.product_id.default_code">[<t t-esc="line.product_id.default_code"/>] </t>
+                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                </div>
+                                <t t-if="line.discount">
+                                    <div class="rc-pad"><span t-if="is_arabic">خصم: </span><span t-else="">Discount: </span><t t-esc="'%.2f' % line.discount"/>%</div>
+                                </t>
+                                <div class="rc-row rc-pad">
+                                    <t t-esc="line.quantity"/>
+                                    <t groups="uom.group_uom"> <t t-esc="line.product_uom_id.name"/></t>
+                                    x <t t-esc="'{:,.2f} {}'.format(line.price_unit, cur)"/>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f}'.format(line.price_subtotal)"/></span>
+                                </div>
+                                <t t-if="line.tax_ids">
+                                    <div class="rc-pad"><span t-if="is_arabic">الضريبة: </span><span t-else="">Tax: </span><t t-esc="', '.join(line.tax_ids.mapped('name'))"/></div>
+                                </t>
+                                <t t-set="sn_list" t-value="', '.join([l['lot_name'] for l in doc.get_line_lots(line) if l.get('lot_name')])"/>
+                                <div class="rc-pad" t-if="sn_list">SN <t t-esc="sn_list"/></div>
+                            </t>
+                        </t>
+
+                        <!-- ===== Total taxes + Total (matches the reference exactly: no
+                             Subtotal line, no per-tax breakdown - just Total Taxes then
+                             TOTAL, same as the tax-included branch of the POS receipt) ===== -->
+                        <t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>
+                        <div class="rc-dash-r">--------</div>
+                        <div class="rc-row">
+                            <span t-if="is_arabic">إجمالي الضريبة</span><span t-else="">Total Taxes</span>
+                            <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(tax_totals['amount_total'] - tax_totals['amount_untaxed'], cur)"/></span>
+                        </div>
+                        <div class="rc-row rc-amount">
+                            <span t-if="is_arabic">الإجمالي</span><span t-else="">TOTAL</span>
+                            <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(tax_totals['amount_total'], cur)"/></span>
+                        </div>
+
+                        <div class="rc-gap"/>
+
+                        <!-- ===== Payments (posted customer invoices/credit notes only) ===== -->
+                        <t t-if="doc.move_type in ('out_invoice', 'out_refund') and doc.state == 'posted'">
+                            <t t-set="payments_vals" t-value="doc.sudo()._get_reconciled_info_JSON_values()"/>
+                            <t t-foreach="payments_vals" t-as="pmt">
+                                <div class="rc-row">
+                                    <t t-esc="pmt.get('payment_method_name') or ('دفعة' if is_arabic else 'Payment')"/>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f}'.format(pmt['amount'])"/></span>
+                                </div>
+                            </t>
+                            <div class="rc-gap-sm"/>
+                            <div class="rc-row rc-amount">
+                                <span t-if="is_arabic">المبلغ المتبقي</span><span t-else="">Amount Due</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_residual, cur)"/></span>
+                            </div>
+                            <div class="rc-gap"/>
+                        </t>
+
+                        <!-- ===== Additional Details (matches custom_pos_receipt xpath) ===== -->
+                        <div class="rc-center">--------------------------------</div>
+                        <div class="rc-center">
+                            <span t-if="is_arabic">تفاصيل إضافية:</span><span t-else="">Additional Details:</span><br/>
+                            <span t-if="is_arabic">- يقر المستلم بأن البضاعة استُلمت بحالة جيدة</span>
+                            <span t-else="">- Retailer acknowledges that the goods are received in good condition</span><br/>
+                            <span t-if="is_arabic">- ضمان الشركة المصنعة حسب الشروط من تاريخ الفاتورة</span>
+                            <span t-else="">- Manufacturer warranty as per terms from invoice date</span><br/>
+                            <span t-if="is_arabic">- في حال الجوال، الضمان مشمول من الشركة المصنعة</span>
+                            <span t-else="">- In case of mobile, warranty will be covered by the manufacturer</span><br/>
+                        </div>
+                        <div class="rc-center">--------------------------------</div>
+
+                        <!-- ===== QR code - real, generated code (qrcode pip lib, same
+                             approach as sahara_planet/models/qr_code.py) encoding the
+                             company name + invoice number, via
+                             account.move.pos_style_qr_code (models/account_move.py in
+                             this module). Not part of the reference PDF, kept purely
+                             additive. ===== -->
+                        <t t-if="doc.pos_style_qr_code">
+                            <img t-att-src="image_data_uri(doc.pos_style_qr_code)" style="display:block; margin:1mm auto; max-height:25mm;" alt="QR"/>
+                        </t>
+
+                        <!-- ===== Invoice number + date/time (very bottom) ===== -->
+                        <div class="rc-center"><t t-esc="doc.name"/></div>
+                        <div class="rc-center" t-if="doc.create_date"><span t-field="doc.create_date" t-options="{'widget': 'datetime'}"/></div>
+
+                        <!-- ===== Blank space reserved after the date, for a manual stamp
+                             + handwritten notes - explicitly requested, not paper-feed
+                             margin (that's what rc-end-space above already was; this is
+                             a bigger, deliberate blank area). ===== -->
+                        <div class="rc-stamp-space"/>
+
+                        <div class="rc-end-space"/>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

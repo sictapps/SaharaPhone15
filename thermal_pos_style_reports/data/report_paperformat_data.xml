@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Own paperformat, fully independent from
+             thermal_sale_report.paperformat_thermal_paper_80mm - this
+             module must not depend on thermal_sale_report/thermal_repair_report
+             at all. default=False on purpose: must never become the
+             company-wide default paperformat, since every report action in
+             this module already references it explicitly. -->
+        <record id="paperformat_pos_style_80mm" model="report.paperformat">
+            <field name="name">POS Style Thermal Paper 80mm</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">80</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">2</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
+    </data>
+</odoo>

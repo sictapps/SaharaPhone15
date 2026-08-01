@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- =====================================================================
+             Additive report action only - "Thermal (POS Style)" appears as a
+             SECOND option in the Repair Order Print menu, alongside the
+             existing "Thermal Repair Order" (thermal_repair_report).
+             ===================================================================== -->
+
+        <record id="action_report_thermal_repair_pos_style" model="ir.actions.report">
+            <field name="name">Thermal (POS Style)</field>
+            <field name="model">repair.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">thermal_pos_style_reports.report_thermal_repair_pos_style</field>
+            <field name="report_file">thermal_pos_style_reports.report_thermal_repair_pos_style</field>
+            <field name="print_report_name">'Repair Order - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="repair.model_repair_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_pos_style_80mm"/>
+        </record>
+
+        <!-- =====================================================================
+             QWeb Template - same rebuilt-from-the-reference-PDF design as
+             thermal_invoice_pos_style_report.xml in this same module
+             (identical CSS/structure on purpose, data swapped for repair
+             fields). See that file's header comment for the element-by-
+             element breakdown this was built against.
+             ===================================================================== -->
+
+        <template id="report_thermal_repair_pos_style">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="cur" t-value="doc.currency_id.name or doc.currency_id.symbol"/>
+                    <t t-set="is_arabic" t-value="doc.partner_id.lang and 'ar' in doc.partner_id.lang"/>
+                    <t t-set="doc_dir" t-value="'rtl' if is_arabic else 'ltr'"/>
+
+                    <style type="text/css">
+                        .thermal-doc {
+                            font-family: Arial, Helvetica, sans-serif !important;
+                            font-size: 12px !important;
+                            font-weight: normal !important;
+                            line-height: 1.35 !important;
+                            color: #000000 !important;
+                            width: 100% !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                        }
+                        .thermal-doc[dir="rtl"] { text-align: right !important; direction: rtl !important; }
+                        .thermal-doc[dir="ltr"] { text-align: left !important; direction: ltr !important; }
+
+                        .rc-center { text-align: center !important; }
+                        .rc-amount { font-weight: bold !important; font-size: 16px !important; }
+
+                        .rc-logo { max-width: 55% !important; max-height: 20mm !important; display: block !important; margin: 0 auto 1mm auto !important; }
+
+                        .rc-row { width: 100% !important; overflow: hidden !important; }
+                        .thermal-doc[dir="ltr"] .rc-row-amt { float: right !important; }
+                        .thermal-doc[dir="rtl"] .rc-row-amt { float: left !important; }
+
+                        .rc-pad { padding-left: 8px !important; }
+                        .thermal-doc[dir="rtl"] .rc-pad { padding-left: 0 !important; padding-right: 8px !important; }
+
+                        .thermal-doc[dir="ltr"] .rc-dash-r { text-align: right !important; }
+                        .thermal-doc[dir="rtl"] .rc-dash-r { text-align: left !important; }
+
+                        .rc-gap { height: 4mm !important; }
+                        .rc-gap-sm { height: 2mm !important; }
+                        .rc-end-space { height: 10mm !important; }
+                    </style>
+
+                    <div class="thermal-doc" t-att-dir="doc_dir">
+
+                        <!-- ===== Logo ===== -->
+                        <t t-if="doc.company_id.logo">
+                            <img t-att-src="image_data_uri(doc.company_id.logo)" class="rc-logo rc-center" alt="Logo"/>
+                        </t>
+
+                        <!-- ===== Title ===== -->
+                        <div class="rc-center">
+                            <span t-if="is_arabic">أمر صيانة</span>
+                            <span t-else="">Repair Order</span>
+                        </div>
+
+                        <!-- ===== Company info ===== -->
+                        <div class="rc-center">
+                            <div><t t-esc="doc.company_id.name"/></div>
+                            <div t-if="doc.company_id.phone">Tel:<t t-esc="doc.company_id.phone"/></div>
+                            <div t-if="doc.company_id.vat"><t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:<t t-esc="doc.company_id.vat"/></div>
+                            <div t-if="doc.company_id.email"><t t-esc="doc.company_id.email"/></div>
+                            <div t-if="doc.company_id.website"><t t-esc="doc.company_id.website"/></div>
+                        </div>
+
+                        <!-- ===== "Served by" (technician) ===== -->
+                        <t t-if="doc.user_id">
+                            <div class="rc-center">--------------------------------</div>
+                            <div class="rc-center"><span t-if="is_arabic">خدمكم: </span><span t-else="">Served by </span><t t-esc="doc.user_id.name"/></div>
+                        </t>
+
+                        <!-- ===== Client block ===== -->
+                        <t t-if="doc.partner_id">
+                            <div class="rc-center">--------------------------------</div>
+                            <div class="rc-center"><span t-if="is_arabic">العميل: </span><span t-else="">Client: </span><t t-esc="doc.partner_id.name"/></div>
+                            <div class="rc-center" t-if="doc.partner_id.phone"><span t-if="is_arabic">هاتف: </span><span t-else="">Tel: </span><t t-esc="doc.partner_id.phone"/></div>
+                            <div class="rc-center" t-if="doc.partner_id.vat"><span t-if="is_arabic">الرقم الضريبي: </span><span t-else="">Tax ID: </span><t t-esc="doc.partner_id.vat"/></div>
+                        </t>
+
+                        <div class="rc-gap"/>
+
+                        <!-- ===== Technician (matches the POS receipt's "SalesPerson:" line) ===== -->
+                        <t t-if="doc.user_id">
+                            <div class="rc-pad"><span t-if="is_arabic">الفني:</span><span t-else="">Technician:</span><t t-esc="doc.user_id.name"/></div>
+                        </t>
+                        <div class="rc-center">--------------------------------</div>
+
+                        <!-- ===== Device / Serial ===== -->
+                        <t t-if="doc.product_id">
+                            <div class="rc-row">
+                                <span t-if="is_arabic">الجهاز: </span><span t-else="">Device: </span>
+                                <t t-esc="doc.product_id.name"/>
+                                <t t-if="doc.product_id.default_code"> [<t t-esc="doc.product_id.default_code"/>]</t>
+                            </div>
+                            <div class="rc-pad" t-if="doc.lot_id">SN <t t-esc="doc.lot_id.name"/></div>
+                        </t>
+
+                        <!-- ===== Problem description ===== -->
+                        <t t-if="doc.description">
+                            <div class="rc-gap-sm"/>
+                            <div><span t-if="is_arabic">وصف المشكلة: </span><span t-else="">Problem Description: </span><t t-esc="doc.description"/></div>
+                        </t>
+
+                        <div class="rc-center">--------------------------------</div>
+
+                        <!-- ===== Parts Used ===== -->
+                        <t t-if="doc.operations">
+                            <t t-foreach="doc.operations" t-as="line">
+                                <div class="rc-row">
+                                    <t t-if="line.type == 'remove'">(<span t-if="is_arabic">إزالة</span><span t-else="">Remove</span>) </t>
+                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                    <span class="rc-row-amt">
+                                        <t t-if="doc.invoice_method != 'none'"><t t-esc="'{:,.2f}'.format(line.price_subtotal)"/></t>
+                                    </span>
+                                </div>
+                                <div class="rc-pad" t-if="line.lot_id">SN <t t-esc="line.lot_id.name"/></div>
+                            </t>
+                        </t>
+
+                        <!-- ===== Services ===== -->
+                        <t t-if="doc.fees_lines">
+                            <t t-foreach="doc.fees_lines" t-as="fee">
+                                <div class="rc-row">
+                                    <span t-field="fee.name" t-options="{'widget': 'text'}"/>
+                                    <span class="rc-row-amt"><t t-esc="'{:,.2f}'.format(fee.price_subtotal)"/></span>
+                                </div>
+                            </t>
+                        </t>
+
+                        <!-- ===== Totals (only when meant to be invoiced) ===== -->
+                        <t t-if="doc.invoice_method != 'none'">
+                            <div class="rc-dash-r">--------</div>
+                            <div class="rc-row">
+                                <span t-if="is_arabic">إجمالي الضريبة</span><span t-else="">Total Taxes</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_tax, cur)"/></span>
+                            </div>
+                            <div class="rc-row rc-amount">
+                                <span t-if="is_arabic">الإجمالي</span><span t-else="">TOTAL</span>
+                                <span class="rc-row-amt"><t t-esc="'{:,.2f} {}'.format(doc.amount_total, cur)"/></span>
+                            </div>
+                            <div class="rc-gap"/>
+                        </t>
+
+                        <!-- ===== Repair Status (same visual slot as the POS receipt's CHANGE row) ===== -->
+                        <div class="rc-row rc-amount">
+                            <span t-if="is_arabic">الحالة</span><span t-else="">Repair Status</span>
+                            <span class="rc-row-amt" t-esc="dict(doc._fields['state'].selection).get(doc.state, doc.state)"/>
+                        </div>
+
+                        <div class="rc-gap"/>
+
+                        <!-- ===== Additional Details ===== -->
+                        <div class="rc-center">--------------------------------</div>
+                        <div class="rc-center">
+                            <span t-if="is_arabic">تفاصيل إضافية:</span><span t-else="">Additional Details:</span><br/>
+                            <span t-if="is_arabic">- يقر المستلم بأن البضاعة استُلمت بحالة جيدة</span>
+                            <span t-else="">- Retailer acknowledges that the goods are received in good condition</span><br/>
+                            <span t-if="is_arabic">- ضمان الشركة المصنعة حسب الشروط من تاريخ الفاتورة</span>
+                            <span t-else="">- Manufacturer warranty as per terms from invoice date</span><br/>
+                            <span t-if="is_arabic">- في حال الجوال، الضمان مشمول من الشركة المصنعة</span>
+                            <span t-else="">- In case of mobile, warranty will be covered by the manufacturer</span><br/>
+                        </div>
+                        <div class="rc-center">--------------------------------</div>
+
+                        <!-- ===== QR code - real, generated code (qrcode pip lib, same
+                             approach as sahara_planet/models/qr_code.py and this same
+                             module's account_move.py) encoding the company name + repair
+                             order name, via repair.order.pos_style_qr_code
+                             (models/repair_order.py in this module). ===== -->
+                        <t t-if="doc.pos_style_qr_code">
+                            <img t-att-src="image_data_uri(doc.pos_style_qr_code)" style="display:block; margin:1mm auto; max-height:25mm;" alt="QR"/>
+                        </t>
+
+                        <!-- ===== Order reference + date/time (very bottom) ===== -->
+                        <div class="rc-center"><t t-esc="doc.name"/></div>
+                        <div class="rc-center" t-if="doc.create_date"><span t-field="doc.create_date" t-options="{'widget': 'datetime'}"/></div>
+
+                        <div class="rc-end-space"/>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
