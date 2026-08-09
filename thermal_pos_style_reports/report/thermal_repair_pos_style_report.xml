@@ -85,15 +85,16 @@
                         <!-- ===== Company info ===== -->
                         <div class="rc-center">
                             <div><t t-esc="doc.company_id.name"/></div>
-                            <div t-if="doc.company_id.phone">Tel:<t t-esc="doc.company_id.phone"/></div>
                             <!-- Fixed support contact numbers (constant values, not
-                                 sourced from res.company - same two numbers on every print). -->
+                                 sourced from res.company - same two numbers on every print).
+                                 Order per requested layout: Tel (landline) -> Repair -> Mob (company phone). -->
                             <div>
-                                <span t-if="is_arabic">الأرضي الأساسي: </span><span t-else="">Landline: </span>+97165726664
+                                <span t-if="is_arabic">هاتف: </span><span t-else="">Tel: </span>+97165726664
                             </div>
                             <div>
                                 <span t-if="is_arabic">الصيانة: </span><span t-else="">Repair: </span>+97165726634
                             </div>
+                            <div t-if="doc.company_id.phone"><span t-if="is_arabic">جوال: </span><span t-else="">Mob: </span><t t-esc="doc.company_id.phone"/></div>
                             <div t-if="doc.company_id.vat"><t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:<t t-esc="doc.company_id.vat"/></div>
                             <div t-if="doc.company_id.email"><t t-esc="doc.company_id.email"/></div>
                             <div t-if="doc.company_id.website"><t t-esc="doc.company_id.website"/></div>

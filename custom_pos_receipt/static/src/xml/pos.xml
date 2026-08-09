@@ -5,11 +5,15 @@
                 <div style="text-align: center;">Tax Invoice</div>
         </xpath>
 
-        <!-- Fixed support contact numbers (constant values, not sourced from
-             company data - same two numbers on every receipt), right under Tel:. -->
-        <xpath expr="//t[@t-if='receipt.company.phone']" position="after">
-            <div>Landline: +97165726664</div>
+        <!-- Reorder/relabel the phone lines: Tel (fixed landline) -> Repair
+             (fixed) -> Mob (the company's actual phone, receipt.company.phone) -
+             replaces the original single "Tel:{company.phone}" line entirely. -->
+        <xpath expr="//t[@t-if='receipt.company.phone']" position="replace">
+            <div>Tel: +97165726664</div>
             <div>Repair: +97165726634</div>
+            <t t-if="receipt.company.phone">
+                <div>Mob:<t t-esc="receipt.company.phone"/></div>
+            </t>
         </xpath>
 
         <xpath expr="//div[@class='pos-receipt-contact']" position="inside">
